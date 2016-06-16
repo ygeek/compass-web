@@ -17,7 +17,7 @@ class VerifyCodeServiceTest extends TestCase
         $phone_number = '13838383333';
 
         $code = $service->setVerifyCodeForPhoneNumber($phone_number);
-        $this->assertTrue($service->testingVerifyCodeWithPhoneNumber($code, $phone_number));
-        $this->assertFalse($service->testingVerifyCodeWithPhoneNumber('fakecode', $phone_number));
+        $this->assertTrue($service->testingVerifyCodeWithPhoneNumber($phone_number, $code));
+        $this->assertFalse($service->testingVerifyCodeWithPhoneNumber($phone_number, 'fakecode'));
     }
 }

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Services\Registrar;
+use App\Services\VerifyCodeService;
+use Illuminate\Http\Request;
 use App\User;
 use Validator;
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -30,43 +34,61 @@ class AuthController extends Controller
      */
     protected $redirectTo = '/';
 
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $verify_code_service;
+
+    protected $registrar;
+
+    public function __construct(VerifyCodeService $verify_code_service, Registrar $registrar)
     {
+        $this->verify_code_service = $verify_code_service;
+        $this->registrar = $registrar;
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
+    public function createVerifyCodes(Request $request){
+        $phone_number = $request->input('phone_number');
+        $code = $this->verify_code_service->setVerifyCodeForPhoneNumber($phone_number);
+
+        if(env('APP_DEBUG')){
+            return $this->responseJson('ok', ['code' => $code]);
+        }else{
+            return $this->responseJson('ok');
+        }
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'phone_number' => $data['phone_number'],
-            'password' => bcrypt($data['password']),
-        ]);
+    public function register(Request $request){
+        $code = $request->get('code');
+        $phone_number = $request->get('phone_number');
+        $password = $request->get('password');
+
+        if(!$this->validateVerifyCode($phone_number, $code)){
+            return $this->errorResponse('验证码验证失败');
+        }
+
+        try {
+            $data = $request->all();
+            $data['register_ip'] = $request->ip();
+            $this->registrar->create($data);
+
+            return $this->okResponse();
+        }catch (\Exception $e){
+            return $this->errorResponse('创建用户失败');
+        }
     }
+
+    public function login(Request $request){
+        $phone_number = $request->get('phone_number');
+        $password = $request->get('password');
+        
+        if(Auth::attempt(['phone_number' => $phone_number, 'password' => $password])){
+            return $this->okResponse();
+        }else{
+            return $this->errorResponse('登录信息错误');
+        }
+    }
+
+    private function validateVerifyCode($phone_number, $code){
+        return $this->verify_code_service->testingVerifyCodeWithPhoneNumber($phone_number, $code);
+    }
+
 }

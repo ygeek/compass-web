@@ -2,18 +2,9 @@
 
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
     protected $baseUrl = 'http://localhost';
+    protected $faker;
 
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
     public function createApplication()
     {
         $app = require __DIR__.'/../bootstrap/app.php';
@@ -21,5 +12,15 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    public function setUp(){
+        parent::setUp();
+        $this->faker = Faker\Factory::create();
+        $this->faker->addProvider(new Faker\Provider\zh_CN\PhoneNumber($this->faker));
+        $this->faker->addProvider(new Faker\Provider\zh_CN\Person($this->faker));
+        $this->faker->addProvider(new Faker\Provider\zh_CN\Company($this->faker));
+        $this->faker->addProvider(new Faker\Provider\zh_CN\Address($this->faker));
+        $this->faker->addProvider(new Faker\Provider\Internet($this->faker));
     }
 }

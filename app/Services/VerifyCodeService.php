@@ -12,21 +12,25 @@ class VerifyCodeService{
         return $code;
     }
 
-    public function testingVerifyCodeWithPhoneNumber(string $verify_code, string $phone_number) : bool {
-        $cached_code = $this->getVerifyCodeFromCache($phone_number);
-        return $verify_code == $cached_code;
+    public function testingVerifyCodeWithPhoneNumber(string $phone_number, string $verify_code) : bool {
+        try{
+            $cached_code = $this->getVerifyCodeFromCache($phone_number);
+            return $verify_code == $cached_code;
+        }catch (\Exception $e){
+            return false;
+        }
     }
-
-    private function cacheExist(string $phone_number) : bool {
-        return !!$this->getVerifyCodeFromCache($phone_number);
-    }
-
+    
     private function setVerifyCodeToCache(string $verify_code, string $phone_number){
         Cache::put($this->getKey($phone_number), $verify_code, self::CACHE_TTL);
     }
 
     private function getVerifyCodeFromCache(string $phone_number) : string {
-        return Cache::get($this->getKey($phone_number));
+        $code = Cache::get($this->getKey($phone_number));
+        if(!$code){
+            throw new \Exception('code not found');
+        }
+        return $code;
     }
 
     private function getKey(string $key) : string{
