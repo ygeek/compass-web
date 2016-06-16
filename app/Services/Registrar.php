@@ -1,7 +1,6 @@
 <?php namespace App\Services;
 
 use App\User;
-use Validator;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
@@ -27,9 +26,6 @@ class Registrar implements RegistrarContract {
             'register_ip' => $data['register_ip']
         ];
         return User::create($properties);
-
-        $user = new User();
-        $user->save();
     }
 
 }
