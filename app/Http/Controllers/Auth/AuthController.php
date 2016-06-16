@@ -59,14 +59,13 @@ class AuthController extends Controller
     public function register(Request $request){
         $code = $request->get('code');
         $phone_number = $request->get('phone_number');
-        $password = $request->get('password');
 
         if(!$this->validateVerifyCode($phone_number, $code)){
             return $this->errorResponse('验证码验证失败');
         }
 
         try {
-            $data = $request->all();
+            $data = $request->only(['phone_number', 'password']);
             $data['register_ip'] = $request->ip();
             $this->registrar->create($data);
 
@@ -79,7 +78,7 @@ class AuthController extends Controller
     public function login(Request $request){
         $phone_number = $request->get('phone_number');
         $password = $request->get('password');
-        
+
         if(Auth::attempt(['phone_number' => $phone_number, 'password' => $password])){
             return $this->okResponse();
         }else{
