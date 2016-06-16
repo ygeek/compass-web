@@ -4,12 +4,19 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/chareice/SUBMAIL_PHP_SDK"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "fzaninotto/faker": "^1.6"
+        "submail/submail-php": "dev-master"
     },
     "require-dev": {
+        "fzaninotto/faker": "^1.6",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
         "symfony/css-selector": "2.8.*|3.0.*",

@@ -158,6 +158,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\VerifyCodeServiceProvider::class,
+        App\Providers\SMSServiceProvider::class,
     ],
 
     /*

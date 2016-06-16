@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\Event;
+use App\Events\VerifyCodeSet;
 use App\Services\Registrar;
 use App\Services\VerifyCodeService;
 use Illuminate\Http\Request;
@@ -52,6 +54,7 @@ class AuthController extends Controller
         if(env('APP_DEBUG')){
             return $this->responseJson('ok', ['code' => $code]);
         }else{
+            Event::fire(new VerifyCodeSet($code, $phone_number));
             return $this->responseJson('ok');
         }
     }

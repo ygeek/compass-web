@@ -91,4 +91,10 @@ class AuthControllerTest extends TestCase
         $this->assertResponseOk();
 
     }
+
+//    public function testSmsSender(){
+//        $phone_number = '18170820396';
+//        $smsService = app('sms');
+//        $smsService->sendVerifyCode('1234', $phone_number);
+//    }
 }
