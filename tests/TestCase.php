@@ -1,4 +1,5 @@
 <?php
+use App\Admin;
 
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
@@ -22,5 +23,19 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $this->faker->addProvider(new Faker\Provider\zh_CN\Company($this->faker));
         $this->faker->addProvider(new Faker\Provider\zh_CN\Address($this->faker));
         $this->faker->addProvider(new Faker\Provider\Internet($this->faker));
+    }
+
+    protected function createAdmin(){
+        $params = [
+            'username' => $this->faker->email,
+            'password' => bcrypt($this->faker->password),
+            'name' => $this->faker->name
+        ];
+
+        return Admin::create($params);
+    }
+
+    protected function adminLogin(){
+        Auth::guard('admin')->login($this->createAdmin());
     }
 }
