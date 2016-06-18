@@ -25,7 +25,7 @@ class AdminAuthControllerTest extends TestCase
         //用户未登录
         $this->assertFalse(app('auth')->guard('admin')->check());
         //用户访问管理界面
-        $this->call('GET', '/admin/auth/login');
+        $this->call('GET', '/admin/login');
         $this->assertResponseOk();
 
         //登录用户
@@ -34,7 +34,7 @@ class AdminAuthControllerTest extends TestCase
             'password' => 'pass'
         ];
 
-        $this->call('POST', '/admin/auth/login', $params);
+        $this->call('POST', '/admin/login', $params);
         //登陆成功
         $this->assertRedirectedToRoute('admin_home');
         $this->assertTrue(app('auth')->guard('admin')->check());
@@ -47,7 +47,7 @@ class AdminAuthControllerTest extends TestCase
             'password' => 'pass'
         ];
 
-        $this->call('POST', '/admin/auth/login', $params);
+        $this->call('POST', '/admin/login', $params);
         $this->assertFalse(app('auth')->guard('admin')->check());
     }
 }
