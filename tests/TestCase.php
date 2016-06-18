@@ -21,6 +21,7 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $this->faker->addProvider(new Faker\Provider\zh_CN\PhoneNumber($this->faker));
         $this->faker->addProvider(new Faker\Provider\zh_CN\Person($this->faker));
         $this->faker->addProvider(new Faker\Provider\zh_CN\Company($this->faker));
+        $this->faker->addProvider(new Faker\Provider\zh_CN\Payment($this->faker));
         $this->faker->addProvider(new Faker\Provider\zh_CN\Address($this->faker));
         $this->faker->addProvider(new Faker\Provider\Internet($this->faker));
     }

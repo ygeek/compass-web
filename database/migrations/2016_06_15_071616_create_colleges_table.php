@@ -16,20 +16,20 @@ class CreateCollegesTable extends Migration
             $table->increments('id');
             $table->string('chinese_name');
             $table->string('english_name');
-            $table->text('description');
+            $table->text('description')->nullable();
 
-            $table->string('telephone_number');
-            $table->string('founded_in');
-            $table->string('address');
-            $table->string('website');
+            $table->string('telephone_number')->nullable();
+            $table->string('founded_in')->nullable();
+            $table->string('address')->nullable();
+            $table->string('website')->nullable();
 
-            $table->integer('qs_ranking');
-            $table->integer('us_new_ranking');
-            $table->integer('times_ranking');
-            $table->integer('domestic_ranking');
+            $table->integer('qs_ranking')->nullable();
+            $table->integer('us_new_ranking')->nullable();
+            $table->integer('times_ranking')->nullable();
+            $table->integer('domestic_ranking')->nullable();
 
-            $table->string('badge_path');
-            $table->string('background_image_path');
+            $table->string('badge_path')->nullable();
+            $table->string('background_image_path')->nullable();
 
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')

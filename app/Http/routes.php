@@ -12,4 +12,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/', 'Admin\IndexController@index')->name('admin_home');
     Route::get('login', 'Admin\Auth\AuthController@getLogin');
     Route::post('login', 'Admin\Auth\AuthController@postLogin');
+
+    Route::resource('colleges', 'Admin\CollegesController');
 });
