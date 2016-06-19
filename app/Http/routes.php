@@ -1,5 +1,6 @@
 <?php
 
+Route::get('/', 'IndexController@index');
 Route::group(['prefix' => 'auth'], function (){
     Route::post('verify_codes', 'Auth\AuthController@createVerifyCodes');
     Route::post('register', 'Auth\AuthController@register');
