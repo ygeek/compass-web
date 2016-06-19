@@ -39,7 +39,6 @@
       </p>
       <button class="button" @click="sendRegisterRequest">注册</button>
     </div>
-    @{{$data | json}}
   </div>
 </div>
 </template>
@@ -89,7 +88,7 @@
           phone_number: this.phone_number,
           password: this.password
         }).then(function(response){
-          alert('登录成功');
+          window.location.reload();
         }, function(response){
           alert('登录失败');
         });

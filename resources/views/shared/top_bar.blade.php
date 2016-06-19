@@ -22,7 +22,11 @@
         <a href="#">指南针官网</a>
       </li>
       <li class='nav-item'>
+        @if(Auth::check())
+        <span>你已登陆</span>
+        @else
         <span v-on:click="showLoginAndRegisterPanel=true">登录</span>
+        @endif
       </li>
     </ul>
   </div>
