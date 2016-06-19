@@ -9,6 +9,14 @@ use Auth;
 
 class AuthController extends Controller
 {
+
+    protected $redirectTo = '/admin';
+
+    public function __construct()
+    {
+        $this->middleware('guest:admin');
+    }
+
     public function getLogin(){
         return view('admin.auth.login');
     }
