@@ -10,7 +10,7 @@ use Auth;
 class AuthController extends Controller
 {
     public function getLogin(){
-
+        return view('admin.auth.login');
     }
 
     public function postLogin(Request $request){
@@ -19,6 +19,6 @@ class AuthController extends Controller
         if(Auth::guard('admin')->attempt(compact('username', 'password'))){
             return redirect()->route('admin_home');
         }
-        return redirect()->back()->withInput()->with('message', '登录失败');
+        return redirect()->back()->withInput()->withErrors('登录失败');
     }
 }
