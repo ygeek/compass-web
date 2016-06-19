@@ -22,7 +22,7 @@
         <a href="#">指南针官网</a>
       </li>
       <li class='nav-item'>
-        <a href="#">登录</a>
+        <span v-on:click="showLoginAndRegisterPanel=true">登录</span>
       </li>
     </ul>
   </div>

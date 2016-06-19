@@ -2,9 +2,9 @@
 
 Route::get('/', 'IndexController@index');
 Route::group(['prefix' => 'auth'], function (){
-    Route::post('verify_codes', 'Auth\AuthController@createVerifyCodes');
-    Route::post('register', 'Auth\AuthController@register');
-    Route::post('login', 'Auth\AuthController@login');
+    Route::post('verify-codes', 'Auth\AuthController@createVerifyCodes')->name('auth.verifyCode.store');
+    Route::post('register', 'Auth\AuthController@register')->name('auth.users.store');
+    Route::post('login', 'Auth\AuthController@login')->name('auth.login');
 });
 
 Route::get('/home', 'HomeController@index');

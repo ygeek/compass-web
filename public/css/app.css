@@ -377,6 +377,9 @@ a {
 ul {
   list-style-type: none; }
 
+.hidden {
+  display: none; }
+
 .app-content {
   width: 1100px;
   margin: 0 auto;
@@ -529,7 +532,8 @@ ul {
       display: block;
       position: absolute;
       right: 10px;
-      top: 10px; }
+      top: 10px;
+      cursor: pointer; }
     #login-panel .panel .form-nav {
       margin-top: 30px;
       overflow: auto; }
@@ -538,6 +542,7 @@ ul {
         overflow: auto;
         margin-top: 10px; }
         #login-panel .panel .form-nav ul li {
+          cursor: pointer;
           float: left;
           width: 45px;
           height: 30px;

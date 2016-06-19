@@ -16,7 +16,7 @@ class AuthControllerTest extends TestCase
             'phone_number' => $phone_number
         ];
 
-        $this->call('POST', '/auth/verify_codes', $params);
+        $this->call('POST', '/auth/verify-codes', $params);
         $this->assertResponseOk();
     }
 
@@ -29,7 +29,7 @@ class AuthControllerTest extends TestCase
             'phone_number' => $phone_number
         ];
 
-        $response = $this->call('POST', '/auth/verify_codes', $params);
+        $response = $this->call('POST', '/auth/verify-codes', $params);
         $code = $response->getData()->data->code;
 
         //注册
@@ -73,7 +73,7 @@ class AuthControllerTest extends TestCase
             'phone_number' => $phone_number
         ];
 
-        $response = $this->call('POST', '/auth/verify_codes', $params);
+        $response = $this->call('POST', '/auth/verify-codes', $params);
         $code = $response->getData()->data->code;
         //注册
         $params = [

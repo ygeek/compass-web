@@ -17,6 +17,10 @@ ul{
   list-style-type: none;
 }
 
+.hidden{
+  display: none;
+}
+
 .app-content{
   width: 1100px;
   margin: 0 auto;
@@ -199,6 +203,7 @@ ul{
       position: absolute;
       right: 10px;
       top: 10px;
+      cursor: pointer;
     }
     width: 345px;
     background: #f3f3f3 url('/images/login-logo.png') no-repeat;
@@ -216,6 +221,7 @@ ul{
         overflow: auto;
         margin-top: 10px;
         li{
+          cursor: pointer;
           float: left;
           width: 45px;
           height: 30px;
