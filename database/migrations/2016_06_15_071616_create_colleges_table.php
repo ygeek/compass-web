@@ -31,10 +31,7 @@ class CreateCollegesTable extends Migration
             $table->string('badge_path')->nullable();
             $table->string('background_image_path')->nullable();
 
-            $table->integer('city_id')->unsigned();
-            $table->foreign('city_id')
-                ->references('id')->on('cities')
-                ->onDelete('cascade');
+            $table->morphs('localizable');
 
             $table->timestamps();
         });

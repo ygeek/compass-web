@@ -45,7 +45,7 @@ class AuthControllerTest extends TestCase
         $this->assertResponseStatus(422);
 
         $params['code'] = $code;
-        $this->call('POST', '/auth/register', $params);
+        $response = $this->call('POST', '/auth/register', $params);
         $this->assertResponseOk();
 
         $this->seeInDatabase('users', ['phone_number' => $params['phone_number']]);

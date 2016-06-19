@@ -31,13 +31,13 @@ $factory->define(App\Admin::class, function (Faker\Generator $faker){
 $factory->define(App\City::class, function (Faker\Generator $faker){
     return [
         'name' => $faker->city,
-        'region_id' => function(){
-            return factory(App\Region::class)->create()->id;
+        'state_id' => function(){
+            return factory(App\State::class)->create()->id;
         }
     ];
 });
 
-$factory->define(App\Region::class, function (Faker\Generator $faker){
+$factory->define(App\State::class, function (Faker\Generator $faker){
     return [
         'name' => $faker->state,
         'country_id' => function(){
@@ -53,6 +53,8 @@ $factory->define(App\Country::class, function (Faker\Generator $faker){
 });
 
 $factory->define(App\College::class, function(Faker\Generator $faker){
+    $city = factory(App\City::class)->create();
+
     return [
         'chinese_name' => '悉尼大学',
         'english_name' => 'University of Sydney',
@@ -68,8 +70,11 @@ $factory->define(App\College::class, function(Faker\Generator $faker){
         'domestic_ranking' => 1,
         'badge_path' => 'http://sydney.edu.au/etc/designs/corporate-commons/bower_components/corporate-frontend/dist/assets/img/USydLogo.svg',
         'background_image_path' => null,
-        'city_id' => function(){
-            return factory(App\City::class)->create()->id;
+        'localizable_id' => function() use ($city){
+            return $city->id;
+        },
+        'localizable_type' => function(){
+            return App\City::class;
         }
     ];
 });

@@ -20,6 +20,11 @@ class College extends Model
         'domestic_ranking',
         'badge_path',
         'background_image_path',
-        'city_id'
+        'localizable_id',
+        'localizable_type'
     ];
+
+    public function localizable(){
+        return $this->morphTo();
+    }
 }
