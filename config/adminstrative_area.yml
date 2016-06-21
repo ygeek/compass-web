@@ -1,0 +1,183 @@
+---
+- name: 澳洲
+  children:
+    - name: 首都
+      children:
+        - name: 堪培拉
+    - name: 新南威尔士州
+      children:
+        - name: 悉尼
+        - name: 纽卡斯尔
+        - name: 卧龙岗
+        - name: 巴瑟斯特
+        - name: 阿米代尔
+        - name: 利斯莫尔
+        - name: 沃加
+    - name: 维多利亚州
+      children:
+        - name: 墨尔本
+        - name: 巴拉瑞特
+    - name: 昆士兰州
+      children:
+        - name: 布里斯班
+        - name: 黄金海岸
+        - name: 洛克汉普顿
+        - name: 汤斯维尔
+        - name: 图文巴
+        - name: 玛卢奇多
+    - name: 西澳洲
+      children:
+        - name: 珀斯
+        - name: 弗里曼特尔
+    - name: 南澳州
+      children:
+        - name: 阿德莱德
+    - name: 北领地
+      children:
+        - name: 达尔文
+    - name: 塔斯马尼亚州
+      children:
+        - name: 霍巴特拉
+- name: 美国
+  children:
+    - name: 加利福尼亚州
+    - name: 俄勒冈州
+    - name: 伊利诺伊州
+    - name: 密苏里州
+    - name: 俄亥俄州
+    - name: 路易斯安那州
+    - name: 亚利桑那州
+    - name: 北卡罗来纳州
+    - name: 佐治亚州
+    - name: 佛罗里达州
+    - name: 宾夕法尼亚州
+    - name: 康涅狄格州
+    - name: 纽约州
+    - name: 新泽西州
+    - name: 田纳西州
+    - name: 华盛顿州
+    - name: 马萨诸塞州
+    - name: 弗吉尼亚州
+    - name: 马里兰州
+    - name: 明尼苏达州
+    - name: 佛蒙特州
+    - name: 犹他州
+    - name: 内华达州
+    - name: 印第安纳州
+    - name: 新墨西哥州
+    - name: 德克萨斯州
+    - name: 威斯康星州
+    - name: 密歇根州
+    - name: 罗德岛州
+    - name: 肯塔基州
+    - name: 阿拉巴马州
+    - name: 南卡罗来纳州
+    - name: 俄克拉荷马州
+    - name: 堪萨斯州
+    - name: 爱荷华州
+    - name: 新罕布什尔州
+    - name: 内布拉斯加州
+    - name: 科罗拉多州
+    - name: 特拉华州
+- name: 英国
+  children:
+    - name: 英格兰
+      children: 
+        - name: 巴斯
+        - name: 伯明翰
+        - name: 波士顿
+        - name: 伯恩茅斯
+        - name: 布拉德福德
+        - name: 布里德灵顿
+        - name: 布莱顿
+        - name: 布里斯托
+        - name: 白金汉
+        - name: 白金汉郡
+        - name: 剑桥
+        - name: 剑桥郡
+        - name: 坎特伯雷
+        - name: 切尔滕纳姆
+        - name: 切斯特
+        - name: 科尔切斯特
+        - name: 考文垂
+        - name: 德比
+        - name: 达勒姆
+        - name: 埃克塞特
+        - name: 哈德斯菲尔德
+        - name: 赫尔
+        - name: 基尔
+        - name: 肯特
+        - name: 金斯敦
+        - name: 兰卡斯特
+        - name: 利兹
+        - name: 莱斯特
+        - name: 林肯
+        - name: 利物浦
+        - name: 伦敦
+        - name: 拉夫堡
+        - name: 鲁顿
+        - name: 曼侧斯特
+        - name: 米德尔斯堡
+        - name: 纽卡斯尔
+        - name: 北安普顿
+        - name: 诺维奇
+        - name: 诺丁汉
+        - name: 牛津
+        - name: 奥克斯特德
+        - name: 普利茅斯
+        - name: 朴茨茅斯
+        - name: 普雷斯顿
+        - name: 雷丁
+        - name: 谢菲尔德
+        - name: 南安普顿
+        - name: 斯塔福德
+        - name: 温切斯特
+        - name: 伍尔弗汉普顿
+        - name: 伍斯特
+        - name: 约克
+        - name: 什罗普郡
+        - name: 法尔茅斯
+    - name: 苏格兰
+      children:
+        - name: 阿伯丁
+        - name: 邓迪
+        - name: 爱丁堡
+        - name: 格拉斯哥
+        - name: 因弗内斯
+        - name: 佩斯利
+        - name: 圣安德鲁斯
+        - name: 斯特灵
+    - name: 威尔士
+      children:
+        - name: 加的夫
+        - name: 阿伯里斯特威斯
+        - name: 班戈
+        - name: 兰彼得
+        - name: 纽波特
+        - name: 庞特普里德
+        - name: 雷克瑟姆
+    - name: 北爱尔兰
+      children:
+        - name: 贝尔法斯特
+- name: 新西兰
+  children: 
+    - name: 惠灵顿
+    - name: 奥克兰
+    - name: 基督城
+    - name: 达尼丁
+    - name: 哈密尔顿
+    - name: 北帕默斯顿
+    - name: 旺加努伊
+    - name: 新普利茅斯
+    - name: 因弗卡吉尔
+    - name: 罗托鲁阿
+    - name: 尼尔森
+    - name: 布兰尼姆
+    - name: 纳皮尔
+    - name: 吉斯伯恩
+    - name: 陶朗加
+    - name: 皮克顿
+    - name: 旺格雷
+    - name: 陶波
+    - name: 格雷茅斯
+    - name: 皇后镇

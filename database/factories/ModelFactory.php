@@ -53,8 +53,14 @@ $factory->define(App\Country::class, function (Faker\Generator $faker){
 });
 
 $factory->define(App\College::class, function(Faker\Generator $faker){
-    $city = factory(App\City::class)->create();
+    if(App\AdministrativeArea::count() == 0){
+        foreach (config('adminstrative_area') as $root_node){
+            $node = App\AdministrativeArea::create($root_node);
 
+            $node->save();
+        }
+    }
+    
     return [
         'chinese_name' => '悉尼大学',
         'english_name' => 'University of Sydney',
@@ -70,11 +76,8 @@ $factory->define(App\College::class, function(Faker\Generator $faker){
         'domestic_ranking' => 1,
         'badge_path' => 'http://sydney.edu.au/etc/designs/corporate-commons/bower_components/corporate-frontend/dist/assets/img/USydLogo.svg',
         'background_image_path' => null,
-        'localizable_id' => function() use ($city){
-            return $city->id;
-        },
-        'localizable_type' => function(){
-            return App\City::class;
+        'administrative_area_id' => function(){
+            return App\AdministrativeArea::whereIsRoot()->get()->first()->id;
         }
     ];
 });

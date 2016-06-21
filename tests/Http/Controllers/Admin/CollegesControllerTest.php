@@ -41,7 +41,7 @@ class CollegesControllerTest extends TestCase
 
     //测试创建学校
     public function testStoreCollege(){
-        $city_id = factory(App\City::class)->create()->id;
+        (new AdministrativeAreaSeeder())->run();
         $params = [
             'chinese_name' => '悉尼大学',
             'english_name' => 'University of Sydney',
@@ -57,7 +57,7 @@ class CollegesControllerTest extends TestCase
             'domestic_ranking' => 1,
             'badge_path' => 'http://sydney.edu.au/etc/designs/corporate-commons/bower_components/corporate-frontend/dist/assets/img/USydLogo.svg',
             'background_image_path' => null,
-            'city_id' => $city_id
+            'administrative_area_id' => App\AdministrativeArea::whereIsRoot()->get()->first()->id
         ];
 
         $this->call('POST', '/admin/colleges', $params);

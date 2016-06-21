@@ -30,9 +30,9 @@ class CreateCollegesTable extends Migration
 
             $table->string('badge_path')->nullable();
             $table->string('background_image_path')->nullable();
-
-            $table->morphs('localizable');
-
+            
+            $table->integer('administrative_area_id')->unsigned();
+            $table->foreign('administrative_area_id')->references('id')->on('administrative_areas');
             $table->timestamps();
         });
     }
