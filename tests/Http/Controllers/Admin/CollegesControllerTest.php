@@ -73,7 +73,7 @@ class CollegesControllerTest extends TestCase
         ];
 
         $this->call('PATCH', route('admin.colleges.update', $college->id), $params);
-        $this->assertRedirectedToRoute('admin.colleges.show', $college->id);
+        $this->assertRedirectedToRoute('admin.colleges.edit', $college->id);
 
         $college = \App\College::find($college->id);
         $this->assertEquals($params['chinese_name'], $college->chinese_name);
