@@ -27,7 +27,12 @@ class CollegesController extends BaseController
      */
     public function create()
     {
-        return view('admin.colleges.create');
+        $areas = \App\AdministrativeArea::get()->toTree()->toJson();
+        $college = new \App\College;
+        $city = null;
+        $country = null;
+        $state = null;
+        return view('admin.colleges.create', compact('college', 'areas', 'city', 'country', 'state'));
     }
 
     /**
@@ -65,7 +70,26 @@ class CollegesController extends BaseController
     public function edit($id)
     {
         $college = College::find($id);
-        return view('admin.colleges.edit', compact('college'));
+
+        $city = null;
+        $country = null;
+        $state = null;
+
+        $node = $college->administrativeArea;
+        $ancestors = $node->getAncestors();
+        if($ancestors->count() == 2){
+          $country = $ancestors[0]->id;
+          $state = $ancestors[1]->id;
+          $city = $node->id;
+        }else if($ancestors->count() == 1){
+          $country = $ancestors[0]->id;
+          $state = $node->id;
+        }else{
+          $country = $node->id;
+        }
+
+        $areas = \App\AdministrativeArea::get()->toTree()->toJson();
+        return view('admin.colleges.edit', compact('college', 'areas', 'state', 'country', 'city'));
     }
 
     /**
@@ -79,7 +103,7 @@ class CollegesController extends BaseController
     {
         $college = College::find($id);
         $college->update($request->all());
-        return redirect()->route('admin.colleges.show', $id);
+        return redirect()->route('admin.colleges.edit', $id);
     }
 
     /**

@@ -14,8 +14,8 @@ class CreateCollegesTable extends Migration
     {
         Schema::create('colleges', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('chinese_name');
-            $table->string('english_name');
+            $table->string('chinese_name')->unique();
+            $table->string('english_name')->unique();
             $table->text('description')->nullable();
 
             $table->string('telephone_number')->nullable();
@@ -30,9 +30,11 @@ class CreateCollegesTable extends Migration
 
             $table->string('badge_path')->nullable();
             $table->string('background_image_path')->nullable();
-            
+
             $table->integer('administrative_area_id')->unsigned();
-            $table->foreign('administrative_area_id')->references('id')->on('administrative_areas');
+            $table->foreign('administrative_area_id')
+                  ->references('id')
+                  ->on('administrative_areas');
             $table->timestamps();
         });
     }

@@ -22,4 +22,8 @@ class College extends Model
         'background_image_path',
         'administrative_area_id',
     ];
+
+    public function administrativeArea(){
+      return $this->belongsTo(AdministrativeArea::class);
+    }
 }
