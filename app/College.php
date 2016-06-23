@@ -26,4 +26,8 @@ class College extends Model
     public function administrativeArea(){
       return $this->belongsTo(AdministrativeArea::class);
     }
+
+    public function examinationScoreWeight(){
+        return $this->belongsTo(ExaminationScoreWeight::class);
+    }
 }

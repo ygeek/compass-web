@@ -53,8 +53,10 @@ $factory->define(App\Country::class, function (Faker\Generator $faker){
 });
 
 $factory->define(App\Examination::class, function(){
+    $examination_names = ['高考', '雅思', '托福'];
+
     return [
-        'name' => '高考'
+        'name' => array_rand($examination_names)
     ];
 });
 
