@@ -60,6 +60,7 @@ $factory->define(App\Examination::class, function(){
     ];
 });
 
+
 $factory->define(App\College::class, function(Faker\Generator $faker){
     if(App\AdministrativeArea::count() == 0){
         foreach (config('adminstrative_area') as $root_node){

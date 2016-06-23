@@ -30,5 +30,7 @@ class ScoreMapSectionTest extends TestCase
         $this->assertTrue($section->matching('150'));
         $this->assertFalse($section->matching('350'));
 
+        $section = new \App\ScoreMapSection('江西:<500');
+        $this->assertTrue($section->matching('江西:400'));
     }
 }

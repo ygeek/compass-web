@@ -40,7 +40,7 @@ class ScoreMapSection
                 return $score > $this->score;
             },
             '<' => function($score){
-                return $score > $this->score;
+                return $score < $this->score;
             },
             '-' => function($score){
                 $res =  ($score >= $this->score[0] && $score <= $this->score[1]);
@@ -72,7 +72,6 @@ class ScoreMapSection
         if($tag != $this->tag){
             return false;
         }
-
         $closure = $this->currentClosure();
         return $closure($tester);
     }
