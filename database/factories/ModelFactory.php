@@ -52,6 +52,12 @@ $factory->define(App\Country::class, function (Faker\Generator $faker){
    ];
 });
 
+$factory->define(App\Examination::class, function(){
+    return [
+        'name' => '高考'
+    ];
+});
+
 $factory->define(App\College::class, function(Faker\Generator $faker){
     if(App\AdministrativeArea::count() == 0){
         foreach (config('adminstrative_area') as $root_node){
