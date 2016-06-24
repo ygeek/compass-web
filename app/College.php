@@ -53,7 +53,7 @@ class College extends Model
                 $score_map_section = new ScoreMapSection($score_section['section']);
                 if($score_map_section->matching($student_score['score'])){
                     //分数段查找匹配成功
-                    $current_section_score = $score_section['score'] * $current_map['weight'] / 100;
+                    $current_section_score = $score_section['score'] * $current_examination_map['weight'] / 100;
                     return $carry + $current_section_score;
                 }
             }
