@@ -46,10 +46,10 @@ class College extends Model
 
         return collect($student_scores)->reduce(function($carry, $student_score) use ($merged_map){
             $current_examination = $student_score['examination_id'];
-            $current_map = $merged_map[$current_examination];
+            $current_examination_map = $merged_map[$current_examination];
 
-            $sections = $current_map['score_sections'];
-            foreach ($sections as $score_section){
+            $current_examination_score_sections = $current_examination_map['score_sections'];
+            foreach ($current_examination_score_sections as $score_section){
                 $score_map_section = new ScoreMapSection($score_section['section']);
                 if($score_map_section->matching($student_score['score'])){
                     //分数段查找匹配成功
