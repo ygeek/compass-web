@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\College;
+use App\Degree;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use DB;
 
 class CollegesController extends BaseController
 {
@@ -32,7 +34,8 @@ class CollegesController extends BaseController
         $city = null;
         $country = null;
         $state = null;
-        return view('admin.colleges.create', compact('college', 'areas', 'city', 'country', 'state'));
+        $degrees = Degree::all();
+        return view('admin.colleges.create', compact('college', 'areas', 'city', 'country', 'state', 'degrees'));
     }
 
     /**
@@ -43,8 +46,13 @@ class CollegesController extends BaseController
      */
     public function store(Request $request)
     {
-        $college = new College($request->all());
-        $college->save();
+        DB::transaction(function() use ($request){
+            $college = new College($request->all());
+            $college->save();
+            $degree_ids = $request->input('degree_ids');
+            $college->degrees()->attach($degree_ids);
+            $college->save();
+        });
 
         return redirect()->route('admin.colleges.index');
     }
@@ -69,11 +77,12 @@ class CollegesController extends BaseController
      */
     public function edit($id)
     {
-        $college = College::find($id);
+        $college = College::with('degrees')->find($id);
 
         $city = null;
         $country = null;
         $state = null;
+        $degrees = Degree::all();
 
         $node = $college->administrativeArea;
         $ancestors = $node->getAncestors();
@@ -89,7 +98,7 @@ class CollegesController extends BaseController
         }
 
         $areas = \App\AdministrativeArea::get()->toTree()->toJson();
-        return view('admin.colleges.edit', compact('college', 'areas', 'state', 'country', 'city'));
+        return view('admin.colleges.edit', compact('college', 'areas', 'state', 'country', 'city', 'degrees'));
     }
 
     /**
@@ -103,6 +112,10 @@ class CollegesController extends BaseController
     {
         $college = College::find($id);
         $college->update($request->all());
+
+        $degree_ids = $request->input('degree_ids');
+        $college->degrees()->sync($degree_ids);
+
         return redirect()->route('admin.colleges.edit', $id);
     }
 

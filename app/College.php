@@ -24,6 +24,10 @@ class College extends Model
         'administrative_area_id',
     ];
 
+    public function degrees(){
+        return $this->belongsToMany(Degree::class);
+    }
+    
     public function administrativeArea(){
       return $this->belongsTo(AdministrativeArea::class);
     }

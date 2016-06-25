@@ -41,7 +41,13 @@ class CollegesControllerTest extends TestCase
 
     //测试创建学校
     public function testStoreCollege(){
-        (new AdministrativeAreaSeeder())->run();
+        $this->seed('AdministrativeAreaSeeder');
+        $this->seed('DegreeSeeder');
+
+        $degree_ids = \App\Degree::all()->map(function($item){
+           return $item->id;
+        });
+
         $params = [
             'chinese_name' => '悉尼大学',
             'english_name' => 'University of Sydney',
@@ -57,11 +63,14 @@ class CollegesControllerTest extends TestCase
             'domestic_ranking' => 1,
             'badge_path' => 'http://sydney.edu.au/etc/designs/corporate-commons/bower_components/corporate-frontend/dist/assets/img/USydLogo.svg',
             'background_image_path' => null,
-            'administrative_area_id' => App\AdministrativeArea::whereIsRoot()->get()->first()->id
+            'administrative_area_id' => App\AdministrativeArea::whereIsRoot()->get()->first()->id,
+            'degree_ids' => $degree_ids->toArray()
         ];
 
         $this->call('POST', '/admin/colleges', $params);
         $this->seeInDatabase('colleges', ['chinese_name' => '悉尼大学']);
+        //同时存储了学历关联关系
+        $this->seeInDatabase('college_degree', ['degree_id' => $degree_ids->first()]);
         $this->assertRedirectedToRoute('admin.colleges.index');
     }
 

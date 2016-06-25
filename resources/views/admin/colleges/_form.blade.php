@@ -1,4 +1,5 @@
 <college-create-form></college-create-form>
+<?php $degree_ids = $college->degrees->map(function($item){return $item->id;})->toArray() ?>
 <template id="create_form">
 <div class="block block-bordered">
     <div class="block-header bg-gray-lighter">
@@ -149,6 +150,25 @@
                           </div>
                         </div>
                       </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12">所拥有学位</label>
+                        <div class="col-xs-12">
+                            @foreach($degrees as $degree)
+                                <div class="checkbox">
+                                    <label for="degrees-{{$degree->id}}">
+                                        <input type="checkbox"
+                                               id="degrees-{{$degree->id}}"
+                                               name="degree_ids[]"
+                                               @if(in_array($degree->id, $degree_ids))
+                                               checked
+                                               @endif
+                                               value="{{$degree->id}}"> {{$degree->name}}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
 
                     </div>
                 </div>
