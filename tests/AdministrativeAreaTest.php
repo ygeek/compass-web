@@ -20,4 +20,17 @@ class AdministrativeAreaTest extends TestCase
             $this->assertTrue($node->isRoot());
         }
     }
+
+    public function testGetCountry(){
+        $adminstrative_areas = config('adminstrative_area');
+        foreach ($adminstrative_areas as $root_node){
+            $node = AdministrativeArea::create($root_node);
+
+            $node->save();
+            $this->assertTrue($node->isRoot());
+        }
+        
+        $countries_count = AdministrativeArea::countries()->count();
+        $this->assertEquals(4, $countries_count);
+    }
 }
