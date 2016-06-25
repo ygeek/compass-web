@@ -21,7 +21,7 @@ class CollegeTest extends TestCase
         //1.设置该学校的考试分数映射表
 
         //创建考试
-        $this->examinations = collect(['高考', '雅思', '托福'])->map(function($examination_name){
+        $this->examinations = collect(['高考', '雅思', '托福', '平均成绩'])->map(function($examination_name){
             return \App\Examination::create(['name' => $examination_name]);
         });
 

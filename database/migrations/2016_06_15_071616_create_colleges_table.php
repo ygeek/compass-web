@@ -35,6 +35,7 @@ class CreateCollegesTable extends Migration
             $table->foreign('administrative_area_id')
                   ->references('id')
                   ->on('administrative_areas');
+
             $table->timestamps();
         });
     }

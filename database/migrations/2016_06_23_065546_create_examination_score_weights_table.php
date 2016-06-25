@@ -15,6 +15,18 @@ class CreateExaminationScoreWeightsTable extends Migration
         Schema::create('examination_score_weights', function (Blueprint $table) {
             $table->increments('id');
             $table->json('weights');
+
+            //权重关联国家
+            $table->integer('country_id')->unsigned()->unllable();
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('administrative_areas');
+
+            //权重关联学历
+            $table->integer('degree_id')->unsigned()->unllable();
+            $table->foreign('degree_id')
+                ->references('id')
+                ->on('degrees');
             $table->timestamps();
         });
     }
