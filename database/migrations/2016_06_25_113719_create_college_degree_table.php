@@ -17,9 +17,9 @@ class CreateCollegeDegreeTable extends Migration
             $table->foreign('college_id')->references('id')->on('colleges')->onDelete('cascade');
             $table->integer('degree_id')->unsigned()->index();
             $table->foreign('degree_id')->references('id')->on('degrees');
-            $table->integer('examination_score_weight_id')->unsigned()->index();
-
-            $table->index(['college_id', 'degree_id']);
+            $table->integer('examination_score_weight_id')->unsigned()->nullable()->index();
+            $table->foreign('examination_score_weight_id')->references('id')->on('examination_score_weights');
+            $table->primary(['college_id', 'degree_id']);
         });
     }
 

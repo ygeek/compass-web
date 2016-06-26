@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\College;
+use App\ExaminationScoreWeight;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

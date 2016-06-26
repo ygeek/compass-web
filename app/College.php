@@ -24,6 +24,21 @@ class College extends Model
         'administrative_area_id',
     ];
 
+    public static function boot(){
+        parent::boot();
+
+        static::saving(function($college)
+        {
+            $area_id = $college->administrative_area_id;
+            $area = AdministrativeArea::find($area_id);
+            if($area->isRoot()){
+                $college->country_id = $area->id;
+            }else{
+                $college->country_id = AdministrativeArea::ancestorsOf($area_id)->first()->id;
+            }
+        });
+    }
+
     public function degrees(){
         return $this->belongsToMany(Degree::class);
     }

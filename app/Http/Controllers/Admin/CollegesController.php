@@ -114,7 +114,9 @@ class CollegesController extends BaseController
         $college->update($request->all());
 
         $degree_ids = $request->input('degree_ids');
-        $college->degrees()->sync($degree_ids);
+        if($degree_ids){
+            $college->degrees()->sync($degree_ids); 
+        }
 
         return redirect()->route('admin.colleges.edit', $id);
     }

@@ -46,8 +46,8 @@ class Controller extends BaseController
         return $this->responseJson('error', $error, 422);
     }
 
-    protected function okResponse(){
-        return $this->responseJson('ok');
+    protected function okResponse($content=''){
+        return $this->responseJson('ok', $content);
     }
 
 }

@@ -16,10 +16,17 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('login', 'Admin\Auth\AuthController@postLogin')->name('admin.auth.login');
     //--
 
-    Route::get('/country_degree_examination_map', 'Admin\CountryDegreeExaminationMapController@index')->name('country_degree_examination_map');
+    Route::get('/country_degree_examination_map', 'Admin\CountryDegreeExaminationMapController@index')
+        ->name('country_degree_examination_map');
 
     //Resources
     Route::resource('colleges', 'Admin\CollegesController');
     Route::resource('examination_score_weights', 'Admin\ExaminationScoreWeightsController');
     //--
+
+    Route::get('/examination_score_weights/{weight_id}/colleges', 'Admin\ExaminationScoreWeightsController@colleges')
+        ->name('admin.examination_score_weights.colleges');
+
+    Route::patch('/examination_score_weights/{weight_id}/colleges', 'Admin\ExaminationScoreWeightsController@updateColleges')
+        ->name('admin.examination_score_weights.updateColleges');
 });

@@ -13,4 +13,12 @@ class ExaminationScoreWeight extends Model
     protected $casts = [
         'weights' => 'array',
     ];
+
+    public function country(){
+        return $this->belongsTo(AdministrativeArea::class);
+    }
+
+    public function degree(){
+        return $this->belongsTo(Degree::class);
+    }
 }
