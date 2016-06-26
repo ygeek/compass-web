@@ -71,4 +71,9 @@ class ExaminationScoreWeightsControllerTest extends TestCase
         $this->call('POST', route('admin.examination_score_weights.store'), $params);
         $this->seeInDatabase('examination_score_weights', ['country_id' => $country->id]);
     }
+
+    public function testGetCreate(){
+        $this->call('GET', route('admin.examination_score_weights.create'));
+        $this->assertResponseOk();
+    }
 }

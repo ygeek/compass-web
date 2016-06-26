@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AdministrativeArea;
+use App\Degree;
 use App\ExaminationScoreWeight;
 use Illuminate\Http\Request;
 
@@ -14,6 +16,12 @@ class ExaminationScoreWeightsController extends BaseController
 
     }
 
+    public function create(){
+        $countries = AdministrativeArea::countries()->get();
+        $degrees = Degree::all();
+        return view('admin.examination_score_weights.create', compact('countries', 'degrees'));
+    }
+    
     public function store(Request $request){
         ExaminationScoreWeight::create($request->all());
     }

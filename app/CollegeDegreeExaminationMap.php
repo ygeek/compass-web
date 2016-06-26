@@ -7,8 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 //学校学历对应考试映射表
 class CollegeDegreeExaminationMap extends Model
 {
-    public static function getExaminationsWith($college, $education){
-        $config = config("college_degree_examination_map.{$college}.{$education}");
+    public static function getExaminationsWith($country, $degree){
+        if(is_numeric($country)){
+            $country = AdministrativeArea::find($country)->name;
+        }
+
+        if(is_numeric($degree)){
+            $degree = Degree::find($degree)->name;
+        }
+        $config = config("college_degree_examination_map.{$country}.{$degree}");
         return collect($config)->map(function($item){
             if(!is_array($item)){
                 $item = [$item];
@@ -26,5 +33,10 @@ class CollegeDegreeExaminationMap extends Model
                 'visible' => $visible
             ];
         });
+    }
+
+    public static function getAllExaminations(){
+        $config = config('college_degree_examination_map');
+
     }
 }

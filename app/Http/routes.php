@@ -16,7 +16,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('login', 'Admin\Auth\AuthController@postLogin')->name('admin.auth.login');
     //--
 
-    Route::get('/country_degree_examination_map', 'Admin\CountryDegreeExaminationMapController@index');
+    Route::get('/country_degree_examination_map', 'Admin\CountryDegreeExaminationMapController@index')->name('country_degree_examination_map');
 
     //Resources
     Route::resource('colleges', 'Admin\CollegesController');

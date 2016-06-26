@@ -50,6 +50,23 @@
               </li>
             </ul>
         </li>
+
+          <li>
+            <a class="nav-submenu" data-toggle="nav-submenu" href="#">
+              <i class="si si-badge"></i><span class="sidebar-mini-hide">分数比例设置</span></a>
+            <ul>
+              <li>
+                <a href="{{ route('admin.examination_score_weights.index') }}"><i class="si si-rocket"></i>
+                  <span class="sidebar-mini-hide">比例列表</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.examination_score_weights.create') }}"><i class="si si-rocket"></i>
+                  <span class="sidebar-mini-hide">新增规则</span>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
       <!-- END Side Content -->

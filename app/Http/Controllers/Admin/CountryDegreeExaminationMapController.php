@@ -12,6 +12,7 @@ class CountryDegreeExaminationMapController extends BaseController
     public function index(Request $request){
         $country = $request->input('country');
         $degree = $request->input('degree');
+
         $map = \App\CollegeDegreeExaminationMap::getExaminationsWith($country, $degree);
         return $this->responseJson('ok', $map);
     }
