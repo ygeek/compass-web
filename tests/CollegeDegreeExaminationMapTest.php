@@ -15,7 +15,7 @@ class CollegeDegreeExaminationMapTest extends TestCase
         $contry = '新西兰';
         $degree = '本科';
 
-        $map = \App\CollegeDegreeExaminationMap::getExaminationsWith($contry, $degree);
+        $map = \App\CountryDegreeExaminationMap::getExaminationsWith($contry, $degree);
         //var_dump($map);
     }
 }

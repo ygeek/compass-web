@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Degree extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name' , 'estimatable'];
+
+    public static function estimatable(){
+        return self::where('estimatable', true);
+    }
 }

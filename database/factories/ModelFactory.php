@@ -87,6 +87,6 @@ $factory->define(App\College::class, function(Faker\Generator $faker){
         'background_image_path' => null,
         'administrative_area_id' => function(){
             return App\AdministrativeArea::whereIsRoot()->get()->first()->id;
-        }
+        },
     ];
 });

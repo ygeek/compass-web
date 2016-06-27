@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Examination extends Model
 {
     protected $fillable = [
-        'name', 'score_sections', 'sections'
+        'name', 'score_sections', 'sections', 'multiple_degree'
     ];
 
     protected $casts = [

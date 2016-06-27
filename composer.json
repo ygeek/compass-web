@@ -8,6 +8,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/chareice/SUBMAIL_PHP_SDK"
+        },
+        {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
         }
     ],
     "require": {
@@ -16,7 +20,8 @@
         "submail/submail-php": "dev-master",
         "laravelcollective/html": "5.2.*",
         "kalnoy/nestedset": "^4.1",
-        "symfony/yaml": "^3.1"
+        "symfony/yaml": "^3.1",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.6",

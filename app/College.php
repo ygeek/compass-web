@@ -39,6 +39,10 @@ class College extends Model
         });
     }
 
+    public function country(){
+        return $this->belongsTo(AdministrativeArea::class);
+    }
+
     public function degrees(){
         return $this->belongsToMany(Degree::class);
     }
@@ -52,18 +56,19 @@ class College extends Model
     }
 
     public function examinationScoreWeight(){
-        return $this->belongsTo(ExaminationScoreWeight::class);
+        return $this->belongsToMany(ExaminationScoreWeight::class, 'college_degree', 'examination_score_weight_id');
     }
 
     //计算最终的权重分
-    public function calculateWeightScore($student_scores){
+    public function calculateWeightScore($student_scores, $degree){
         $map = $this->examinationScoreMap->map;
-        $weights = $this->examinationScoreWeight->weights;
+        $weights = $this->examinationScoreWeight()->where('college_degree.degree_id', $degree->id)->first()->weights;
+
 
         $merged_map = self::mergeMap($map, $weights);
 
-
-        return collect($student_scores)->reduce(function($carry, $student_score) use ($merged_map){
+        $carry = 0;
+        foreach ($student_scores as $student_score){
             $current_examination = $student_score['examination_id'];
             $current_examination_map = $merged_map[$current_examination];
 
@@ -72,17 +77,35 @@ class College extends Model
                 $score_map_section = new ScoreMapSection($score_section['section']);
                 if($score_map_section->matching($student_score['score'])){
                     //分数段查找匹配成功
-                    $current_section_score = $score_section['score'] * $current_examination_map['weight'] / 100;
-                    return $carry + $current_section_score;
+                    $score_key = 'score';
+                    //有多个学历的 匹配当前学历
+                    if($current_examination_map['multiple_degree']){
+                        $score_key = $degree->id . ":" . $score_key;
+                    }
+                    $current_section_score = $score_section[$score_key] * $current_examination_map['weight'] / 100;
+                    $carry += $current_section_score;
                 }
             }
-        });
+        }
+        return $carry;
     }
 
     public static function mergeMap($map, $weights){
         return collect($map)->map(function($item, $key) use ($weights){
-            $item['weight'] = $weights[$key]['weight'];
+            $weight = self::findExaminationFromWeight($key, $weights);
+            $item['weight'] = $weight['weight'];
             return $item;
+        })->filter(function($item, $key){
+            return $item['weight'] > 0;
         });
+    }
+
+    private static function findExaminationFromWeight($examination_id, $weights){
+        foreach ($weights as $weight){
+            if(in_array($examination_id, $weight['ids'])){
+                return $weight;
+            }
+        }
+        return null;
     }
 }

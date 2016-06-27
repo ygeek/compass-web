@@ -21,20 +21,8 @@ class ExaminationScoreWeightsControllerTest extends TestCase
 
     //测试创建权重
     public function testCreateExaminationScoreWeight(){
-        foreach (config('adminstrative_area') as $root_node){
-            $node = App\AdministrativeArea::create($root_node);
-
-            $node->save();
-        }
-
         //获取国家
         $countries = \App\AdministrativeArea::countries()->get();
-
-        $degrees_config = collect(config('degrees'));
-        $degrees_config->each(function($item){
-            \App\Degree::create(['name' => $item]);
-        });
-
         //获取学历
         $degrees = App\Degree::where(['name' => '本科'])->get();
 

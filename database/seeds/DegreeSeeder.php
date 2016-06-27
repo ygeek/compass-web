@@ -13,7 +13,7 @@ class DegreeSeeder extends Seeder
     {
         $educations = collect(config('degrees'));
         $educations->each(function($item){
-           \App\Degree::create(['name' => $item]);
+           \App\Degree::create($item);
         });
     }
 }
