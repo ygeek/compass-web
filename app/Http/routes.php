@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin'], function(){
 
     //Resources
     Route::resource('colleges', 'Admin\CollegesController');
+    Route::resource('colleges.examination_score_maps', 'Admin\CollegeExaminationScoreMapController');
     Route::resource('examination_score_weights', 'Admin\ExaminationScoreWeightsController');
     //--
 

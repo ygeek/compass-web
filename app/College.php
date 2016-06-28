@@ -39,6 +39,24 @@ class College extends Model
         });
     }
 
+    public function examinationScoreMapTemplate(){
+        $college_examination_ids = [];
+        $degrees = $this->degrees()->where('estimatable', true)->get();
+        foreach ($degrees as $degree){
+            $examinations = CountryDegreeExaminationMap::getExaminationsWith($this->country->name, $degree->name);
+
+            foreach ($examinations as $examination){
+                array_push($college_examination_ids, $examination['ids']);
+            }
+        }
+
+        $college_examinations = Examination::whereIn('id',
+            collect($college_examination_ids)->flatten()->unique()
+        )->get()->toArray();
+
+        return $college_examinations;
+    }
+
     public function country(){
         return $this->belongsTo(AdministrativeArea::class);
     }
