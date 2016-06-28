@@ -43,13 +43,13 @@
 
                                     <template v-if="!examination.multiple_degree">
                                         <td>
-                                            <input type="text" v-model="score_section.score"/>
+                                            <input type="text" v-model="score_section.score" placeholder="@{{examination.name}} @{{score_section['section']}}"/>
                                         </td>
                                     </template>
 
                                     <template v-if="examination.multiple_degree">
                                         <td v-for="degree in examination.degrees">
-                                            <input type="text" v-model="score_section[degree.id + ':score']" />
+                                            <input type="text" v-model="score_section[degree.id + ':score']" placeholder="@{{examination.name}} @{{score_section['section']}} @{{degree.name}}" />
                                         </td>
                                     </template>
                                     
@@ -69,8 +69,7 @@
                         <div class="col-xs-6">
                         </div>
                         <div class="col-xs-6 text-right">
-                            <button class="wizard-next btn btn-default disabled" type="button" style="display: none;">Next <i class="fa fa-arrow-right"></i></button>
-                            <button class="wizard-finish btn btn-primary" type="submit" style="display: inline-block;"><i class="fa fa-check"></i> Submit</button>
+                            <button @click="save" class="wizard-finish btn btn-primary" type="submit" style="display: inline-block;"><i class="fa fa-check"></i>保存</button>
                         </div>
                     </div>
                 </div>
@@ -82,48 +81,58 @@
             data: function () {
                 return {
                     examinations: function(){
-                        var examinations_template = {!! json_encode($examination_template) !!};
-                        var degrees = {!! json_encode($degrees) !!};
-                        return examinations_template.map(function(examination_template){
-                            var examination = {
-                                _id: guid()
-                            };
-                            examination.id = examination_template.id;
-                            examination.name = examination_template.name;
-                            examination.multiple_degree = examination_template.multiple_degree;
-                            if(examination.multiple_degree){
-                                examination.degrees = degrees.map(function(degree){
-                                    return {
-                                        id: degree.id,
-                                        name: degree.name
-                                    };
-                                });
-                            }
-
-                            var score_sections = examination_template.score_sections.map(function(score_section_template){
-                                var section = {
+                        @if(isset($examination_template))
+                            var examinations_template = {!! json_encode($examination_template) !!};
+                            var degrees = {!! json_encode($degrees) !!};
+                            var examinations = {};
+                            
+                            examinations_template.forEach(function(examination_template){
+                                var examination = {
                                     _id: guid()
                                 };
-                                section.section = score_section_template;
-                                if(examination.degrees){
-                                    examination.degrees.forEach(function(degree){
-                                        var key = degree.id + ":score";
-                                        section[key] = null;
+                                examination.id = examination_template.id;
+                                examination.name = examination_template.name;
+                                examination.multiple_degree = examination_template.multiple_degree;
+                                if(examination.multiple_degree){
+                                    examination.degrees = degrees.map(function(degree){
+                                        return {
+                                            id: degree.id,
+                                            name: degree.name
+                                        };
                                     });
-                                }else{
-                                    section['score'] = null;
                                 }
-                                return section;
+
+                                var score_sections = examination_template.score_sections.map(function(score_section_template){
+                                    var section = {
+                                        _id: guid()
+                                    };
+                                    section.section = score_section_template;
+                                    if(examination.degrees){
+                                        examination.degrees.forEach(function(degree){
+                                            var key = degree.id + ":score";
+                                            section[key] = null;
+                                        });
+                                    }else{
+                                        section['score'] = null;
+                                    }
+                                    return section;
+                                });
+                                examination.score_sections = score_sections;
+                                examinations[examination.id] = examination;
                             });
-                            examination.score_sections = score_sections;
-                            return examination;
-                        });
+                        @else
+                            var examinations = {!! json_encode($map->map) !!};
+                        @endif
+                        
+                        return examinations;
                     }()
                 };
             },
             methods: {
                 deleteScoreSection: function(section_id, examination_id){
-                    this.examinations.forEach(function(examination){
+                    var that = this;
+                    Object.keys(this.examinations).forEach(function(key){
+                        var examination = that.examinations[key];
                         if(examination._id == examination_id){
                             examination.score_sections.forEach(function(score_section, index){
                                 if(score_section._id == section_id){
@@ -136,9 +145,9 @@
                 },
                 addSectionForExamination: function(examination){
                     var section = {
-                                    _id: guid()
-                                };
-                    section.section = null;
+                        _id: guid()
+                    };
+                    section.section = '';
                     if(examination.degrees){
                         examination.degrees.forEach(function(degree){
                             var key = degree.id + ":score";
@@ -148,6 +157,14 @@
                         section['score'] = null;
                     }
                     examination.score_sections.push(section);
+                },
+                save: function(){
+                    var url = '{{ route("admin.colleges.examination_score_map.index", $college->id) }}';
+                    this.$http.post(url, {
+                        map: this.examinations
+                    }).then(function(response){
+                        alert('修改成功');
+                    });
                 }
             },
             computed: {

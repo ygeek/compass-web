@@ -27,6 +27,9 @@
                           <a href="{{ route('admin.colleges.edit', $college->id) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="修改院校">
                             <i class="fa fa-pencil"></i>
                           </a>
+                          <a href="{{ route('admin.colleges.examination_score_map.index', $college->id) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="查看分数映射表">
+                            <i class="fa fa-pencil"></i>
+                          </a>
                           <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="Remove Client">
                             <i class="fa fa-times"></i>
                           </button>

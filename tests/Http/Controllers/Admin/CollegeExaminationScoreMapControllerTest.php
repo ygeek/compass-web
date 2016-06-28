@@ -49,5 +49,20 @@ class CollegeExaminationScoreMapControllerTest extends TestCase
 
             $score_map[$key] = $score_sections;
         }
+
+        $params = [
+            'map' => json_encode($score_map)
+        ];
+
+        $this->call('POST', route('admin.colleges.examination_score_map.index', $this->college->id), $params);
+        $this->seeInDatabase('college_examination_score_maps', ['college_id' => $this->college->id]);
+
+        //获取接口
+        $this->call('GET', route('admin.colleges.examination_score_map.index', $this->college->id));
+        $this->assertViewHas('map');
+
+        //修改
+        $this->call('POST', route('admin.colleges.examination_score_map.index', $this->college->id), $params);
+        $this->assertResponseOk();
     }
 }
