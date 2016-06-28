@@ -101,22 +101,25 @@
                                         };
                                     });
                                 }
+                                var score_sections = [];
+                                if(examination_template.score_sections){
+                                    examination_template.score_sections.map(function(score_section_template){
+                                        var section = {
+                                            _id: guid()
+                                        };
+                                        section.section = score_section_template;
+                                        if(examination.degrees){
+                                            examination.degrees.forEach(function(degree){
+                                                var key = degree.id + ":score";
+                                                section[key] = null;
+                                            });
+                                        }else{
+                                            section['score'] = null;
+                                        }
+                                        return section;
+                                    });
+                                }
 
-                                var score_sections = examination_template.score_sections.map(function(score_section_template){
-                                    var section = {
-                                        _id: guid()
-                                    };
-                                    section.section = score_section_template;
-                                    if(examination.degrees){
-                                        examination.degrees.forEach(function(degree){
-                                            var key = degree.id + ":score";
-                                            section[key] = null;
-                                        });
-                                    }else{
-                                        section['score'] = null;
-                                    }
-                                    return section;
-                                });
                                 examination.score_sections = score_sections;
                                 examinations[examination.id] = examination;
                             });
