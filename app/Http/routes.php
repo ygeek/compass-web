@@ -25,6 +25,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('examination_score_weights', 'Admin\ExaminationScoreWeightsController');
     //--
 
+    Route::get('setting/{key}', 'Admin\SettingController@index')->name('admin.setting.index');
+    Route::post('setting/{key}', 'Admin\SettingController@store')->name('admin.setting.store');
+
     Route::get('/examination_score_weights/{weight_id}/colleges', 'Admin\ExaminationScoreWeightsController@colleges')
         ->name('admin.examination_score_weights.colleges');
 
