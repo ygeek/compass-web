@@ -1,4 +1,9 @@
 <?php
+/*
+ * 标示字段说明
+ * multiple_degree 是否根据学历不同而需要不同处理
+ * is_requirement 是否是申请要求 default false
+ * */
 return [
     [
         'name' => '雅思',
@@ -64,6 +69,7 @@ return [
     ],
     [
         'name' => '相关专业工作年限',
-        'multiple_degree' => false
+        'multiple_degree' => false,
+        'is_requirement' => true
     ]
 ];

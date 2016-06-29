@@ -6,6 +6,12 @@ namespace App;
 class CountryDegreeExaminationMap
 {
     public static function getExaminationsWith($country, $degree){
+        $allExaminations = self::getAllExaminationsWith($country, $degree, false);
+        //排除掉is_requirement为True的项目
+        return $allExaminations;
+    }
+
+    public static function getAllExaminationsWith($country, $degree, $is_requirement=true){
         if(is_numeric($country)){
             $country = AdministrativeArea::find($country)->name;
         }
@@ -14,22 +20,31 @@ class CountryDegreeExaminationMap
             $degree = Degree::find($degree)->name;
         }
         $config = config("college_degree_examination_map.{$country}.{$degree}");
-        return collect($config)->map(function($item){
+        $res = [];
+
+        foreach ($config as $item){
             if(!is_array($item)){
                 $item = [$item];
             }
 
             $examinations = Examination::whereIn('name', $item)->get();
-            $values = $examinations->map(function($item){
-                return $item->id;
-            })->toArray();
+            $values = [];
+
+            foreach ($examinations as $examination){
+                if(!$is_requirement && $examination->is_requirement){
+                    continue 2;
+                }
+                $values[] = $examination->id;
+            }
 
             $visible = implode('/', $item);
 
-            return [
+            $res[] = [
                 'ids' => $values,
                 'visible' => $visible
             ];
-        });
+        }
+
+        return collect($res);
     }
 }

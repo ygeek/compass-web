@@ -17,6 +17,7 @@ class CreateExaminationsTable extends Migration
             $table->string('name')->unique();
             //是否考试不同学历要求不一致
             $table->boolean('multiple_degree');
+            $table->boolean('is_requirement')->default(false);
             //该考试的子科目
             $table->json('sections');
             $table->json('score_sections');
