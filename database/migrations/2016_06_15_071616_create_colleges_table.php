@@ -40,6 +40,9 @@ class CreateCollegesTable extends Migration
             $table->foreign('country_id')
                 ->references('id')
                 ->on('administrative_areas');
+
+            //申请条件
+            $table->json('requirement')->nullable();
             $table->timestamps();
         });
     }

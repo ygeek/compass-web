@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\App;
 
 class College extends Model
 {
+
+    protected $casts = [
+      'requirement' => 'array'
+    ];
+    
     protected $fillable = [
         'chinese_name',
         'english_name',
@@ -23,6 +28,7 @@ class College extends Model
         'background_image_path',
         'administrative_area_id',
     ];
+
 
     public static function boot(){
         parent::boot();

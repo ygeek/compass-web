@@ -21,7 +21,7 @@ class ExaminationScoreWeightsController extends BaseController
 
     public function create(){
         $countries = AdministrativeArea::countries()->get();
-        $degrees = Degree::all();
+        $degrees = Degree::estimatable()->get();
         return view('admin.examination_score_weights.create', compact('countries', 'degrees'));
     }
     

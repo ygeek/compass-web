@@ -25,6 +25,8 @@ class CreateSpecialitiesTable extends Migration
             $table->integer('category_id')->unsigned()->index();
             $table->foreign('category_id')->references('id')->on('speciality_categories');
 
+            //申请条件
+            $table->json('requirement')->nullable();
             $table->timestamps();
         });
     }
