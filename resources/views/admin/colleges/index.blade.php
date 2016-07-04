@@ -33,6 +33,9 @@
                           <a href="{{ route('admin.requirement.index', ['type' => get_class($college), 'id' => $college->id ]) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="设置申请要求">
                               <i class="fa fa-pencil"></i>
                           </a>
+                          <a href="{{ route('admin.colleges.specialities.index', [ 'college' => $college->id ]) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="查看专业设置">
+                              <i class="fa fa-pencil"></i>
+                          </a>
                           <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="Remove Client">
                             <i class="fa fa-times"></i>
                           </button>

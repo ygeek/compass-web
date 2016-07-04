@@ -11,7 +11,7 @@ class College extends Model
     protected $casts = [
       'requirement' => 'array'
     ];
-    
+
     protected $fillable = [
         'chinese_name',
         'english_name',
@@ -65,6 +65,10 @@ class College extends Model
 
     public function country(){
         return $this->belongsTo(AdministrativeArea::class);
+    }
+
+    public function specialities(){
+        return $this->hasMany(Speciality::class);
     }
 
     public function degrees(){

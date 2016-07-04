@@ -17,6 +17,10 @@ class RequirementController extends BaseController
 
         $country = $instance->country;
         $degrees = $instance->degrees;
+        if(is_null($degrees)){
+            $degree = $instance->degree;
+            $degrees = [$degree];
+        }
 
         if($requirement){
             //已存在 修改
