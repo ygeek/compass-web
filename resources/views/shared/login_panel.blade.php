@@ -80,7 +80,7 @@
           code: this.verify_code,
           password: this.password
         }).then(function(response){
-          console.log('注册成功');
+          alert('注册成功');
         });
       },
       sendLoginRequest: function(){
