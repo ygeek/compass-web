@@ -27,4 +27,7 @@ class Speciality extends Model
         return $this->belongsTo(Degree::class);
     }
 
+    public function category(){
+        return $this->belongsTo(SpecialityCategory::class, 'category_id');
+    }
 }

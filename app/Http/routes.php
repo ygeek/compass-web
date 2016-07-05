@@ -1,6 +1,13 @@
 <?php
 
 Route::get('/', 'IndexController@index');
+
+//评估
+Route::get('/estimate/step-1', 'EstimateController@stepFirst')->name('estimate.step_first');
+Route::get('/estimate/step-2', 'EstimateController@stepSecond')->name('estimate.step_second');
+Route::post('/estimate', 'EstimateController@store')->name('estimate.store');
+
+
 Route::group(['prefix' => 'auth'], function (){
     Route::post('verify-codes', 'Auth\AuthController@createVerifyCodes')->name('auth.verifyCode.store');
     Route::post('register', 'Auth\AuthController@register')->name('auth.users.store');

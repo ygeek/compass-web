@@ -78,14 +78,9 @@ class CountryDegreeExaminationMap
                     'sections' => collect($examination->sections)->map(function($section){ return ['name' => $section, 'requirement' => null];})
                 ];
 
+                //院校性质不在申请要求中单独出现
                 if($res['examination_name'] == '院校性质'){
                     continue;
-                }
-
-                //特殊处理
-                //平均成绩这门考试 在本科 tagable为false
-                if($res['examination_name'] == '平均成绩' && $degree->name == '本科'){
-                    $res['tagable'] = false;
                 }
 
                 $degree_examinations[] = $res;

@@ -84,17 +84,17 @@ class College extends Model
     }
 
     public function examinationScoreWeight(){
-        return $this->belongsToMany(ExaminationScoreWeight::class, 'college_degree', 'examination_score_weight_id');
+        return $this->belongsToMany(ExaminationScoreWeight::class, 'college_degree', 'college_id');
     }
 
     //计算最终的权重分
     public function calculateWeightScore($student_scores, $degree){
         $map = $this->examinationScoreMap->map;
         $weights = $this->examinationScoreWeight()->where('college_degree.degree_id', $degree->id)->first()->weights;
-
-
+        if(is_string($weights)){
+            $weights = json_decode($weights, true);
+        }
         $merged_map = self::mergeMap($map, $weights);
-
         $carry = 0;
         foreach ($student_scores as $student_score){
             $current_examination = $student_score['examination_id'];
@@ -103,13 +103,16 @@ class College extends Model
             $current_examination_score_sections = $current_examination_map['score_sections'];
             foreach ($current_examination_score_sections as $score_section){
                 $score_map_section = new ScoreMapSection($score_section['section']);
-                if($score_map_section->matching($student_score['score'])){
-                    //分数段查找匹配成功
-                    $score_key = 'score';
-                    //有多个学历的 匹配当前学历
-                    if($current_examination_map['multiple_degree']){
-                        $score_key = $degree->id . ":" . $score_key;
-                    }
+
+                //分数段查找匹配成功
+                $score_key = 'score';
+
+                //有多个学历的 匹配当前学历
+                if($current_examination_map['multiple_degree']){
+                    $score_key = $degree->id . ":" . $score_key;
+                }
+
+                if($score_map_section->matching($student_score[$score_key])){
                     $current_section_score = $score_section[$score_key] * $current_examination_map['weight'] / 100;
                     $carry += $current_section_score;
                 }

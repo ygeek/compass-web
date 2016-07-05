@@ -4,7 +4,9 @@
  * multiple_degree 是否根据学历不同而需要不同处理
  * is_requirement 是否是申请要求 default false
  * examination_only 要求Only
+ * computed 是推导出的
  * */
+
 return [
     [
         'name' => '雅思',
@@ -27,12 +29,18 @@ return [
         'multiple_degree' => true
     ],
     [
-        'name' => '平均成绩',
+        'name' => '大学平均成绩',
         'score_sections' => [
             '90-100', '85-89', '80-84', '75-79', '70-74', '65-69', '60-78', '60-54', '<=59'
         ],
-        'multiple_degree' => true,
         'tagable' => true
+    ],
+    [
+        'name' => '高中平均成绩',
+        'score_sections' => [
+            '90-100', '85-89', '80-84', '75-79', '70-74', '65-69', '60-78', '60-54', '<=59'
+        ],
+        'tagable' => false
     ],
     [
         'name' => '高考',
@@ -72,6 +80,6 @@ return [
     [
         'name' => '院校性质',
         'score_sections' => ['985', '211', '双非'],
-        'examination_only' => true
+        // 'examination_only' => true
     ]
 ];

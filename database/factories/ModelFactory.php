@@ -60,6 +60,15 @@ $factory->define(App\Examination::class, function(){
     ];
 });
 
+$factory->define(\App\Speciality::class, function (){
+    $speciality_names = collect(['机械工程', '电子信息工程', '土木工程', '计算数学', '建筑经济', '金融']);
+    $name = $speciality_names->random();
+    return [
+        'name' => $name,
+        'category_id' => \App\SpecialityCategory::all()->random()->id,
+        'degree_id' => \App\Degree::all()->random()->id
+    ];
+});
 
 $factory->define(App\College::class, function(Faker\Generator $faker){
     if(App\AdministrativeArea::count() == 0){
