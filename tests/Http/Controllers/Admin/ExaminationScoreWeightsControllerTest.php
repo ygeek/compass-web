@@ -57,7 +57,17 @@ class ExaminationScoreWeightsControllerTest extends TestCase
         ];
 
         $this->call('POST', route('admin.examination_score_weights.store'), $params);
+        $this->assertRedirectedTo(route('admin.examination_score_weights.index'));
         $this->seeInDatabase('examination_score_weights', ['country_id' => $country->id]);
+
+        $weight = \App\ExaminationScoreWeight::first();
+        //测试修改
+        $this->call('GET', route('admin.examination_score_weights.edit', $weight->id));
+        $this->assertResponseOk();
+        $weight_name = 'Hello World';
+        $this->call('PATCH', route('admin.examination_score_weights.update', $weight->id), ['name' => $weight_name]);
+        $this->assertRedirectedTo(route('admin.examination_score_weights.index'));
+
     }
 
     public function testGetCreate(){

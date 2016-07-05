@@ -5,6 +5,7 @@
         <div class="block">
             <div class="block-header">
                 <h3 class="block-title">规则列表</h3>
+                <a class="btn btn-primary" href="{{route('admin.examination_score_weights.create')}}">新增规则</a>
             </div>
 
             <div class="modal" tabindex="-1" style="display: block;" v-if="showPop">

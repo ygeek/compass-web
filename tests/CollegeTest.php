@@ -117,7 +117,7 @@ class CollegeTest extends TestCase
         $degree = \App\Degree::where('name', '本科')->first();
         $yasi = \App\Examination::where('name', '雅思')->first();
         $gaokao = \App\Examination::where('name', '高考')->first();
-        $pingjunchengji = \App\Examination::where('name', '平均成绩')->first();
+        $pingjunchengji = \App\Examination::where('name', '高中平均成绩')->first();
 
         $studentScore = [
             [

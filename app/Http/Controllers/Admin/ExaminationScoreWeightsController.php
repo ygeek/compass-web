@@ -26,7 +26,28 @@ class ExaminationScoreWeightsController extends BaseController
     }
     
     public function store(Request $request){
-        ExaminationScoreWeight::create($request->all());
+        $weight = new ExaminationScoreWeight($request->all());
+        $weights = json_decode($request->input('weights'));
+        $weight->weights = $weights;
+        $weight->save();
+        
+        return redirect()->route('admin.examination_score_weights.index');
+    }
+
+    public function edit($weight_id){
+        $weight = ExaminationScoreWeight::find($weight_id);
+        return view('admin.examination_score_weights.edit', compact('weight'));
+    }
+
+    public function update($weight_id, Request $request){
+        $weight = ExaminationScoreWeight::find($weight_id);
+        $weights = json_decode($request->input('weights'));
+
+        $weight->name = $request->input('name');
+        $weight->weights = $weights;
+        $weight->save();
+
+        return redirect()->route('admin.examination_score_weights.index');
     }
 
     public function colleges($weight_id){
