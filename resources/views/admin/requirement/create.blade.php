@@ -60,7 +60,7 @@
             <div class="js-wizard-simple block">
                 <!-- Step Tabs -->
                 <ul class="nav nav-tabs nav-justified">
-                    <li v-for="degree in requirements">
+                    <li v-for="degree in requirements" v-bind:class="{'active': $index == 0}">
                         <a href="#degree@{{degree.id}}" data-toggle="tab" aria-expanded="false">@{{degree.name}}</a>
                     </li>
                 </ul>
@@ -68,7 +68,7 @@
 
                 <!-- Steps Content -->
                 <div class="block-content tab-content">
-                    <div class="tab-pane push-30-t push-50" id="degree@{{degree.id}}" v-for="degree in requirements">
+                    <div class="tab-pane push-30-t push-50" id="degree@{{degree.id}}" v-for="degree in requirements" v-bind:class="{'active': $index == 0}">
                         <table class="table">
                             <thead>
                             <tr>

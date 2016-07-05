@@ -6,7 +6,7 @@
         <div class="js-wizard-simple block">
             <!-- Step Tabs -->
             <ul class="nav nav-tabs nav-justified">
-                <li v-for="examination in examinations">
+                <li v-for="examination in examinations" v-bind:class="{'active': $index == 0}">
                     <a href="#examination@{{examination.id}}" data-toggle="tab" aria-expanded="false">@{{examination.name}}</a>
                 </li>
             </ul>
@@ -14,7 +14,7 @@
 
                 <!-- Steps Content -->
                 <div class="block-content tab-content">
-                    <div class="tab-pane push-30-t push-50" id="examination@{{examination.id}}" v-for="examination in examinations" track-by="_id">
+                    <div class="tab-pane push-30-t push-50" id="examination@{{examination.id}}" v-for="examination in examinations" track-by="_id" v-bind:class="{'active': $index == 0}">
                         <table class="table">
                             <thead>
                                 <tr>
