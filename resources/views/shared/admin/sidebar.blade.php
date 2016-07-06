@@ -37,6 +37,15 @@
           <li>
               <a href="{{ route('admin.setting.index', ['key' => 'core_range']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">核心冲刺概率设置</span></a>
           </li>
+
+          <li>
+            <a href="{{ route('admin.setting.index', ['key' => '918list']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">985院校列表设置</span></a>
+          </li>
+
+          <li>
+            <a href="{{ route('admin.setting.index', ['key' => '211list']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">211院校列表设置</span></a>
+          </li>
+
           <li>
             <a class="nav-submenu" data-toggle="nav-submenu" href="#">
               <i class="si si-badge"></i><span class="sidebar-mini-hide">院校管理</span></a>
