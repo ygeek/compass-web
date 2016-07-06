@@ -43,7 +43,7 @@ class CoreRangeSetting{
         return $this->getCountryDegreeSetting($country_id, $degree_id)['sprint']['range'];
     }
 
-    private function getCountryDegreeSetting($country_id, $degree_id){
+    public function getCountryDegreeSetting($country_id, $degree_id){
         foreach ($this->getSetting() as $country){
             if($country['country_id'] == $country_id){
                 foreach ($country['degrees'] as $degree) {

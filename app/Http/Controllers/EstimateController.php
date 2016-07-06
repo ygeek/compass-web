@@ -66,12 +66,20 @@ class EstimateController extends Controller
 
         $colleges = $this->estimateColleges();
 
-        $res = $colleges->map(function($college) use ($student_scores, $selected_degree){
-            return [
-                'college' => $college->id,
-                'score' => $college->calculateWeightScore($student_scores, $selected_degree)
-            ];
-        });
+        $res = [];
+        foreach ($colleges as $college){
+            try{
+                $res[] = [
+                    'college_id' => $college->id,
+                    'score' => $college->calculateWeightScore($student_scores, $selected_degree)
+                ];
+            }catch (\Exception $e){
+                continue;
+            }
+        }
+
+
+        dd($res);
     }
 
     private function estimateColleges($params=null){
