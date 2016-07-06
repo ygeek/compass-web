@@ -7,6 +7,14 @@ class CoreRangeSetting{
 
     public function __construct()
     {
+        $this->loadSetting();
+    }
+
+    public function reload(){
+        $this->loadSetting();
+    }
+
+    private function loadSetting(){
         $setting = Setting::get('core_range');
         if(is_null($setting)){
             $setting = $this->newCoreRange();
@@ -19,11 +27,40 @@ class CoreRangeSetting{
         return $this->setting;
     }
 
+    public function getCoreRange($country_id, $degree_id){
+        return $this->getCountryDegreeSetting($country_id, $degree_id)['core']['range'];
+    }
+
+    public function getCoreCount($country_id, $degree_id){
+        return $this->getCountryDegreeSetting($country_id, $degree_id)['core']['count'];
+    }
+
+    public function getSprintCount($country_id, $degree_id){
+        return $this->getCountryDegreeSetting($country_id, $degree_id)['sprint']['count'];
+    }
+
+    public function getSprintRange($country_id, $degree_id){
+        return $this->getCountryDegreeSetting($country_id, $degree_id)['sprint']['range'];
+    }
+
+    private function getCountryDegreeSetting($country_id, $degree_id){
+        foreach ($this->getSetting() as $country){
+            if($country['country_id'] == $country_id){
+                foreach ($country['degrees'] as $degree) {
+                    if($degree['degree_id'] == $degree_id){
+                        return $degree;
+                    }
+                };
+            }
+        }
+        return null;
+    }
+
     private function newCoreRange(){
         $countries = \App\AdministrativeArea::countries()->get();
         $degrees = \App\Degree::estimatable()->get();
 
-        $countries->map(function ($country) use ($degrees){
+        return $countries->map(function ($country) use ($degrees){
             $obj = [];
             $obj['country_id'] = $country->id;
             $obj['country_name'] = $country->name;
@@ -40,7 +77,7 @@ class CoreRangeSetting{
                     'count' => null
                 ];
                 return $core_degree;
-            });
+            })->toArray();
 
             return $obj;
         });
