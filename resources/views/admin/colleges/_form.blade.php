@@ -15,10 +15,10 @@
     </div>
     <div class="block-content" id="new_college_form">
       @if( Route::getCurrentRoute()->getName() == 'admin.colleges.edit')
-        <form class="form-horizontal push-10-t push-10" action="{{ route('admin.colleges.update', $college->id) }}" method="POST">
+        <form class="form-horizontal push-10-t push-10" action="{{ route('admin.colleges.update', $college->id) }}" method="POST" enctype="multipart/form-data">
         <input name="_method" type="hidden" value="PATCH">
       @else
-        <form class="form-horizontal push-10-t push-10" action="{{ route('admin.colleges.store') }}" method="POST">
+        <form class="form-horizontal push-10-t push-10" action="{{ route('admin.colleges.store') }}" method="POST" enctype="multipart/form-data">
       @endif
           {{ csrf_field() }}
             <div class="row">
@@ -112,6 +112,9 @@
                             <label for="badge_path">院校Logo</label>
                             <input class="form-control input-lg" type="file" id="badge_path" name="badge_path" placeholder="Enter your location..">
                         </div>
+                        @if($college->badge_path)
+                            <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" height="40px;"/>
+                        @endif
                     </div>
 
                     <div class="form-group">
@@ -119,6 +122,9 @@
                             <label for="background_image_path">院校背景图</label>
                             <input class="form-control input-lg" type="file" id="background_image_path" name="background_image_path" placeholder="Enter your location..">
                         </div>
+                        @if($college->background_image_path)
+                            <img src="{{app('qiniu_uploader')->pathOfKey($college->background_image_path)}}" height="40px;"/>
+                        @endif
                     </div>
 
                     <div class="form-group">

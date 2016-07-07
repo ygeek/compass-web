@@ -161,6 +161,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\VerifyCodeServiceProvider::class,
         App\Providers\SMSServiceProvider::class,
+        App\Providers\QiniuUploderProvider::class,
     ],
 
     /*

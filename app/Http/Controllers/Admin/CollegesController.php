@@ -48,6 +48,21 @@ class CollegesController extends BaseController
     {
         DB::transaction(function() use ($request){
             $college = new College($request->all());
+
+            $badge_path = $request->file('badge_path');
+            if($badge_path){
+                $result = app('qiniu_uploader')->upload_file($badge_path);
+                $key = $result['key'];
+                $college->badge_path = $key;
+            }
+
+            $background_image_path = $request->file('background_image_path');
+            if($background_image_path){
+                $result = app('qiniu_uploader')->upload_file($background_image_path);
+                $key = $result['key'];
+                $college->background_image_path = $key;
+            }
+            
             $college->save();
             $degree_ids = $request->input('degree_ids');
             $college->degrees()->attach($degree_ids);
@@ -112,6 +127,22 @@ class CollegesController extends BaseController
     {
         $college = College::find($id);
         $college->update($request->all());
+
+        $badge_path = $request->file('badge_path');
+        if($badge_path){
+            $result = app('qiniu_uploader')->upload_file($badge_path);
+            $key = $result['key'];
+            $college->badge_path = $key;
+        }
+
+        $background_image_path = $request->file('background_image_path');
+        if($background_image_path){
+            $result = app('qiniu_uploader')->upload_file($background_image_path);
+            $key = $result['key'];
+            $college->background_image_path = $key;
+        }
+
+        $college->save();
 
         $degree_ids = $request->input('degree_ids');
         if($degree_ids){
