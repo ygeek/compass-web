@@ -39,7 +39,7 @@
           </li>
 
           <li>
-            <a href="{{ route('admin.setting.index', ['key' => '918list']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">985院校列表设置</span></a>
+            <a href="{{ route('admin.setting.index', ['key' => '985list']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">985院校列表设置</span></a>
           </li>
 
           <li>
