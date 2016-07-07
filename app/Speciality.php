@@ -9,7 +9,17 @@ class Speciality extends Model
     protected $casts = [
       'requirement' => 'array'
     ];
-    
+
+    public static function boot(){
+        parent::boot();
+
+        static::saving(function($speciality)
+        {
+            $college = College::find($speciality->college_id);
+            $speciality->country_id = $college->country->id;
+        });
+    }
+
     protected $fillable = [
         'name', 'category_id', 'degree_id'
     ];
