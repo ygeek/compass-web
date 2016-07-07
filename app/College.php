@@ -139,4 +139,28 @@ class College extends Model
         }
         return null;
     }
+
+    //获取院校专业的要求信息
+    public function getSpecialityRequirement($speciality_name, $degree){
+        $obj = $this->specialities->where('name', $speciality_name)->first();
+
+        $type = 'speciality';
+        if(!$obj || !$obj->requirement){
+            $obj = $this;
+            $type = 'college';
+        }
+
+        $requirement = [];
+
+        foreach ($obj->requirement as $require){
+            if($require['id'] == $degree->id){
+                $requirement = $require['examinations'];
+            }
+        }
+
+        return [
+            'type' => $type,
+            'requirement' => $requirement
+        ];
+    }
 }

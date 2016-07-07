@@ -280,3 +280,105 @@ ul{
     }
   }
 }
+
+.estimate-page{
+  background-color: #e0e0e0;
+  background-image: url("/images/estimate-bg.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .estimate-form{
+    width: 435px;
+    position: absolute;
+    left: 50%;
+    margin-left: -272.5px;
+    margin-top: 75px;
+
+    label{
+      font-size: 14px;
+      color: #a1a1a1;
+      line-height: 40px;
+      width: 100px;
+      display: inline-block;
+    }
+
+    h1{
+      font-size: 15px;
+      color: #0e2d60;
+      margin-left: 210px;
+      margin-bottom: 30px;
+    }
+    .form-group{
+      display: block;
+      width: 100%;
+      overflow: auto;
+    }
+    .estimate-input{
+      width: 298px;
+      height: 40px;
+      border: none;
+      margin-bottom: 12px;
+      padding-left: 2px;
+    }
+
+
+
+    .estimate-select{
+      background: #fff url("/images/select_arrow.png") no-repeat 98%;
+      height: 40px;
+      width: 280px;
+      border: none;
+      overflow: hidden;
+      padding-left: 20px;
+      float: right;
+      margin-bottom: 12px;
+      select{
+        background: transparent;
+        border: none;
+        height: 40px;
+        width: 298px;
+        -webkit-appearance: none;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+    .estimate-short-select{
+      background: #fff url("/images/select_arrow.png") no-repeat 98%;
+      height: 40px;
+      border: none;
+      overflow: hidden;
+      padding-left: 20px;
+      width: 120px;
+      float: none;
+      display: inline-block;
+      select{
+        background: transparent;
+        border: none;
+        height: 40px;
+        width: 118px;
+        -webkit-appearance: none;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+.estimate-result{
+  .identity{
+    
+  }
+}
+
+.estimate-button{
+  width: 138px;
+  color: #ffffff;
+  border: none;
+  background-color: #0e2d60;
+  height: 30px;
+  margin-left: 210px;
+  margin-top: 40px;
+}

@@ -1,16 +1,16 @@
 <div class="top-nav-bar">
   <div class='top-bar-logo'>
     <a class='logo-nav-bar' href="#">
-      <img src="images/logo_ico.png" alt="logo">
+      <img src="/images/logo_ico.png" alt="logo">
     </a>
   </div>
   <div class="top-bar-content">
     <ul class='title-nav-bar'>
-      <li class="nav-item active">
-        <a href="#">首页</a>
+      <li class="nav-item">
+        <a href="/">首页</a>
       </li>
       <li class="nav-item">
-        <a href="#">免费留学评估</a>
+        <a href="{{ route('estimate.step_first') }}">免费留学评估</a>
       </li>
       <li class="nav-item">
         <a href="#">院校查询</a>

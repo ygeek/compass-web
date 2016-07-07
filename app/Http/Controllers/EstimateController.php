@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\AdministrativeArea;
+use App\CoreRangeSetting;
 use App\CountryDegreeExaminationMap;
 use App\Degree;
 use App\College;
+use App\Estimate;
 use App\Examination;
 use App\SpecialityCategory;
 use Illuminate\Http\Request;
@@ -30,7 +32,8 @@ class EstimateController extends Controller
     public function stepSecond(Request $request){
         $selected_country = AdministrativeArea::find($request->input('selected_country_id'));
         $selected_degree = Degree::find($request->input('selected_degree_id'));
-        return view('estimate.step_second', compact('selected_degree', 'selected_country'));
+        $selected_speciality_name = $request->input('speciality_name');
+        return view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name'));
     }
 
     /*
@@ -38,10 +41,25 @@ class EstimateController extends Controller
      */
     public function store(Request $request){
         $data = $request->input('data');
+        if(is_string($data)){
+            $data = json_decode($data, true);
+        }
         $selected_country = AdministrativeArea::find($data['selected_country']);
         $selected_degree = Degree::find($data['selected_degree']);
+        $selected_speciality_name = $data['selected_speciality_name'];
 
         $examinations = $data['examinations'];//需要将前端提交的数据修改为ArrayOfObject的形式 Object包含两个值 examination_id和score
+
+        //需要计算院校性质
+        if($selected_degree->name == '硕士'){
+            $recently_college_name = $data['recently_college_name'];
+            $recently_college_type = Estimate::getRecentlyCollegeType($recently_college_name);
+
+            //补充院校性质考试类型到examinations里面
+            $examinations['院校性质'] = [
+                'score' => $recently_college_type
+            ];
+        }
 
         $student_scores = [];
         foreach ($examinations as $examination_name => $value) {
@@ -78,9 +96,14 @@ class EstimateController extends Controller
             }
         }
 
-
-        dd($res);
+        //Reduce结果
+        $core_range_setting = (new CoreRangeSetting())->getCountryDegreeSetting($selected_country->id, $selected_degree->id);
+        $reduce_result = Estimate::reduceScoreResult($res, $core_range_setting);
+        //生成院校信息
+        $reduce_colleges = Estimate::mapCollegeInfo($reduce_result, $selected_speciality_name, $selected_degree, $examinations);
+        return view('estimate.index', compact('reduce_colleges'));
     }
+
 
     private function estimateColleges($params=null){
         return College::all();

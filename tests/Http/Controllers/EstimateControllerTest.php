@@ -257,4 +257,15 @@ class EstimateControllerTest extends TestCase
         $this->assertEquals(intval($core_count), count($reduce_result['core']));
         $this->assertEquals(intval($sprint_count), count($reduce_result['sprint']));
     }
+
+    public function testCollegeType(){
+        \App\Setting::set('985list', ['清华大学', '北京大学']);
+        \App\Setting::set('211list', ['南昌大学', '厦门大学']);
+
+        $this->assertEquals('985', \App\Estimate::getRecentlyCollegeType('清华大学'));
+        $this->assertEquals('211', \App\Estimate::getRecentlyCollegeType('南昌大学'));
+        $this->assertEquals('双非', \App\Estimate::getRecentlyCollegeType('江西科技学院'));
+
+
+    }
 }
