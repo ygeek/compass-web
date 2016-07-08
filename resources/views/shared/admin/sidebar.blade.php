@@ -45,7 +45,9 @@
           <li>
             <a href="{{ route('admin.setting.index', ['key' => '211list']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">211院校列表设置</span></a>
           </li>
-
+          <li>
+            <a href="{{ route('admin.messages.index') }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">站内通知管理</span></a>
+          </li>
           <li>
             <a class="nav-submenu" data-toggle="nav-submenu" href="#">
               <i class="si si-badge"></i><span class="sidebar-mini-hide">院校管理</span></a>

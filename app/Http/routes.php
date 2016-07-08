@@ -6,6 +6,7 @@ Route::get('/', 'IndexController@index');
 Route::get('/estimate/step-1', 'EstimateController@stepFirst')->name('estimate.step_first');
 Route::get('/estimate/step-2', 'EstimateController@stepSecond')->name('estimate.step_second');
 Route::post('/estimate', 'EstimateController@store')->name('estimate.store');
+Route::get('/home', 'HomeController@index');
 
 
 Route::group(['prefix' => 'auth'], function (){
@@ -14,7 +15,6 @@ Route::group(['prefix' => 'auth'], function (){
     Route::post('login', 'Auth\AuthController@login')->name('auth.login');
 });
 
-Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'admin'], function(){
     //登陆相关
@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('colleges.specialities', 'Admin\SpecialitiesController');
     Route::resource('colleges.examination_score_map', 'Admin\CollegeExaminationScoreMapController');
     Route::resource('examination_score_weights', 'Admin\ExaminationScoreWeightsController');
+    Route::resource('messages', 'Admin\MessagesController');
     //--
 
     Route::get('setting/{key}', 'Admin\SettingController@index')->name('admin.setting.index');

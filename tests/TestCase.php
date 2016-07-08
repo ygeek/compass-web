@@ -39,4 +39,8 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
     protected function adminLogin(){
         Auth::guard('admin')->login($this->createAdmin());
     }
+
+    protected function userLogin(){
+        Auth::login(factory(\App\User::class)->create());
+    }
 }

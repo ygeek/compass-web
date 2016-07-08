@@ -22,7 +22,8 @@
         "kalnoy/nestedset": "^4.1",
         "symfony/yaml": "^3.1",
         "predis/predis": "^1.1",
-        "chareice/simple-qiniu-sdk": "dev-master"
+        "chareice/simple-qiniu-sdk": "dev-master",
+        "rmccue/requests": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.6",
