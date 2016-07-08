@@ -27,6 +27,12 @@ ul{
   position: relative;
 }
 
+.mask{
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
+}
+
 .index-page{
   .header{
     height: 542px;
@@ -186,16 +192,13 @@ ul{
   }
 }
 
+
 #login-panel{
   width: 100%;
   height: 100vh;
   position: fixed;
   z-index: 999;
-  .mask{
-    background: rgba(0,0,0,0.5);
-    width: 100%;
-    height: 100%;
-  }
+
 
   .panel{
     .close{
@@ -369,10 +372,152 @@ ul{
 
 .estimate-result{
   .identity{
+    overflow: auto;
+    line-height: 40px;
+    h1{
+      font-size: 18px;
+      color: #6c6c6c;
+      display: inline-block;
+      float: left;
+    }
 
+    ul{
+      margin: 0.67em 0;
+      margin-left: 100px;
+      float: left;
+      overflow: auto;
+      li{
+        margin-right: 90px;
+        float: left;
+        cursor: pointer;
+        &.active{
+          color: #0e2d60;
+          border-bottom: solid;
+          border-width: 4px;
+        }
+      }
+    }
+  }
+  .college-list{
+    width: 100%;
+    .college-show{
+      width: 100%;
+      height: 180px;
+      background: #fff;
+      position: relative;
+      .college-badge{
+        margin-left: 27px;
+        margin-top: 35px;
+        display: inline-block;
+      }
+      .college-info{
+        color: #6c6c6c;
+        position: absolute;
+        height: 140px;
+        top: 0;
+        margin-top: 10px;
+        display: inline-block;
+        margin-left: 68px;
+        width: 410px;
+        header{
+          display: inline-block;
+          width: 265px;
+          h1{
+            font-size: 18px;
+            color: #000;
+          }
+          h2{
+            font-size: 14px;
+            margin-top: -10px;
+            color: #6c6c6c;
+          }
+          .ielts-and-toelf-requirement{
+            position: absolute;
+            bottom: 0;
+          }
+        }
+        .college-rank-info{
+          float: right;
+          position: relative;
+          top: 24px;
+          table{
+            text-align: right;
+          }
+          tr{
+            line-height: 27px;
+            td{
+              padding-left: 10px;
+            }
+          }
+        }
+      }
+      .view-matching-detail{
+        position: absolute;
+        bottom: 25px;
+        right: 15px;
+        .view-details-button{
+          cursor: pointer;
+          background: #fff;
+          border: none;
+          color: #55e3c4;
+          font-size: 15px;
+        }
+      }
+      .score{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        right: 20px;
+        top:25px;
+        border-radius: 50px;
+        color: #fff;
+        background: #4ae1c0;
+        .content{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          p{
+            &:first-child{
+              font-size: 40px;
+              span{
+                font-size: 12px;
+              }
+            }
+            text-align: center;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+#estimate-detail-pop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  .estimate-detail{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 870px;
+    height: 360px;
+    background: #fff;
+    .close{
+      position: absolute;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+    }
   }
 }
 
+.college-badge{
+  width:345px;
+  height: 110px;
+}
 .estimate-button{
   width: 138px;
   color: #ffffff;

@@ -1,7 +1,7 @@
 <div class="top-nav-bar">
   <div class='top-bar-logo'>
     <a class='logo-nav-bar' href="#">
-      <img src="/images/logo_ico.png" alt="logo">
+      <img src="/images/logo_ico.png" alt="logo" />
     </a>
   </div>
   <div class="top-bar-content">
@@ -23,9 +23,9 @@
       </li>
       <li class='nav-item'>
         @if(Auth::check())
-        <span>你已登陆</span>
+          <span>你已登陆</span>
         @else
-        <span v-on:click="showLoginAndRegisterPanel=true">登录</span>
+          <span v-on:click="showLoginAndRegisterPanel=true">登录</span>
         @endif
       </li>
     </ul>

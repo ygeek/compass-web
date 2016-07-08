@@ -75,11 +75,17 @@ return [
     ],
     [
         'name' => '相关专业工作年限',
-        'is_requirement' => true
+        'is_requirement' => true,
+        'form_key' => 'related_length_of_working'
     ],
+
     [
         'name' => '院校性质',
         'score_sections' => ['985', '211', '双非'],
-        // 'examination_only' => true
+    ],
+    [
+        'name' => '备注',
+        'is_requirement' => true,
+        'form_key' => null //form_key is null means that user cant input this filed but must show on estimate result
     ]
 ];

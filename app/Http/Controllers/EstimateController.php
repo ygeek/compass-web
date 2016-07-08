@@ -59,18 +59,27 @@ class EstimateController extends Controller
             $examinations['院校性质'] = [
                 'score' => $recently_college_type
             ];
+
+            //修改大学平均成绩 增加ta
+            $examinations['大学平均成绩']['tag'] = $recently_college_type;
+            $examinations['大学平均成绩']['score_without_tag'] = $examinations['大学平均成绩']['score'];
+            $data['examinations'] = $examinations;
         }
+
+        $data['examinations'] = collect($data['examinations'])->filter(function($item){
+            return !!$item['score'];
+        });
 
         $student_scores = [];
         foreach ($examinations as $examination_name => $value) {
             //前端没有提交分数 Continue
-            if(!$value['score']){
+            if(!$value['score'] || $value['score'] == ''){
                 continue;
             }
 
             $examination = Examination::where('name', $examination_name)->first();
             $item = [
-                'examination_id' => $examination->id,
+                'examination_id' => $examination->id
             ];
 
             if($examination->multiple_degree){
@@ -81,7 +90,6 @@ class EstimateController extends Controller
 
             $student_scores[] = $item;
         }
-
         $colleges = $this->estimateColleges();
 
         $res = [];
@@ -95,13 +103,12 @@ class EstimateController extends Controller
                 continue;
             }
         }
-
         //Reduce结果
         $core_range_setting = (new CoreRangeSetting())->getCountryDegreeSetting($selected_country->id, $selected_degree->id);
         $reduce_result = Estimate::reduceScoreResult($res, $core_range_setting);
         //生成院校信息
-        $reduce_colleges = Estimate::mapCollegeInfo($reduce_result, $selected_speciality_name, $selected_degree, $examinations);
-        return view('estimate.index', compact('reduce_colleges'));
+        $reduce_colleges = Estimate::mapCollegeInfo($reduce_result, $selected_speciality_name, $selected_degree, $data);
+        return view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_speciality_name'));
     }
 
 

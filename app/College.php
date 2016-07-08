@@ -103,7 +103,6 @@ class College extends Model
             $current_examination_score_sections = $current_examination_map['score_sections'];
             foreach ($current_examination_score_sections as $score_section){
                 $score_map_section = new ScoreMapSection($score_section['section']);
-
                 //分数段查找匹配成功
                 $score_key = 'score';
 
@@ -111,10 +110,11 @@ class College extends Model
                 if($current_examination_map['multiple_degree']){
                     $score_key = $degree->id . ":" . $score_key;
                 }
-
                 if($score_map_section->matching($student_score[$score_key])){
                     $current_section_score = $score_section[$score_key] * $current_examination_map['weight'] / 100;
                     $carry += $current_section_score;
+                    //防止重复Match多个分数段
+                    continue 2;
                 }
             }
         }
