@@ -7,6 +7,11 @@
 
 body, html {
   height: 100%;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 19px;
+  min-height: 100vh;
+  font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
 a{
@@ -529,7 +534,88 @@ ul{
 }
 
 .home-page{
+  background: #ebebeb;
   .page-content{
     width: 100%;
+    overflow: auto;
   }
+
+  .home-slider{
+    float: left;
+    margin-top: 60px;
+    width: 215px;
+    height: 415px;
+    background: #fff;
+    .user-info{
+      width: 100%;
+    }
+    ul{
+      padding-top: 195px;
+      width: 100%;
+      li{
+        margin-bottom: 30px;
+        line-height: 25px;
+        &.active{
+          border-left: solid 3px #0e2d60;
+        }
+        width: 100%;
+        padding-left: 75px;
+        color: #0e2d60;
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .home-content{
+    float: right;
+    margin-top: 60px;
+    width: 876px;
+    .title{
+      display: block;
+      background: #fff;
+      height: 54px;
+      padding-left: 30px;
+      color: #1e1e1e;
+      font-size: 15px;
+      line-height: 54px;
+      font-weight:bold;
+    }
+
+    .content{
+      .message-table{
+        width: 100%;
+        border: none;
+        border-spacing: 0 4px;
+        font-size: 16px;
+        .message{
+          background: #fff;
+          height: 108px;
+          margin-top: 4px;
+          border: none;
+          .message-title{
+            padding-left: 15px;
+            width: 142px;
+          }
+          .message-content{
+            width: 550px;
+          }
+          .created_at{
+            font-size: 14px;
+            color: #6c6c6c;
+          }
+          .actions{
+            width: 20px;
+            font-size: 14px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer{
+  width: 100%;
+
 }

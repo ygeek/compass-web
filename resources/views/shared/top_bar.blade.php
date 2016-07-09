@@ -23,7 +23,7 @@
       </li>
       <li class='nav-item'>
         @if(Auth::check())
-          <span>你已登陆</span>
+          <a href="{{route('home.index')}}"><span>你已登陆</span></a>
         @else
           <span v-on:click="showLoginAndRegisterPanel=true">登录</span>
         @endif

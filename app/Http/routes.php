@@ -6,7 +6,11 @@ Route::get('/', 'IndexController@index');
 Route::get('/estimate/step-1', 'EstimateController@stepFirst')->name('estimate.step_first');
 Route::get('/estimate/step-2', 'EstimateController@stepSecond')->name('estimate.step_second');
 Route::post('/estimate', 'EstimateController@store')->name('estimate.store');
-Route::get('/home', 'HomeController@index');
+Route::group(['prefix' => 'home'], function (){
+    Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('/messages', 'HomeController@messages')->name('home.messages');
+    Route::patch('/messages/{message_id}', 'HomeController@readMessage')->name('home.messages.read');
+});
 
 
 Route::group(['prefix' => 'auth'], function (){
