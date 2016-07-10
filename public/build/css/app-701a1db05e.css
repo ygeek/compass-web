@@ -835,30 +835,80 @@ ul {
       font-size: 15px;
       line-height: 54px;
       font-weight: bold; }
-    .home-page .home-content .content .message-table {
-      width: 100%;
-      border: none;
-      border-spacing: 0 4px;
-      font-size: 16px; }
-      .home-page .home-content .content .message-table .message {
-        background: #fff;
-        height: 108px;
-        margin-top: 4px;
-        border: none; }
-        .home-page .home-content .content .message-table .message .message-title {
-          padding-left: 15px;
-          width: 142px; }
-        .home-page .home-content .content .message-table .message .message-content {
-          width: 550px; }
-        .home-page .home-content .content .message-table .message .created_at {
-          font-size: 14px;
-          color: #6c6c6c; }
-        .home-page .home-content .content .message-table .message .actions {
-          width: 20px;
-          font-size: 14px;
-          cursor: pointer; }
+    .home-page .home-content .content {
+      width: calc(100% - 30px);
+      background: #fff;
+      margin-top: 8px;
+      padding-left: 30px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      font-size: 14px; }
+      .home-page .home-content .content .estimate-button {
+        margin: 0 0; }
+      .home-page .home-content .content .message-table {
+        width: 100%;
+        border: none;
+        border-spacing: 0 4px;
+        font-size: 16px; }
+        .home-page .home-content .content .message-table .message {
+          background: #fff;
+          height: 108px;
+          margin-top: 4px;
+          border: none; }
+          .home-page .home-content .content .message-table .message .message-title {
+            padding-left: 15px;
+            width: 142px; }
+          .home-page .home-content .content .message-table .message .message-content {
+            width: 550px; }
+          .home-page .home-content .content .message-table .message .created_at {
+            font-size: 14px;
+            color: #6c6c6c; }
+          .home-page .home-content .content .message-table .message .actions {
+            width: 20px;
+            font-size: 14px;
+            cursor: pointer; }
 
 .footer {
   width: 100%; }
+
+.shanbox {
+  width: 500px;
+  height: 40px;
+  background-color: #666;
+  border-radius: 5px;
+  line-height: 40px;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -250px;
+  margin-top: -20px;
+  z-index: 999999;
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFF; }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+.shanbox {
+  animation-name: fadeOut;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: ease;
+  -moz-animation-fill-mode: both;
+  -ms-animation-duration: 1s;
+  -ms-animation-timing-function: ease;
+  -ms-animation-fill-mode: both;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-fill-mode: both; }
 
 /*# sourceMappingURL=app.css.map */

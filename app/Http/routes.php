@@ -15,6 +15,8 @@ Route::group(['prefix' => 'home'], function (){
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/messages', 'HomeController@messages')->name('home.messages');
     Route::patch('/messages/{message_id}', 'HomeController@readMessage')->name('home.messages.read');
+
+    Route::post('/change_password', 'HomeController@changePassword')->name('home.change_password');
 });
 
 

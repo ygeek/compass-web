@@ -590,6 +590,16 @@ ul{
     }
 
     .content{
+      width: calc(100% - 30px);
+      background: #fff;
+      margin-top: 8px;
+      padding-left: 30px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      font-size: 14px;
+      .estimate-button{
+        margin: 0 0;
+      }
       .message-table{
         width: 100%;
         border: none;
@@ -625,4 +635,63 @@ ul{
 .footer{
   width: 100%;
 
+}
+
+.shanbox{
+  width:500px;
+  height:40px;
+  background-color:#666;
+  border-radius:5px;
+  line-height:40px;
+  text-align:center;
+  position:fixed;
+  top:50%;
+  left:50%;
+  margin-left:-250px;
+  margin-top:-20px;
+  z-index:999999;
+  font-size:14px;
+  font-weight:bold;
+  color:#FFF;}
+
+
+@-webkit-keyframes fadeOut {
+  0% { opacity: 1; }
+  50% {opacity: 1;}
+100% { opacity: 0; }
+}
+@-moz-keyframes fadeOut {
+  0% { opacity: 1; }
+  50% {opacity: 1;}
+100% { opacity: 0; }
+}
+@-o-keyframes fadeOut {
+  0% { opacity: 1; }
+  50% {opacity: 1;}
+100% { opacity: 0; }
+}
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  50% {opacity: 1;}
+  100% { opacity: 0; }
+}
+
+.shanbox{
+  -webkit-animation-name:fadeOut;
+  -moz-animation-name:fadeOut;
+  -o-animation-name:fadeOut;
+  animation-name:fadeOut;
+
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: ease;
+  -moz-animation-fill-mode: both;
+  -ms-animation-duration: 1s;
+  -ms-animation-timing-function: ease;
+  -ms-animation-fill-mode: both;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
 }

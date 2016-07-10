@@ -9,6 +9,13 @@
     <script src="/js/vue-resource.min.js"></script>
   </head>
   <body>
+
+    @if (Session::has('flash_notification.message'))
+      <div class="shanbox alert-{{ Session::get('flash_notification.level') }}">
+        {{ Session::get('flash_notification.message') }}
+      </div>
+    @endif
+
     <div id="app">
       @unless(Auth::check())
         @include('shared.login_panel')
