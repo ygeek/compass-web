@@ -27,4 +27,23 @@ class User extends Model implements AuthenticatableContract
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function likedCollegeIds(){
+        $key = User::likeKey($this->id);
+        $value = Setting::get($key);
+        if(is_null($value)){
+            $value = [];
+        }
+        return $value;
+    }
+
+    //判断用户是否收藏了某学校
+    public function isLikeCollege($college_id){
+        $ids = $this->likedCollegeIds();
+        return in_array($college_id, $ids);
+    }
+
+    public static function likeKey($user_id){
+        return 'user:'. $user_id .':favorites';
+    }
 }

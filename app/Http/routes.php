@@ -8,6 +8,9 @@ Route::get('/estimate/step-2', 'EstimateController@stepSecond')->name('estimate.
 Route::post('/estimate', 'EstimateController@store')->name('estimate.store');
 Route::resource('/intentions', 'IntentionsController');
 
+Route::post('/like_college', 'FavoritesController@store')->name('like.store');
+Route::post('/dislike_college', 'FavoritesController@cancelFavorite')->name('like.destroy');
+
 Route::group(['prefix' => 'home'], function (){
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/messages', 'HomeController@messages')->name('home.messages');
