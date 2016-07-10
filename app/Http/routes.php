@@ -6,6 +6,8 @@ Route::get('/', 'IndexController@index');
 Route::get('/estimate/step-1', 'EstimateController@stepFirst')->name('estimate.step_first');
 Route::get('/estimate/step-2', 'EstimateController@stepSecond')->name('estimate.step_second');
 Route::post('/estimate', 'EstimateController@store')->name('estimate.store');
+Route::resource('/intentions', 'IntentionsController');
+
 Route::group(['prefix' => 'home'], function (){
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/messages', 'HomeController@messages')->name('home.messages');

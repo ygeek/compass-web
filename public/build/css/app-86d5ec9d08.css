@@ -654,6 +654,9 @@ ul {
       float: none;
       display: inline-block; }
       .estimate-page .estimate-form .estimate-short-select select {
+        -moz-appearance: window;
+        text-indent: 0.01px;
+        text-overflow: '';
         background: transparent;
         border: none;
         height: 40px;
@@ -772,6 +775,8 @@ ul {
     width: 870px;
     height: 360px;
     background: #fff; }
+    #estimate-detail-pop .estimate-detail table {
+      width: 100%; }
     #estimate-detail-pop .estimate-detail .close {
       position: absolute;
       right: 0;
