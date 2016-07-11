@@ -11,6 +11,8 @@ Route::resource('/intentions', 'IntentionsController');
 Route::post('/like_college', 'FavoritesController@store')->name('like.store');
 Route::post('/dislike_college', 'FavoritesController@cancelFavorite')->name('like.destroy');
 
+Route::get('/colleges', 'CollegesController@index')->name('colleges.index');
+
 Route::group(['prefix' => 'home'], function (){
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/messages', 'HomeController@messages')->name('home.messages');

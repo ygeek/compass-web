@@ -163,4 +163,18 @@ class College extends Model
             'requirement' => $requirement
         ];
     }
+
+    public function toeflRequirement($degree_name){
+        $toefl_requirement = collect(collect($this->requirement)->where('name', $degree_name)->first()['examinations'])->filter(function ($require){
+            return $require['examination_name'] == '托福IBT';
+        })->first()['requirement'];
+        return $toefl_requirement;
+    }
+
+    public function ieltsRequirement($degree_name){
+        $ielts_requirement = collect(collect($this->requirement)->where('name', $degree_name)->first()['examinations'])->filter(function ($require){
+            return $require['examination_name'] == '雅思';
+        })->first()['requirement'];
+        return $ielts_requirement;
+    }
 }

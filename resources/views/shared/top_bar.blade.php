@@ -13,7 +13,7 @@
         <a href="{{ route('estimate.step_first') }}">免费留学评估</a>
       </li>
       <li class="nav-item">
-        <a href="#">院校查询</a>
+        <a href="{{ route('colleges.index') }}">院校查询</a>
       </li>
       <li class="nav-item">
         <a href="#">在线留学顾问</a>
