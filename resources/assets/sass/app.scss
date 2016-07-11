@@ -597,9 +597,22 @@ ul{
       padding-top: 30px;
       padding-bottom: 30px;
       font-size: 14px;
+      label{
+        width: 160px;
+        display: inline-block;
+        line-height: 30px;
+        margin-bottom: 30px;
+      }
+
+      input{
+        height: 30px;
+        width: 200px;
+      }
+
       .estimate-button{
         margin: 0 0;
       }
+
       .message-table{
         width: 100%;
         border: none;

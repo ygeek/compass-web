@@ -843,6 +843,14 @@ ul {
       padding-top: 30px;
       padding-bottom: 30px;
       font-size: 14px; }
+      .home-page .home-content .content label {
+        width: 160px;
+        display: inline-block;
+        line-height: 30px;
+        margin-bottom: 30px; }
+      .home-page .home-content .content input {
+        height: 30px;
+        width: 200px; }
       .home-page .home-content .content .estimate-button {
         margin: 0 0; }
       .home-page .home-content .content .message-table {

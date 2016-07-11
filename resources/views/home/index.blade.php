@@ -25,8 +25,11 @@
                     </div>
 
                     <div class="content">
-                        <label>手机号</label>
-                        <span style="margin-left: 160px;">{{$user->phone_number}}</span>
+                        <div class="form-group">
+
+                            <label>手机号</label>
+                            <span>{{$user->phone_number}}</span>
+                        </div>
                         <button class="estimate-button">修改手机号</button>
                     </div>
 
