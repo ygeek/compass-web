@@ -15,7 +15,7 @@
                 <div class="tag-area">
                     <div class="tag-select">
                         <tag-select label-name="选择国家" :selects="areas" :selected_id.sync="selected_country_id"></tag-select>
-                        <input type="hidden" v-model="selected_country_id" name="selected_country_id" value="{{$selected_country_id}}"/>
+                        <input type="hidden" v-model="selected_country_id" name="selected_country_id" value="{{$selected_country_id }}"/>
                     </div>
 
                     <div v-if="states.length > 0" class="tag-select">
@@ -24,7 +24,7 @@
                     </div>
 
                     <div v-if="cities.length > 0" class="tag-select">
-                        <tag-select label-name="选择地区" :selects="cities" :selected_id.sync="selected_city_id"></tag-select>
+                        <tag-select label-name="选择城市" :selects="cities" :selected_id.sync="selected_city_id"></tag-select>
                         <input type="hidden" v-model="selected_city_id" name="selected_city_id" value="{{$selected_city_id}}"/>
                     </div>
 

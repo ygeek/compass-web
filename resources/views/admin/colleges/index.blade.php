@@ -36,6 +36,9 @@
                           <a href="{{ route('admin.colleges.specialities.index', [ 'college' => $college->id ]) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="查看专业设置">
                               <i class="fa fa-pencil"></i>
                           </a>
+                          <a href="{{ route('admin.articles.index', [ 'college_id' => $college->id ]) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="查看文章－页面设置">
+                              <i class="fa fa-pencil"></i>
+                          </a>
                           <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="Remove Client">
                             <i class="fa fa-times"></i>
                           </button>

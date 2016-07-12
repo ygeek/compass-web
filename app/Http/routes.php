@@ -45,6 +45,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('colleges.examination_score_map', 'Admin\CollegeExaminationScoreMapController');
     Route::resource('examination_score_weights', 'Admin\ExaminationScoreWeightsController');
     Route::resource('messages', 'Admin\MessagesController');
+    Route::resource('articles', 'Admin\ArticlesController');
+
+    Route::post('articles/picture-upload', 'Admin\ArticlesController@pictureUpload')->name('picture_upload');
     //--
 
     Route::get('setting/{key}', 'Admin\SettingController@index')->name('admin.setting.index');
