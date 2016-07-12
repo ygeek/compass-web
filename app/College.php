@@ -42,7 +42,14 @@ class College extends Model
             }else{
                 $college->country_id = AdministrativeArea::ancestorsOf($area_id)->first()->id;
             }
+
+            $key = self::generateKey($college->english_name);
+            $college->key = $key;
         });
+    }
+
+    public static function generateKey($english_name){
+        return str_replace(' ','-',strtolower($english_name));
     }
 
     public function examinationScoreMapTemplate(){
