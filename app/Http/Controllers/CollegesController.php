@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\AdministrativeArea;
 use App\College;
 use App\SpecialityCategory;
+use App\ArticleCategory;
 use Illuminate\Http\Request;
+use Overtrue\Pinyin\Pinyin;
 
 use App\Http\Requests;
 
@@ -62,5 +64,20 @@ class CollegesController extends Controller
             'selected_country_id',
             'college_name'
         ));
+    }
+
+    public function show($key, Request $request){
+        $college = College::where('key', $key)->first();
+        $article_type = $request->input('article_type', '学校概况');
+        $pinyin = new Pinyin();
+        $article_key = $pinyin->permalink($article_type);
+
+        $category = ArticleCategory::where('key', $article_key)->first();
+
+        $articles = $college->articles()->whereHas('category', function($q) use ($article_key){
+            return $q->where('key', $article_key);
+        })->orderBy('articles.order_weight')->get();
+
+        return view('colleges.show', compact('college', 'article_key', 'articles'));
     }
 }

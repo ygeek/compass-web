@@ -12,6 +12,7 @@ Route::post('/like_college', 'FavoritesController@store')->name('like.store');
 Route::post('/dislike_college', 'FavoritesController@cancelFavorite')->name('like.destroy');
 
 Route::get('/colleges', 'CollegesController@index')->name('colleges.index');
+Route::get('/colleges/{key}', 'CollegesController@show')->name('colleges.show');
 
 Route::group(['prefix' => 'home'], function (){
     Route::get('/', 'HomeController@index')->name('home.index');

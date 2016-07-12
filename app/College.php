@@ -94,6 +94,10 @@ class College extends Model
         return $this->belongsToMany(ExaminationScoreWeight::class, 'college_degree', 'college_id');
     }
 
+    public function articles(){
+        return $this->hasMany(Article::class);
+    }
+    
     //计算最终的权重分
     public function calculateWeightScore($student_scores, $degree){
         $map = $this->examinationScoreMap->map;

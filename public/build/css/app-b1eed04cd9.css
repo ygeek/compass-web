@@ -765,7 +765,7 @@ ul {
 .estimate-page {
   background-color: #e0e0e0;
   background-image: url("/images/estimate-bg.png");
-  height: 100vh;
+  min-height: 100vh;
   background-repeat: no-repeat;
   background-position: center; }
   .estimate-page .estimate-form {
@@ -1114,7 +1114,7 @@ ul {
 .colleges-page .search-result {
   background-color: #e0e0e0;
   background-image: url("/images/estimate-bg.png");
-  height: 100vh;
+  min-height: 100vh;
   background-repeat: no-repeat;
   background-position: center; }
   .colleges-page .search-result .colleges {
@@ -1146,6 +1146,9 @@ ul {
           .colleges-page .search-result .colleges .college .college-info header h1 {
             font-size: 18px;
             color: #000; }
+            .colleges-page .search-result .colleges .college .college-info header h1 a {
+              font-size: 18px;
+              color: #000; }
           .colleges-page .search-result .colleges .college .college-info header h2 {
             font-size: 14px;
             margin-top: -10px;
@@ -1204,5 +1207,105 @@ ul {
   .pagination li.active {
     color: #0e2d60;
     font-weight: bold; }
+
+.college-page .college-page-header {
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 600px; }
+  .college-page .college-page-header .college-name {
+    margin-top: 300px;
+    margin-left: 90px; }
+    .college-page .college-page-header .college-name h1 {
+      font-size: 53px;
+      color: #fff;
+      font-weight: bold; }
+    .college-page .college-page-header .college-name p {
+      font-size: 15px;
+      width: 300px;
+      margin-top: 25px;
+      color: #fff;
+      height: 172px;
+      text-overflow: "…";
+      overflow: hidden; }
+
+.college-page .college-page-content .college-content-header {
+  padding-top: 24px; }
+  .college-page .college-page-content .college-content-header .college-logo {
+    width: 239px;
+    height: 76px;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: top; }
+  .college-page .college-page-content .college-content-header .college-info {
+    display: inline-block;
+    margin-left: 40px; }
+    .college-page .college-page-content .college-content-header .college-info h1 {
+      color: #000;
+      font-size: 22px;
+      line-height: 24px;
+      margin-bottom: 10px;
+      margin-top: 0; }
+    .college-page .college-page-content .college-content-header .college-info h2 {
+      color: #6c6c6c;
+      font-size: 15px;
+      line-height: 24px;
+      margin-bottom: 10px; }
+    .college-page .college-page-content .college-content-header .college-info .img-container {
+      float: left;
+      width: 30px; }
+    .college-page .college-page-content .college-content-header .college-info .info-content {
+      float: left; }
+    .college-page .college-page-content .college-content-header .college-info .info {
+      line-height: 24px;
+      margin-bottom: 5px;
+      font-size: 15px;
+      color: #6c6c6c;
+      overflow: auto; }
+  .college-page .college-page-content .college-content-header .ranks {
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 180px; }
+    .college-page .college-page-content .college-content-header .ranks li {
+      display: inline-block;
+      height: 110px;
+      margin-left: 20px; }
+      .college-page .college-page-content .college-content-header .ranks li .rank {
+        margin: 0 auto;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        line-height: 60px;
+        font-size: 24px;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 30px; }
+      .college-page .college-page-content .college-content-header .ranks li .rank-name {
+        font-size: 15px;
+        color: #6c6c6c; }
+
+.college-page .college-page-nav {
+  height: 54px;
+  border-top: solid #f4f4f4 2px; }
+  .college-page .college-page-nav ul {
+    font-size: 15px;
+    color: #6c6c6c; }
+    .college-page .college-page-nav ul li {
+      height: 50px;
+      line-height: 50px;
+      display: inline-block;
+      margin-right: 60px;
+      cursor: pointer; }
+      .college-page .college-page-nav ul li.active {
+        color: #0e2d60;
+        border-bottom: solid #0e2d60 4px;
+        font-weight: bold; }
+
+.college-page .college-page-detail {
+  background-image: url("/images/estimate-bg.png");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center; }
+  .college-page .college-page-detail .app-content {
+    padding-top: 20px; }
 
 /*# sourceMappingURL=app.css.map */

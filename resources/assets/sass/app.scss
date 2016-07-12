@@ -399,11 +399,11 @@ ul{
     .nav-item{
       float: left;
       margin-right: 50px;
-       &.active{
-         a{
-           color: #ffffff;
-         }
-       }
+      &.active{
+        a{
+          color: #ffffff;
+        }
+      }
     }
   }
 }
@@ -503,7 +503,7 @@ ul{
 .estimate-page{
   background-color: #e0e0e0;
   background-image: url("/images/estimate-bg.png");
-  height: 100vh;
+  min-height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
 
@@ -642,8 +642,10 @@ ul{
           display: inline-block;
           width: 265px;
           h1{
+
             font-size: 18px;
             color: #000;
+
           }
           h2{
             font-size: 14px;
@@ -882,17 +884,17 @@ ul{
 @-webkit-keyframes fadeOut {
   0% { opacity: 1; }
   50% {opacity: 1;}
-100% { opacity: 0; }
+  100% { opacity: 0; }
 }
 @-moz-keyframes fadeOut {
   0% { opacity: 1; }
   50% {opacity: 1;}
-100% { opacity: 0; }
+  100% { opacity: 0; }
 }
 @-o-keyframes fadeOut {
   0% { opacity: 1; }
   50% {opacity: 1;}
-100% { opacity: 0; }
+  100% { opacity: 0; }
 }
 @keyframes fadeOut {
   0% { opacity: 1; }
@@ -947,7 +949,7 @@ ul{
   .search-result{
     background-color: #e0e0e0;
     background-image: url("/images/estimate-bg.png");
-    height: 100vh;
+    min-height: 100vh;
     background-repeat: no-repeat;
     background-position: center;
 
@@ -981,6 +983,10 @@ ul{
             h1{
               font-size: 18px;
               color: #000;
+              a{
+                font-size: 18px;
+                color: #000;
+              }
             }
             h2{
               font-size: 14px;
@@ -1061,5 +1067,133 @@ ul{
       color: #0e2d60;
       font-weight: bold;
     }
+  }
+}
+
+.college-page{
+  .college-page-header{
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 600px;
+
+    .college-name{
+      margin-top: 300px;
+      margin-left: 90px;
+      h1{
+        font-size: 53px;
+        color: #fff;
+        font-weight: bold;
+      }
+      p{
+        font-size: 15px;
+        width: 300px;
+        margin-top: 25px;
+        color: #fff;
+        height: 172px;
+        text-overflow: "…";
+        overflow: hidden;
+      }
+    }
+  }
+  .college-page-content{
+    .college-content-header{
+      padding-top: 24px;
+      .college-logo{
+        width: 239px;
+        height: 76px;
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: top;
+      }
+      .college-info{
+        display: inline-block;
+        margin-left: 40px;
+        h1{
+          color: #000;
+          font-size: 22px;
+          line-height: 24px;
+          margin-bottom: 10px;
+          margin-top: 0;
+        }
+        h2{
+          color: #6c6c6c;
+          font-size: 15px;
+          line-height: 24px;
+          margin-bottom: 10px;
+        }
+        .img-container{
+          float: left;
+          width: 30px;
+        }
+        .info-content{
+          float: left;
+        }
+        .info{
+          line-height: 24px;
+          margin-bottom: 5px;
+          font-size: 15px;
+          color: #6c6c6c;
+          overflow: auto;
+        }
+      }
+
+      .ranks{
+        vertical-align: top;
+        display: inline-block;
+        margin-left: 180px;
+        li{
+          display: inline-block;
+          height: 110px;
+          margin-left: 20px;
+          .rank{
+            margin: 0 auto;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            line-height: 60px;
+            font-size: 24px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+          }
+          .rank-name{
+            font-size: 15px;
+            color: #6c6c6c;
+          }
+        }
+      }
+    }
+  }
+
+  .college-page-nav{
+    height: 54px;
+    border-top: solid #f4f4f4 2px;
+
+    ul{
+      font-size: 15px;
+      color: #6c6c6c;
+      li{
+        height: 50px;
+        line-height: 50px;
+        display: inline-block;
+        margin-right: 60px;
+        &.active{
+          color: #0e2d60;
+          border-bottom: solid #0e2d60 4px;
+          font-weight: bold;
+        }
+        cursor: pointer;
+      }
+    }
+  }
+  .college-page-detail{
+    .app-content{
+      padding-top: 20px;
+    }
+
+    background-image: url("/images/estimate-bg.png");
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
