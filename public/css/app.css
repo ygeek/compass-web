@@ -475,7 +475,7 @@ ul {
   .index-page .middle .consult {
     margin: 0 auto;
     position: relative;
-    top: 300px; }
+    top: 250px; }
     .index-page .middle .consult button {
       width: 550px;
       height: 40px;
@@ -486,6 +486,174 @@ ul {
       display: block;
       font-size: 15px;
       word-spacing: 30px; }
+    .index-page .middle .consult img {
+      margin: 0 auto 20px;
+      display: block; }
+    .index-page .middle .consult .questions {
+      width: 550px;
+      margin: 15px auto 0; }
+      .index-page .middle .consult .questions p {
+        margin-bottom: 5px; }
+      .index-page .middle .consult .questions a {
+        width: 260px;
+        float: left;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        color: #21406b; }
+        .index-page .middle .consult .questions a:nth-child(2n) {
+          margin-right: 30px; }
+  .index-page .middle .consult-academy {
+    margin: 0 auto;
+    position: relative;
+    top: 550px; }
+    .index-page .middle .consult-academy .location {
+      float: left;
+      width: 230px;
+      margin-right: 50px; }
+      .index-page .middle .consult-academy .location div:not(:first-child) {
+        margin-top: 10px; }
+      .index-page .middle .consult-academy .location h3 {
+        color: #0e2d60;
+        margin-bottom: 10px;
+        margin-left: 15px; }
+      .index-page .middle .consult-academy .location a {
+        width: 90px;
+        float: left;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        color: #909090;
+        margin-bottom: 5px; }
+        .index-page .middle .consult-academy .location a:nth-child(2n) {
+          margin-right: 10px;
+          margin-left: 30px; }
+    .index-page .middle .consult-academy .academy {
+      float: left;
+      width: 820px; }
+      .index-page .middle .consult-academy .academy .search {
+        margin-bottom: 30px; }
+        .index-page .middle .consult-academy .academy .search .search-text {
+          float: left;
+          width: 660px;
+          height: 20px;
+          padding: 10px 20px;
+          background: #1ddab0;
+          color: #fff;
+          line-height: 20px;
+          font-size: 16px;
+          border: 0; }
+        .index-page .middle .consult-academy .academy .search .search-button {
+          float: left;
+          height: 40px;
+          width: 116px;
+          border: 0;
+          background: url("/images/search_ico.png") #fb9c04 50% 50% no-repeat; }
+      .index-page .middle .consult-academy .academy .subjects a {
+        display: inline-block;
+        float: left;
+        width: 273px;
+        height: 120px;
+        line-height: 120px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        font-size: 16px; }
+      .index-page .middle .consult-academy .academy .subjects .more {
+        width: 546px;
+        background: #1ddab0; }
+  .index-page .middle .link {
+    padding: 20px;
+    position: relative;
+    top: 670px; }
+    .index-page .middle .link .text-box {
+      border-left: solid #fcb600 1px;
+      padding-left: 20px;
+      width: 380px; }
+      .index-page .middle .link .text-box h3 {
+        color: #0e2d60;
+        margin-bottom: 20px;
+        float: left; }
+      .index-page .middle .link .text-box .more {
+        float: right;
+        display: inline-block;
+        width: 50px; }
+      .index-page .middle .link .text-box a {
+        width: 350px;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        color: #909090;
+        margin-bottom: 5px; }
+    .index-page .middle .link .lang-study {
+      position: absolute;
+      top: 50px;
+      left: 0; }
+    .index-page .middle .link .img-1 {
+      position: absolute;
+      top: 320px;
+      left: 0;
+      width: 430px;
+      height: 430px;
+      box-shadow: 2px 2px 5px #333333; }
+    .index-page .middle .link .img-2 {
+      position: absolute;
+      top: 240px;
+      right: 0;
+      width: 570px;
+      height: 280px;
+      box-shadow: 2px 2px 5px #333333; }
+    .index-page .middle .link .lang-study {
+      position: absolute;
+      top: 50px;
+      left: 0; }
+    .index-page .middle .link .study-abroad {
+      position: absolute;
+      top: 0;
+      right: 20px; }
+    .index-page .middle .link .immigrant {
+      position: absolute;
+      top: 550px;
+      right: 60px;
+      width: 490px !important; }
+  .index-page .middle .assess {
+    position: absolute;
+    top: 3170px;
+    height: 250px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3); }
+    .index-page .middle .assess h1 {
+      color: #fff;
+      text-align: center;
+      font-size: 18px;
+      line-height: 32px; }
+      .index-page .middle .assess h1 span {
+        font-size: 32px;
+        color: #fa8c55; }
+      .index-page .middle .assess h1:first-child {
+        margin-top: 50px; }
+    .index-page .middle .assess button {
+      display: block;
+      margin: 20px auto 0;
+      height: 40px;
+      width: 240px;
+      border: 0;
+      color: #fff;
+      background: #fa8c55; }
+
+.clear {
+  zoom: 1; }
+  .clear:after {
+    content: " ";
+    display: block;
+    clear: both;
+    height: 0; }
 
 .top-nav-bar {
   width: 100%;
