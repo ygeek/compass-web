@@ -74,29 +74,29 @@
         <div class="college-page-nav" id="colelge-page-nav">
             <div class="app-content">
                 <ul>
-                    <a href="{{ route('colleges.show', ['key' => $college->key]) }}#colelge-page-nav">
+                    <a href="{{ route('colleges.show', ['key' => $college->key]) }}">
                         <li @if($article_key == 'xue-xiao-gai-kuang')class="active"@endif>
                             学校概况
                         </li>
                     </a>
-                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}#colelge-page-nav">
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}">
                         <li @if($article_key == 'lu-qu-qing-kuang')class="active"@endif>
                             录取情况
                         </li>
                     </a>
 
-                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'specialities']) }}#colelge-page-nav">
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'specialities']) }}">
                         <li @if($article_key == 'specialities')class="active"@endif>
                             专业
                         </li>
                     </a>
 
-                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'tu-pian']) }}#colelge-page-nav">
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'tu-pian']) }}">
                         <li @if($article_key == 'tu-pian')class="active"@endif>
                             图片
                         </li>
                     </a>
-                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue', 'desc' => '1']) }}#colelge-page-nav">
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue', 'desc' => '1']) }}">
                         <li @if($article_key == 'liu-xue-gong-lue')class="active"@endif>
                             留学攻略
                         </li>
