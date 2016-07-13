@@ -16,7 +16,10 @@ use App\Http\Requests;
 
 class EstimateController extends Controller
 {
-    public function stepFirst(){
+    public function stepFirst(Request $request){
+        $selected_country_id = $request->input('selected_country_id', null);
+        $selected_degree_id = $request->input('selected_degree_id', null);
+        $selected_year = $request->input('selected_year', null);
         $countries = AdministrativeArea::countries()->get();
         $degrees = Degree::estimatable()->get();
 
@@ -26,7 +29,7 @@ class EstimateController extends Controller
         ];
 
         $speciality_categories = SpecialityCategory::with('specialities')->get();
-        return view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories'));
+        return view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year'));
     }
 
     public function stepSecond(Request $request){

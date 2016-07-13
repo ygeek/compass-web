@@ -5,10 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
+use App\AdministrativeArea;
+use App\Degree;
 class IndexController extends Controller
 {
     public function index(){
-        return view('index.index');
+        $countries = AdministrativeArea::countries()->get();
+        $degrees = Degree::estimatable()->get();
+
+        $now_year = date("Y");
+        $years = collect([$now_year + 1, $now_year + 2])->map(function($item){
+            return [
+                'name' => $item,
+                'id' => $item
+            ];
+        });
+        return view('index.index', compact('countries', 'degrees', 'years'));
     }
 }

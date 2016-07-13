@@ -57,7 +57,7 @@ ul{
         text-align: center;
         display: block;
       }
-      ul{
+      .select-item{
         li{
           font-size: 15px;
           display: block;
@@ -72,9 +72,36 @@ ul{
             }
           }
         }
-        .aboard-time{
+        .estimate-val{
           line-height: 30px;
-          background: #f0f0f0;
+          margin-bottom: 10px;
+          &.active{
+            background: #f0f0f0;
+          }
+        }
+      }
+      .select-area{
+        display: block;
+        width: 189px;
+        height: 360px;
+        background: #f0f0f0;
+        position: absolute;
+        bottom: 0;
+        right: -189px;
+        ul{
+          width: 100%;
+          vertical-align: middle;
+          margin-top: 70px;
+          li{
+            cursor: pointer;
+            font-size: 15px;
+            line-height: 40px;
+            color: #0e2d60;
+            text-align: center;
+            &:hover{
+              font-weight: bold;
+            }
+          }
         }
       }
       button{
@@ -939,7 +966,8 @@ ul{
       padding: 0;
       position: relative;
       left: -4px;
-      bottom: 4px;
+      bottom: 1px;
+      vertical-align: middle;
       cursor: pointer;
       background-color: transparent; /* make the button transparent */
       background-repeat: no-repeat;  /* make the background image appear only once */

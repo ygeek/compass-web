@@ -413,20 +413,42 @@ ul {
       padding-top: 20px;
       text-align: center;
       display: block; }
-    .index-page .header .evaluate-nav ul li {
+    .index-page .header .evaluate-nav .select-item li {
       font-size: 15px;
       display: block;
       width: 100%;
       height: 60px;
       line-height: 60px; }
-      .index-page .header .evaluate-nav ul li p {
+      .index-page .header .evaluate-nav .select-item li p {
         margin-left: 10px; }
-        .index-page .header .evaluate-nav ul li p span {
+        .index-page .header .evaluate-nav .select-item li p span {
           float: right;
           margin-right: 10px; }
-    .index-page .header .evaluate-nav ul .aboard-time {
+    .index-page .header .evaluate-nav .select-item .estimate-val {
       line-height: 30px;
-      background: #f0f0f0; }
+      margin-bottom: 10px; }
+      .index-page .header .evaluate-nav .select-item .estimate-val.active {
+        background: #f0f0f0; }
+    .index-page .header .evaluate-nav .select-area {
+      display: block;
+      width: 189px;
+      height: 360px;
+      background: #f0f0f0;
+      position: absolute;
+      bottom: 0;
+      right: -189px; }
+      .index-page .header .evaluate-nav .select-area ul {
+        width: 100%;
+        vertical-align: middle;
+        margin-top: 70px; }
+        .index-page .header .evaluate-nav .select-area ul li {
+          cursor: pointer;
+          font-size: 15px;
+          line-height: 40px;
+          color: #0e2d60;
+          text-align: center; }
+          .index-page .header .evaluate-nav .select-area ul li:hover {
+            font-weight: bold; }
     .index-page .header .evaluate-nav button {
       width: 240px;
       height: 40px;
@@ -1103,7 +1125,8 @@ ul {
     padding: 0;
     position: relative;
     left: -4px;
-    bottom: 4px;
+    bottom: 1px;
+    vertical-align: middle;
     cursor: pointer;
     background-color: transparent;
     /* make the button transparent */

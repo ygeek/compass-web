@@ -14,7 +14,7 @@
                         <div class="estimate-select">
                             <select name="selected_country_id" id="country" v-model="selected_country_id">
                                 @foreach($countries as $country)
-                                    <option value="{{$country->id}}">{{$country->name}}</option>
+                                    <option value="{{$country->id}}" @if($country->id == $selected_country_id) selected @endif>{{$country->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="estimate-select">
                             <select name="selected_degree_id" id="degree" v-model="selected_degree_id">
                                 @foreach($degrees as $degree)
-                                    <option value="{{$degree->id}}">{{$degree->name}}</option>
+                                    <option value="{{$degree->id}}" @if($degree->id == $selected_degree_id) selected @endif>{{$degree->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -38,7 +38,7 @@
                         <div class="estimate-select">
                             <select name="selected_year" id="years">
                                 @foreach($years as $year)
-                                    <option value="{{$year}}">{{$year}}</option>
+                                    <option value="{{$year}}" @if($year == $selected_year) selected @endif>{{$year}}</option>
                                 @endforeach
                             </select>
                         </div>

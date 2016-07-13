@@ -118,7 +118,7 @@
                     <input class="estimate-input" style="width: 120px;" type="text" v-model="selected_examination.score">
 
                     <template v-for="section in selected_examination['sections']">
-                        <label style="width: 10px;" for='section@{{ $index }}'>@{{ section.name }}</label>
+                        <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
                         <input  class="estimate-input" style="width: 60px;" type="text" v-model="section.score">
                     </template>
                 </template>

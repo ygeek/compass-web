@@ -6,28 +6,82 @@
       <div class="app-content">
         @include('shared.top_bar')
 
-        <div class='evaluate-nav'>
+        <estimate-nav></estimate-nav>
+        <template id='estimate-nav'>
+
+        <form method="GET" action="{{ route('estimate.step_first') }}">
+          <div class='evaluate-nav'>
           <h1>留学评估</h1>
-          <ul>
-            <li>
+          <ul class="select-item">
+            <li class="estimate-val" v-on:mouseover="selecting='countries'">
               <p>
                 选择国家 <span>&gt;</span>
               </p>
+              <p>@{{ selected_countries.name }}</p>
+              <input type="hidden" name="selected_country_id" v-model='selected_countries.id'>
             </li>
-            <li>
+            <li class="estimate-val" v-on:mouseover="selecting='degrees'">
               <p>
                 选择学历 <span>&gt;</span>
               </p>
+              <p>@{{ selected_degrees.name }}</p>
+              <input type="hidden" name="selected_degree_id" v-model='selected_degrees.id'>
             </li>
-            <li class="aboard-time">
+            <li class="estimate-val" v-on:mouseover="selecting='years'">
               <p>
                 计划留学时间<span>&gt;</span>
               </p>
-              <p>2015.9-2018.6</p>
+              <p>@{{ selected_years.name }}</p>
+              <input type="hidden" name="selected_year" v-model='selected_years.id'>
             </li>
           </ul>
           <button class='orange-btn'>我要评估</button>
+
+          <div class="select-area" v-show="selecting">
+            <ul>
+              <li v-for="select_item in selectes" @click="select(select_item)">
+                @{{ select_item.name }}
+              </li>
+            <ul>
+          </div>
         </div>
+        </form>
+        </template>
+        <script type="text/javascript">
+          Vue.component('estimate-nav', {
+            template: '#estimate-nav',
+            data: function(){
+              return {
+                countries: {!! json_encode($countries->toArray()) !!},
+                degrees: {!! json_encode($degrees->toArray()) !!},
+                years: {!! json_encode($years)!!},
+
+                selected_countries: {name: null, id: null},
+                selected_degrees: {name: null, id: null},
+                selected_years: {name: null, id: null},
+                selecting: null
+              }
+            },
+            computed: {
+              selectes: function(){
+                if(this.selecting){
+                  var values = this[this.selecting];
+                  return values;
+                }else{
+                  return [];
+                }
+              }
+            },
+            methods: {
+              select: function(selected){
+                var key = 'selected_' + this.selecting;
+                console.log(key);
+                this[key] = selected;
+              }
+            }
+          })
+        </script>
+
       </div>
 
       <div class='slogan-word'></div>
