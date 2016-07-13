@@ -54,19 +54,22 @@
             maxHeight: null,
             callbacks: {
                 onImageUpload: function(files) {
-                    data = new FormData();
-                    data.append("image", files[0]);
-                    $.ajax({
-                        data: data,
-                        type: "POST",
-                        url: "{{route("picture_upload")}}",
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function(filename) {
-                            $('#summernote').summernote("insertImage", filename.data.path);
-                        }
-                    });
+                    for (var i = files.length - 1; i >= 0; i--) {
+                        data = new FormData();
+                        data.append("image", files[i]);
+                        $.ajax({
+                            data: data,
+                            type: "POST",
+                            url: "{{route("picture_upload")}}",
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(filename) {
+                                $('#summernote').summernote("insertImage", filename.data.path);
+                            }
+                        });                        
+                    }
+                    
                 }
             }
 

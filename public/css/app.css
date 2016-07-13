@@ -1408,5 +1408,109 @@ ul {
         font-size: 20px;
         margin-bottom: 20px;
         font-weight: bold; }
+  .college-page .college-page-detail .college-pages .college-galleries {
+    overflow: auto; }
+    .college-page .college-page-detail .college-pages .college-galleries .college-gallery {
+      width: 267px;
+      height: 220px;
+      float: left;
+      margin-right: 12px; }
+      .college-page .college-page-detail .college-pages .college-galleries .college-gallery .img-container {
+        width: 100%;
+        height: 168px;
+        display: block; }
+        .college-page .college-page-detail .college-pages .college-galleries .college-gallery .img-container img {
+          width: 100%;
+          height: 100%; }
+      .college-page .college-page-detail .college-pages .college-galleries .college-gallery .name {
+        width: 100%;
+        height: 52px;
+        background: #fff;
+        text-align: center;
+        line-height: 52px;
+        font-size: 15px; }
+
+.icon-wrap {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+  left: 10%;
+  top: calc(50% - 30px); }
+  .icon-wrap-next {
+    right: 10%;
+    transform: rotate(180deg);
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 30px;
+    top: calc(50% - 30px); }
+    .icon-wrap-next:before {
+      transform: translateX(-50%) rotate(30deg);
+      transform-origin: 0 100%;
+      content: " ";
+      position: absolute;
+      left: 25%;
+      width: 3px;
+      height: 50%;
+      background: #fff;
+      transition: transform .3s,background-color .3s;
+      backface-visibility: hidden; }
+    .icon-wrap-next:after {
+      top: 50%;
+      transform: translateX(-50%) rotate(-30deg);
+      transform-origin: 0 0;
+      content: " ";
+      position: absolute;
+      left: 25%;
+      width: 3px;
+      height: 50%;
+      background: #fff;
+      transition: transform .3s,background-color .3s;
+      backface-visibility: hidden; }
+  .icon-wrap:before {
+    transform: translateX(-50%) rotate(30deg);
+    transform-origin: 0 100%;
+    content: " ";
+    position: absolute;
+    left: 25%;
+    width: 3px;
+    height: 50%;
+    background: #fff;
+    transition: transform .3s,background-color .3s;
+    backface-visibility: hidden; }
+  .icon-wrap:after {
+    top: 50%;
+    transform: translateX(-50%) rotate(-30deg);
+    transform-origin: 0 0;
+    content: " ";
+    position: absolute;
+    left: 25%;
+    width: 3px;
+    height: 50%;
+    background: #fff;
+    transition: transform .3s,background-color .3s;
+    backface-visibility: hidden; }
+
+.gallery-view {
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0; }
+  .gallery-view .close {
+    font-size: 25px;
+    color: #fff;
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    cursor: pointer; }
+  .gallery-view .image-viewer {
+    width: 50%;
+    margin: 0 auto;
+    padding: 5% 0; }
+    .gallery-view .image-viewer img {
+      width: 100%; }
 
 /*# sourceMappingURL=app.css.map */

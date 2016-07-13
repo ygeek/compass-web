@@ -74,21 +74,26 @@
         <div class="college-page-nav" id="colelge-page-nav">
             <div class="app-content">
                 <ul>
-                    <li @if($article_key == 'xue-xiao-gai-kuang')class="active"@endif>
-                        <a href="{{ route('colleges.show', ['key' => $college->key]) }}#colelge-page-nav">学校概况</a>
-                    </li>
-
-                    <li @if($article_key == 'lu-qu-qing-kuang')class="active"@endif>
-                        <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}#colelge-page-nav">录取情况</a>
-                    </li>
+                    <a href="{{ route('colleges.show', ['key' => $college->key]) }}#colelge-page-nav">
+                        <li @if($article_key == 'xue-xiao-gai-kuang')class="active"@endif>
+                            学校概况
+                        </li>
+                    </a>
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}#colelge-page-nav">
+                        <li @if($article_key == 'lu-qu-qing-kuang')class="active"@endif>
+                            录取情况
+                        </li>
+                    </a>
 
                     <li>
                         专业
                     </li>
 
-                    <li>
-                        图片
-                    </li>
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'tu-pian']) }}#colelge-page-nav">
+                        <li @if($article_key == 'tu-pian')class="active"@endif>
+                            图片
+                        </li>
+                    </a>
                     <li>
                         留学攻略
                     </li>
