@@ -1195,5 +1195,40 @@ ul{
     min-height: 100vh;
     background-repeat: no-repeat;
     background-position: center;
+
+    .college-pages{
+      .college-overview{
+        width: 824px;
+        overflow: auto;
+        min-height: 515px;
+        .tabs{
+          min-height: 515px;
+          float: left;
+          width: 180px;
+          background: #0e2d60;
+          color: #fff;
+          font-size: 15px;
+          text-align: center;
+          li{
+            cursor: pointer;
+            line-height: 50px;
+            &.active{
+              background: #fff;
+              color: #0e2d60;
+            }
+            box-sizing: border-box;
+            border-left: solid #0e2d60 3px;
+          }
+        }
+        .content-areas{
+          font-size: 14px;
+          padding: 20px 45px;
+          min-height: calc(515px - 40px);
+          float: left;
+          background: #fff;
+          width: calc(100% - 270px);
+        }
+      }
+    }
   }
 }

@@ -1307,5 +1307,32 @@ ul {
   background-position: center; }
   .college-page .college-page-detail .app-content {
     padding-top: 20px; }
+  .college-page .college-page-detail .college-pages .college-overview {
+    width: 824px;
+    overflow: auto;
+    min-height: 515px; }
+    .college-page .college-page-detail .college-pages .college-overview .tabs {
+      min-height: 515px;
+      float: left;
+      width: 180px;
+      background: #0e2d60;
+      color: #fff;
+      font-size: 15px;
+      text-align: center; }
+      .college-page .college-page-detail .college-pages .college-overview .tabs li {
+        cursor: pointer;
+        line-height: 50px;
+        box-sizing: border-box;
+        border-left: solid #0e2d60 3px; }
+        .college-page .college-page-detail .college-pages .college-overview .tabs li.active {
+          background: #fff;
+          color: #0e2d60; }
+    .college-page .college-page-detail .college-pages .college-overview .content-areas {
+      font-size: 14px;
+      padding: 20px 45px;
+      min-height: calc(515px - 40px);
+      float: left;
+      background: #fff;
+      width: calc(100% - 270px); }
 
 /*# sourceMappingURL=app.css.map */
