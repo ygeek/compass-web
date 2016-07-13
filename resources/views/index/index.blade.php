@@ -286,6 +286,6 @@
       </div>
     </div>
 
-    <div class="footer"></div>
+    @include('shared.footer')
   </div>
 @endsection

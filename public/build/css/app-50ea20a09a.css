@@ -647,7 +647,7 @@ ul {
   .index-page .middle .assess {
     position: absolute;
     top: 3170px;
-    height: 250px;
+    height: 245px;
     width: 100%;
     background: rgba(0, 0, 0, 0.3); }
     .index-page .middle .assess h1 {
@@ -1067,7 +1067,28 @@ ul {
             cursor: pointer; }
 
 .footer {
-  width: 100%; }
+  width: 100%;
+  height: 200px;
+  background: #0e2d60;
+  padding-top: 70px; }
+  .footer .logo {
+    float: left;
+    margin: 0 40px; }
+  .footer .text {
+    float: left;
+    margin-left: 120px;
+    color: #fff; }
+    .footer .text a {
+      display: block;
+      color: #fff;
+      margin: 8px 0; }
+  .footer .copyright {
+    float: left;
+    margin-left: 120px;
+    color: #fff; }
+    .footer .copyright img {
+      float: left;
+      margin: 25px; }
 
 .shanbox {
   width: 500px;
