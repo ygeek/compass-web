@@ -85,16 +85,18 @@
                         </li>
                     </a>
 
-                    <li>
-                        专业
-                    </li>
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'specialities']) }}#colelge-page-nav">
+                        <li @if($article_key == 'specialities')class="active"@endif>
+                            专业
+                        </li>
+                    </a>
 
                     <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'tu-pian']) }}#colelge-page-nav">
                         <li @if($article_key == 'tu-pian')class="active"@endif>
                             图片
                         </li>
                     </a>
-                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue']) }}#colelge-page-nav">
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue', 'desc' => '1']) }}#colelge-page-nav">
                         <li @if($article_key == 'liu-xue-gong-lue')class="active"@endif>
                             留学攻略
                         </li>
@@ -102,7 +104,79 @@
                 </ul>
             </div>
         </div>
+        @if($article_key == 'specialities')
+        <div class="college-specialities-search">
+            <div class="app-content">
+                <search-form></search-form>
+                <template id="search-form">
+                <form>
+                    <input type="hidden" name="article_type" value="specialities" />
+                    <div class="search-area">
+                        <input type="text" placeholder="输入要查询的专业" name="speciality_name" value="{{ app('request')->input('speciality_name') }}"/>
+                        <button type="submit" class="search-button"></button>
+                    </div>
 
+                    <div class="tag-area">
+                        <div class="tag-select">
+                            <tag-select label-name="学位类型" :selects="degrees" :selected_id.sync="selected_degree_id"></tag-select>
+                            <input type="hidden" v-model="selected_degree_id" name="selected_degree_id" value="{{ app('request')->input('selected_degree_id') }}"/>
+                        </div>
+
+                        <div class="tag-select">
+                            <tag-select label-name="选择专业方向" :selects="categories" :selected_id.sync="selected_category_id"></tag-select>
+                            <input type="hidden" v-model="selected_category_id" name="selected_category_id" value="{{ app('request')->input('selected_category_id') }}"/>
+                        </div>
+                    </div>
+                    </form>
+                </template>
+            </div>
+        </div>
+
+        <template id="tag-select">
+            <div>
+                <label>@{{ labelName }}</label>
+                <div class="tags">
+                    <div class="tag"  v-bind:class="{'active': selected_id == null}">
+                        <span v-on:click="select_item(null)">不限</span>
+                    </div>
+                    <div v-for="item in selects" class="tag" v-on:click="select_item(item.id)" v-bind:class="{'active': selected_id == item.id}">
+                        <span>@{{ item.name }}</span>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <script>
+            Vue.component("tag-select", {
+                template: '#tag-select',
+                props: ['labelName', 'selects', 'selected_id'],
+                methods: {
+                    select_item: function (item_id) {
+                        this.selected_id = item_id
+                    }
+                }
+            });
+
+            Vue.component("search-form", {
+                template: '#search-form',
+                data: function () {
+                    return {
+                        categories: <?php
+    echo json_encode(
+            collect(App\SpecialityCategory::all()->toArray())->map(function ($category){
+                $new_category = $category;
+                $new_category['name'] = $category['chinese_name'];
+                return $new_category;
+            })->toArray());
+                    ?>,
+                        degrees: {!!json_encode($college->degrees) !!},
+                        selected_degree_id: null,
+                        selected_category_id: null
+                    }
+                }
+            });
+        </script>
+        @endif
         <div class="college-page-detail">
             <div class="app-content">
                 <div class="college-pages">

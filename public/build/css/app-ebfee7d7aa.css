@@ -1130,15 +1130,15 @@ ul {
   animation-timing-function: ease;
   animation-fill-mode: both; }
 
-.colleges-page .search-area {
+.search-area {
   margin-top: 40px; }
-  .colleges-page .search-area input {
+  .search-area input {
     width: 690px;
     background: #ebebeb;
     height: 40px;
     padding-left: 10px;
     border: none; }
-  .colleges-page .search-area .search-button {
+  .search-area .search-button {
     background-image: url("/images/search-button.png");
     width: 126px;
     height: 40px;
@@ -1154,6 +1154,28 @@ ul {
     background-repeat: no-repeat;
     /* make the background image appear only once */
     background-position: 0px 0px; }
+
+.tag-area {
+  margin-top: 30px; }
+  .tag-area .tag-select {
+    width: 100%;
+    margin-bottom: 20px;
+    color: #6c6c6c;
+    font-size: 14px;
+    overflow: auto; }
+    .tag-area .tag-select label {
+      width: 130px;
+      display: inline-block; }
+    .tag-area .tag-select .tags {
+      width: calc(100% - 130px);
+      float: right; }
+      .tag-area .tag-select .tags .tag {
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 20px; }
+        .tag-area .tag-select .tags .tag.active {
+          color: #0e2d60;
+          font-weight: bold; }
 
 .colleges-page .search-result {
   background-color: #e0e0e0;
@@ -1217,28 +1239,6 @@ ul {
   padding: 20px 0;
   border-top: solid #ebebeb 1px;
   font-size: 14px; }
-
-.colleges-page .tag-area {
-  margin-top: 30px; }
-  .colleges-page .tag-area .tag-select {
-    width: 100%;
-    margin-bottom: 20px;
-    color: #6c6c6c;
-    font-size: 14px;
-    overflow: auto; }
-    .colleges-page .tag-area .tag-select label {
-      width: 130px;
-      display: inline-block; }
-    .colleges-page .tag-area .tag-select .tags {
-      width: calc(100% - 130px);
-      float: right; }
-      .colleges-page .tag-area .tag-select .tags .tag {
-        cursor: pointer;
-        display: inline-block;
-        margin-right: 20px; }
-        .colleges-page .tag-area .tag-select .tags .tag.active {
-          color: #0e2d60;
-          font-weight: bold; }
 
 .pagination li {
   display: inline-block;
@@ -1354,6 +1354,26 @@ ul {
   background-position: center; }
   .college-page .college-page-detail .app-content {
     padding-top: 20px; }
+  .college-page .college-page-detail .speciality {
+    width: 785px;
+    height: 130px;
+    background: #fff;
+    padding-top: 40px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    position: relative; }
+    .college-page .college-page-detail .speciality h1 {
+      font-size: 18px;
+      margin: 0 0;
+      margin-bottom: 30px; }
+    .college-page .college-page-detail .speciality p {
+      color: #6c6c6c;
+      font-size: 14px; }
+    .college-page .college-page-detail .speciality button {
+      cursor: pointer;
+      position: absolute;
+      top: -40px;
+      right: 0; }
   .college-page .college-page-detail .college-pages .college-overview {
     width: 824px;
     overflow: auto;

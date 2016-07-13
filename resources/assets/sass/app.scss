@@ -975,32 +975,61 @@ ul{
   animation-timing-function: ease;
   animation-fill-mode: both;
 }
-.colleges-page{
-  .search-area{
-    margin-top: 40px;
-    input{
-      width: 690px;
-      background: #ebebeb;
-      height: 40px;
-      padding-left: 10px;
-      border: none;
+.search-area{
+  margin-top: 40px;
+  input{
+    width: 690px;
+    background: #ebebeb;
+    height: 40px;
+    padding-left: 10px;
+    border: none;
+  }
+  .search-button{
+    background-image: url("/images/search-button.png");
+    width: 126px;
+    height: 40px;
+    border: none;
+    padding: 0;
+    position: relative;
+    left: -4px;
+    bottom: 1px;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;
+  }
+}
+
+.tag-area{
+  margin-top: 30px;
+  .tag-select{
+    width: 100%;
+    margin-bottom: 20px;
+    color: #6c6c6c;
+    font-size: 14px;
+    overflow: auto;
+
+    label{
+      width: 130px;
+      display: inline-block;
     }
-    .search-button{
-      background-image: url("/images/search-button.png");
-      width: 126px;
-      height: 40px;
-      border: none;
-      padding: 0;
-      position: relative;
-      left: -4px;
-      bottom: 1px;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: transparent; /* make the button transparent */
-      background-repeat: no-repeat;  /* make the background image appear only once */
-      background-position: 0px 0px;
+    .tags{
+      width: calc(100% - 130px);
+      float: right;
+      .tag{
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 20px;
+        &.active{
+          color: #0e2d60;
+          font-weight: bold;
+        }
+      }
     }
   }
+}
+.colleges-page{
   .search-result{
     background-color: #e0e0e0;
     background-image: url("/images/estimate-bg.png");
@@ -1078,34 +1107,6 @@ ul{
     padding: 20px 0;
     border-top: solid #ebebeb 1px;
     font-size: 14px;
-  }
-  .tag-area{
-    margin-top: 30px;
-    .tag-select{
-      width: 100%;
-      margin-bottom: 20px;
-      color: #6c6c6c;
-      font-size: 14px;
-      overflow: auto;
-
-      label{
-        width: 130px;
-        display: inline-block;
-      }
-      .tags{
-        width: calc(100% - 130px);
-        float: right;
-        .tag{
-          cursor: pointer;
-          display: inline-block;
-          margin-right: 20px;
-          &.active{
-            color: #0e2d60;
-            font-weight: bold;
-          }
-        }
-      }
-    }
   }
 }
 
@@ -1246,6 +1247,12 @@ ul{
       }
     }
   }
+
+  .college-specialities-search{
+    .search-area{
+    }
+  }
+
   .college-page-detail{
     .app-content{
       padding-top: 20px;
@@ -1255,6 +1262,33 @@ ul{
     min-height: 100vh;
     background-repeat: no-repeat;
     background-position: center;
+
+    .speciality{
+      width: 785px;
+      height: 130px;
+      background: #fff;
+      padding-top: 40px;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      position: relative;
+      h1{
+        font-size: 18px;
+        margin: 0 0;
+        margin-bottom: 30px;
+      }
+
+      p{
+        color: #6c6c6c;
+        font-size: 14px;
+      }
+
+      button{
+        cursor: pointer;
+        position: absolute;
+        top: -40px;
+        right: 0;
+      }
+    }
 
     .college-pages{
       .college-overview{

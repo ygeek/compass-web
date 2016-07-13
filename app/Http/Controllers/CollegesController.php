@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Overtrue\Pinyin\Pinyin;
 
 use App\Http\Requests;
+use Input;
 
 class CollegesController extends Controller
 {
@@ -72,11 +73,40 @@ class CollegesController extends Controller
         $pinyin = new Pinyin();
         $article_key = $pinyin->permalink($article_type);
 
-        $category = ArticleCategory::where('key', $article_key)->first();
+        if(in_array($article_key, ['xue-xiao-gai-kuang', 'lu-qu-qing-kuang', 'liu-xue-gong-lue', 'tu-pian'])){
+            $category = ArticleCategory::where('key', $article_key)->first();
 
-        $articles = $college->articles()->whereHas('category', function($q) use ($article_key){
-            return $q->where('key', $article_key);
-        })->orderBy('articles.order_weight')->orderBy('articles.created_at', 'desc')->get();
+            $articles_query = $college->articles()->whereHas('category', function($q) use ($article_key){
+                return $q->where('key', $article_key);
+            })->orderBy('articles.order_weight');
+
+            if($request->input('desc', false)){
+                $articles_query = $articles_query->orderBy('articles.created_at', 'desc');
+            }
+
+            $articles = $articles_query->get();
+
+        }else{
+            //学校专业
+            $specialities_query = $college->specialities()->with('category', 'degree');
+            $selected_degree_id = $request->input('selected_degree_id');
+            $selected_category_id = $request->input('selected_category_id');
+            $speciality_name = $request->input('speciality_name');
+
+            if($selected_degree_id){
+                $specialities_query = $specialities_query->where('degree_id', $selected_degree_id);
+            }
+
+            if($selected_category_id){
+                $specialities_query = $specialities_query->where('category_id', $selected_category_id);
+            }
+
+            if($speciality_name){
+                $specialities_query = $specialities_query->where('name', 'like', '%'.$speciality_name.'%');
+            }
+
+            $articles = $specialities_query->paginate(15);
+        }
 
         return view('colleges.show', compact('college', 'article_key', 'articles'));
     }
