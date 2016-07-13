@@ -71,15 +71,15 @@
             </div>
         </div>
 
-        <div class="college-page-nav">
+        <div class="college-page-nav" id="colelge-page-nav">
             <div class="app-content">
                 <ul>
                     <li @if($article_key == 'xue-xiao-gai-kuang')class="active"@endif>
-                        学校概况
+                        <a href="{{ route('colleges.show', ['key' => $college->key]) }}#colelge-page-nav">学校概况</a>
                     </li>
 
-                    <li>
-                        录取情况
+                    <li @if($article_key == 'lu-qu-qing-kuang')class="active"@endif>
+                        <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}#colelge-page-nav">录取情况</a>
                     </li>
 
                     <li>

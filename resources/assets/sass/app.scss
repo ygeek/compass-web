@@ -1200,6 +1200,11 @@ ul{
     ul{
       font-size: 15px;
       color: #6c6c6c;
+      a{
+        font-size: 15px;
+        color: #6c6c6c;
+      }
+
       li{
         height: 50px;
         line-height: 50px;
@@ -1255,6 +1260,43 @@ ul{
           float: left;
           background: #fff;
           width: calc(100% - 270px);
+        }
+      }
+      .college-applications{
+        width: 827px;
+        &:after{
+          content: '';
+          display: block;
+          clear: both;
+        }
+        .left-grid{
+          width: 256px;
+          float: left;
+        }
+        .right-grid{
+          width: 410px;
+          margin-left: 10px;
+          float: left;
+          .article{
+            // width: calc(100% - 40px);
+          }
+        }
+
+        .article{
+          width: calc(100% - 60px);
+          display: inline-block;
+          background: #fff;
+          padding-top: 30px;
+          padding-bottom: 30px;
+          padding-left: 40px;
+          padding-right: 20px;
+          margin-bottom: 20px;
+          vertical-align: top;
+          header{
+            font-size:20px;
+            margin-bottom:20px;
+            font-weight: bold;
+          }
         }
       }
     }
