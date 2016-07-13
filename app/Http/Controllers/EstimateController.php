@@ -111,8 +111,6 @@ class EstimateController extends Controller
         $reduce_result = Estimate::reduceScoreResult($res, $core_range_setting);
         //生成院校信息
         $reduce_colleges = Estimate::mapCollegeInfo($reduce_result, $selected_speciality_name, $selected_degree, $data);
-        dd($data);
-        dd(json_encode($reduce_colleges));
         return view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_speciality_name'));
     }
 
