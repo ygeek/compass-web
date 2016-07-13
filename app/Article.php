@@ -32,7 +32,6 @@ class Article extends Model
         $doc = new \DOMDocument();
         $doc->loadHTML($html);
         $tags = $doc->getElementsByTagName($tag);
-        dd($tags);
         $attrs = [];
         foreach ($tags as $tag) {
            $attrs[] = $tag->getAttribute($attr);
