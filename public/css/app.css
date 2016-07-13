@@ -1411,6 +1411,7 @@ ul {
   .college-page .college-page-detail .college-pages .college-galleries {
     overflow: auto; }
     .college-page .college-page-detail .college-pages .college-galleries .college-gallery {
+      cursor: pointer;
       width: 267px;
       height: 220px;
       float: left;
@@ -1429,6 +1430,31 @@ ul {
         text-align: center;
         line-height: 52px;
         font-size: 15px; }
+  .college-page .college-page-detail .college-pages .college-list-articles {
+    width: 824px; }
+    .college-page .college-page-detail .college-pages .college-list-articles .article {
+      width: 100%;
+      height: 36px;
+      overflow: auto;
+      margin-bottom: 2px;
+      line-height: 36px;
+      font-size: 14px;
+      background: #fff; }
+      .college-page .college-page-detail .college-pages .college-list-articles .article .identity {
+        float: left;
+        width: 30px;
+        text-align: center; }
+      .college-page .college-page-detail .college-pages .college-list-articles .article a {
+        display: block;
+        float: left;
+        color: #373737; }
+        .college-page .college-page-detail .college-pages .college-list-articles .article a h1 {
+          font-size: 14px;
+          margin: 0 0; }
+      .college-page .college-page-detail .college-pages .college-list-articles .article .created_at {
+        float: right;
+        color: #c1c1c1;
+        padding-right: 10px; }
 
 .icon-wrap {
   cursor: pointer;
@@ -1509,7 +1535,8 @@ ul {
   .gallery-view .image-viewer {
     width: 50%;
     margin: 0 auto;
-    padding: 5% 0; }
+    padding: 5% 0;
+    vertical-align: middle; }
     .gallery-view .image-viewer img {
       width: 100%; }
 

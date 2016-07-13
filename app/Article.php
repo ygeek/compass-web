@@ -12,19 +12,31 @@ class Article extends Model
 
     //从content中抽出image地址
     public function images(){
-        $doc = new \DOMDocument();
-        $doc->loadHTML($this->content);
-        $tags = $doc->getElementsByTagName('img');
-        $images = [];
-        foreach ($tags as $tag) {
-           $images[] = $tag->getAttribute('src');
-        }
-        return collect($images);
+        return $this->getNodesAttrFormHtml($this->content, 'img', 'src');
+    }
+
+    public function link(){
+        preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $this->content, $match);
+
+        $links = $match[0];
+        return $links[0];
     }
 
     public function toGallery(){
         $name = $this->title;
         $imaegs = $this->images();
         return ['name' => $name, 'images' => $imaegs];
+    }
+
+    private function getNodesAttrFormHtml($html, $tag, $attr){
+        $doc = new \DOMDocument();
+        $doc->loadHTML($html);
+        $tags = $doc->getElementsByTagName($tag);
+        dd($tags);
+        $attrs = [];
+        foreach ($tags as $tag) {
+           $attrs[] = $tag->getAttribute($attr);
+        }
+        return collect($attrs);
     }
 }

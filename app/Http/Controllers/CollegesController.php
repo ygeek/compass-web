@@ -76,7 +76,7 @@ class CollegesController extends Controller
 
         $articles = $college->articles()->whereHas('category', function($q) use ($article_key){
             return $q->where('key', $article_key);
-        })->orderBy('articles.order_weight')->get();
+        })->orderBy('articles.order_weight')->orderBy('articles.created_at', 'desc')->get();
 
         return view('colleges.show', compact('college', 'article_key', 'articles'));
     }

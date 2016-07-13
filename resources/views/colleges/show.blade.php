@@ -94,9 +94,11 @@
                             图片
                         </li>
                     </a>
-                    <li>
-                        留学攻略
-                    </li>
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue']) }}#colelge-page-nav">
+                        <li @if($article_key == 'liu-xue-gong-lue')class="active"@endif>
+                            留学攻略
+                        </li>
+                    </a>
                 </ul>
             </div>
         </div>
