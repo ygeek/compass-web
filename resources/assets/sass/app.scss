@@ -1038,6 +1038,79 @@ ul{
     }
   }
 }
+
+.colleges-rank-page{
+  .app-content{
+    @include clearfix;
+  }
+  .tabs{
+    float: left;
+    width: 600px;
+    font-size: 15px;
+    color: #6c6c6c;
+    a{
+      font-size: 15px;
+      color: #6c6c6c;
+    }
+
+    .tab{
+      height: 50px;
+      line-height: 50px;
+      display: inline-block;
+      margin-right: 60px;
+      &.active{
+        color: #0e2d60;
+        border-bottom: solid #0e2d60 4px;
+        font-weight: bold;
+      }
+      cursor: pointer;
+    }
+  }
+}
+
+.colleges-rank-page-content{
+    background-color: #e0e0e0;
+    background-image: url("/images/estimate-bg.png");
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 14px;
+    table{
+      width: 824px;
+      padding-top: 20px;
+      border-spacing: 0;
+      margin-bottom: 20px;
+      tr{
+        line-height: 50px;
+        &:nth-child(even){
+          background: #f3f3f3;
+        }
+        &:nth-child(odd){
+          background: #fff;
+        }
+      }
+      .rank{
+        padding-left: 30px;
+        width: 50px;
+        font-size: 18px;
+      }
+      .chinese_name{
+        width: 200px;
+      }
+      .english_name{
+        width: 350px;
+      }
+      .actions{
+
+      }
+    }
+    button{
+      cursor: pointer;
+      margin: 0 0;
+      line-height: 30px;
+    }
+}
+
 .colleges-page{
   .search-result{
     background-color: #e0e0e0;

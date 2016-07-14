@@ -1206,6 +1206,61 @@ ul {
           color: #0e2d60;
           font-weight: bold; }
 
+.colleges-rank-page .app-content:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.colleges-rank-page .tabs {
+  float: left;
+  width: 600px;
+  font-size: 15px;
+  color: #6c6c6c; }
+  .colleges-rank-page .tabs a {
+    font-size: 15px;
+    color: #6c6c6c; }
+  .colleges-rank-page .tabs .tab {
+    height: 50px;
+    line-height: 50px;
+    display: inline-block;
+    margin-right: 60px;
+    cursor: pointer; }
+    .colleges-rank-page .tabs .tab.active {
+      color: #0e2d60;
+      border-bottom: solid #0e2d60 4px;
+      font-weight: bold; }
+
+.colleges-rank-page-content {
+  background-color: #e0e0e0;
+  background-image: url("/images/estimate-bg.png");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 14px; }
+  .colleges-rank-page-content table {
+    width: 824px;
+    padding-top: 20px;
+    border-spacing: 0;
+    margin-bottom: 20px; }
+    .colleges-rank-page-content table tr {
+      line-height: 50px; }
+      .colleges-rank-page-content table tr:nth-child(even) {
+        background: #f3f3f3; }
+      .colleges-rank-page-content table tr:nth-child(odd) {
+        background: #fff; }
+    .colleges-rank-page-content table .rank {
+      padding-left: 30px;
+      width: 50px;
+      font-size: 18px; }
+    .colleges-rank-page-content table .chinese_name {
+      width: 200px; }
+    .colleges-rank-page-content table .english_name {
+      width: 350px; }
+  .colleges-rank-page-content button {
+    cursor: pointer;
+    margin: 0 0;
+    line-height: 30px; }
+
 .colleges-page .search-result {
   background-color: #e0e0e0;
   background-image: url("/images/estimate-bg.png");

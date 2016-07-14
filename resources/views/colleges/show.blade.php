@@ -148,7 +148,7 @@
                         }
                     });
                 </script>
-                <button class="estimate-button">院校排名 -></button>
+                <a href="{{ route('colleges.rank') }}"><button class="estimate-button">院校排名 -></button></a>
                 </div>
             </div>
         </div>

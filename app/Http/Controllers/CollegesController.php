@@ -110,4 +110,15 @@ class CollegesController extends Controller
 
         return view('colleges.show', compact('college', 'article_key', 'articles'));
     }
+
+    //院校排名
+    public function rank(Request $request){
+        $rank = $request->input('rank', 'us_new_ranking');
+        if(!in_array($rank, ['us_new_ranking', 'times_ranking', 'qs_ranking'])){
+            abort(404);
+        }
+
+        $colleges = College::where($rank, '!=', 0)->orderBy($rank)->paginate(15);
+        return view('colleges.rank', compact('colleges', 'rank'));
+    }
 }
