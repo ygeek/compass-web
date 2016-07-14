@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use App\College;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests;
@@ -10,6 +11,10 @@ use Illuminate\Support\Facades\App;
 
 class FavoritesController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     //收藏一个学校
     public function store(Request $request){
         $college_id = $request->input('college_id');
@@ -30,6 +35,10 @@ class FavoritesController extends Controller
         }
 
         Setting::set($key, $set);
+        $college = College::find($college_id);
+        $college->like_nums += 1;
+        $college->save();
+
         return $this->okResponse();
     }
 
@@ -47,6 +56,10 @@ class FavoritesController extends Controller
                return $item != $college_id;
             })->toArray();
             Setting::set($key, $set);
+            $college = College::find($college_id);
+            $college->like_nums -= 1;
+            $college->save();
+
             return $this->okResponse();
         }
     }

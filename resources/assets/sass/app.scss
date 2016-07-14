@@ -1,5 +1,14 @@
 @import "normalize";
 
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
 *{
   margin: 0;
   padding: 0;
@@ -130,7 +139,7 @@ ul{
     }
 
     ul{
-      overflow: auto;
+      @include clearfix;
       margin-right: -145px;
       li{
         margin-top: 25px;
@@ -422,7 +431,7 @@ ul{
     }
     float: right;
     width: 715px;
-    overflow: auto;
+    @include clearfix;
     .nav-item{
       float: left;
       margin-right: 50px;
@@ -461,10 +470,10 @@ ul{
     transform: translate(-50%, -50%);
     .form-nav{
       margin-top: 30px;
-      overflow: auto;
+      @include clearfix;
       ul{
         float: right;
-        overflow: auto;
+        @include clearfix;
         margin-top: 10px;
         li{
           cursor: pointer;
@@ -511,7 +520,7 @@ ul{
     margin-left: 22px;
   }
   .sms-container{
-    overflow: auto;
+    @include clearfix;
     .sms-input{
       width: 200px;
       float: left;
@@ -558,7 +567,7 @@ ul{
     .form-group{
       display: block;
       width: 100%;
-      overflow: auto;
+      @include clearfix;
     }
     .estimate-input{
       width: 298px;
@@ -618,7 +627,7 @@ ul{
 
 .estimate-result{
   .identity{
-    overflow: auto;
+    @include clearfix;
     line-height: 40px;
     h1{
       font-size: 18px;
@@ -631,7 +640,7 @@ ul{
       margin: 0.67em 0;
       margin-left: 100px;
       float: left;
-      overflow: auto;
+      @include clearfix;
       li{
         margin-right: 90px;
         float: left;
@@ -784,7 +793,7 @@ ul{
   background: #ebebeb;
   .page-content{
     width: 100%;
-    overflow: auto;
+    @include clearfix;
   }
 
   .home-slider{
@@ -1008,7 +1017,7 @@ ul{
     margin-bottom: 20px;
     color: #6c6c6c;
     font-size: 14px;
-    overflow: auto;
+    @include clearfix;
 
     label{
       width: 130px;
@@ -1189,7 +1198,7 @@ ul{
           margin-bottom: 5px;
           font-size: 15px;
           color: #6c6c6c;
-          overflow: auto;
+          @include clearfix;
         }
       }
 
@@ -1224,8 +1233,12 @@ ul{
   .college-page-nav{
     height: 54px;
     border-top: solid #f4f4f4 2px;
-
+    .app-content{
+      @include clearfix;
+    }
     ul{
+      float: left;
+      width: 600px;
       font-size: 15px;
       color: #6c6c6c;
       a{
@@ -1244,6 +1257,17 @@ ul{
           font-weight: bold;
         }
         cursor: pointer;
+      }
+    }
+    .actions{
+      float: right;
+      vertical-align: top;
+      margin-top: 10px;
+      button{
+        width: 90px;
+        cursor: pointer;
+        margin-top: 0;
+        margin-left: 10px;
       }
     }
   }
@@ -1293,7 +1317,7 @@ ul{
     .college-pages{
       .college-overview{
         width: 824px;
-        overflow: auto;
+        @include clearfix;
         min-height: 515px;
         .tabs{
           min-height: 515px;
@@ -1359,7 +1383,7 @@ ul{
       }
 
       .college-galleries{
-        overflow: auto;
+        @include clearfix;
         .college-gallery{
           cursor: pointer;
           width: 267px;
@@ -1391,7 +1415,7 @@ ul{
         .article{
           width: 100%;
           height: 36px;
-          overflow: auto;
+          @include clearfix;
           margin-bottom: 2px;
           line-height: 36px;
           font-size: 14px;
@@ -1534,4 +1558,68 @@ ul{
       width: 100%;
     }
   }
+}
+
+$heart_size: 12px;
+
+.heart {
+  background-color: red;
+  display: inline-block;
+  height: $heart_size;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: $heart_size;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  height: $heart_size;
+  position: absolute;
+  width: $heart_size;
+}
+
+.heart:before {
+  top: -($heart_size / 2);
+  left: 0;
+}
+
+.heart:after {
+  left: ($heart-size / 2);
+  top: 0;
+}
+
+.gray-heart {
+  background-color: gray;
+  display: inline-block;
+  height: $heart_size;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: $heart_size;
+}
+
+.gray-heart:before,
+.gray-heart:after {
+  content: "";
+  background-color: gray;
+  border-radius: 50%;
+  height: $heart_size;
+  position: absolute;
+  width: $heart_size;
+}
+
+.gray-heart:before {
+  top: -($heart_size / 2);
+  left: 0;
+}
+
+.gray-heart:after {
+  left: ($heart-size / 2);
+  top: 0;
 }

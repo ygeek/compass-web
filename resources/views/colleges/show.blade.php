@@ -102,6 +102,54 @@
                         </li>
                     </a>
                 </ul>
+
+                <div class="actions">
+                <template id="like-college">
+                    <button v-if="liked == 0" class="estimate-button" @click="likeCollege">收藏 <span class="gray-heart"></span></button>
+
+                    <button v-if="liked == 1" class="estimate-button" @click="dislikeCollege">取消收藏 <span class="heart"></span></button>
+                </template>
+
+                <like-college 
+                    college_id="{{ $college->id }}"
+                    liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 0;}}else{echo 0;} ?>"
+                ></like-college>
+                <script type="text/javascript">
+                    Vue.component('like-college', {
+                        template: '#like-college',
+                        props: ['college_id', 'liked'],
+                        methods: {
+                            likeCollege: function(){
+                                var that = this;
+                                this.$http.post("{{ route('like.store') }}", {
+                                    college_id: this.college_id
+                                }).then(function(){
+                                    alert('收藏成功');
+                                    that.liked = true;
+
+                                }, function(response){
+                                    if(response.status == 401){
+                                        alert('请登陆后收藏院校');
+                                    };
+                                });
+                            },
+                            dislikeCollege: function(){
+                                var that = this;
+                                this.$http.post("{{ route('like.destroy') }}", {
+                                    college_id: this.college_id
+                                }).then(function(){
+                                    alert('取消收藏成功');
+                                    that.liked = false;
+
+                                }, function(response){
+
+                                });
+                            }
+                        }
+                    });
+                </script>
+                <button class="estimate-button">院校排名 -></button>
+                </div>
             </div>
         </div>
         @if($article_key == 'specialities')

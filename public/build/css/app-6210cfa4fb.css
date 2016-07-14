@@ -470,8 +470,11 @@ ul {
     font-size: 18px;
     width: 100%; }
   .index-page .aboard-flow ul {
-    overflow: auto;
     margin-right: -145px; }
+    .index-page .aboard-flow ul:after {
+      content: "";
+      display: table;
+      clear: both; }
     .index-page .aboard-flow ul li {
       margin-top: 25px;
       position: relative;
@@ -699,12 +702,15 @@ ul {
     margin-right: -55px;
     margin-top: 15px;
     float: right;
-    width: 715px;
-    overflow: auto; }
+    width: 715px; }
     .top-nav-bar .top-bar-content a {
       color: #7de6ca; }
     .top-nav-bar .top-bar-content .title-nav-bar {
       list-style-type: none; }
+    .top-nav-bar .top-bar-content:after {
+      content: "";
+      display: table;
+      clear: both; }
     .top-nav-bar .top-bar-content .nav-item {
       float: left;
       margin-right: 50px; }
@@ -732,12 +738,18 @@ ul {
       top: 10px;
       cursor: pointer; }
     #login-panel .panel .form-nav {
-      margin-top: 30px;
-      overflow: auto; }
+      margin-top: 30px; }
+      #login-panel .panel .form-nav:after {
+        content: "";
+        display: table;
+        clear: both; }
       #login-panel .panel .form-nav ul {
         float: right;
-        overflow: auto;
         margin-top: 10px; }
+        #login-panel .panel .form-nav ul:after {
+          content: "";
+          display: table;
+          clear: both; }
         #login-panel .panel .form-nav ul li {
           cursor: pointer;
           float: left;
@@ -771,18 +783,20 @@ ul {
     padding-left: 10px;
     margin-bottom: 10px;
     margin-left: 22px; }
-  #login-panel .sms-container {
-    overflow: auto; }
-    #login-panel .sms-container .sms-input {
-      width: 200px;
-      float: left; }
-    #login-panel .sms-container .grab-verify-code {
-      border: none;
-      font-size: 12px;
-      line-height: 40px;
-      float: right;
-      margin-right: 19px;
-      padding: 0 10px; }
+  #login-panel .sms-container:after {
+    content: "";
+    display: table;
+    clear: both; }
+  #login-panel .sms-container .sms-input {
+    width: 200px;
+    float: left; }
+  #login-panel .sms-container .grab-verify-code {
+    border: none;
+    font-size: 12px;
+    line-height: 40px;
+    float: right;
+    margin-right: 19px;
+    padding: 0 10px; }
 
 .estimate-page {
   background-color: #e0e0e0;
@@ -809,8 +823,11 @@ ul {
       margin-bottom: 30px; }
     .estimate-page .estimate-form .form-group {
       display: block;
-      width: 100%;
-      overflow: auto; }
+      width: 100%; }
+      .estimate-page .estimate-form .form-group:after {
+        content: "";
+        display: table;
+        clear: both; }
     .estimate-page .estimate-form .estimate-input {
       width: 298px;
       height: 40px;
@@ -856,8 +873,11 @@ ul {
           outline: none; }
 
 .estimate-result .identity {
-  overflow: auto;
   line-height: 40px; }
+  .estimate-result .identity:after {
+    content: "";
+    display: table;
+    clear: both; }
   .estimate-result .identity h1 {
     font-size: 18px;
     color: #6c6c6c;
@@ -866,8 +886,11 @@ ul {
   .estimate-result .identity ul {
     margin: 0.67em 0;
     margin-left: 100px;
-    float: left;
-    overflow: auto; }
+    float: left; }
+    .estimate-result .identity ul:after {
+      content: "";
+      display: table;
+      clear: both; }
     .estimate-result .identity ul li {
       margin-right: 90px;
       float: left;
@@ -989,8 +1012,11 @@ ul {
 .home-page {
   background: #ebebeb; }
   .home-page .page-content {
-    width: 100%;
-    overflow: auto; }
+    width: 100%; }
+    .home-page .page-content:after {
+      content: "";
+      display: table;
+      clear: both; }
   .home-page .home-slider {
     float: left;
     margin-top: 60px;
@@ -1161,8 +1187,11 @@ ul {
     width: 100%;
     margin-bottom: 20px;
     color: #6c6c6c;
-    font-size: 14px;
-    overflow: auto; }
+    font-size: 14px; }
+    .tag-area .tag-select:after {
+      content: "";
+      display: table;
+      clear: both; }
     .tag-area .tag-select label {
       width: 130px;
       display: inline-block; }
@@ -1303,8 +1332,11 @@ ul {
       line-height: 24px;
       margin-bottom: 5px;
       font-size: 15px;
-      color: #6c6c6c;
-      overflow: auto; }
+      color: #6c6c6c; }
+      .college-page .college-page-content .college-content-header .college-info .info:after {
+        content: "";
+        display: table;
+        clear: both; }
   .college-page .college-page-content .college-content-header .ranks {
     vertical-align: top;
     display: inline-block;
@@ -1330,7 +1362,13 @@ ul {
 .college-page .college-page-nav {
   height: 54px;
   border-top: solid #f4f4f4 2px; }
+  .college-page .college-page-nav .app-content:after {
+    content: "";
+    display: table;
+    clear: both; }
   .college-page .college-page-nav ul {
+    float: left;
+    width: 600px;
     font-size: 15px;
     color: #6c6c6c; }
     .college-page .college-page-nav ul a {
@@ -1346,6 +1384,15 @@ ul {
         color: #0e2d60;
         border-bottom: solid #0e2d60 4px;
         font-weight: bold; }
+  .college-page .college-page-nav .actions {
+    float: right;
+    vertical-align: top;
+    margin-top: 10px; }
+    .college-page .college-page-nav .actions button {
+      width: 90px;
+      cursor: pointer;
+      margin-top: 0;
+      margin-left: 10px; }
 
 .college-page .college-page-detail {
   background-image: url("/images/estimate-bg.png");
@@ -1376,8 +1423,11 @@ ul {
       right: 0; }
   .college-page .college-page-detail .college-pages .college-overview {
     width: 824px;
-    overflow: auto;
     min-height: 515px; }
+    .college-page .college-page-detail .college-pages .college-overview:after {
+      content: "";
+      display: table;
+      clear: both; }
     .college-page .college-page-detail .college-pages .college-overview .tabs {
       min-height: 515px;
       float: left;
@@ -1428,38 +1478,43 @@ ul {
         font-size: 20px;
         margin-bottom: 20px;
         font-weight: bold; }
-  .college-page .college-page-detail .college-pages .college-galleries {
-    overflow: auto; }
-    .college-page .college-page-detail .college-pages .college-galleries .college-gallery {
-      cursor: pointer;
-      width: 267px;
-      height: 220px;
-      float: left;
-      margin-right: 12px; }
-      .college-page .college-page-detail .college-pages .college-galleries .college-gallery .img-container {
+  .college-page .college-page-detail .college-pages .college-galleries:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .college-page .college-page-detail .college-pages .college-galleries .college-gallery {
+    cursor: pointer;
+    width: 267px;
+    height: 220px;
+    float: left;
+    margin-right: 12px; }
+    .college-page .college-page-detail .college-pages .college-galleries .college-gallery .img-container {
+      width: 100%;
+      height: 168px;
+      display: block; }
+      .college-page .college-page-detail .college-pages .college-galleries .college-gallery .img-container img {
         width: 100%;
-        height: 168px;
-        display: block; }
-        .college-page .college-page-detail .college-pages .college-galleries .college-gallery .img-container img {
-          width: 100%;
-          height: 100%; }
-      .college-page .college-page-detail .college-pages .college-galleries .college-gallery .name {
-        width: 100%;
-        height: 52px;
-        background: #fff;
-        text-align: center;
-        line-height: 52px;
-        font-size: 15px; }
+        height: 100%; }
+    .college-page .college-page-detail .college-pages .college-galleries .college-gallery .name {
+      width: 100%;
+      height: 52px;
+      background: #fff;
+      text-align: center;
+      line-height: 52px;
+      font-size: 15px; }
   .college-page .college-page-detail .college-pages .college-list-articles {
     width: 824px; }
     .college-page .college-page-detail .college-pages .college-list-articles .article {
       width: 100%;
       height: 36px;
-      overflow: auto;
       margin-bottom: 2px;
       line-height: 36px;
       font-size: 14px;
       background: #fff; }
+      .college-page .college-page-detail .college-pages .college-list-articles .article:after {
+        content: "";
+        display: table;
+        clear: both; }
       .college-page .college-page-detail .college-pages .college-list-articles .article .identity {
         float: left;
         width: 30px;
@@ -1559,5 +1614,59 @@ ul {
     vertical-align: middle; }
     .gallery-view .image-viewer img {
       width: 100%; }
+
+.heart {
+  background-color: red;
+  display: inline-block;
+  height: 12px;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: 12px; }
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  height: 12px;
+  position: absolute;
+  width: 12px; }
+
+.heart:before {
+  top: -6px;
+  left: 0; }
+
+.heart:after {
+  left: 6px;
+  top: 0; }
+
+.gray-heart {
+  background-color: gray;
+  display: inline-block;
+  height: 12px;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: 12px; }
+
+.gray-heart:before,
+.gray-heart:after {
+  content: "";
+  background-color: gray;
+  border-radius: 50%;
+  height: 12px;
+  position: absolute;
+  width: 12px; }
+
+.gray-heart:before {
+  top: -6px;
+  left: 0; }
+
+.gray-heart:after {
+  left: 6px;
+  top: 0; }
 
 /*# sourceMappingURL=app.css.map */
