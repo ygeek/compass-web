@@ -440,6 +440,18 @@ ul{
           color: #ffffff;
         }
       }
+
+      .user-avatar{
+        line-height: 33px;
+        vertical-align: middle;
+        position: relative;
+        top: -6px;
+        img{
+          width: 30px;
+          height: 30px;
+          border-radius: 30px;
+        }
+      }
     }
   }
 }
@@ -802,8 +814,26 @@ ul{
     width: 215px;
     height: 415px;
     background: #fff;
+    position:relative;
     .user-info{
       width: 100%;
+      .user-avatar{
+        position: absolute;
+        top: 40px;
+        left: calc(215px / 2 - 40px);
+        img{
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+        }
+      }
+      .user-username{
+        position: absolute;
+        width: 100%;
+        top: 140px;
+        text-align: center;
+        font-weight: bold;
+      }
     }
     ul{
       padding-top: 195px;

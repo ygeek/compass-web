@@ -1,10 +1,10 @@
 <div class="home-slider">
     <div class="user-info">
         <div class="user-avatar">
-
+            <img src="{{ $user->getAvatarPath() }}" />
         </div>
         <div class="user-username">
-            <span></span>
+            <span>{{ $user->username }}</span>
         </div>
     </div>
     <ul>

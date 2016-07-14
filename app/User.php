@@ -46,4 +46,16 @@ class User extends Model implements AuthenticatableContract
     public static function likeKey($user_id){
         return 'user:'. $user_id .':favorites';
     }
+
+    public function getAvatarPath(){
+        if($this->getAttribute('avatar_path')){
+            return $this->getAttribute('avatar_path');
+        }else{
+            return $this->defaultAvatarPath();
+        }
+    }
+
+    public function defaultAvatarPath(){
+        return '/images/default-avatar.jpg'; 
+    }
 }

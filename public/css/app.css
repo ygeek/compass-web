@@ -716,6 +716,15 @@ ul {
       margin-right: 50px; }
       .top-nav-bar .top-bar-content .nav-item.active a {
         color: #ffffff; }
+      .top-nav-bar .top-bar-content .nav-item .user-avatar {
+        line-height: 33px;
+        vertical-align: middle;
+        position: relative;
+        top: -6px; }
+        .top-nav-bar .top-bar-content .nav-item .user-avatar img {
+          width: 30px;
+          height: 30px;
+          border-radius: 30px; }
 
 #login-panel {
   width: 100%;
@@ -1022,9 +1031,24 @@ ul {
     margin-top: 60px;
     width: 215px;
     height: 415px;
-    background: #fff; }
+    background: #fff;
+    position: relative; }
     .home-page .home-slider .user-info {
       width: 100%; }
+      .home-page .home-slider .user-info .user-avatar {
+        position: absolute;
+        top: 40px;
+        left: calc(215px / 2 - 40px); }
+        .home-page .home-slider .user-info .user-avatar img {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%; }
+      .home-page .home-slider .user-info .user-username {
+        position: absolute;
+        width: 100%;
+        top: 140px;
+        text-align: center;
+        font-weight: bold; }
     .home-page .home-slider ul {
       padding-top: 195px;
       width: 100%; }

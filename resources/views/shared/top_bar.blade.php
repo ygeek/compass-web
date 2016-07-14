@@ -23,7 +23,11 @@
       </li>
       <li class='nav-item'>
         @if(Auth::check())
-          <a href="{{route('home.index')}}"><span>你已登陆</span></a>
+          <a href="{{route('home.index')}}">
+            <div class="user-avatar">
+              <img src="{{ app('auth')->user()->getAvatarPath() }}" />
+            </div>
+          </a>
         @else
           <span v-on:click="showLoginAndRegisterPanel=true">登录</span>
         @endif
