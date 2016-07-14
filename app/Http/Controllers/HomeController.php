@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Mail;
+use App\College;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
@@ -68,6 +69,13 @@ class HomeController extends Controller
 
         return back();
 
+    }
+
+    public function likeColleges(){
+        $college_ids = $this->user->likedCollegeIds();
+        $colleges = College::whereIn('id', $college_ids)->get();
+
+        return view('home.like_colleges', compact('colleges'));
     }
 
     public function messages(){

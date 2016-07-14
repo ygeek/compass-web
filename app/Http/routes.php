@@ -19,6 +19,7 @@ Route::group(['prefix' => 'home'], function (){
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::post('/', 'HomeController@saveProfile')->name('home.store_profile');
     Route::get('/messages', 'HomeController@messages')->name('home.messages');
+    Route::get('/like-colleges', 'HomeController@likeColleges')->name('home.like_colleges');
     Route::patch('/messages/{message_id}', 'HomeController@readMessage')->name('home.messages.read');
 
     Route::post('/change_password', 'HomeController@changePassword')->name('home.change_password');
