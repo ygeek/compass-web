@@ -18,24 +18,25 @@ class FavoritesController extends Controller
     //收藏一个学校
     public function store(Request $request){
         $college_id = $request->input('college_id');
+        $college = College::find($college_id);
 
         $user_id = Auth::user()->id;
         $key = \App\User::likeKey($user_id);
 
-        $set = null;
+        $set = $college->id;
 
         $exists_favorites = Setting::get($key);
 
         //原先不存在
         if(is_null($exists_favorites)){
-            $set = [$college_id];
+            $set = [$set];
         }else{
             $exists_favorites[] = $set;
             $set = $exists_favorites;
         }
 
         Setting::set($key, $set);
-        $college = College::find($college_id);
+        
         $college->like_nums += 1;
         $college->save();
 
@@ -45,6 +46,8 @@ class FavoritesController extends Controller
     //取消收藏一个学校
     public function cancelFavorite(Request $request){
         $college_id = $request->input('college_id');
+        $college = College::find($college_id);
+
         $user_id = Auth::user()->id;
         $key = \App\User::likeKey($user_id);
 
@@ -52,11 +55,10 @@ class FavoritesController extends Controller
         if(is_null($exists_favorites)){
             return $this->okResponse();
         }else{
-            $set = collect($exists_favorites)->filter(function($item) use ($college_id){
-               return $item != $college_id;
+            $set = collect($exists_favorites)->filter(function($item) use ($college){
+               return $item != $college->id;
             })->toArray();
             Setting::set($key, $set);
-            $college = College::find($college_id);
             $college->like_nums -= 1;
             $college->save();
 
