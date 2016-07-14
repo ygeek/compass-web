@@ -164,7 +164,7 @@
       <div class='app-content'>
         <div class='consult'>
           <img src="/images/msg_ic.png" alt="msg_ic" />
-          <button>我要咨询</button>
+          <button onclick='easemobim.bind({tenantId: 21250})'>我要咨询</button>
           <div class="questions">
             <p>常见问题：</p>
             <a href="#">此处20字此处20字此处20字此处20字此处20字此处20字此处20字此处20字</a>
@@ -287,5 +287,13 @@
     </div>
 
     @include('shared.footer')
+    <script>
+    window.easemobim = window.easemobim || {};
+    easemobim.config = {
+        hide: true,   //是否隐藏小的悬浮按钮
+        autoConnect: true    //自动连接
+    };
+    </script>
+    <script src='//kefu.easemob.com/webim/easemob.js?tenantId=21250' async='async'></script>
   </div>
 @endsection
