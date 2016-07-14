@@ -287,13 +287,5 @@
     </div>
 
     @include('shared.footer')
-    <script>
-    window.easemobim = window.easemobim || {};
-    easemobim.config = {
-        hide: true,   //是否隐藏小的悬浮按钮
-        autoConnect: true    //自动连接
-    };
-    </script>
-    <script src='//kefu.easemob.com/webim/easemob.js?tenantId=21250' async='async'></script>
   </div>
 @endsection

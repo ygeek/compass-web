@@ -16,7 +16,7 @@
         <a href="{{ route('colleges.index') }}">院校查询</a>
       </li>
       <li class="nav-item">
-        <a href="#">在线留学顾问</a>
+        <a href="javascript:void(0)" onclick='easemobim.bind({tenantId: 21250})'>在线留学顾问</a>
       </li>
       <li class='nav-item'>
         <a href="#">指南针官网</a>
@@ -35,3 +35,11 @@
     </ul>
   </div>
 </div>
+<script>
+window.easemobim = window.easemobim || {};
+easemobim.config = {
+    hide: true,   //是否隐藏小的悬浮按钮
+    autoConnect: true    //自动连接
+};
+</script>
+<script src='//kefu.easemob.com/webim/easemob.js?tenantId=21250' async='async'></script>
