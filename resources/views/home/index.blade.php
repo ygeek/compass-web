@@ -11,17 +11,23 @@
                 <div class="home-content">
                     <div class="title">我的资料</div>
                     <div class="content">
+                    {!!Form::open(['route' => 'home.store_profile', 'enctype' => 'multipart/form-data']) !!}
                         <div class="form-group">
                             <label>用户名</label>
-                            <input />
+                            <input name="username" type="text" value="{{ $user->username }}" />
                         </div>
 
                         <div class="form-group">
                             <label>邮箱</label>
-                            <input />
+                            <input name="email" type="email" value="{{ $user->email }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>头像</label>
+                            <input type="file" name="avatar"/>
                         </div>
                         <button class="estimate-button">修改资料</button>
-
+                    {!!Form::close() !!}
                     </div>
 
                     <div class="content">

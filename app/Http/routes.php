@@ -17,6 +17,7 @@ Route::get('/colleges/{key}', 'CollegesController@show')->name('colleges.show');
 
 Route::group(['prefix' => 'home'], function (){
     Route::get('/', 'HomeController@index')->name('home.index');
+    Route::post('/', 'HomeController@saveProfile')->name('home.store_profile');
     Route::get('/messages', 'HomeController@messages')->name('home.messages');
     Route::patch('/messages/{message_id}', 'HomeController@readMessage')->name('home.messages.read');
 

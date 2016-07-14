@@ -16,6 +16,15 @@
       </div>
     @endif
 
+    @if (count($errors) > 0)
+      <div class="shanbox alert-{{ Session::get('flash_notification.level') }}">
+        @foreach ($errors->all() as $error)
+          {{ $error }}
+        @endforeach
+      </div>
+    @endif
+
+
     <div id="app">
       @unless(Auth::check())
         @include('shared.login_panel')
