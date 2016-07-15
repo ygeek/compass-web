@@ -1798,3 +1798,87 @@ $heart_size: 12px;
   left: ($heart-size / 2);
   top: 0;
 }
+
+#phone-panel{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 999;
+
+  .panel{
+    background: #fff;
+    width: 400px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .title {
+      height: 50px;
+      padding-left:20px;;
+      p {
+        font-size: 14px;
+        line-height: 50px;
+      }
+    }
+
+    .phone-form {
+      .row {
+        margin-bottom: 20px;
+        label {
+          display: inline-block;
+          line-height: 35px;
+          width: 90px;
+          padding-left: 30px;
+        }
+        input {
+          height: 35px;
+          width: 200px;
+          line-height: 35px;
+          padding-left:5px ;
+          border: solid #ebebeb 1px;
+        }
+        .warning {
+          font-size: 12px;
+          line-height: 25px;
+          color: #ff0042;
+          margin-left: 126px;
+        }
+        .code {
+          display: inline-block;
+          input {
+            width: 95px !important;
+          }
+          button {
+            margin-left: 6px;
+            width: 95px;
+            height: 35px;
+            color: #fff;
+            background: #17cba3;
+            border: none;
+          }
+        }
+        .close {
+          color: #0e2d60;
+          line-height: 40px;
+          font-size: 14px;
+          width: 80px;
+          text-align: center;
+          display: inline-block;
+          float: right;
+        }
+        .change {
+          float: right;
+          height: 40px;
+          width: 100px;
+          border: none;
+          color: #fff;
+          background: #0e2d60;
+          margin-right: 20px;
+        }
+      }
+    }
+
+  }
+}
