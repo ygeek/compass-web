@@ -10,12 +10,12 @@ class Setting extends Model
         'value' => 'array'
     ];
 
-    public static function get(string $key){
+    public static function get(string $key, $default=null){
         $record = self::where('key', $key)->first();
         if($record){
             return $record->value;
         }else{
-            return null;
+            return $default;
         }
     }
 
