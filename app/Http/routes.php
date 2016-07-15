@@ -23,6 +23,7 @@ Route::group(['prefix' => 'home'], function (){
     Route::patch('/messages/{message_id}', 'HomeController@readMessage')->name('home.messages.read');
 
     Route::post('/change_password', 'HomeController@changePassword')->name('home.change_password');
+    Route::post('/change_phone', 'HomeController@changePhone')->name('home.change_phone');
 });
 
 

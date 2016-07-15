@@ -9,13 +9,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 
+use App\Services\VerifyCodeService;
+
 class HomeController extends Controller
 {
+    protected $verify_code_service;
 
     protected $user;
 
-    public function __construct()
+    public function __construct(VerifyCodeService $verify_code_service)
     {
+        $this->verify_code_service = $verify_code_service;
         $this->middleware('auth');
         $this->user = Auth::user();
     }
@@ -116,5 +120,25 @@ class HomeController extends Controller
         }
 
         return back();
+    }
+
+    public function changePhone(Request $request){
+        $code = $request->get('code');
+        $phone_number = $request->get('phone_number');
+
+        if(!$this->validateVerifyCode($phone_number, $code)){
+            return $this->errorResponse('验证码验证失败');
+        }
+
+        $user = Auth::user();
+        $phone_number = $request->input('phone_number');
+        $user->phone_number = $phone_number;
+        $user->save();
+        Flash::message('手机修改成功');
+        return back();
+    }
+
+    private function validateVerifyCode($phone_number, $code){
+        return $this->verify_code_service->testingVerifyCodeWithPhoneNumber($phone_number, $code);
     }
 }

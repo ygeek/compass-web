@@ -3,6 +3,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getA
 new Vue({
   el: '#app',
   data: {
-    showLoginAndRegisterPanel: false
+    showLoginAndRegisterPanel: false,
+    showChangePhonePanel: false
   }
 });

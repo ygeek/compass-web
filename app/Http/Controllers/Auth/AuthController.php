@@ -44,7 +44,7 @@ class AuthController extends Controller
     {
         $this->verify_code_service = $verify_code_service;
         $this->registrar = $registrar;
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'logout','except' => 'createVerifyCodes']);
     }
 
     public function createVerifyCodes(Request $request){
