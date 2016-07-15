@@ -24,20 +24,21 @@
                   </td>
                   <td class="text-center">
                       <div class="btn-group">
-                          <a href="{{ route('admin.colleges.edit', $college->id) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="修改院校">
-                            <i class="fa fa-pencil"></i>
+                          <a href="{{ route('admin.colleges.edit', $college->id) }}" class="btn btn-xs btn-default" >
+                            修改院校
                           </a>
-                          <a href="{{ route('admin.colleges.examination_score_map.index', $college->id) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="查看分数映射表">
-                            <i class="fa fa-pencil"></i>
+
+                          <a href="{{ route('admin.colleges.examination_score_map.index', $college->id) }}" class="btn btn-xs btn-default">
+                            查看分数映射表
                           </a>
-                          <a href="{{ route('admin.requirement.index', ['type' => get_class($college), 'id' => $college->id ]) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="设置申请要求">
-                              <i class="fa fa-pencil"></i>
+                          <a href="{{ route('admin.requirement.index', ['type' => get_class($college), 'id' => $college->id ]) }}" class="btn btn-xs btn-default">
+                              设置申请要求
                           </a>
-                          <a href="{{ route('admin.colleges.specialities.index', [ 'college' => $college->id ]) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="查看专业设置">
-                              <i class="fa fa-pencil"></i>
+                          <a href="{{ route('admin.colleges.specialities.index', [ 'college' => $college->id ]) }}" class="btn btn-xs btn-default">
+                              查看专业设置
                           </a>
-                          <a href="{{ route('admin.articles.index', [ 'college_id' => $college->id ]) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="查看文章－页面设置">
-                              <i class="fa fa-pencil"></i>
+                          <a href="{{ route('admin.articles.index', [ 'college_id' => $college->id ]) }}" class="btn btn-xs btn-default">
+                              查看文章－页面设置
                           </a>
                           <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="Remove Client">
                             <i class="fa fa-times"></i>

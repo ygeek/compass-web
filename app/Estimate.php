@@ -77,9 +77,9 @@ class Estimate{
 
     //根据院校名称获取院校的类型 985 211或者双非
     public static function getRecentlyCollegeType($college_name){
-        if(in_array($college_name, Setting::get('985list'))){
+        if(in_array($college_name, Setting::get('985list', []))){
             return '985';
-        }else if(in_array($college_name, Setting::get('211list'))){
+        }else if(in_array($college_name, Setting::get('211list', []))){
             return '211';
         }else{
             return '双非';
@@ -90,6 +90,7 @@ class Estimate{
     public static function grabContrastFromRequirement($requirement, $data){
         $contrasts = [];
         $examinations = collect(config('examinations'));
+
         foreach ($requirement as $require){
             $user_score = null;
             //当前需求的考试信息
@@ -104,7 +105,7 @@ class Estimate{
                 $user_score = $current_item;
             }else{
                 $key = $require['examination_name'];
-                if(!isset($examination['is_require'])){
+                if(!isset($examination['is_requirement'])){
                     //如果该需求用户没有提交 跳过
                     try{
                         $current_item = $data['examinations'][$key];
@@ -113,7 +114,7 @@ class Estimate{
                         continue;
                     }
                 }else{
-
+                    //备注
                 }
             }
 

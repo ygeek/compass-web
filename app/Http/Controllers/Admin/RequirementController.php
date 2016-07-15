@@ -28,6 +28,39 @@ class RequirementController extends BaseController
         }else{
             //不存在 新建
             $template = CountryDegreeExaminationMap::getExaminationsGroupByDegree($country, $degrees);
+            $template = collect($template)->map(function($degree){
+                return [
+                    'id' => $degree['id'],
+                    'name' => $degree['name'],
+                    'examinations' => collect($degree['examinations'])->map(function($item){
+                        if($item['tagable']){
+                            $requirement = null;
+
+                            if($item['examination_name'] == '高考'){
+                                $provinces = collect(config('provinces'));
+                                $requirement = $provinces->map(function($province){
+                                    return [
+                                        'tag_name' => $province,
+                                        'tag_value' => null
+                                    ];
+                                });
+                            }
+
+                            if($item['examination_name'] == '大学平均成绩'){
+                                $requirement = collect(['985', '211', '双非'])->map(function($province){
+                                    return [
+                                        'tag_name' => $province,
+                                        'tag_value' => null
+                                    ];
+                                });
+                            }
+
+                            $item['requirement'] = $requirement;
+                        }
+                        return $item;
+                    })
+                ];
+            });
             return view('admin.requirement.create', compact('template', 'type', 'id'));
         }
     }
