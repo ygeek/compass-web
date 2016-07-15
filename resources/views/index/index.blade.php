@@ -167,12 +167,14 @@
           <button onclick='easemobim.bind({tenantId: 21250})'>我要咨询</button>
           <div class="questions">
             <p>常见问题：</p>
-            <a href="#">此处20字此处20字此处20字此处20字此处20字此处20字此处20字此处20字</a>
-            <a href="#">此处20字此处20字此处20字此处20字此处20字此处20字此处20字此处20字</a>
-            <a href="#">此处20字此处20字此处20字此处20字此处20字此处20字此处20字此处20字</a>
-            <a href="#">此处20字此处20字此处20字此处20字此处20字此处20字此处20字此处20字</a>
-            <a href="#">此处20字此处20字此处20字此处20字此处20字此处20字此处20字此处20字</a>
-            <a href="#">此处20字此处20字此处20字此处20字此处20字此处20字此处20字此处20字</a>
+            <?php 
+              $articles = App\Article::whereHas('category', function($q){
+                return $q->where('key', 'chang-jian-wen-ti');
+            })->orderBy('articles.order_weight')->limit(6)->get(); 
+            ?>
+            @foreach($articles as $article)
+            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            @endforeach
           </div>
         </div>
         <div class="consult-academy clear">
