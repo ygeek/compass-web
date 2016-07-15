@@ -13,6 +13,22 @@
   <script src="/dash-assets/js/oneui.min.js"></script>
   <script src="/js/vue.js"></script>
   <script src="/js/vue-resource.min.js"></script>
+  <style type="text/css">
+    .modal{
+      background: rgba(0,0,0,0.5);
+      width: 100%;
+      height: 100%;
+    }
+
+    .modal .modal-content{
+      height: 500px;
+    }
+
+    .modal .modal-content .block-content{
+      height: 400px;
+      overflow: scroll;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
