@@ -28,6 +28,9 @@ class User extends Model implements AuthenticatableContract
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'intentions' => 'array'
+    ];
     public function likedCollegeIds(){
         $key = User::likeKey($this->id);
         $value = Setting::get($key);

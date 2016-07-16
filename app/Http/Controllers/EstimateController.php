@@ -9,8 +9,10 @@ use App\Degree;
 use App\College;
 use App\Estimate;
 use App\Examination;
+use App\Setting;
 use App\SpecialityCategory;
 use Illuminate\Http\Request;
+use Uuid;
 
 use App\Http\Requests;
 
@@ -112,7 +114,10 @@ class EstimateController extends Controller
         //生成院校信息
         $reduce_colleges = Estimate::mapCollegeInfo($reduce_result, $selected_speciality_name, $selected_degree, $data);
 
-        return view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_speciality_name'));
+        $estimate_id = Uuid::generate(4);
+        Setting::set('estimate-'.$estimate_id, $data);
+
+        return view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data'));
     }
 
 

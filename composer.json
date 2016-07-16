@@ -25,7 +25,8 @@
         "chareice/simple-qiniu-sdk": "dev-master",
         "rmccue/requests": "^1.6",
         "laracasts/flash": "^2.0",
-        "overtrue/pinyin": "~3.0"
+        "overtrue/pinyin": "~3.0",
+        "webpatser/laravel-uuid": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.6",
