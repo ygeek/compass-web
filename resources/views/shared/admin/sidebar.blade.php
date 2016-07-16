@@ -47,7 +47,7 @@
           </li>
 
           <li>
-            <a href="{{ route('admin.setting.index', ['key' => 'us_news_ranking']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">U.S.News 排行设置</span></a>
+            <a href="{{ route('admin.setting.index', ['key' => 'us_new_ranking']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">U.S.News 排行设置</span></a>
           </li>
 
           <li>

@@ -23,10 +23,10 @@
             <table class="colleges">
                 @foreach($colleges as $college)
                     <tr>
-                    <td class="rank">{{ $college->getAttributes()[$rank] }}</td>
-                    <td class="chinese_name">{{ $college->chinese_name }}</td>
-                    <td class="english_name">{{ $college->english_name }}</td>
-                    <td class="actions"><a href="{{ route('estimate.step_first') }}"><button class="estimate-button">测试录取率 -></button></a></td>
+                    <td class="rank">{{ $college['rank'] }}</td>
+                    <td class="chinese_name">{{ $college['chinese_name'] }}</td>
+                    <td class="english_name">{{ $college['english_name'] }}</td>
+                    <td class="actions">@if($college['key'])<a href="{{ route('estimate.step_first') }}"><button class="estimate-button">测试录取率 -></button></a>@endif</td>
                     </tr>
                 @endforeach
             </table>

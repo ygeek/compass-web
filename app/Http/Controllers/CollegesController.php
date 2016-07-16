@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\AdministrativeArea;
 use App\College;
+use App\Setting;
 use App\SpecialityCategory;
 use App\ArticleCategory;
 use Illuminate\Http\Request;
@@ -11,6 +13,7 @@ use Overtrue\Pinyin\Pinyin;
 
 use App\Http\Requests;
 use Input;
+use DB;
 
 class CollegesController extends Controller
 {
@@ -117,8 +120,32 @@ class CollegesController extends Controller
         if(!in_array($rank, ['us_new_ranking', 'times_ranking', 'qs_ranking'])){
             abort(404);
         }
+        
 
-        $colleges = College::where($rank, '!=', 0)->orderBy($rank)->paginate(15);
-        return view('colleges.rank', compact('colleges', 'rank'));
+        //取出系统中所有院校的英文名
+        $exist_colleges_english_name = collect(DB::select('select english_name from colleges'))->map(function($item){
+            return $item->english_name;
+        });
+
+        $rank_items = collect(Setting::get($rank, []));
+        //先排序 再take
+        $rank_items = $rank_items->sortBy('rank');
+
+        $rank_items = $rank_items->map(function($rank_item) use ($exist_colleges_english_name){
+            $rank_item['key'] = false;
+            if($exist_colleges_english_name->contains($rank_item['english_name'])){
+                $rank_item['key'] = $rank_item['english_name'];
+            }
+            return $rank_item;
+        });
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 20;
+        $current_rank_items = $rank_items->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $paginated_rank_items= new LengthAwarePaginator($current_rank_items, count($rank_items), $perPage, null, [
+                'path' => route('colleges.rank')
+            ]);
+
+        return view('colleges.rank', ['colleges' => $paginated_rank_items, 'rank' => $rank]);
     }
 }
