@@ -138,6 +138,15 @@ class HomeController extends Controller
         return back();
     }
 
+    public function intentions(){
+        $intentions = $this->user->intentions;
+        $intentions['intentions'] = collect($intentions['intentions'])->map(function($intention){
+            $intention['college'] = College::find($intention['college_id']);
+            return $intention;
+        });
+        return view('home.intentions', compact('intentions'));
+    }
+
     private function validateVerifyCode($phone_number, $code){
         return $this->verify_code_service->testingVerifyCodeWithPhoneNumber($phone_number, $code);
     }

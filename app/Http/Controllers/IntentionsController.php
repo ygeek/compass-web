@@ -40,6 +40,13 @@ class IntentionsController extends Controller
 
         $user = Auth::user();
 
+        if($user->intentions){
+            //重新评估
+            $user->intentions['estimate_id'] != $estimate_id;
+            $user->intentions = null;
+            $user->save();
+        }
+
         if(!$user->intentions){
             //还没有意向
             $user_scores = [];
