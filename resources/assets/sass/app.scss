@@ -777,9 +777,32 @@ ul{
     transform: translate(-50%, -50%);
     width: 870px;
     height: 360px;
-    background: #fff;
+    background: #f3f3f3;
+    padding-left: 30px;
+    padding-top: 15px;
+    padding-right: 30px;
+
+    h1{
+      font-size: 16px;
+    }
+
     table{
       width: 100%;
+      border-spacing: 0;
+      border: none;
+      tr{
+        line-height: 53px;
+        td{
+          border: none;
+          text-align: center;
+        }
+      }
+    }
+
+    .estimate-button{
+      margin: 0 auto;
+      display: block;
+      margin-top: 10px;
     }
 
     .close{

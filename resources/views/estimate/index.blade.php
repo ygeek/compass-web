@@ -15,27 +15,34 @@
                                 <th>
                                     专业
                                 </th>
-                                <th v-for="contrast in showRequirementContrastsContent.contrasts">
+                                <th v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  != '备注'">
                                     @{{ contrast['name'] }}
                                 </th>
                             </tr>
                             <tr>
-                                <td>
+                                <td style="text-align: left;">
                                     您的成绩
                                 </td>
-                                <td v-for="contrast in showRequirementContrastsContent.contrasts">
+                                <td v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  != '备注'">
                                     @{{ contrast['user_score'] }}
                                 </td>
                             </tr>
 
                             <tr>
-                                <td>
+                                <td style="text-align: left;">
                                     @{{ selected_speciality_name }}专业要求
                                 </td>
-                                <td v-for="contrast in showRequirementContrastsContent.contrasts">
+                                <td v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  != '备注'">
                                     @{{ contrast['require'] }}
                                 </td>
                             </tr>
+
+                            <tr class="comment">
+                                <td style="text-align: left;" v-bind:colspan="showRequirementContrastsContent.contrasts.length"v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
+                                    @{{ contrast['require'] }}
+                                </td>
+                            </tr>
+
                         </table>
                         <div class="tips">
                             <p>如果您的成绩满足专业要求，可加入意向单。我们的顾问会为您制定合适的留学方案。</p>
@@ -155,7 +162,11 @@
                         estimate_id: estimate_id,
                         speciality_name: speciality_name
                     }).then(function(response){
-
+                        alert('加入意向单成功');
+                    }, function(response){
+                        if(response.status == 401){
+                            alert('请先登录')
+                        };
                     })
                 }
             }

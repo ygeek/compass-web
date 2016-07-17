@@ -95,7 +95,8 @@ class EstimateController extends Controller
 
             $student_scores[] = $item;
         }
-        $colleges = $this->estimateColleges();
+
+        $colleges = $this->estimateColleges($selected_degree, $selected_speciality_name);
 
         $res = [];
         foreach ($colleges as $college){
@@ -121,7 +122,12 @@ class EstimateController extends Controller
     }
 
 
-    private function estimateColleges($params=null){
-        return College::all();
+    //获取需要遍历的院校列表
+    //条件为有对应学历的专业
+    private function estimateColleges($degree, $speciality_name){
+        return College::whereHas('specialities', function($query) use ($degree, $speciality_name){
+            $query->where('specialities.degree_id', $degree->id)
+                  ->where('specialities.name', $speciality_name);
+        })->get();
     }
 }
