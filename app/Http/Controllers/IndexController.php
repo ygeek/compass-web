@@ -10,7 +10,7 @@ use App\Degree;
 class IndexController extends Controller
 {
     public function index(){
-        $countries = AdministrativeArea::countries()->get();
+        $countries = AdministrativeArea::countries()->with('children')->get();
         $degrees = Degree::estimatable()->get();
 
         $now_year = date("Y");

@@ -650,30 +650,30 @@ ul {
       top: 550px;
       right: 60px;
       width: 490px !important; }
-  .index-page .middle .assess {
-    position: absolute;
-    top: 3170px;
-    height: 245px;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.3); }
-    .index-page .middle .assess h1 {
-      color: #fff;
-      text-align: center;
-      font-size: 18px;
-      line-height: 32px; }
-      .index-page .middle .assess h1 span {
-        font-size: 32px;
-        color: #fa8c55; }
-      .index-page .middle .assess h1:first-child {
-        margin-top: 50px; }
-    .index-page .middle .assess button {
-      display: block;
-      margin: 20px auto 0;
-      height: 40px;
-      width: 240px;
-      border: 0;
-      color: #fff;
-      background: #fa8c55; }
+
+.assess {
+  position: relative;
+  margin-top: 50px;
+  height: 245px;
+  padding-top: 50px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3); }
+  .assess h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    line-height: 32px; }
+    .assess h1 span {
+      font-size: 32px;
+      color: #fa8c55; }
+  .assess button {
+    display: block;
+    margin: 20px auto 0;
+    height: 40px;
+    width: 240px;
+    border: 0;
+    color: #fff;
+    background: #fa8c55; }
 
 .clear {
   zoom: 1; }

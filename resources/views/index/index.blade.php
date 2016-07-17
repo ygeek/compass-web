@@ -178,62 +178,34 @@
           </div>
         </div>
         <div class="consult-academy clear">
+        
           <div class="location">
+            @foreach($countries as $country)
             <div class="clear">
-              <h3>澳大利亚</h3>
-              <a href="#">悉尼</a>
-              <a href="#">惠森迪</a>
-              <a href="#">墨尔本</a>
-              <a href="#">西澳</a>
-              <a href="#">布里斯本</a>
-              <a href="#">凯恩斯</a>
-              <a href="#">堪培拉</a>
+              <h3>{{ $country->name }}</h3>
+              @foreach($country->children as $state)
+                <a href="{{ route('colleges.index', ['selected_country_id' => $country->id, 'selected_state_id' => $state->id]) }}">{{ $state->name }}</a>
+              @endforeach
             </div>
-            <div class="clear">
-              <h3>美国</h3>
-              <a href="#">芝加哥</a>
-              <a href="#">旧金山</a>
-              <a href="#">纽约</a>
-              <a href="#">费城</a>
-              <a href="#">华盛顿</a>
-              <a href="#">底特律</a>
-              <a href="#">西雅图</a>
-              <a href="#">波斯顿</a>
-            </div>
-            <div class="clear">
-              <h3>新西兰</h3>
-              <a href="#">芝加哥</a>
-              <a href="#">旧金山</a>
-              <a href="#">纽约</a>
-              <a href="#">费城</a>
-              <a href="#">华盛顿</a>
-            </div>
-            <div class="clear">
-              <h3>英国</h3>
-              <a href="#">伦敦</a>
-              <a href="#">南安普顿</a>
-              <a href="#">纽约</a>
-              <a href="#">费城</a>
-              <a href="#">华盛顿</a>
-            </div>
+            @endforeach
           </div>
           <div class="academy">
             <div class="search clear">
-              <input type="text" placeholder="院校查询" class="search-text" />
-              <input type="button" class="search-button" />
+              <form method="GET" action="{{ route('colleges.index') }}">
+                <input type="text" placeholder="院校查询" class="search-text" name="college_name"/>
+                <button type="submit" class="search-button"></button>
+              </form>
             </div>
             <div class="subjects clear">
-              <a href="#" style="background: url('/images/p1.png');">商&nbsp;科</a>
-              <a href="#" style="background: url('/images/p2.png')">工&nbsp;科</a>
-              <a href="#" style="background: url('/images/p3.png')">人文艺术</a>
-              <a href="#" style="background: url('/images/p4.png')">经济金融</a>
-              <a href="#" style="background: url('/images/p5.png')">医&nbsp;学</a>
-              <a href="#" style="background: url('/images/p6.png')">法&nbsp;学</a>
-              <a href="#" style="background: url('/images/p7.png')">理&nbsp;科</a>
-              <a href="#" style="background: url('/images/p8.png')">人文艺术</a>
+              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p1.png');">商&nbsp;科</a>
+              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 3]) }}" style="background: url('/images/p2.png')">工&nbsp;科</a>
+              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 4]) }}" style="background: url('/images/p3.png')">人文艺术</a>
+              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p4.png')">经济金融</a>
+              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 6]) }}" style="background: url('/images/p5.png')">医&nbsp;学</a>
+              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}" style="background: url('/images/p6.png')">法&nbsp;学</a>
+              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 8]) }}" style="background: url('/images/p7.png')">理&nbsp;科</a>
+              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 1]) }}" style="background: url('/images/p8.png')">人文艺术</a>
               <a href="#" style="background: url('/images/p9.png')">经济金融</a>
-              <a href="#" style="background: url('/images/p10.jpg')">工&nbsp;科</a>
-              <a href="#" class="more">更多专业</a>
             </div>
           </div>
         </div>
@@ -242,28 +214,29 @@
             <div class="clear">
               <h3>语言学习</h3>
             </div>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">更多></a>
+            <?php 
+              $articles = App\Article::whereHas('category', function($q){
+                return $q->where('key', 'yu-yan-xue-xi');
+            })->orderBy('articles.order_weight')->limit(7)->get(); 
+            ?>
+            @foreach($articles as $article)
+            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            @endforeach
           </div>
           <img class="img-1" src="/images/i1.jpg" alt="img" />
           <div class="text-box study-abroad">
             <div class="clear">
               <h3>留学攻略</h3>
-              <a href="#" class="more">更多></a>
+              <!-- <a href="#" class="more">更多></a> -->
             </div>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
+            <?php 
+              $articles = App\Article::whereHas('category', function($q){
+                return $q->where('key', 'liu-xue-gong-lue');
+            })->orderBy('articles.order_weight')->limit(7)->get(); 
+            ?>
+            @foreach($articles as $article)
+            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            @endforeach
           </div>
           <img class="img-2" src="/images/i2.jpg" alt="img" />
           <div class="text-box immigrant">
@@ -271,23 +244,23 @@
               <h3>移民攻略</h3>
               <a href="#" class="more">更多></a>
             </div>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
-            <a href="#">世界大学牙科医学学科排名汇总！</a>
+            <?php 
+              $articles = App\Article::whereHas('category', function($q){
+                return $q->where('key', 'yi-min-gong-lue');
+            })->orderBy('articles.order_weight')->limit(7)->get(); 
+            ?>
+            @foreach($articles as $article)
+            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            @endforeach
           </div>
         </div>
       </div>
-      <div class="assess">
-        <h1>已有<span>6513</span>人使用过指南针出国</h1>
-        <h1>有<span>542867</span>人使用了指南针智能评估系统</h1>
-        <button>开始免费评估</button>
-      </div>
     </div>
-
+    <div class="assess">
+      <h1>已有<span>6513</span>人使用过指南针出国</h1>
+      <h1>有<span>542867</span>人使用了指南针智能评估系统</h1>
+      <button>开始免费评估</button>
+    </div>
     @include('shared.footer')
   </div>
 @endsection
