@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 </div>
-                <div class="title">我的意向单 <button class="estimate-button">提交审核</button></div>
+                <div class="title">我的意向单 <button class="estimate-button" @click="commit">提交审核 @{{ selected_specialities_count }}/@{{ specialities_count }}</button></div>
                 <div class="content">
                     <div class="intention" v-for="intention in intentions.intentions">
                         <div class="college">
@@ -104,7 +104,7 @@
 
                             <tr v-for="speciality in intention.specialities">
                                 <td>
-                                <input type="checkbox" />
+                                <input type="checkbox" v-model="speciality.checked"/>
                                 </td>
                                 <td style="text-align: left;">
                                     @{{ speciality.speciality_name }}
@@ -123,7 +123,7 @@
         </div>
     </div>
 </div>
-
+{{ dd($intentions) }}
 <script type="text/javascript">
 Array.prototype.unique = function() {
     var a = [];
@@ -172,6 +172,32 @@ Array.prototype.contains = function(obj) {
                 });
 
                 return data;
+            },
+            specialities_count: function(){
+                var nums = 0;
+                this.intentions.intentions.forEach(function(college){
+                    var keys = Object(college.specialities);
+                    for(key in keys){
+                        nums += 1;
+                    }
+                });
+                return nums;
+            },
+            selected_specialities: function(){
+                var res = [];
+                this.intentions.intentions.forEach(function(college){
+                    var keys = Object(college.specialities);
+                    for(key in keys){
+                        if(college.specialities[key].checked){
+                            res.push(college.specialities[key])
+                        }
+                    }
+                });
+                return res;
+            },
+
+            selected_specialities_count: function(){
+                return this.selected_specialities.length;
             }
         },
         methods: {
@@ -219,6 +245,26 @@ Array.prototype.contains = function(obj) {
                 this.$http.delete(url).then(function(response){
                     alert('删除成功');
                     window.location.reload();
+                });
+            },
+            commit: function(){
+                //提交审核
+                var estimate_id = this.intentions.estimate_id;
+                var selected_speciality_ids = this.selected_specialities.map(function(speciality){
+                    return speciality._id;
+                });
+
+                if(selected_speciality_ids.length == 0){
+                    alert('未选择审核专业');
+                    return;
+                }
+
+                var url = "{{ route('intentions.create') }}";
+                this.$http.post(url, {
+                    estimate_id: estimate_id,
+                    selected_speciality_ids: selected_speciality_ids
+                }, function(response){
+
                 });
             }
         }

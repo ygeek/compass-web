@@ -19,9 +19,41 @@ class IntentionsController extends Controller
         $this->middleware('auth');
     }
 
-    //用户意向单
-    public function index(){
+    //用户提交审核 创建Intention对象
+    public function create(Request $request){
+        $user = Auth::user();
+        $estimate_id = $request->input('estimate_id');
+        $selected_speciality_ids = $request->input('selected_speciality_ids');
+        $estimate_data = Setting::get('estimate-'.$estimate_id);
 
+        $intentions = $user->intentions;
+        $intention_colleges = $intentions['intentions'];
+        $new_intention_colleges = collect($intention_colleges)->map(function($college) use ($selected_speciality_ids){
+            $res = [
+                'college_id' => $college['college_id']
+            ];
+
+            $specialities = collect($college['specialities'])->filter(function($speciality) use ($selected_speciality_ids){
+                return in_array($speciality['_id'], $selected_speciality_ids);  
+            })->toArray();
+
+            $res['specialities'] = $specialities;
+            return $res;
+        })->filter(function($college){
+            return count($college['specialities']) > 0;
+        });
+        $intentions['intentions'] = $new_intention_colleges;
+
+        $intentions['country_id'] = $estimate_data['selected_country'];
+
+        $intention = new Intention();
+        $intention->name = $estimate_data['name'];
+        $intention->email = $user->email;
+        $intention->phone_number = $user->phone_number;
+        $intention->data = $intentions;
+        $intention->save();
+
+        return $this->okResponse();
     }
 
     public function store(Request $request){

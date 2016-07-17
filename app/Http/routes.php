@@ -7,6 +7,7 @@ Route::get('/estimate/step-1', 'EstimateController@stepFirst')->name('estimate.s
 Route::get('/estimate/step-2', 'EstimateController@stepSecond')->name('estimate.step_second');
 Route::post('/estimate', 'EstimateController@store')->name('estimate.store');
 Route::resource('/intentions', 'IntentionsController');
+Route::post('/intentions/create', 'IntentionsController@create')->name('intentions.create');
 
 Route::post('/like_college', 'FavoritesController@store')->name('like.store');
 Route::post('/dislike_college', 'FavoritesController@cancelFavorite')->name('like.destroy');

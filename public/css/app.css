@@ -1073,6 +1073,9 @@ ul {
             display: inline-block; }
   .home-page.intentions .estimate-button {
     margin-top: 0px; }
+  .home-page.intentions .title .estimate-button {
+    line-height: 30px;
+    margin-left: 590px; }
   .home-page.intentions .college-intentions {
     margin-top: 40px; }
     .home-page.intentions .college-intentions table {
