@@ -10,7 +10,7 @@ use App\Setting;
 use App\College;
 use App\Estimate;
 use App\Degree;
-
+use Uuid;
 use Illuminate\Support\Facades\Auth;
 
 class IntentionsController extends Controller
@@ -46,9 +46,10 @@ class IntentionsController extends Controller
 
         if($user->intentions){
             //重新评估
-            $user->intentions['estimate_id'] != $estimate_id;
-            $user->intentions = null;
-            $user->save();
+            if($user->intentions['estimate_id'] != $estimate_id){
+                $user->intentions = null;
+                $user->save();
+            }
         }
 
         if(!$user->intentions){
@@ -77,9 +78,10 @@ class IntentionsController extends Controller
 
         $speciality_intention = [
             'speciality_name' => $speciality_name,
-            'require' => $speciality_intention_require
+            'require' => $speciality_intention_require,
+            '_id' => Uuid::generate(4)->string
         ];
-
+        
         //判断该院校有没有存在意向中
         $college_intention_index = null;
 
@@ -92,10 +94,11 @@ class IntentionsController extends Controller
         if(!is_null($college_intention_index)){
             //判断专业是否存在意向中
             $speciality_index = null;
-            for ($i=0; $i < count($intentions['intentions'][$college_intention_index]['specialities']); $i++) { 
-                if($intentions['intentions'][$college_intention_index]['specialities'][$i]['speciality_name'] == $speciality_name){
-                    $speciality_index = $i;
-                }
+            $keys = array_keys($intentions['intentions'][$college_intention_index]['specialities']);
+            foreach ($keys as $key) {
+                if($intentions['intentions'][$college_intention_index]['specialities'][$key]['speciality_name'] == $speciality_name){
+                        $speciality_index = $i;
+                    }
             }
 
             if(is_null($speciality_index)){
@@ -113,6 +116,33 @@ class IntentionsController extends Controller
             ];
         }
 
+
+        $user->intentions = $intentions;
+        $user->save();
+
+        return $this->okResponse();
+    }
+
+    //从意向单中删除专业
+    public function destroy($id){
+        $user = Auth::user();
+        $intentions = $user->intentions;
+        $intention_colleges = $intentions['intentions'];
+        $new_intention_colleges = collect($intention_colleges)->map(function($college) use ($id){
+            $res = [
+                'college_id' => $college['college_id']
+            ];
+
+            $specialities = collect($college['specialities'])->filter(function($speciality) use ($id){
+                return $speciality['_id'] != $id;
+            })->toArray();
+
+            $res['specialities'] = $specialities;
+            return $res;
+        })->filter(function($college){
+            return count($college['specialities']) > 0;
+        });
+        $intentions['intentions'] = $new_intention_colleges;
 
         $user->intentions = $intentions;
         $user->save();

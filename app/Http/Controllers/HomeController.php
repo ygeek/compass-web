@@ -140,11 +140,20 @@ class HomeController extends Controller
 
     public function intentions(){
         $intentions = $this->user->intentions;
-        $intentions['intentions'] = collect($intentions['intentions'])->map(function($intention){
-            $intention['college'] = College::find($intention['college_id']);
+        $intentions['degree'] = \App\Degree::find($intentions['degree_id']);
+
+        $intentions['intentions'] = collect($intentions['intentions'])->map(function($intention) use ($intentions){
+            $college = College::with(['specialities' => function($q) use ($intentions){
+                $q->where('specialities.degree_id', $intentions['degree']->id);
+            }])->where('id', $intention['college_id'])->get()->first();
+            $intention['college'] = $college->toArray();
+            $intention['college']['toefl_requirement'] = $college->toeflRequirement($intentions['degree']->name);
+            $intention['college']['ielts_requirement'] = $college->ieltsRequirement($intentions['degree']->name);
+            $intention['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
             return $intention;
         });
-        return view('home.intentions', compact('intentions'));
+        $speciality_categories = \App\SpecialityCategory::all()->toArray();
+        return view('home.intentions', compact('intentions', 'speciality_categories'));
     }
 
     private function validateVerifyCode($phone_number, $code){

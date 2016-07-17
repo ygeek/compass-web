@@ -1039,6 +1039,104 @@ ul {
 
 .home-page {
   background: #ebebeb; }
+  .home-page .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999; }
+    .home-page .mask .add-speciality-pop {
+      font-size: 16px;
+      width: 800px;
+      height: 370px;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      position: fixed;
+      left: 50%;
+      top: 50%; }
+      .home-page .mask .add-speciality-pop .close {
+        position: absolute;
+        cursor: pointer;
+        top: 10px;
+        right: 10px; }
+      .home-page .mask .add-speciality-pop .form {
+        margin-top: 100px; }
+        .home-page .mask .add-speciality-pop .form .estimate-button {
+          display: block;
+          margin: 0 auto;
+          margin-top: 95px; }
+        .home-page .mask .add-speciality-pop .form .form-group {
+          width: 400px;
+          margin: 0 auto;
+          line-height: 40px; }
+          .home-page .mask .add-speciality-pop .form .form-group label {
+            width: 100px;
+            display: inline-block; }
+  .home-page.intentions .estimate-button {
+    margin-top: 0px; }
+  .home-page.intentions .college-intentions {
+    margin-top: 40px; }
+    .home-page.intentions .college-intentions table {
+      border-spacing: 0;
+      width: 100%; }
+      .home-page.intentions .college-intentions table input {
+        width: 30px; }
+      .home-page.intentions .college-intentions table tr:nth-child(odd) {
+        background: #f3f3f3; }
+      .home-page.intentions .college-intentions table tr {
+        line-height: 50px;
+        text-align: center; }
+  .home-page.intentions .college {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: #fff;
+    margin-bottom: 10px; }
+    .home-page.intentions .college .estimate-button {
+      margin: 0 auto;
+      display: block; }
+    .home-page.intentions .college .college-badge {
+      margin-left: 27px;
+      margin-top: 35px;
+      display: inline-block;
+      width: 334px;
+      height: 109px; }
+    .home-page.intentions .college .college-info {
+      color: #6c6c6c;
+      position: absolute;
+      height: 165px;
+      top: 0;
+      margin-top: 10px;
+      display: inline-block;
+      margin-left: 28px;
+      width: 425px; }
+      .home-page.intentions .college .college-info header {
+        float: left;
+        width: 228px; }
+        .home-page.intentions .college .college-info header h1 {
+          font-size: 18px;
+          color: #000; }
+          .home-page.intentions .college .college-info header h1 a {
+            font-size: 18px;
+            color: #000; }
+        .home-page.intentions .college .college-info header h2 {
+          font-size: 14px;
+          margin-top: -10px;
+          color: #6c6c6c; }
+        .home-page.intentions .college .college-info header .ielts-and-toelf-requirement {
+          position: absolute;
+          bottom: 0px; }
+      .home-page.intentions .college .college-info .college-rank-info {
+        float: right;
+        margin-right: 10px;
+        position: relative;
+        top: 24px; }
+        .home-page.intentions .college .college-info .college-rank-info tr {
+          line-height: 27px; }
+          .home-page.intentions .college .college-info .college-rank-info tr td {
+            padding-left: 10px; }
+        .home-page.intentions .college .college-info .college-rank-info a {
+          font-size: 14px;
+          font-weight: bold; }
   .home-page .page-content {
     width: 100%; }
     .home-page .page-content:after {
