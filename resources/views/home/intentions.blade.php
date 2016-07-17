@@ -123,7 +123,7 @@
         </div>
     </div>
 </div>
-{{ dd($intentions) }}
+
 <script type="text/javascript">
 Array.prototype.unique = function() {
     var a = [];
@@ -238,7 +238,7 @@ Array.prototype.contains = function(obj) {
             },
             deleteSpeciality: function(speciality){
                 var id = speciality._id;
-                if(!confirm('确定删除专业？')){
+                if(!confirm('确定删除专业？(若当前专业为院校最后一个专业、院校也会被删除)')){
                     return false;
                 }
                 var url = "{{ route('intentions.destroy', ['id' => 'id']) }}".replace('id', id);
@@ -264,10 +264,12 @@ Array.prototype.contains = function(obj) {
                     estimate_id: estimate_id,
                     selected_speciality_ids: selected_speciality_ids
                 }, function(response){
-
+                    alert('提交审核成功');
                 });
             }
         }
     });
 </script>
+
+    @include('shared.footer')
 @endsection
