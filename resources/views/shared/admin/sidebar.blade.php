@@ -57,6 +57,10 @@
           <li>
             <a href="{{ route('admin.setting.index', ['key' => 'times_ranking']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">Times 设置</span></a>
           </li>
+
+          <li>
+            <a href="{{ route('admin.intentions.index') }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">用户意向管理</span></a>
+          </li>
           
           <li>
             <a href="{{ route('admin.articles.index') }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">文章-页面管理</span></a>

@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('examination_score_weights', 'Admin\ExaminationScoreWeightsController');
     Route::resource('messages', 'Admin\MessagesController');
     Route::resource('articles', 'Admin\ArticlesController');
+    Route::resource('intentions', 'Admin\IntentionsController');
 
     Route::post('articles/picture-upload', 'Admin\ArticlesController@pictureUpload')->name('picture_upload');
     //--
