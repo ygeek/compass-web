@@ -3,7 +3,7 @@
 @section('content')
     <div class="colleges-page">
         <div class="app-content">
-            @include('shared.top_bar')
+            @include('shared.top_bar', ['page' => 'colleges'])
             <search-form></search-form>
             <template id="search-form">
                 <form>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="estimate-page">
         <div class="app-content">
-            @include('shared.top_bar')
+            @include('shared.top_bar', ['page' => 'estimate'])
             <step-second-form></step-second-form>
             <template id="step-second-form">
                 <div class="estimate-form" style="width: 860px;">

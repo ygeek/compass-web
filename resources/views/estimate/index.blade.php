@@ -3,7 +3,7 @@
 @section('content')
     <div class="estimate-page estimate-result">
         <div class="app-content">
-            @include('shared.top_bar')
+            @include('shared.top_bar', ['page' => 'estimate'])
             <estimate-result-list></estimate-result-list>
             <template id="estimate-result-list">
                 <div id="estimate-detail-pop" class="mask" v-if="showRequirementContrasts">

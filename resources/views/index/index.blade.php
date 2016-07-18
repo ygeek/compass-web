@@ -4,7 +4,7 @@
   <div class="index-page">
     <div class="header">
       <div class="app-content">
-        @include('shared.top_bar')
+        @include('shared.top_bar', ['page' => 'index'])
 
         <estimate-nav></estimate-nav>
         <template id='estimate-nav'>

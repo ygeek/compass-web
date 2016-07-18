@@ -3,7 +3,7 @@
 @section('content')
     <div class="estimate-page">
         <div class="app-content">
-            @include('shared.top_bar')
+            @include('shared.top_bar', ['page' => 'estimate'])
             <template id="union-select">
 
                 <form class="estimate-form" action="{{route('estimate.step_second')}}">

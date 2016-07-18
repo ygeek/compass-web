@@ -1,3 +1,6 @@
+<?php
+  $page = isset($page) ? $page : null; 
+?>
 <div class="top-nav-bar">
   <div class='top-bar-logo'>
     <a class='logo-nav-bar' href="#">
@@ -6,13 +9,13 @@
   </div>
   <div class="top-bar-content">
     <ul class='title-nav-bar'>
-      <li class="nav-item">
+      <li class="nav-item @if($page == 'index') active @endif">
         <a href="/">首页</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item @if($page == 'estimate') active @endif">
         <a href="{{ route('estimate.step_first') }}">免费留学评估</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item @if($page == 'colleges') active @endif">
         <a href="{{ route('colleges.index') }}">院校查询</a>
       </li>
       <li class="nav-item">
