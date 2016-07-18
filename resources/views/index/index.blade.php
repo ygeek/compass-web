@@ -183,8 +183,17 @@
             @foreach($countries as $country)
             <div class="clear">
               <h3>{{ $country->name }}</h3>
+              <?php 
+                $index = 0;
+              ?>
               @foreach($country->children as $state)
+                <?php if($index ==8){
+                ?>
+                  <a href="{{ route('colleges.index', ['selected_country_id' => $country->id]) }}">更多</a>
+                <?php
+                break;}?>
                 <a href="{{ route('colleges.index', ['selected_country_id' => $country->id, 'selected_state_id' => $state->id]) }}">{{ $state->name }}</a>
+                <?php $index++; ?>
               @endforeach
             </div>
             @endforeach
