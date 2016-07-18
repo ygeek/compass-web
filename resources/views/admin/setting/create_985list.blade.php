@@ -1,13 +1,15 @@
 @extends('layouts.admin')
+
 @section('content')
     <setting></setting>
     <template id="setting">
         <h1>985院校列表设置</h1>
 
         <ul>
-            <li v-for="item in list" track-by="$index">
+            <ol v-for="item in list" track-by="$index" v-bind:class='{"red": !unique(item) }'>
+                <span>@{{ $index+1 }}</span>
                 <input v-model="list[$index]"> <button @click="remove($index)">删除</button>
-            </li>
+            </ol>
         </ul>
         <button @click="add">增加项目</button>
         <button @click="save">保存</button>
@@ -39,6 +41,9 @@
                     this.$http.post(url, {'value': this.list}).then(function(response){
                         alert('修改成功');
                     });
+                },
+                unique: function(item){
+                    return this.list.filter(function(name){ return name == item }).length  < 2;
                 }
             }
         })

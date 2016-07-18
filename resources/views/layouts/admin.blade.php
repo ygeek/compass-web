@@ -16,6 +16,9 @@
   <script src="/js/vue-resource.min.js"></script>
   <script src="/dash-assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
   <style type="text/css">
+  .red{
+    border: solid red 1px;
+  }
     .modal{
       background: rgba(0,0,0,0.5);
       width: 100%;
