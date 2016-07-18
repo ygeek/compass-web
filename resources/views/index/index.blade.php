@@ -15,21 +15,21 @@
           <ul class="select-item">
             <li class="estimate-val" v-bind:class="{'active': selecting=='countries'}" v-on:mouseover="selecting='countries'">
               <p>
-                选择国家 <span>&gt;</span>
+                选择国家 <span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_countries.name }}</p>
               <input type="hidden" name="selected_country_id" v-model='selected_countries.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='degrees'}" v-on:mouseover="selecting='degrees'">
               <p>
-                选择学历 <span>&gt;</span>
+                选择学历 <span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_degrees.name }}</p>
               <input type="hidden" name="selected_degree_id" v-model='selected_degrees.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='years'}" v-on:mouseover="selecting='years'">
               <p>
-                计划留学时间<span>&gt;</span>
+                计划留学时间<span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_years.name }}</p>
               <input type="hidden" name="selected_year" v-model='selected_years.id'>
