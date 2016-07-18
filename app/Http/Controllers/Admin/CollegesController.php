@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use DB;
-
+use Flash;
 class CollegesController extends BaseController
 {
     /**
@@ -46,6 +46,13 @@ class CollegesController extends BaseController
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'administrative_area_id' => 'required',
+            'chinese_name' => 'required|unique:colleges',
+            'english_name' => 'required|unique:colleges',
+            'degree_ids' => 'required'
+        ]);
+
         DB::transaction(function() use ($request){
             $college = new College($request->all());
 
@@ -67,6 +74,7 @@ class CollegesController extends BaseController
             $degree_ids = $request->input('degree_ids');
             $college->degrees()->attach($degree_ids);
             $college->save();
+            Flash::message('添加成功');
         });
 
         return redirect()->route('admin.colleges.index');
@@ -149,6 +157,7 @@ class CollegesController extends BaseController
             $college->degrees()->sync($degree_ids); 
         }
 
+        Flash::message('修改成功');
         return redirect()->route('admin.colleges.edit', $id);
     }
 

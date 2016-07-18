@@ -8,20 +8,24 @@
         <table class="table table-striped table-borderless table-header-bg">
             <thead>
                 <tr>
-                    <th class="text-center" style="width: 50px;">#</th>
-                    <th >院校名称</th>
-                    <th class="hidden-xs" style="width: 15%;">Access</th>
+                    <th>已匹配规则</th>
+                    <th>院校名称</th>
+                    <th>英文名</th>
+                    <th>收藏数量</th>
                     <th class="text-center" style="width: 100px;">操作</th>
                 </tr>
             </thead>
             <tbody>
               @foreach($colleges as $college)
               <tr>
-                  <td class="text-center">1</td>
-                  <td>{{$college->chinese_name}}</td>
-                  <td class="hidden-xs">
-                      <span class="label label-primary">Personal</span>
+                  <td>
+                  @foreach($college->examinationScoreWeight as $weight)
+                    [{{$weight->degree->name}} : {{ $weight->name }}]
+                  @endforeach
                   </td>
+                  <td>{{$college->chinese_name}}</td>
+                  <td>{{ $college->english_name }}</td>
+                  <td>{{ $college->like_nums }}</td>
                   <td class="text-center">
                       <div class="btn-group">
                           <a href="{{ route('admin.colleges.edit', $college->id) }}" class="btn btn-xs btn-default" >

@@ -44,7 +44,7 @@ class College extends Model
             }
 
             $key = self::generateKey($college->english_name);
-            $college->key = $key;
+            $college->key = $key;   
         });
     }
 

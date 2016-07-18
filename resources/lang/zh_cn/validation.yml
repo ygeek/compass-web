@@ -64,3 +64,7 @@ attributes:
   password: 密码
   content: 内容
   identity: 手机号/用户名
+  administrative_area_id: 院校地区
+  chinese_name: 中文名
+  english_name: 英文名
+  degree_ids: 所拥有学历
