@@ -5,6 +5,16 @@
         <h3 class="block-title">院校列表</h3>
     </div>
     <div class="block-content">
+        <form>
+        <input type="text" name="college_name" value="{{ $college_name }}" placeholder="院校名称" />
+        <select name="country_id">
+          <option value="">所有国家</option>
+          @foreach($countries as $country)
+            <option value="{{ $country->id }}" @if($country_id == $country->id) selected="selected" @endif>{{ $country->name }}</option>
+          @endforeach
+        </select>
+        <button type="submit" class="btn btn-primary">查询</button>
+        </form>
         <table class="table table-striped table-borderless table-header-bg">
             <thead>
                 <tr>

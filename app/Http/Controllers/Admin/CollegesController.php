@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\College;
+use App\AdministrativeArea;
 use App\Degree;
 use Illuminate\Http\Request;
 
@@ -16,10 +17,22 @@ class CollegesController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $colleges = College::paginate(20);
-        return view('admin.colleges.index', compact('colleges'));
+    public function index(Request $request)
+    {   
+        $college_name = $request->input('college_name');
+        $country_id = $request->input('country_id');
+        $countries = AdministrativeArea::countries()->get();
+        $colleges_query = College::whereNotNULL('id');
+        if($college_name){
+            $colleges_query = $colleges_query->where('chinese_name', 'like', "%{$college_name}%");
+        }
+
+        if($country_id){
+            $colleges_query = $colleges_query->where('country_id', $country_id);
+        }
+
+        $colleges = $colleges_query->paginate(20);
+        return view('admin.colleges.index', compact('colleges', 'countries', 'college_name', 'country_id'));
     }
 
     /**
