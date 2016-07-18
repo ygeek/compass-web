@@ -56,7 +56,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit">提交</button>
+                        <p v-show="!dataValidate()">总和不等于100% 无法提交</p>
+                        <button type="submit" class="btn" :disabled="!dataValidate()">提交</button>
                     </div>
                 </div>
                 {!! Form::close() !!}
@@ -70,7 +71,20 @@
                     name:  "{{$weight->name}}",
                     examination_map: {!! json_encode($weight->weights) !!}
                 }
-            }
+            },methods: {
+                dataValidate: function(){
+                    var sum = 0;
+                    this.examination_map.forEach(function(weight){
+                        sum += parseInt(weight.weight);
+                    });
+
+                    if(sum == 100){
+                        return true;
+                    }
+
+                    return false;
+                }
+            },
         });
     </script>
 @endsection

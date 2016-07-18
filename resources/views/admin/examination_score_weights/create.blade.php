@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label class="col-xs-12" for="name">规则名称</label>
                     <div class="col-sm-9">
-                        <input class="form-control" type="text" id="name" name="name" placeholder="规则名称">
+                        <input required class="form-control" type="text" id="name" name="name" placeholder="规则名称">
                     </div>
                 </div>
 
@@ -58,8 +58,8 @@
                         </table>
                     </div>
                 </div>
-
-                <button type="submit">提交</button>
+                <p v-show="!dataValidate()">总和不等于100% 无法提交</p>
+                <button type="submit" class="btn" :disabled="!dataValidate()">提交</button>
                 {!! Form::close() !!}
             </div>
         </div>
@@ -74,13 +74,31 @@
                     examination_map: []
                 }
             },
+            methods: {
+                dataValidate: function(){
+                    var sum = 0;
+                    this.examination_map.forEach(function(weight){
+                        sum += parseInt(weight.weight);
+                    });
+
+                    if(sum == 100){
+                        return true;
+                    }
+
+                    return false;
+                }
+            },
             watch: {
                 country_id: function (newVal, oldVal) {
                     this.$http.get('{{route('country_degree_examination_map')}}', {
                         'degree': this.degree_id,
                         'country': newVal
                     }).then(function (response) {
-                        this.examination_map = response.data.data;
+                        var data = response.data.data;
+                        this.examination_map = data.map(function(item){
+                            item['weight'] = 0;
+                            return item;
+                        });
                     });
                 },
                 degree_id: function (newVal, oldVal ) {
@@ -88,7 +106,11 @@
                         'degree': newVal,
                         'country': this.country_id
                     }).then(function (response) {
-                        this.examination_map = response.data.data;
+                        var data = response.data.data;
+                        this.examination_map = data.map(function(item){
+                            item['weight'] = 0;
+                            return item;
+                        });
                     });
                 }
             }

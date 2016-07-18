@@ -26,6 +26,10 @@ class ExaminationScoreWeightsController extends BaseController
     }
     
     public function store(Request $request){
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+
         $weight = new ExaminationScoreWeight($request->all());
         $weights = json_decode($request->input('weights'));
         $weight->weights = $weights;
