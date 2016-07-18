@@ -54,7 +54,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('messages', 'Admin\MessagesController');
     Route::resource('articles', 'Admin\ArticlesController');
     Route::resource('intentions', 'Admin\IntentionsController');
-
+    Route::post('intentions/{intentions}/export-to-excel', 'Admin\IntentionsController@exportToExcel')->name('admin.intentions.export_to_excel');
     Route::post('articles/picture-upload', 'Admin\ArticlesController@pictureUpload')->name('picture_upload');
     //--
 

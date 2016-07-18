@@ -48,7 +48,13 @@
                                 <button class="btn btn-primary">分配</button>
                             </form>
                             @endif
-                            <button class="btn btn-primary">导出Excel</button>
+
+                            <form style="display:inline-block" action="{{ URL::route('admin.intentions.export_to_excel', $intention->id) }}" method="POST">
+                                <input type="hidden" name="_method" value="POST">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <button class="btn btn-primary">导出Excel</button>
+                            </form>
+
                         </td>
                     </tr>
                 @endforeach

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use App\Intention;
+use App\AdministrativeArea;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Flash;
+use Excel;
 
 class IntentionsController extends Controller
 {
@@ -44,5 +46,15 @@ class IntentionsController extends Controller
         $intention->save();
         Flash::message('分配成功');
         return back();
+    }
+
+    //导出Excel
+    public function exportToExcel($intention_id){
+        $intention = Intention::find($intention_id);
+        Excel::create($intention->name . '意向单', function($excel) use ($intention){
+            $excel->sheet('New sheet', function($sheet) use ($intention){
+                $sheet->loadView('admin.intentions.excel', ['intention' => $intention]);
+            });
+        })->download();
     }
 }
