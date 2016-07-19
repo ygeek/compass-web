@@ -20,6 +20,6 @@ class IndexController extends Controller
                 'id' => $item
             ];
         });
-        return view('index.index', compact('countries', 'degrees', 'years'));
+        return $this->view('index.index', compact('countries', 'degrees', 'years'));
     }
 }

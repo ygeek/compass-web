@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Http\JsonResponse;
 
+use Jenssegers\Agent\Agent;
 use Request;
 
 class Controller extends BaseController
@@ -49,5 +50,14 @@ class Controller extends BaseController
     protected function okResponse($content=''){
         return $this->responseJson('ok', $content);
     }
+    
+    protected function view($view = null, $data = [], $mergeData = []){
+        //判断是否是移动设备 如果是跳转到移动页面
+        $agent = new Agent();
+        if($agent->isMobile()){
+            $view = "m.{$view}";
+        }
 
+        return view($view, $data, $mergeData);
+    }
 }
