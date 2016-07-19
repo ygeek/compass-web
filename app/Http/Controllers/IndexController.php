@@ -14,7 +14,7 @@ class IndexController extends Controller
         $degrees = Degree::estimatable()->get();
 
         $now_year = date("Y");
-        $years = collect([$now_year, $now_year + 1, $now_year + 2, $now_year + 3])->map(function($item){
+        $years = collect([$now_year, $now_year + 1, $now_year + 2, '三年以后'])->map(function($item){
             return [
                 'name' => $item,
                 'id' => $item

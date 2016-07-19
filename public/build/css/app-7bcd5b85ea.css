@@ -403,6 +403,8 @@ ul {
   height: 542px;
   background: url("/images/head_bg.jpg") no-repeat fixed top;
   background-size: cover; }
+  .index-page .header form {
+    width: 460px; }
   .index-page .header .evaluate-nav {
     width: 280px;
     height: 360px;
