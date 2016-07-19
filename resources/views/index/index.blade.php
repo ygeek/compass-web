@@ -213,7 +213,7 @@
               <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}" style="background: url('/images/p6.png')">法&nbsp;学</a>
               <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 8]) }}" style="background: url('/images/p7.png')">理&nbsp;科</a>
               <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 1]) }}" style="background: url('/images/p8.png')">人文艺术</a>
-              <a href="#" style="background: url('/images/p9.png')">经济金融</a>
+              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p9.png')">经济金融</a>
             </div>
           </div>
         </div>
