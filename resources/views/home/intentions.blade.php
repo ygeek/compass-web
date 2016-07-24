@@ -51,7 +51,7 @@
                                     <div class="ielts-and-toelf-requirement">
                                    <span class="toelf-requirement">托福: @{{ intention['college'].toefl_requirement }}</span>
                                     <span class="ielts-requirement">托福: @{{ intention['college'].ielts_requirement }}</span>
-                                    </div> 
+                                    </div>
                                 </header>
 
                                 <div class="college-rank-info">
@@ -176,10 +176,7 @@ Array.prototype.contains = function(obj) {
             specialities_count: function(){
                 var nums = 0;
                 this.intentions.intentions.forEach(function(college){
-                    var keys = Object(college.specialities);
-                    for(key in keys){
-                        nums += 1;
-                    }
+                    nums += college.specialities.length
                 });
                 return nums;
             },
