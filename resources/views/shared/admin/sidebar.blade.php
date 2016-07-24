@@ -47,21 +47,13 @@
           </li>
 
           <li>
-            <a href="{{ route('admin.setting.index', ['key' => 'us_new_ranking']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">U.S.News 排行设置</span></a>
-          </li>
-
-          <li>
-            <a href="{{ route('admin.setting.index', ['key' => 'qs_ranking']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">QS 排行设置</span></a>
-          </li>
-
-          <li>
-            <a href="{{ route('admin.setting.index', ['key' => 'times_ranking']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">Times 设置</span></a>
+            <a href="{{ route('admin.setting.index', ['key' => 'rankings']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">排行榜设置</span></a>
           </li>
 
           <li>
             <a href="{{ route('admin.intentions.index') }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">用户意向管理</span></a>
           </li>
-          
+
           <li>
             <a href="{{ route('admin.articles.index') }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">文章-页面管理</span></a>
           </li>
