@@ -42,7 +42,7 @@
                         <div class="college">
                             <button class="estimate-button" @click="addSpeciality(intention)">添加专业</button>
 
-                            <img class="college-badge" v-bind:src="intention.college.badge_path" />
+                            <img class="college-badge" v-bind:src="intention.badge_path" />
                             <div class="college-info">
                                 <header>
                                     <h1>@{{intention['college'].chinese_name}}</h1>
@@ -50,7 +50,7 @@
 
                                     <div class="ielts-and-toelf-requirement">
                                    <span class="toelf-requirement">托福: @{{ intention['college'].toefl_requirement }}</span>
-                                    <span class="ielts-requirement">托福: @{{ intention['college'].ielts_requirement }}</span>
+                                    <span class="ielts-requirement">雅思: @{{ intention['college'].ielts_requirement }}</span>
                                     </div>
                                 </header>
 
