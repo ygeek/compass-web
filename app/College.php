@@ -27,6 +27,10 @@ class College extends Model
         'badge_path',
         'background_image_path',
         'administrative_area_id',
+        'hot',
+        'recommendatory',
+        'type',
+        'go8'
     ];
 
 

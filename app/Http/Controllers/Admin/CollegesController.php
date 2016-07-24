@@ -18,7 +18,7 @@ class CollegesController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    {
         $college_name = $request->input('college_name');
         $country_id = $request->input('country_id');
         $countries = AdministrativeArea::countries()->get();
@@ -69,6 +69,18 @@ class CollegesController extends BaseController
         DB::transaction(function() use ($request){
             $college = new College($request->all());
 
+            if($request->input('hot', null) == 'on'){
+              $college->hot = true;
+            }else{
+              $college->hot = false;
+            }
+
+            if($request->input('recommendatory', null) == 'on'){
+              $college->recommendatory = true;
+            }else{
+              $college->recommendatory = false;
+            }
+            
             $badge_path = $request->file('badge_path');
             if($badge_path){
                 $result = app('qiniu_uploader')->upload_file($badge_path);
@@ -82,7 +94,7 @@ class CollegesController extends BaseController
                 $key = $result['key'];
                 $college->background_image_path = $key;
             }
-            
+
             $college->save();
             $degree_ids = $request->input('degree_ids');
             $college->degrees()->attach($degree_ids);
@@ -149,6 +161,18 @@ class CollegesController extends BaseController
         $college = College::find($id);
         $college->update($request->all());
 
+        if($request->input('hot', null) == 'on'){
+          $college->hot = true;
+        }else{
+          $college->hot = false;
+        }
+
+        if($request->input('recommendatory', null) == 'on'){
+          $college->recommendatory = true;
+        }else{
+          $college->recommendatory = false;
+        }
+
         $badge_path = $request->file('badge_path');
         if($badge_path){
             $result = app('qiniu_uploader')->upload_file($badge_path);
@@ -167,7 +191,7 @@ class CollegesController extends BaseController
 
         $degree_ids = $request->input('degree_ids');
         if($degree_ids){
-            $college->degrees()->sync($degree_ids); 
+            $college->degrees()->sync($degree_ids);
         }
 
         Flash::message('修改成功');

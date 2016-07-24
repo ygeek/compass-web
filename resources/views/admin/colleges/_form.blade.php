@@ -68,36 +68,6 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <div class="col-xs-6">
-                            <label for="qs_ranking">QS排名</label>
-                            <input class="form-control input-lg" type="text" id="qs_ranking" value="{{$college->qs_ranking}}" name="qs_ranking" placeholder="输入院校的电话..">
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="us_new_ranking">US New排名</label>
-                            <input class="form-control input-lg" type="text" id="us_new_ranking" value="{{$college->us_new_ranking}}" name="us_new_ranking" placeholder="输入院校的地址..">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <div class="col-xs-6">
-                            <label for="times_ranking">Times排名</label>
-                            <input class="form-control input-lg" type="text" id="times_ranking" value="{{$college->times_ranking}}" name="times_ranking" placeholder="输入院校的电话..">
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="domestic_ranking">国内排名</label>
-                            <input class="form-control input-lg" type="text" id="domestic_ranking" value="{{$college->domestic_ranking}}" name="domestic_ranking" placeholder="输入院校的地址..">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
                 <div class="col-sm-7">
                     <div class="form-group">
                         <div class="col-xs-12">
@@ -173,6 +143,48 @@
                                     </label>
                                 </div>
                             @endforeach
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12">八大院校</label>
+                        <div class="col-xs-12">
+                            <label class="css-input css-radio css-radio-warning push-10-r">
+                                <input name="go8" type="radio" value="1" @if($college->go8) checked @endif><span></span> 八大
+                            </label>
+                            <label class="css-input css-radio css-radio-warning">
+                                <input name="go8" type="radio" value="0" @if(!$college->go8) checked @endif><span></span> 非八大
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12">院校类型</label>
+                        <div class="col-xs-12">
+                            <label class="css-input css-radio css-radio-warning push-10-r">
+                                <input name="type" type="radio" value="public" @if($college->type == 'public') checked @endif><span></span> 公立
+                            </label>
+                            <label class="css-input css-radio css-radio-warning">
+                                <input name="type" type="radio" value="private" @if($college->type == 'private') checked @endif><span></span> 私立
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12">热门院校</label>
+                        <div class="col-xs-12">
+                          <label class="css-input css-checkbox css-checkbox-success">
+                              <input name="hot" type="checkbox" @if($college->hot) checked @endif><span></span>
+                          </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12">推荐院校</label>
+                        <div class="col-xs-12">
+                          <label class="css-input css-checkbox css-checkbox-success">
+                              <input name="recommendatory" type="checkbox" @if($college->recommendatory) checked @endif)><span></span>
+                          </label>
                         </div>
                     </div>
 

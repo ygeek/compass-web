@@ -3,6 +3,7 @@
 <div class="block">
     <div class="block-header">
         <h3 class="block-title">院校列表</h3>
+        <a class="btn btn-primary" href="{{route('admin.colleges.create')}}">新增院校</a>
     </div>
     <div class="block-content">
         <form>
