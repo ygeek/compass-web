@@ -1,4 +1,4 @@
-<?php 
+<?php
     $galleries = $articles->map(function($article){
         return $article->toGallery();
     });
@@ -26,12 +26,16 @@
 <template id="gallery-view">
     <div class="gallery-view mask" v-show="show">
         <span class="close" @click="show=false">X</span>
-        <span class="icon-wrap" @click="showIndex--" v-show="hasPre"></span>
+        <span class="icon-wrap" @click="preImage()"></span>
+
+        <header>
+          <h1>@{{ gallery.name }}</h1>
+        </header>
 
         <div class="image-viewer">
             <img v-bind:src="currentShowImage" />
         </div>
-        <span class="icon-wrap-next" @click="showIndex++" v-show="hasNext"></span>
+        <span class="icon-wrap-next" @click="nextImage()"></span>
     </div>
 </template>
 
@@ -73,6 +77,22 @@
             hasPre: function(){
                 return this.showIndex != 0;
             }
+        },
+        methods: {
+          preImage: function(){
+            var preIndex = this.showIndex - 1;
+            if(preIndex < 0){
+              preIndex = this.totalImages - 1;
+            }
+            this.showIndex = preIndex;
+          },
+          nextImage: function(){
+            var nextIndex = this.showIndex + 1;
+            if(nextIndex > this.totalImages - 1){
+              nextIndex = 0;
+            }
+            this.showIndex = nextIndex;
+          }
         },
         events: {
             'show-gallery': function(gallery){

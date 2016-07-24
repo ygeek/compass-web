@@ -1852,6 +1852,12 @@ ul {
   position: fixed;
   top: 0;
   left: 0; }
+  .gallery-view header {
+    text-align: center;
+    margin-top: 2em; }
+    .gallery-view header h1 {
+      color: #fff;
+      margin: 0 auto; }
   .gallery-view .close {
     font-size: 25px;
     color: #fff;

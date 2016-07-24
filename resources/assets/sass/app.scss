@@ -1876,6 +1876,16 @@ ul{
   position: fixed;
   top: 0;
   left: 0;
+
+  header{
+    text-align: center;
+    margin-top: 2em;
+    h1{
+      color: #fff;
+      margin: 0 auto;
+    }
+  }
+
   .close{
     font-size: 25px;
     color: #fff;
