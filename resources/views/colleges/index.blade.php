@@ -194,4 +194,5 @@
             }
         });
     </script>
+    @include('shared.footer')
 @endsection
