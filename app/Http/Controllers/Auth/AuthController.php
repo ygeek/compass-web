@@ -44,7 +44,7 @@ class AuthController extends Controller
     {
         $this->verify_code_service = $verify_code_service;
         $this->registrar = $registrar;
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout','except' => 'createVerifyCodes']);
+        $this->middleware($this->guestMiddleware(), ['except' => ['logoutUser', 'createVerifyCodes']]);
     }
 
     public function createVerifyCodes(Request $request){
@@ -87,6 +87,11 @@ class AuthController extends Controller
         }else{
             return $this->errorResponse('登录信息错误');
         }
+    }
+
+    public function logoutUser(){
+      Auth::logout();
+      return redirect()->route('index');
     }
 
     private function validateVerifyCode($phone_number, $code){

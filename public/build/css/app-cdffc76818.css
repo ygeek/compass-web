@@ -1152,11 +1152,19 @@ ul {
     float: left;
     margin-top: 60px;
     width: 215px;
-    height: 415px;
+    height: 445px;
     background: #fff;
     position: relative; }
+    .home-page .home-slider a {
+      color: #1e1e1e; }
     .home-page .home-slider .user-info {
       width: 100%; }
+      .home-page .home-slider .user-info .logout {
+        font-size: 15px;
+        text-align: right;
+        padding-top: 10px;
+        padding-right: 10px;
+        font-weight: bold; }
       .home-page .home-slider .user-info .user-avatar {
         position: absolute;
         top: 40px;
@@ -1177,13 +1185,16 @@ ul {
       .home-page .home-slider ul li {
         margin-bottom: 30px;
         line-height: 25px;
-        width: 100%;
         padding-left: 75px;
         color: #0e2d60;
         font-size: 15px;
         font-weight: bold; }
         .home-page .home-slider ul li.active {
           border-left: solid 3px #0e2d60; }
+          .home-page .home-slider ul li.active a {
+            color: #0e2d60;
+            position: relative;
+            left: -3px; }
   .home-page .home-content {
     float: right;
     margin-top: 60px;

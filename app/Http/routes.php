@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index')->name('index');
 
 //评估
 Route::get('/estimate/step-1', 'EstimateController@stepFirst')->name('estimate.step_first');
@@ -32,6 +32,7 @@ Route::group(['prefix' => 'home'], function (){
 Route::group(['prefix' => 'auth'], function (){
     Route::post('verify-codes', 'Auth\AuthController@createVerifyCodes')->name('auth.verifyCode.store');
     Route::post('register', 'Auth\AuthController@register')->name('auth.users.store');
+    Route::get('logout', 'Auth\AuthController@logoutUser')->name('auth.logout_user');
     Route::post('login', 'Auth\AuthController@login')->name('auth.login');
 });
 

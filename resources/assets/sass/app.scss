@@ -977,11 +977,23 @@ ul{
     float: left;
     margin-top: 60px;
     width: 215px;
-    height: 415px;
+    height: 445px;
     background: #fff;
     position:relative;
+    a{
+      color: #1e1e1e;
+    }
+
     .user-info{
       width: 100%;
+      .logout{
+        font-size: 15px;
+        text-align: right;
+        padding-top: 10px;
+        padding-right: 10px;
+        font-weight: bold;
+      }
+
       .user-avatar{
         position: absolute;
         top: 40px;
@@ -1008,8 +1020,12 @@ ul{
         line-height: 25px;
         &.active{
           border-left: solid 3px #0e2d60;
+          a{
+            color: #0e2d60;
+            position: relative;
+            left: -3px;
+          }
         }
-        width: 100%;
         padding-left: 75px;
         color: #0e2d60;
         font-size: 15px;

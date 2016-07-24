@@ -6,7 +6,7 @@
         @include('shared.top_bar')
 
         <div class="page-content">
-            @include('home.slider')
+            @include('home.slider', ['active' => 'intention'])
             <div class="home-content">
                 <intentions :intentions='{!! json_encode($intentions) !!}' :categories='{!! json_encode($speciality_categories) !!}'></intentions>
                 <template id="intentions">

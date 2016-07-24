@@ -95,7 +95,7 @@
             @include('shared.top_bar')
 
             <div class="page-content">
-                @include('home.slider')
+                @include('home.slider', ['active' => 'index'])
 
                 <div class="home-content">
                     <div class="title">我的资料</div>

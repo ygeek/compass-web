@@ -6,7 +6,7 @@
             @include('shared.top_bar')
 
             <div class="page-content">
-                @include('home.slider')
+                @include('home.slider', , ['active' => 'messages'])
                 <div class="home-content">
                     <div class="title">我的消息</div>
                     <div class="content">

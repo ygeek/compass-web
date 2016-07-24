@@ -6,7 +6,7 @@
             @include('shared.top_bar')
 
             <div class="page-content">
-                @include('home.slider')
+                @include('home.slider', ['active' => 'like_college'])
                 <div class="home-content">
                     <div class="title">我的收藏</div>
                     <div class="colleges">
