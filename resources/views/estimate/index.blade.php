@@ -44,10 +44,6 @@
                             </tr>
 
                         </table>
-                        <div class="tips">
-                            <p>如果您的成绩满足专业要求，可加入意向单。我们的顾问会为您制定合适的留学方案。</p>
-                            <p>如果您的成绩不满足专业要求，也可加入意向单。我们的顾问会指导您怎样满足专业要求，并制定合适的留学方案。</p>
-                        </div>
                         <button class="estimate-button" @click="addIntention">加入意向单</button>
                     </div>
                 </div>
@@ -144,9 +140,9 @@
             },
             methods: {
                 showDetail: function (contrasts) {
-                    this.showRequirementContrastsContent.contrasts = 
+                    this.showRequirementContrastsContent.contrasts =
                         JSON.parse(contrasts.target.getAttribute('data-requirement-contrasts'));
-                    this.showRequirementContrastsContent.college = 
+                    this.showRequirementContrastsContent.college =
                         JSON.parse(contrasts.target.getAttribute('data-college'));
                     this.showRequirementContrasts = true
                 },

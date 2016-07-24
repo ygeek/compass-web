@@ -886,6 +886,12 @@ ul {
         .estimate-page .estimate-form .estimate-short-select select:focus {
           outline: none; }
 
+.estimate-result .close {
+  font-size: 20px;
+  padding-top: 10px;
+  padding-right: 10px;
+  display: block; }
+
 .estimate-result .identity {
   line-height: 40px; }
   .estimate-result .identity:after {

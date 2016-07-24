@@ -643,6 +643,13 @@ ul{
 }
 
 .estimate-result{
+  .close{
+    font-size: 20px;
+    padding-top: 10px;
+    padding-right: 10px;
+    display: block;
+  }
+
   .identity{
     @include clearfix;
     line-height: 40px;
