@@ -1649,7 +1649,7 @@ ul {
 .college-page .college-page-detail {
   background-image: url("/images/estimate-bg.png");
   min-height: 100vh;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-position: center; }
   .college-page .college-page-detail .app-content {
     padding-top: 20px; }
