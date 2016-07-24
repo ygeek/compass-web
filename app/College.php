@@ -44,7 +44,7 @@ class College extends Model
             }
 
             $key = self::generateKey($college->english_name);
-            $college->key = $key;   
+            $college->key = $key;
         });
     }
 
@@ -81,7 +81,7 @@ class College extends Model
     public function degrees(){
         return $this->belongsToMany(Degree::class);
     }
-    
+
     public function administrativeArea(){
       return $this->belongsTo(AdministrativeArea::class);
     }
@@ -97,7 +97,7 @@ class College extends Model
     public function articles(){
         return $this->hasMany(Article::class);
     }
-    
+
     //计算最终的权重分
     public function calculateWeightScore($student_scores, $degree){
         $map = $this->examinationScoreMap->map;
@@ -138,7 +138,7 @@ class College extends Model
             $item['weight'] = $weight['weight'];
             return $item;
         })->filter(function($item, $key){
-            return $item['weight'] > 0;
+            return $item['weight'] >= 0;
         });
     }
 
