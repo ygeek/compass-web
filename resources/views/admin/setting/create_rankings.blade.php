@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <category-rankings :rankings="currentShowRankings" :is_world_ranking="currentShowNode.world_ranking" v-if="!!currentShowNode"></category-rankings>
+    <category-rankings :rankings="currentShowRankings" :is_world_ranking="currentShowNode.world_ranking" :category="currentShowNode" v-if="!!currentShowNode"></category-rankings>
 </div>
 </template>
 
@@ -55,7 +55,7 @@
                               <button @click="showPop=false" data-dismiss="modal" type="button"><i class="si si-close"></i></button>
                           </li>
                       </ul>
-                      <h3 class="block-title">添加排行榜</h3>
+                      <h3 class="block-title">添加@{{category.name}}排行榜</h3>
                   </div>
 
                   <div class="block-content">
@@ -82,13 +82,14 @@
                     </li>
 
                     <li>
-                        <button type="btn btn-primary" data-toggle="block-option" @click="showPop=true">添加排行</button>
+                        <button type="btn btn-primary" data-toggle="block-option" @click="showPop=true">添加@{{category.name}}排行榜</button>
                     </li>
                 </ul>
             </li>
         </ul>
         <div class="block-content tab-content">
             <div class="tab-pane" id="ranking-@{{ranking._id}}" v-for="ranking in rankings" v-bind:class="{'active': $index == 0}">
+              <button class="btn btn-xs" @click="removeRanking(ranking._id)">删除排行榜</button>
               <rank-editor :rank="ranking" :is_world_ranking="is_world_ranking"></rank-editor>
             </div>
         </div>
@@ -140,8 +141,9 @@
 <template id="node">
   <li>
     <div>
-      <span @click="selectNode(node)">@{{node.name}}</span>
+      <span @click="selectNode(node)" style="cursor: pointer">@{{node.name}}</span>
       <button @click="addChild" class="btn btn-xs btn-default">增加子分类</button>
+      <button @click="removeNode(node)" class="btn btn-xs btn-default">删除该分类</button>
     </div>
     <ul>
       <node
@@ -185,23 +187,38 @@ Vue.component('rank-editor', {
         if(node_name == null){
             return;
         }else{
+          //子节点
+          var parent_query_path = this.node.parent_query_path.slice();
+
+          if(parent_query_path.length == 0){
+            parent_query_path = [ this.node._id ];
+          }else{
+            parent_query_path.push(this.node._id);
+          }
+
           this.node.children.push({
             name: node_name,
             _id: guid(),
             children: [],
-            world_ranking: this.node.world_ranking
+            world_ranking: this.node.world_ranking,
+            parent_query_path: parent_query_path
           })
         }
       },
       selectNode: function(node){
         this.$dispatch('select-node', node)
+      },
+      removeNode: function(node){
+        if(confirm('确定删除分类？')){
+          this.$dispatch('remove-node', node)
+        }
       }
     }
   })
 
   Vue.component('category-rankings', {
     template: '#category_rankings',
-    props: ['rankings', 'is_world_ranking'],
+    props: ['rankings', 'is_world_ranking', 'category'],
     data: function(){
       return {
           showPop: false,
@@ -216,6 +233,11 @@ Vue.component('rank-editor', {
     methods: {
       starAddRanking: function(){
 
+      },
+      removeRanking: function(ranking_id){
+        if(confirm('确定删除排行榜？')){
+          this.$dispatch('remove-ranking', ranking_id)
+        }
       }
     },
     events: {
@@ -250,12 +272,13 @@ Vue.component('rank-editor', {
           if(node_name.indexOf('世界') > -1){
             world_ranking = true;
           }
-
+          //根结点
           node.push({
             name: node_name,
             _id: guid(),
             children: [],
-            world_ranking: world_ranking
+            world_ranking: world_ranking,
+            parent_query_path: []
           });
         }
       },
@@ -298,6 +321,68 @@ Vue.component('rank-editor', {
           this.$broadcast('close-pop');
           this.save()
         }
+      },
+      'remove-ranking': function(rank_id){
+        var index = this.rankings.rankings.findIndex(function(rank){
+          return rank._id == rank_id;
+        })
+
+        if(index != undefined){
+          this.rankings.rankings.splice(index, 1);
+        }
+
+        this.save()
+      },
+      'remove-node': function(node){
+        //分类下有子分类 无法删除 分类下有排行榜 无法删除
+        var that = this;
+        if(node.children.length > 0){
+          alert('分类下有子分类 无法删除');
+          return;
+        }
+
+        var node_rankings = this.rankings.rankings.filter(function(ranking){
+          return ranking.category_id == node._id;
+        });
+
+        if(node_rankings.length > 0){
+          alert('分类下有排行榜 无法删除')
+          return
+        }
+        console.log(node.parent_query_path)
+
+        var node_parent = null;
+
+        node.parent_query_path.forEach(function(path){
+          if(node_parent == null){
+            query_arr = that.rankings.categories;
+          }else{
+            query_arr = node_parent.children;
+          }
+
+          var index = query_arr.findIndex(function(category){
+            return category._id == path;
+          })
+
+          node_parent = query_arr[index]
+        });
+
+
+        var nodes = null;
+
+        //删除的是根结点
+        if(node_parent == null){
+          nodes = this.rankings.categories;
+        }else{
+          nodes = node_parent.children;
+        }
+
+        var index = nodes.findIndex(function(category){
+          return category._id == node._id;
+        })
+        nodes.splice(index, 1);
+
+        this.save();
       }
     }
   });
