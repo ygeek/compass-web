@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
+use App\Setting;
+
 class College extends Model
 {
 
@@ -191,5 +193,61 @@ class College extends Model
             return $require['examination_name'] == '雅思';
         })->first()['requirement'];
         return $ielts_requirement;
+    }
+
+    //拦截排名get
+    public function getAttribute($key){
+      $ranking_fields = ['us_new_ranking', 'times_ranking', 'qs_ranking', 'domestic_ranking'];
+      if(in_array($key, $ranking_fields)){
+        return $this->getCollegeRanking($key);
+      }else{
+        return parent::getAttribute($key);
+      }
+    }
+
+    //拦截toArray
+    public function toArray(){
+      $arr = parent::toArray();
+      $ranking_fields = ['us_new_ranking', 'times_ranking', 'qs_ranking', 'domestic_ranking'];
+      foreach ($ranking_fields as $ranking_field) {
+        $arr[$ranking_field] = $this->getCollegeRanking($ranking_field);
+      }
+      return $arr;
+    }
+
+    public function getCollegeRanking($ranking_field){
+      $rankings = Setting::get('rankings');
+      $null_ranking = 0;
+      if(!$rankings){
+        return $null_ranking;
+      }else{
+
+        $tag = str_replace("_ranking", "", $ranking_field);
+
+        //查询国内排名
+        if($ranking_field == 'domestic_ranking'){
+          $country = $this->country->name;
+          $tag = $country;
+        }
+
+        foreach ($rankings['rankings'] as $ranking) {
+          $ranking_tag = $ranking['tag'];
+          if (strpos($ranking_tag, $tag) !== false) {
+            //排行榜的标签包含了查询的key 说明可以使用该排行榜的数据
+
+            $index = 0;
+            foreach ($ranking['rank'] as $rank) {
+              $index += 1;
+
+              if($rank['english_name'] == $this->english_name){
+                return $index;
+              }
+              
+            }
+          }
+        }
+
+        return $null_ranking;
+      }
     }
 }
