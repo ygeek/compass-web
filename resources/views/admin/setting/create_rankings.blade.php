@@ -63,7 +63,7 @@
                   </div>
               </div>
               <div class="modal-footer">
-                  <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal" @click="showPop=false"><i class="fa fa-check"></i> Ok</button>
+                  <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal" @click="showPop=false">关闭窗口</button>
               </div>
           </div>
       </div>
@@ -132,8 +132,8 @@
     </td>
     </tr>
     </table>
-    <button @click="add">增加项目</button>
-    <button @click="save">保存</button>
+    <button class="btn btn-xs" @click="add">增加项目</button>
+    <button class="btn btn-xs" @click="save">保存</button>
 </template>
 
 
@@ -142,7 +142,6 @@
     <div>
       <span @click="selectNode(node)">@{{node.name}}</span>
       <button @click="addChild" class="btn btn-xs btn-default">增加子分类</button>
-      <button @click="addChild" class="btn btn-xs btn-default">增加此分类排行</button>
     </div>
     <ul>
       <node
@@ -170,6 +169,7 @@ Vue.component('rank-editor', {
       remove: function (index) {
           this.rank.rank.splice(index, 1);
       },
+
       save: function(){
         this.$dispatch('edit-rank', this.rank)
       }
@@ -216,6 +216,11 @@ Vue.component('rank-editor', {
     methods: {
       starAddRanking: function(){
 
+      }
+    },
+    events: {
+      'close-pop': function(){
+        this.showPop = false;
       }
     }
   })
@@ -283,12 +288,15 @@ Vue.component('rank-editor', {
       },
       'edit-rank': function(rank){
         if(rank._id){
-          //修改
+          this.save()
         }else{
           //新建 要创建id 以及设置其 category_id
           rank._id = guid();
           rank.category_id = this.selected_node_id;
           this.rankings.rankings.push(rank)
+
+          this.$broadcast('close-pop');
+          this.save()
         }
       }
     }
