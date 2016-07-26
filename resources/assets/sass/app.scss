@@ -198,6 +198,7 @@ ul{
       .questions {
         width: 550px;
         margin: 15px auto 0;
+        @include clearfix;
         p {
           margin-bottom: 5px;
         }

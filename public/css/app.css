@@ -522,6 +522,10 @@ ul {
     .index-page .middle .consult .questions {
       width: 550px;
       margin: 15px auto 0; }
+      .index-page .middle .consult .questions:after {
+        content: "";
+        display: table;
+        clear: both; }
       .index-page .middle .consult .questions p {
         margin-bottom: 5px; }
       .index-page .middle .consult .questions a {
