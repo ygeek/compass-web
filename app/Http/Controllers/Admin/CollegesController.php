@@ -22,7 +22,7 @@ class CollegesController extends BaseController
         $college_name = $request->input('college_name');
         $country_id = $request->input('country_id');
         $countries = AdministrativeArea::countries()->get();
-        $colleges_query = College::whereNotNULL('id');
+        $colleges_query = College::whereNotNULL('id')->with('country');
         if($college_name){
             $colleges_query = $colleges_query->where('chinese_name', 'like', "%{$college_name}%");
         }
@@ -80,7 +80,7 @@ class CollegesController extends BaseController
             }else{
               $college->recommendatory = false;
             }
-            
+
             $badge_path = $request->file('badge_path');
             if($badge_path){
                 $result = app('qiniu_uploader')->upload_file($badge_path);

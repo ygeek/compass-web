@@ -22,6 +22,7 @@
                     <th>已匹配规则</th>
                     <th>院校名称</th>
                     <th>英文名</th>
+                    <th>国家</th>
                     <th>收藏数量</th>
                     <th class="text-center" style="width: 100px;">操作</th>
                 </tr>
@@ -36,6 +37,7 @@
                   </td>
                   <td>{{$college->chinese_name}}</td>
                   <td>{{ $college->english_name }}</td>
+                  <td>{{ $college->country->name }}</td>
                   <td>{{ $college->like_nums }}</td>
                   <td class="text-center">
                       <div class="btn-group">
