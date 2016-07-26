@@ -1,6 +1,6 @@
 <college-list></college-list>
 <template id="college-list-template">
-    <div class="college-recommend">
+    <div class="college-recommend" v-if="colleges.length > 0">
         <h3>本月重点推荐院校<a style="cursor:pointer" @click="change">换一批</a></h3>
         <college :college="college" v-for="college in colleges"></college>
     </div>
