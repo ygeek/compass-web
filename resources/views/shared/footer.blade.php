@@ -5,16 +5,27 @@
         </div>
         <div class="text">
             <p>关于：</p>
-            <a href="#">指南针</a>
-            <a href="#">联系我们</a>
-            <a href="#">网站地图</a>
-            <a href="#">用户反馈</a>
+            <?php
+              $articles = App\Article::whereHas('category', function($q){
+                return $q->where('key', 'guan-yu');
+            })->orderBy('articles.order_weight')->limit(4)->get();
+            ?>
+
+            @foreach($articles as $article)
+            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            @endforeach
         </div>
         <div class="text">
             <p>友情链接：</p>
-            <a href="#">指南针官网</a>
-            <a href="#">曼拓教育</a>
-            <a href="#">澳洲哈哈网</a>
+            <?php
+              $articles = App\Article::whereHas('category', function($q){
+                return $q->where('key', 'you-qing-lian-jie');
+            })->orderBy('articles.order_weight')->limit(4)->get();
+            ?>
+
+            @foreach($articles as $article)
+            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            @endforeach
         </div>
         <div class="copyright">
             <div class="clear">
