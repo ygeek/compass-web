@@ -241,7 +241,7 @@
             <?php
               $articles = App\Article::whereHas('category', function($q){
                 return $q->where('key', 'liu-xue-gong-lue');
-            })->orderBy('articles.order_weight')->limit(7)->get();
+            })->whereNull('college_id')->orderBy('articles.order_weight')->limit(7)->get();
             ?>
             @foreach($articles as $article)
             <a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a>
