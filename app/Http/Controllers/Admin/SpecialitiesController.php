@@ -15,7 +15,7 @@ class SpecialitiesController extends Controller
 {
 
     public function index($college_id){
-        $college = College::with('specialities')->find($college_id);
+        $college = College::with('specialities.degree')->find($college_id);
         return view('admin.specialities.index', compact('college'));
     }
 
