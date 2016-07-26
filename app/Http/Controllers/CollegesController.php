@@ -148,4 +148,13 @@ class CollegesController extends Controller
 
         return view('colleges.rank', ['colleges' => $paginated_rank_items, 'rank' => $rank]);
     }
+
+    public function getRandomHotColleges(Request $request){
+        $number = $request->input('number', 4);
+        return College::where('hot', true)->get()->random($number)->map(function($item){
+            $item->toefl_score = $item->toeflRequirement('本科');
+            $item->ielts_score = $item->ieltsRequirement('本科');
+            return $item;
+        })->toArray();
+    }
 }

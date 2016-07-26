@@ -1672,136 +1672,223 @@ ul{
         right: 0;
       }
     }
-
-    .college-pages{
-      .college-overview{
-        width: 824px;
-        @include clearfix;
+  }
+  .college-pages{
+    @include clearfix;
+    .college-overview{
+      float: left;
+      width: 824px;
+      @include clearfix;
+      min-height: 515px;
+      .tabs{
         min-height: 515px;
-        .tabs{
-          min-height: 515px;
-          float: left;
-          width: 180px;
-          background: #0e2d60;
-          color: #fff;
-          font-size: 15px;
-          text-align: center;
-          li{
-            cursor: pointer;
-            line-height: 50px;
-            &.active{
-              background: #fff;
-              color: #0e2d60;
-            }
-            box-sizing: border-box;
-            border-left: solid #0e2d60 3px;
-          }
-        }
-        .content-areas{
-          font-size: 14px;
-          padding: 20px 45px;
-          min-height: calc(515px - 40px);
-          float: left;
-          background: #fff;
-          width: calc(100% - 270px);
-        }
-      }
-      .college-applications{
-        width: 827px;
-        &:after{
-          content: '';
-          display: block;
-          clear: both;
-        }
-        .left-grid{
-          width: 256px;
-          float: left;
-        }
-        .right-grid{
-          width: 410px;
-          margin-left: 10px;
-          float: left;
-        }
-
-        .article{
-          width: calc(100% - 60px);
-          display: inline-block;
-          background: #fff;
-          padding-top: 30px;
-          padding-bottom: 30px;
-          padding-left: 40px;
-          padding-right: 20px;
-          margin-bottom: 20px;
-          vertical-align: top;
-          header{
-            font-size:20px;
-            margin-bottom:20px;
-            font-weight: bold;
-          }
-        }
-      }
-
-      .college-galleries{
-        @include clearfix;
-        .college-gallery{
+        float: left;
+        width: 180px;
+        background: #0e2d60;
+        color: #fff;
+        font-size: 15px;
+        text-align: center;
+        li{
           cursor: pointer;
-          width: 267px;
-          height: 220px;
-          float: left;
-          margin-right: 12px;
-          .img-container{
-            width: 100%;
-            height: 168px;
-            display: block;
-            img{
-              width: 100%;
-              height: 100%;
-            }
-          }
-          .name{
-            width: 100%;
-            height: 52px;
+          line-height: 50px;
+          &.active{
             background: #fff;
-            text-align: center;
-            line-height: 52px;
-            font-size: 15px;
+            color: #0e2d60;
           }
+          box-sizing: border-box;
+          border-left: solid #0e2d60 3px;
         }
       }
+      .content-areas{
+        font-size: 14px;
+        padding: 20px 45px;
+        min-height: calc(515px - 40px);
+        float: left;
+        background: #fff;
+        width: calc(100% - 270px);
+      }
+    }
+    .college-applications{
+      width: 827px;
+      &:after{
+        content: '';
+        display: block;
+        clear: both;
+      }
+      .left-grid{
+        width: 256px;
+        float: left;
+      }
+      .right-grid{
+        width: 410px;
+        margin-left: 10px;
+        float: left;
+      }
 
-      .college-list-articles{
-        width: 824px;
-        .article{
+      .article{
+        width: calc(100% - 60px);
+        display: inline-block;
+        background: #fff;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 40px;
+        padding-right: 20px;
+        margin-bottom: 20px;
+        vertical-align: top;
+        header{
+          font-size:20px;
+          margin-bottom:20px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .college-galleries{
+      @include clearfix;
+      .college-gallery{
+        cursor: pointer;
+        width: 267px;
+        height: 220px;
+        float: left;
+        margin-right: 12px;
+        .img-container{
           width: 100%;
-          height: 36px;
-          @include clearfix;
-          margin-bottom: 2px;
-          line-height: 36px;
-          font-size: 14px;
-          background: #fff;
-
-          .identity{
-            float: left;
-            width: 30px;
-            text-align: center;
-          }
-          a{
-            display: block;
-            float: left;
-            color: #373737;
-            h1{
-              font-size: 14px;
-              margin: 0 0;
-            }
-          }
-
-          .created_at{
-            float: right;
-            color: #c1c1c1;
-            padding-right: 10px;
+          height: 168px;
+          display: block;
+          img{
+            width: 100%;
+            height: 100%;
           }
         }
+        .name{
+          width: 100%;
+          height: 52px;
+          background: #fff;
+          text-align: center;
+          line-height: 52px;
+          font-size: 15px;
+        }
       }
+    }
+
+    .college-list-articles{
+      width: 824px;
+      .article{
+        width: 100%;
+        height: 36px;
+        @include clearfix;
+        margin-bottom: 2px;
+        line-height: 36px;
+        font-size: 14px;
+        background: #fff;
+
+        .identity{
+          float: left;
+          width: 30px;
+          text-align: center;
+        }
+        a{
+          display: block;
+          float: left;
+          color: #373737;
+          h1{
+            font-size: 14px;
+            margin: 0 0;
+          }
+        }
+
+        .created_at{
+          float: right;
+          color: #c1c1c1;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+.college-sidebar{
+  width: 266px;
+  margin-left: 10px;
+  float: left;
+  @include clearfix;
+  .tab{
+    height: 54px;
+    background-color: #fff;
+    margin-bottom: 1px;
+    a{
+      display: inline-block;
+      //width: 90px;
+      //margin: 0 20.5px;
+      width: 90px;
+      margin: 0 88px;
+      height: 55px;
+      line-height: 55px;
+      text-align: center;
+      color: #6c6c6c;
+      &:hover{
+        height: 52px;
+        color: #0e2d60;
+        border-bottom: 3px solid #0e2d60;
+        font-weight: bold;
+      }
+    }
+    .active{
+      height: 52px;
+      color: #0e2d60;
+      border-bottom: 3px solid #0e2d60;
+      font-weight: bold;
+    }
+  }
+}
+.college-recommend{
+  @include clearfix;
+  padding: 50px 0;
+  h3{
+    display: block;
+    width: 100%;
+    color: #071f47;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+    a{
+      float: right;
+      color: #6c6c6c;
+      font-size: 12px;
+    }
+  }
+  .college-single:not(:last-child){
+    margin-right: 12px;
+  }
+}
+.college-single{
+  width: 240px;
+  padding: 13px;
+  margin-bottom: 1px;
+  background-color: #fff;
+  float: left;
+  .separator{
+    margin: 10px 0;
+    background-color: #ebebeb;
+    height: 1px;
+  }
+  img {
+    width: 242px;
+    height: 105px;
+  }
+  .row{
+    @include clearfix;
+    .name{
+      color: #000;
+    }
+    span{
+      color: #6c6c6c;
+    }
+    .left{
+      float: left;
+    }
+    .right{
+      float: right;
     }
   }
 }

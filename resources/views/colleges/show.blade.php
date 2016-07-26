@@ -229,6 +229,7 @@
             <div class="app-content">
                 <div class="college-pages">
                     @include('colleges.show-'. $article_key, ['articles' => $articles])
+                    @include('colleges.sidebar')
                 </div>
             </div>
         </div>
