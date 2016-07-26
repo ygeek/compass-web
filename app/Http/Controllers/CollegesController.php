@@ -31,7 +31,8 @@ class CollegesController extends Controller
         $colleges_query = College::with('administrativeArea.parent.parent');
 
         if($college_name){
-            $colleges_query = $colleges_query->where('chinese_name', 'like', '%'.$college_name.'%');
+            $colleges_query = $colleges_query->where('chinese_name', 'like', '%'.$college_name.'%')
+                                             ->orWhere('english_name', 'like', "%{$college_name}%");
         }
 
 
@@ -70,7 +71,7 @@ class CollegesController extends Controller
 
           $colleges_query = $colleges_query->where('go8', $condition);
         }
-        
+
         $colleges = $colleges_query->paginate(15);
         return view('colleges.index', compact('areas',
             'speciality_categories',

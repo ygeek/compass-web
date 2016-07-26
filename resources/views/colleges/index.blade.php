@@ -8,7 +8,7 @@
             <template id="search-form">
                 <form>
                 <div class="search-area">
-                    <input type="text" placeholder="输入院校" name="college_name" value="{{$college_name}}"/>
+                    <input type="text" placeholder="输入院校名称" name="college_name" value="{{$college_name}}"/>
                     <button type="submit" class="search-button"></button>
                 </div>
 
