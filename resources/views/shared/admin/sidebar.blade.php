@@ -47,6 +47,14 @@
           </li>
 
           <li>
+            <a href="{{ route('admin.setting.index', ['key' => 'use_people_nums']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">使用人数设置</span></a>
+          </li>
+
+          <li>
+            <a href="{{ route('admin.setting.index', ['key' => 'abroad_people_nums']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">留学人数设置</span></a>
+          </li>
+
+          <li>
             <a href="{{ route('admin.setting.index', ['key' => 'rankings']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">排行榜设置</span></a>
           </li>
 

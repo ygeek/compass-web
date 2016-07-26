@@ -166,10 +166,10 @@
           <button onclick='easemobim.bind({tenantId: 21250})'>我要咨询</button>
           <div class="questions">
             <p>常见问题：</p>
-            <?php 
+            <?php
               $articles = App\Article::whereHas('category', function($q){
                 return $q->where('key', 'chang-jian-wen-ti');
-            })->orderBy('articles.order_weight')->limit(6)->get(); 
+            })->orderBy('articles.order_weight')->limit(6)->get();
             ?>
             @foreach($articles as $article)
             <a href="{{ $article->link() }}">{{ $article->title }}</a>
@@ -177,12 +177,12 @@
           </div>
         </div>
         <div class="consult-academy clear">
-        
+
           <div class="location">
             @foreach($countries as $country)
             <div class="clear">
               <h3>{{ $country->name }}</h3>
-              <?php 
+              <?php
                 $index = 0;
               ?>
               @foreach($country->children as $state)
@@ -222,10 +222,10 @@
             <div class="clear">
               <h3>语言学习</h3>
             </div>
-            <?php 
+            <?php
               $articles = App\Article::whereHas('category', function($q){
                 return $q->where('key', 'yu-yan-xue-xi');
-            })->orderBy('articles.order_weight')->limit(7)->get(); 
+            })->orderBy('articles.order_weight')->limit(7)->get();
             ?>
             @foreach($articles as $article)
             <a href="{{ $article->link() }}">{{ $article->title }}</a>
@@ -237,10 +237,10 @@
               <h3>留学攻略</h3>
               <!-- <a href="#" class="more">更多></a> -->
             </div>
-            <?php 
+            <?php
               $articles = App\Article::whereHas('category', function($q){
                 return $q->where('key', 'liu-xue-gong-lue');
-            })->orderBy('articles.order_weight')->limit(7)->get(); 
+            })->orderBy('articles.order_weight')->limit(7)->get();
             ?>
             @foreach($articles as $article)
             <a href="{{ $article->link() }}">{{ $article->title }}</a>
@@ -252,10 +252,10 @@
               <h3>移民攻略</h3>
               <a href="#" class="more">更多></a>
             </div>
-            <?php 
+            <?php
               $articles = App\Article::whereHas('category', function($q){
                 return $q->where('key', 'yi-min-gong-lue');
-            })->orderBy('articles.order_weight')->limit(7)->get(); 
+            })->orderBy('articles.order_weight')->limit(7)->get();
             ?>
             @foreach($articles as $article)
             <a href="{{ $article->link() }}">{{ $article->title }}</a>
@@ -265,9 +265,9 @@
       </div>
     </div>
     <div class="assess">
-      <h1>已有<span>6513</span>人使用过指南针出国</h1>
-      <h1>有<span>542867</span>人使用了指南针智能评估系统</h1>
-      <button>开始免费评估</button>
+      <h1>已有<span>{{\App\Setting::get('abroad_people_nums', 0)}}</span>人使用过指南针出国</h1>
+      <h1>有<span>{{\App\Setting::get('use_people_nums', 0)}}</span>人使用了指南针智能评估系统</h1>
+      <a style='color:#fff' href="{{route('estimate.step_first')}}"><button>开始免费评估</button></a>
     </div>
     @include('shared.footer')
   </div>
