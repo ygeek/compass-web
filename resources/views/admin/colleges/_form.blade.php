@@ -147,7 +147,8 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" v-if="is_australia">
+
                         <label class="col-xs-12">八大院校</label>
                         <div class="col-xs-12">
                             <label class="css-input css-radio css-radio-warning push-10-r">
@@ -206,6 +207,7 @@
             </div>
     </div>
 </div>
+
 </template>
 <!-- Select组件  -->
 <template id="select-tag">
@@ -265,6 +267,11 @@ Vue.component('college-create-form', {
     }
   },
   computed: {
+    //是否是澳洲
+    is_australia: function(){
+      return this.selected_country == 1;
+    },
+
     administrative_area_id: function(){
       if(this.selected_city){
         return this.selected_city;
