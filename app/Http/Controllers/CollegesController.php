@@ -26,6 +26,8 @@ class CollegesController extends Controller
         $college_name = $request->input('college_name');
         $selected_speciality_cateogry_id = $request->input('selected_speciality_cateogry_id');
 
+        $selected_go8 = $request->input('selected_go8');
+
         $colleges_query = College::with('administrativeArea.parent.parent');
 
         if($college_name){
@@ -58,6 +60,17 @@ class CollegesController extends Controller
                 $q->where('specialities.category_id', $selected_speciality_cateogry_id);
             });
         }
+
+        //查询go8
+        if($selected_go8){
+          $condition = false;
+          if($selected_go8 == 1){
+            $condition = true;
+          }
+
+          $colleges_query = $colleges_query->where('go8', $condition);
+        }
+        
         $colleges = $colleges_query->paginate(15);
         return view('colleges.index', compact('areas',
             'speciality_categories',
@@ -66,7 +79,8 @@ class CollegesController extends Controller
             'selected_city_id',
             'selected_state_id',
             'selected_country_id',
-            'college_name'
+            'college_name',
+            'selected_go8'
         ));
     }
 

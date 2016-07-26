@@ -15,22 +15,27 @@
                 <div class="tag-area">
                     <div class="tag-select">
                         <tag-select label-name="选择国家" :selects="areas" :selected_id.sync="selected_country_id"></tag-select>
-                        <input type="hidden" v-model="selected_country_id" name="selected_country_id" value="{{$selected_country_id }}"/>
+                        <input type="hidden" number v-model="selected_country_id"  name="selected_country_id" value="{{$selected_country_id }}"/>
                     </div>
 
                     <div v-if="states.length > 0" class="tag-select">
                         <tag-select label-name="选择地区" :selects="states" :selected_id.sync="selected_state_id"></tag-select>
-                        <input type="hidden" v-model="selected_state_id" name="selected_state_id" value="{{$selected_state_id}}"/>
+                        <input type="hidden" number v-model="selected_state_id"  name="selected_state_id" value="{{$selected_state_id}}"/>
                     </div>
 
                     <div v-if="cities.length > 0" class="tag-select">
                         <tag-select label-name="选择城市" :selects="cities" :selected_id.sync="selected_city_id"></tag-select>
-                        <input type="hidden" v-model="selected_city_id" name="selected_city_id" value="{{$selected_city_id}}"/>
+                        <input type="hidden" number v-model="selected_city_id"  name="selected_city_id" value="{{$selected_city_id}}"/>
                     </div>
 
                     <div class="tag-select">
                         <tag-select label-name="选择专业" :selects="speciality_categories" :selected_id.sync="selected_speciality_cateogry_id"></tag-select>
-                        <input type="hidden" v-model="selected_speciality_cateogry_id" name="selected_speciality_cateogry_id" value="{{$selected_speciality_cateogry_id}}"/>
+                        <input type="hidden" v-model="selected_speciality_cateogry_id"  number name="selected_speciality_cateogry_id" value="{{$selected_speciality_cateogry_id}}"/>
+                    </div>
+
+                    <div class="tag-select" v-if="selected_country_id == 1">
+                        <tag-select label-name="选择类型" :selects="go8_selects" :selected_id.sync="selected_go8"></tag-select>
+                        <input type="hidden" v-model="selected_go8" name="selected_go8" value="{{$selected_go8}}" number/>
                     </div>
                 </div>
 
@@ -113,10 +118,10 @@
         <div>
             <label>@{{ labelName }}</label>
             <div class="tags">
-                <div class="tag"  v-bind:class="{'active': selected_id == null}">
+                <div class="tag"  v-bind:class="{'active': selected_id === null || selected_id === '' || selected_id === 0 }">
                     <span v-on:click="select_item(null)">不限</span>
                 </div>
-                <div v-for="item in selects" class="tag" v-on:click="select_item(item.id)" v-bind:class="{'active': selected_id == item.id}">
+                <div v-for="item in selects" class="tag" v-on:click="select_item(item.id)" v-bind:class="{'active': selected_id === item.id}">
                     <span>@{{ item.name }}</span>
                 </div>
             </div>
@@ -143,7 +148,18 @@
                     selected_country_id: null,
                     selected_state_id: null,
                     selected_city_id: null,
+                    selected_go8: null,
                     selected_speciality_cateogry_id: null,
+                    go8_selects: [
+                      {
+                        id: 1,
+                        name: '八大',
+                      },
+                      {
+                        id: 2,
+                        name: '非八大'
+                      }
+                    ],
                     speciality_categories: <?php
     echo json_encode(
             collect($speciality_categories->toArray())->map(function ($category){
@@ -155,6 +171,9 @@
                 }
             },
             computed: {
+                is_australia: function(){
+                  return this.selected_country_id == 1;
+                },
                 states: function () {
                     var that = this;
                     var res = [];
