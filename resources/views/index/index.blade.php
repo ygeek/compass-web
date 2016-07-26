@@ -172,7 +172,7 @@
             })->orderBy('articles.order_weight')->limit(6)->get();
             ?>
             @foreach($articles as $article)
-            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            <a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a>
             @endforeach
           </div>
         </div>
@@ -188,10 +188,10 @@
               @foreach($country->children as $state)
                 <?php if($index ==8){
                 ?>
-                  <a href="{{ route('colleges.index', ['selected_country_id' => $country->id]) }}">更多</a>
+                  <a target="_blank" href="{{ route('colleges.index', ['selected_country_id' => $country->id]) }}">更多</a>
                 <?php
                 break;}?>
-                <a href="{{ route('colleges.index', ['selected_country_id' => $country->id, 'selected_state_id' => $state->id]) }}">{{ $state->name }}</a>
+                <a target="_blank" href="{{ route('colleges.index', ['selected_country_id' => $country->id, 'selected_state_id' => $state->id]) }}">{{ $state->name }}</a>
                 <?php $index++; ?>
               @endforeach
             </div>
@@ -205,15 +205,15 @@
               </form>
             </div>
             <div class="subjects clear">
-              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p1.png');">商&nbsp;科</a>
-              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 3]) }}" style="background: url('/images/p2.png')">工&nbsp;科</a>
-              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 4]) }}" style="background: url('/images/p3.png')">人文艺术</a>
-              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p4.png')">经济金融</a>
-              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 6]) }}" style="background: url('/images/p5.png')">医&nbsp;学</a>
-              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}" style="background: url('/images/p6.png')">法&nbsp;学</a>
-              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 8]) }}" style="background: url('/images/p7.png')">理&nbsp;科</a>
-              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 1]) }}" style="background: url('/images/p8.png')">人文艺术</a>
-              <a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p9.png')">经济金融</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p1.png');">商&nbsp;科</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 3]) }}" style="background: url('/images/p2.png')">工&nbsp;科</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 4]) }}" style="background: url('/images/p3.png')">人文艺术</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p4.png')">经济金融</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 6]) }}" style="background: url('/images/p5.png')">医&nbsp;学</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}" style="background: url('/images/p6.png')">法&nbsp;学</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 8]) }}" style="background: url('/images/p7.png')">理&nbsp;科</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 1]) }}" style="background: url('/images/p8.png')">人文艺术</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p9.png')">经济金融</a>
             </div>
           </div>
         </div>
@@ -221,7 +221,7 @@
           <div class="text-box lang-study">
             <div class="clear">
               <h3>语言学习</h3>
-              <a href="#" class="more">更多></a>
+              <a href="#" class="more" target="_blank">更多></a>
             </div>
             <?php
               $articles = App\Article::whereHas('category', function($q){
@@ -229,14 +229,14 @@
             })->orderBy('articles.order_weight')->limit(7)->get();
             ?>
             @foreach($articles as $article)
-            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            <a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a>
             @endforeach
           </div>
           <img class="img-1" src="/images/i1.jpg" alt="img" />
           <div class="text-box study-abroad">
             <div class="clear">
               <h3>留学攻略</h3>
-              <a href="#" class="more">更多></a>
+              <a href="#" class="more" target="_blank">更多></a>
             </div>
             <?php
               $articles = App\Article::whereHas('category', function($q){
@@ -244,14 +244,14 @@
             })->orderBy('articles.order_weight')->limit(7)->get();
             ?>
             @foreach($articles as $article)
-            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            <a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a>
             @endforeach
           </div>
           <img class="img-2" src="/images/i2.jpg" alt="img" />
           <div class="text-box immigrant">
             <div class="clear">
               <h3>移民攻略</h3>
-              <a href="#" class="more">更多></a>
+              <a href="#" class="more" target="_blank">更多></a>
             </div>
             <?php
               $articles = App\Article::whereHas('category', function($q){
@@ -259,7 +259,7 @@
             })->orderBy('articles.order_weight')->limit(7)->get();
             ?>
             @foreach($articles as $article)
-            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            <a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a>
             @endforeach
           </div>
         </div>

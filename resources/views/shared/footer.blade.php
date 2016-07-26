@@ -12,7 +12,7 @@
             ?>
 
             @foreach($articles as $article)
-            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            <a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a>
             @endforeach
         </div>
         <div class="text">
@@ -24,7 +24,7 @@
             ?>
 
             @foreach($articles as $article)
-            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            <a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a>
             @endforeach
         </div>
         <div class="copyright">
