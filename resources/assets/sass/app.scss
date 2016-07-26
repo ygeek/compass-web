@@ -1362,8 +1362,40 @@ ul{
     background-repeat: no-repeat;
     background-position: center;
     font-size: 14px;
+    @include clearfix;
+
+    .rank-list{
+      width: 206px;
+      margin-right: 10px;
+      margin-top: 20px;
+      float: left;
+      background-color: #fff;
+      .level-1{
+        display: block;
+        background-color: #00d8b3;
+        font-size: 14px;
+        line-height: 35px;
+        color: #fff;
+        text-align: center;
+      }
+      .level-2{
+        display: block;
+        font-size: 14px;
+        line-height: 30px;
+        padding-left: 26px;
+        color: #000;
+      }
+      .level-3{
+        display: block;
+        font-size: 14px;
+        line-height: 30px;
+        padding-left: 36px;
+        color: #000;
+      }
+    }
     table{
-      width: 824px;
+      width: 608px;
+      float: left;
       padding-top: 20px;
       border-spacing: 0;
       margin-bottom: 20px;
@@ -1812,6 +1844,7 @@ ul{
   width: 266px;
   margin-left: 10px;
   float: left;
+  padding-top: 20px;
   @include clearfix;
   .tab{
     height: 54px;

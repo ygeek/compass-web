@@ -20,6 +20,11 @@
 
     <div class="colleges-rank-page-content">
         <div class="app-content">
+            <div class="rank-list">
+                <span class="level-1">世界大学排名</span>
+                <a class="level-2" href="#">2016 U.S.NEWS</a>
+                <span class="level-3">2016 U.S.NEWS</span>
+            </div>
             <table class="colleges">
                 @foreach($colleges as $college)
                     <tr>
@@ -30,6 +35,7 @@
                     </tr>
                 @endforeach
             </table>
+            @include('colleges.sidebar')
             {{ $colleges->appends(app('request')->except('page'))->render() }}
         </div>
     </div>
