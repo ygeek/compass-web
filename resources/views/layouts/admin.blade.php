@@ -79,16 +79,16 @@
       -o-animation-name:fadeOut;
       animation-name:fadeOut;
 
-      -webkit-animation-duration: 1s;
+      -webkit-animation-duration: 3s;
       -webkit-animation-timing-function: ease;
       -webkit-animation-fill-mode: both;
-      -moz-animation-duration: 1s;
+      -moz-animation-duration: 3s;
       -moz-animation-timing-function: ease;
       -moz-animation-fill-mode: both;
-      -ms-animation-duration: 1s;
+      -ms-animation-duration: 3s;
       -ms-animation-timing-function: ease;
       -ms-animation-fill-mode: both;
-      animation-duration: 1s;
+      animation-duration: 3s;
       animation-timing-function: ease;
       animation-fill-mode: both;
     }
