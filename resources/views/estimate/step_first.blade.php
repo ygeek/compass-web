@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="country">选择目标国家</label>
                         <div class="estimate-select">
-                            <select name="selected_country_id" id="country" v-model="selected_country_id">
+                            <select name="selected_country_id" id="country" v-model="selected_country_id" number>
                                 @foreach($countries as $country)
                                     <option value="{{$country->id}}" @if($country->id == $selected_country_id) selected @endif>{{$country->name}}</option>
                                 @endforeach
@@ -77,9 +77,9 @@
             data: function () {
                 return {
                     speciality_categories: {!! json_encode($speciality_categories) !!},
-                    selected_category_id: null,
-                    selected_country_id: null,
-                    selected_degree_id: null
+                    selected_category_id: 1,
+                    selected_country_id: 1,
+                    selected_degree_id: 2
                 }
             },
             computed: {
