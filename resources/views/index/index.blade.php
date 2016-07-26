@@ -221,6 +221,7 @@
           <div class="text-box lang-study">
             <div class="clear">
               <h3>语言学习</h3>
+              <a href="#" class="more">更多></a>
             </div>
             <?php
               $articles = App\Article::whereHas('category', function($q){
@@ -235,7 +236,7 @@
           <div class="text-box study-abroad">
             <div class="clear">
               <h3>留学攻略</h3>
-              <!-- <a href="#" class="more">更多></a> -->
+              <a href="#" class="more">更多></a>
             </div>
             <?php
               $articles = App\Article::whereHas('category', function($q){
