@@ -10,7 +10,8 @@
                 <thead>
                 <tr>
                     <th>专业名称</th>
-                    <th class="text-center" style="width: 100px;">操作</th>
+                    <th>专业层次</th>
+                    <th class="text-center" style="width: 150px;">操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -20,9 +21,12 @@
                                 {{$speciality->name}}
                             </td>
                             <td>
-                                <a href="{{route('admin.colleges.specialities.edit', ['college' => $college->id, 'specialities' => $speciality->id])}}">修改</a>
+                              {{$speciality->degree->name}}
+                            </td>
+                            <td>
+                                <a class="btn btn-xs btn-primary" href="{{route('admin.colleges.specialities.edit', ['college' => $college->id, 'specialities' => $speciality->id])}}">修改</a>
 
-                                <a href="{{ route('admin.requirement.index', ['type' => get_class($speciality), 'id' => $speciality->id ]) }}">设置申请要求</a>
+                                <a class="btn btn-xs btn-primary" href="{{ route('admin.requirement.index', ['type' => get_class($speciality), 'id' => $speciality->id ]) }}">设置申请要求</a>
                             </td>
                         </tr>
                     @endforeach
