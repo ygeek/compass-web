@@ -110,7 +110,7 @@
                     <button v-if="liked == 1" class="estimate-button" @click="dislikeCollege">取消收藏 <span class="heart"></span></button>
                 </template>
 
-                <like-college 
+                <like-college
                     college_id="{{ $college->id }}"
                     liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 0;}}else{echo 0;} ?>"
                 ></like-college>
@@ -167,12 +167,12 @@
                     <div class="tag-area">
                         <div class="tag-select">
                             <tag-select label-name="学位类型" :selects="degrees" :selected_id.sync="selected_degree_id"></tag-select>
-                            <input type="hidden" v-model="selected_degree_id" name="selected_degree_id" value="{{ app('request')->input('selected_degree_id') }}"/>
+                            <input number type="hidden" v-model="selected_degree_id" name="selected_degree_id" value="{{ app('request')->input('selected_degree_id') }}"/>
                         </div>
 
                         <div class="tag-select">
                             <tag-select label-name="选择专业方向" :selects="categories" :selected_id.sync="selected_category_id"></tag-select>
-                            <input type="hidden" v-model="selected_category_id" name="selected_category_id" value="{{ app('request')->input('selected_category_id') }}"/>
+                            <input number type="hidden" v-model="selected_category_id" name="selected_category_id" value="{{ app('request')->input('selected_category_id') }}"/>
                         </div>
                     </div>
                     </form>
@@ -184,7 +184,7 @@
             <div>
                 <label>@{{ labelName }}</label>
                 <div class="tags">
-                    <div class="tag"  v-bind:class="{'active': selected_id == null}">
+                    <div class="tag"  v-bind:class="{'active': selected_id === null || selected_id === 0 }">
                         <span v-on:click="select_item(null)">不限</span>
                     </div>
                     <div v-for="item in selects" class="tag" v-on:click="select_item(item.id)" v-bind:class="{'active': selected_id == item.id}">
