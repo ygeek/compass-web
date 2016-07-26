@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="renderer" content="webkit">
     <title>指南针留学</title>
     <link rel="stylesheet" type="text/css" href="{{ elixir('css/app.css')}}" />
     <meta id="_token" value="{{ csrf_token() }}">
