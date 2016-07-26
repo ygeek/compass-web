@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <label for="badge_path">院校Logo</label>
-                            <input class="form-control input-lg" type="file" id="badge_path" name="badge_path" placeholder="Enter your location..">
+                            <input @change="checkinfo" class="form-control input-lg" type="file" id="badge_path" name="badge_path" placeholder="Enter your location..">
                         </div>
                         @if($college->badge_path)
                             <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" height="40px;"/>
@@ -90,12 +90,13 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <label for="background_image_path">院校背景图</label>
-                            <input class="form-control input-lg" type="file" id="background_image_path" name="background_image_path" placeholder="Enter your location..">
+                            <input @change="checkinfo" class="form-control input-lg" type="file" id="background_image_path" name="background_image_path">
                         </div>
                         @if($college->background_image_path)
                             <img src="{{app('qiniu_uploader')->pathOfKey($college->background_image_path)}}" height="40px;"/>
                         @endif
                     </div>
+
 
                     <div class="form-group">
                       <label class="col-xs-12" for="country_select">院校地区</label>
@@ -239,6 +240,28 @@ Vue.component('college-create-form', {
       selected_country: {{$country or 'null'}},
       selected_state: {{$state or 'null'}},
       selected_city: {{$city or 'null'}}
+    }
+  },
+  methods: {
+    checkinfo: function(e){
+      var obj = e.target
+      var len = obj.files.length;
+
+      var text="";
+      var empty = false;
+      for (var i =0 ; i < len ; i++){
+        var file_size = (obj.files[i].size / 1024 / 1024).toFixed(2);
+        if(file_size * 100 > 200){
+          text += "文件:"+obj.files[i].name+" ,大小:"+ file_size +"M\n";
+          text += "图片大小请勿太大（2M以下）否则将导致用户加载困难"
+          empty = true;
+          alert(text);
+        }
+      }
+
+      if(empty){
+        e.target.value = "";
+      }
     }
   },
   computed: {
