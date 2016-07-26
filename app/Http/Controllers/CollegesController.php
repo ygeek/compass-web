@@ -120,7 +120,7 @@ class CollegesController extends Controller
         if(!in_array($rank, ['us_new_ranking', 'times_ranking', 'qs_ranking'])){
             abort(404);
         }
-        
+
 
         //取出系统中所有院校的英文名
         $exist_colleges_english_name = collect(DB::select('select english_name from colleges'))->map(function($item){
@@ -151,10 +151,12 @@ class CollegesController extends Controller
 
     public function getRandomHotColleges(Request $request){
         $number = $request->input('number', 4);
-        return College::where('hot', true)->get()->random($number)->map(function($item){
+        $res = College::where('recommendatory', true)->orderByRaw('RAND()')->limit(4)->get()->map(function($item){
             $item->toefl_score = $item->toeflRequirement('本科');
             $item->ielts_score = $item->ieltsRequirement('本科');
+            $item->badge_path = app('qiniu_uploader')->pathOfKey($item->badge_path);
             return $item;
-        })->toArray();
+        });
+        return $res;
     }
 }

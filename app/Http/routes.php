@@ -15,7 +15,7 @@ Route::post('/dislike_college', 'FavoritesController@cancelFavorite')->name('lik
 Route::get('/colleges', 'CollegesController@index')->name('colleges.index');
 Route::get('/colleges_rank', 'CollegesController@rank')->name('colleges.rank');
 Route::get('/colleges/{key}', 'CollegesController@show')->name('colleges.show');
-Route::post('/hot_colleges', 'CollegesController@getRandomHotColleges')->name('colleges.hot_colleges');
+Route::get('/hot_colleges', 'CollegesController@getRandomHotColleges')->name('colleges.hot_colleges');
 
 Route::group(['prefix' => 'home'], function (){
     Route::get('/', 'HomeController@index')->name('home.index');
