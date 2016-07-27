@@ -46,8 +46,9 @@
                     </tr>
                 @endforeach
             </table>
+            <?php unset($college) ?>
             <div style="padding-top: 20px;">
-              @include('colleges.sidebar', ['area_id' => $college['administrative_area_id']])
+              @include('colleges.sidebar')
             </div>
 
             <div style="padding-left: 250px;">

@@ -233,7 +233,7 @@
                   </div>
 
                   <div class="hot-content">
-                      @include('colleges.sidebar', ['area_id' => $college['administrative_area_id']])
+                      @include('colleges.sidebar', ['college' => $college])
                   </div>
                 </div>
             </div>

@@ -1871,6 +1871,7 @@ ul {
     background-color: #fff;
     margin-bottom: 1px; }
     .college-sidebar .tab span {
+      cursor: pointer;
       display: inline-block;
       width: 90px;
       margin: 0 20.5px;
