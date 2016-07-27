@@ -45,7 +45,10 @@
                             <img class="college-badge" v-bind:src="intention.badge_path" />
                             <div class="college-info">
                                 <header>
-                                    <h1>@{{intention['college'].chinese_name}}</h1>
+                                    <a v-bind:href="intention.redirect_url" target="_blank">
+                                      <h1>@{{intention['college'].chinese_name}}</h1>
+                                    </a>
+
                                     <h2>@{{intention['college'].english_name}}</h2>
 
                                     <div class="ielts-and-toelf-requirement">

@@ -111,7 +111,7 @@ class HomeController extends Controller
                 Flash::message('两次密码输入不一致');
                 return back();
             }
-            
+
             $user->password = bcrypt($password);
             $user->save();
             Flash::message('密码修改成功');
@@ -153,10 +153,11 @@ class HomeController extends Controller
                 $intention['college']['toefl_requirement'] = $college->toeflRequirement($intentions['degree']->name);
                 $intention['college']['ielts_requirement'] = $college->ieltsRequirement($intentions['degree']->name);
                 $intention['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
+                $intention['redirect_url'] = route('colleges.show', ['key' => $college->key]);
                 return $intention;
             });
         }
-        
+
         $speciality_categories = \App\SpecialityCategory::all()->toArray();
         return view('home.intentions', compact('intentions', 'speciality_categories'));
     }
