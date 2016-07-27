@@ -1801,6 +1801,7 @@ ul{
 
     .college-galleries{
       @include clearfix;
+      margin-right: -12px;
       .college-gallery{
         cursor: pointer;
         width: 267px;
