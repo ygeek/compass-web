@@ -1737,6 +1737,10 @@ ul {
 
 .college-page .college-pages {
   position: relative; }
+  .college-page .college-pages .page-content {
+    float: left; }
+  .college-page .college-pages .hot-content {
+    float: right; }
   .college-page .college-pages:after {
     content: "";
     display: table;
@@ -1773,7 +1777,8 @@ ul {
       background: #fff;
       width: calc(100% - 270px); }
   .college-page .college-pages .college-applications {
-    width: 827px; }
+    width: 827px;
+    float: left; }
     .college-page .college-pages .college-applications:after {
       content: '';
       display: block;
@@ -1854,11 +1859,7 @@ ul {
 
 .college-sidebar {
   width: 266px;
-  margin-left: 10px;
-  float: left;
-  position: absolute;
-  right: 0;
-  top: 0; }
+  float: right; }
   .college-sidebar:after {
     content: "";
     display: table;

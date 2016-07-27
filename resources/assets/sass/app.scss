@@ -1721,6 +1721,13 @@ ul{
     }
   }
   .college-pages{
+    .page-content{
+      float: left;
+    }
+    .hot-content{
+      float: right;
+    }
+
     @include clearfix;
     position: relative;
     .college-overview{
@@ -1758,6 +1765,7 @@ ul{
     }
     .college-applications{
       width: 827px;
+      float: left;
       &:after{
         content: '';
         display: block;
@@ -1858,11 +1866,8 @@ ul{
 .college-sidebar{
   @include clearfix;
   width: 266px;
-  margin-left: 10px;
-  float: left;
-  position: absolute;
-  right: 0;
-  top: 0;
+  float: right;
+
   .tab{
     height: 54px;
     background-color: #fff;
