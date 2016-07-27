@@ -17,6 +17,11 @@
 
   $data = json_encode($data);
  ?>
+
+<p>
+  Tips: 排行榜标签设置为 us_new times qs 澳洲 美国 新西兰 英国 。设置为相应标签可以被院校读取到。
+</p>
+
 <rankings :rankings="{{ $data }}"></rankings>
 <template id="rankings">
   <button @click="save">保存</button>
