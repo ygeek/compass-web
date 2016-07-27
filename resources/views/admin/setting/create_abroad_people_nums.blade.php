@@ -9,7 +9,7 @@
   }
  ?>
 
-    <setting></setting>
+    <setting value='{{$data}}'></setting>
     <template id="setting">
         <h1>出国人数设置</h1>
 
