@@ -8,7 +8,7 @@
             <?php
               $articles = App\Article::whereHas('category', function($q){
                 return $q->where('key', 'guan-yu');
-            })->orderBy('articles.order_weight')->limit(4)->get();
+            })->whereNull('college_id')->orderBy('articles.order_weight')->limit(4)->get();
             ?>
 
             @foreach($articles as $article)
@@ -20,7 +20,7 @@
             <?php
               $articles = App\Article::whereHas('category', function($q){
                 return $q->where('key', 'you-qing-lian-jie');
-            })->orderBy('articles.order_weight')->limit(4)->get();
+            })->whereNull('college_id')->orderBy('articles.order_weight')->limit(4)->get();
             ?>
 
             @foreach($articles as $article)
