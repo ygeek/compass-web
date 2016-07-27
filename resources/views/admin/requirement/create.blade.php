@@ -86,7 +86,13 @@
                                     @{{ examination.examination_name }}
                                 </td>
                                 <td>
-                                    <input type="text" v-model="examination['requirement']"  v-if="!examination.tagable">
+                                    <template v-if="examination.examination_name !== '备注'">
+                                      <input type="text" v-model="examination['requirement']"  v-if="!examination.tagable">
+                                    </template>
+
+                                    <template v-if="examination.examination_name == '备注'">
+                                      <textarea v-model="examination['requirement']"  v-if="!examination.tagable"></textarea>
+                                    </template>
 
                                     <template v-if="examination.tagable">
                                         <tag-setting :examination.sync="examination">
