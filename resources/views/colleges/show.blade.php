@@ -71,32 +71,32 @@
             </div>
         </div>
 
-        <div class="college-page-nav" id="colelge-page-nav">
+        <div class="college-page-nav" id="college-page-nav">
             <div class="app-content">
                 <ul>
-                    <a href="{{ route('colleges.show', ['key' => $college->key]) }}">
+                    <a href="{{ route('colleges.show', ['key' => $college->key]) }}#college-page-nav">
                         <li @if($article_key == 'xue-xiao-gai-kuang')class="active"@endif>
                             学校概况
                         </li>
                     </a>
-                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}">
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}#college-page-nav">
                         <li @if($article_key == 'lu-qu-qing-kuang')class="active"@endif>
                             录取情况
                         </li>
                     </a>
 
-                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'specialities']) }}">
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'specialities']) }}#college-page-nav">
                         <li @if($article_key == 'specialities')class="active"@endif>
                             专业
                         </li>
                     </a>
 
-                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'tu-pian']) }}">
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'tu-pian']) }}#college-page-nav">
                         <li @if($article_key == 'tu-pian')class="active"@endif>
                             图片
                         </li>
                     </a>
-                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue', 'desc' => '1']) }}">
+                    <a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue', 'desc' => '1']) }}#college-page-nav">
                         <li @if($article_key == 'liu-xue-gong-lue')class="active"@endif>
                             留学攻略
                         </li>
