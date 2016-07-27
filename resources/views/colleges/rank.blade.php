@@ -47,7 +47,7 @@
                 @endforeach
             </table>
             <div style="padding-top: 20px;">
-              @include('colleges.sidebar')
+              @include('colleges.sidebar', ['area_id' => $college['administrative_area_id']])
             </div>
 
             <div style="padding-left: 250px;">

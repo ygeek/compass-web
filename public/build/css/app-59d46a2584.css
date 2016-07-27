@@ -1870,15 +1870,15 @@ ul {
     height: 54px;
     background-color: #fff;
     margin-bottom: 1px; }
-    .college-sidebar .tab a {
+    .college-sidebar .tab span {
       display: inline-block;
       width: 90px;
-      margin: 0 88px;
+      margin: 0 20.5px;
       height: 55px;
       line-height: 55px;
       text-align: center;
       color: #6c6c6c; }
-      .college-sidebar .tab a:hover {
+      .college-sidebar .tab span:hover {
         height: 52px;
         color: #0e2d60;
         border-bottom: 3px solid #0e2d60;
