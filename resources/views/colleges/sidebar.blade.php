@@ -1,6 +1,5 @@
 <div class="college-sidebar">
     <div class="tab">
-        <!--<a href="javascript:void(0)">同城院校</a>-->
         <a class="active" href="javascript:void(0)">热门院校</a>
     </div>
 
@@ -8,7 +7,7 @@
 
     @foreach($hot_colleges as $college)
     <div class="college-single">
-        <img src=""/>
+        <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"/>
         <div class="separator"></div>
         <div class="row">
             <span class="name left">{{$college->chinese_name}}</span>

@@ -82,7 +82,7 @@
                     </li>
 
                     <li>
-                        <button type="btn btn-primary" data-toggle="block-option" @click="showPop=true">添加@{{category.name}}排行榜</button>
+                        <button type="btn btn-primary" data-toggle="block-option" @click="startAddRanking">添加@{{category.name}}排行榜</button>
                     </li>
                 </ul>
             </li>
@@ -231,8 +231,18 @@ Vue.component('rank-editor', {
       }
     },
     methods: {
-      starAddRanking: function(){
+      initTmpRanking: function(){
+        this.tmpRanking = {
+          order: 0,
+          name: null,
+          tag: null,
+          rank: []
+        }
 
+      },
+      startAddRanking: function(){
+        this.initTmpRanking()
+        this.showPop = true
       },
       removeRanking: function(ranking_id){
         if(confirm('确定删除排行榜？')){

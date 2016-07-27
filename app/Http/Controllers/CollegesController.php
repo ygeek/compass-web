@@ -136,13 +136,56 @@ class CollegesController extends Controller
             abort(404);
         }
 
+        $selected_category_id = $request->input('category_id');
+        $selected_ranking_id = $request->input('ranking_id');
+        //如果没有传此参数 可以去取一个排行榜的分类id
+
+        $rankings = Setting::get('rankings');
+
+        if(!$selected_category_id){
+          if(count($rankings['rankings']) > 0){
+            $first_ranking = $rankings['rankings'][0];
+            $selected_category_id = $first_ranking['category_id'];
+            $selected_ranking_id = $first_ranking['_id'];
+          }
+        }
+
+        $ranking_categories = $rankings['categories'];
+
+        $rankings_for_show = [];
+
+        //当前显示的排行榜
+        $activing_ranking = null;
+
+        foreach ($rankings['rankings'] as $ranking) {
+          if($ranking['category_id'] == $selected_category_id){
+            $rankings_for_show[] = $ranking;
+          }
+        }
+
+
+        if(!$selected_ranking_id && count($rankings_for_show) > 0){
+          $selected_ranking_id = $rankings_for_show[0]['_id'];
+        }
+
+        foreach ($rankings_for_show as $ranking) {
+          if($ranking['_id'] == $selected_ranking_id){
+            $activing_ranking = $ranking;
+            break;
+          }
+        }
+
+        $index = 0;
+        for ($index=0; $index < count($activing_ranking['rank']); $index++) {
+          $activing_ranking['rank'][$index]['rank'] = $index + 1;
+        }
 
         //取出系统中所有院校的英文名
         $exist_colleges_english_name = collect(DB::select('select english_name from colleges'))->map(function($item){
             return $item->english_name;
         });
 
-        $rank_items = collect(Setting::get($rank, []));
+        $rank_items = collect($activing_ranking['rank']);
         //先排序 再take
         $rank_items = $rank_items->sortBy('rank');
 
@@ -161,7 +204,14 @@ class CollegesController extends Controller
                 'path' => route('colleges.rank')
             ]);
 
-        return view('colleges.rank', ['colleges' => $paginated_rank_items, 'rank' => $rank]);
+        return view('colleges.rank', [
+          'colleges' => $paginated_rank_items,
+          'rank' => $rank,
+          'ranking_categories' => $ranking_categories,
+          'selected_category_id' => $selected_category_id,
+          'selected_ranking_id' => $selected_ranking_id,
+          'rankings_for_show' => $rankings_for_show
+        ]);
     }
 
     public function getRandomHotColleges(Request $request){

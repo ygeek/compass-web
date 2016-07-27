@@ -5,38 +5,45 @@
         <div class="app-content">
             @include('shared.top_bar')
             <ul class="tabs">
-                <a href="{{ route('colleges.rank') }}"><li class="tab @if($rank == 'us_new_ranking') active @endif">
-                    U.S.News排名
-                </li></a>
-                <a href="{{ route('colleges.rank', ['rank' => 'qs_ranking']) }}"><li class="tab @if($rank == 'qs_ranking') active @endif">
-                    QS排名
-                </li></a>
-                <a href="{{ route('colleges.rank', ['rank' => 'times_ranking']) }}"><li class="tab @if($rank == 'times_ranking') active @endif">
-                    Times排名
-                </li></a>
+                @foreach($rankings_for_show as $ranking)
+                  <a href="{{ route('colleges.rank', ['category_id' => $selected_category_id, 'ranking_id' => $ranking['_id']]) }}">
+                    <li class="tab @if($selected_ranking_id == $ranking['_id']) active @endif">
+                        {{$ranking['name']}}
+                    </li>
+                  </a>
+                @endforeach
             </ul>
         </div>
     </div>
 
     <div class="colleges-rank-page-content">
         <div class="app-content">
+
             <div class="rank-list">
-                <span class="level-1">世界大学排名</span>
-                <a class="level-2" href="#">2016 U.S.NEWS</a>
-                <span class="level-3">2016 U.S.NEWS</span>
+                @foreach($ranking_categories as $category)
+                  @include('colleges.rank_category', ['category' => $category, 'level' => 1, 'selected_category_id' => $selected_category_id])
+                @endforeach
             </div>
+
             <table class="colleges">
                 @foreach($colleges as $college)
                     <tr>
                     <td class="rank">{{ $college['rank'] }}</td>
                     <td class="chinese_name">{{ $college['chinese_name'] }}</td>
                     <td class="english_name">{{ $college['english_name'] }}</td>
+                    @if(isset($college['world_ranking']))
+                    <td class="english_name">世界排名: {{$college['world_ranking']}}</td>
+                    @endif
                     <td class="actions">@if($college['key'])<a href="{{ route('estimate.step_first') }}"><button class="estimate-button">测试录取率 -></button></a>@endif</td>
                     </tr>
                 @endforeach
             </table>
             @include('colleges.sidebar')
-            {{ $colleges->appends(app('request')->except('page'))->render() }}
+
+            <div style="padding-left: 250px;">
+              {{ $colleges->appends(app('request')->except('page'))->render() }}
+            </div>
+
         </div>
     </div>
 

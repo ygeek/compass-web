@@ -1332,6 +1332,7 @@ ul{
   }
   .tabs{
     float: left;
+    padding-left: 250px;
     width: 600px;
     font-size: 15px;
     color: #6c6c6c;
@@ -1377,6 +1378,10 @@ ul{
         line-height: 35px;
         color: #fff;
         text-align: center;
+        &.active{
+          color: #0e2d60 !important;
+          font-weight: bold;
+        }
       }
       .level-2{
         display: block;
@@ -1384,6 +1389,10 @@ ul{
         line-height: 30px;
         padding-left: 26px;
         color: #000;
+        &.active{
+          color: #0e2d60 !important;
+          font-weight: bold;
+        }
       }
       .level-3{
         display: block;
@@ -1391,7 +1400,12 @@ ul{
         line-height: 30px;
         padding-left: 36px;
         color: #000;
+        &.active{
+          color: #0e2d60 !important;
+          font-weight: bold;
+        }
       }
+
     }
     table{
       width: 608px;
