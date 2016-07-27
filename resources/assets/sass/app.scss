@@ -1858,7 +1858,8 @@ ul{
   width: 266px;
   margin-left: 10px;
   float: left;
-  padding-top: 20px;
+  position: absolute;
+  right: 0;
   @include clearfix;
   .tab{
     height: 54px;
