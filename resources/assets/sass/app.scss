@@ -1874,8 +1874,6 @@ ul{
     margin-bottom: 1px;
     a{
       display: inline-block;
-      //width: 90px;
-      //margin: 0 20.5px;
       width: 90px;
       margin: 0 88px;
       height: 55px;
@@ -1930,7 +1928,7 @@ ul{
   }
   img {
     width: 242px;
-    height: 105px;
+    height: 77px  ;
   }
   .row{
     @include clearfix;
