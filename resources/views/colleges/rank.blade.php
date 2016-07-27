@@ -38,7 +38,9 @@
                     </tr>
                 @endforeach
             </table>
-            @include('colleges.sidebar')
+            <div style="padding-top: 20px;">
+              @include('colleges.sidebar')
+            </div>
 
             <div style="padding-left: 250px;">
               {{ $colleges->appends(app('request')->except('page'))->render() }}
