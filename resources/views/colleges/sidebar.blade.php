@@ -7,10 +7,15 @@
     </div>
     @foreach($hot_colleges as $college)
     <div class="college-single">
-        <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"/>
+        <a href="{{route('colleges.show', ['key' => $college->key])}}" target="_blank">
+          <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"/>
+        </a>
         <div class="separator"></div>
         <div class="row">
+          <a style="color: #6c6c6c" href="{{route('colleges.show', ['key' => $college->key])}}" target="_blank">
             <span class="name left">{{$college->chinese_name}}</span>
+          </a>
+
             <span class="right">本国排名：{{$college->domestic_ranking}}</span>
         </div>
         <div class="row">
