@@ -1,10 +1,10 @@
+<?php $hot_colleges = App\College::where('hot', true)->get(); ?>
+
+@if(count($hot_colleges) > 0 )
 <div class="college-sidebar">
     <div class="tab">
         <a class="active" href="javascript:void(0)">热门院校</a>
     </div>
-
-    <?php $hot_colleges = App\College::where('hot', true)->get(); ?>
-
     @foreach($hot_colleges as $college)
     <div class="college-single">
         <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"/>
@@ -23,3 +23,4 @@
     </div>
     @endforeach
 </div>
+@endif
