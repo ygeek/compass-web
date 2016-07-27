@@ -9,12 +9,14 @@
   <link rel="stylesheet" type="text/css" href="/dash-assets/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="/dash-assets/css/oneui.min.css" />
   <link rel="stylesheet" type="text/css" href="/dash-assets/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
+  <link rel="stylesheet" href="/dash-assets/sweetalert/sweetalert.min.css">
   <meta id="_token" value="{{ csrf_token() }}">
   <script src="/js/jquery-3.0.0.min.js"></script>
   <script src="/dash-assets/js/oneui.min.js"></script>
   <script src="/js/vue.js"></script>
   <script src="/js/vue-resource.min.js"></script>
   <script src="/dash-assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <script src="/dash-assets/sweetalert/sweetalert.min.js"></script>
   <style type="text/css">
   .red{
     border: solid red 1px;
@@ -102,11 +104,15 @@
   @endif
 
   @if (count($errors) > 0)
-    <div class="shanbox alert-{{ Session::get('flash_notification.level') }}">
-      @foreach ($errors->all() as $error)
-        {{ $error }}
-      @endforeach
-    </div>
+    <?php
+      $message = "";
+      foreach ($errors->all() as $error){
+        $message.=(($message!="")?";":"") . $error;
+      }
+    ?>
+    <script>
+      swal('出错了', '{!! $message !!}', 'error');
+    </script>
   @endif
 
   <div id="app">

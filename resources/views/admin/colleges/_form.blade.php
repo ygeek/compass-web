@@ -25,11 +25,11 @@
                 <div class="col-sm-7">
                     <div class="form-group">
                         <div class="col-xs-6">
-                            <label for="chinese_name">中文名</label>
+                            <label for="chinese_name">中文名<span class="text-danger">*</span></label>
                             <input class="form-control input-lg" type="text" value="{{$college->chinese_name}}" id="chinese_name" name="chinese_name" placeholder="输入院校的中文名称..">
                         </div>
                         <div class="col-xs-6">
-                            <label for="english_name">英文名</label>
+                            <label for="english_name">英文名<span class="text-danger">*</span></label>
                             <input class="form-control input-lg" type="text" value="{{$college->english_name}}" id="english_name" name="english_name" placeholder="输入院校的英文名称..">
                         </div>
                     </div>
@@ -99,7 +99,7 @@
 
 
                     <div class="form-group">
-                      <label class="col-xs-12" for="country_select">院校地区</label>
+                      <label class="col-xs-12" for="country_select">院校地区<span class="text-danger">*</span></label>
                       <input type="hidden" name="administrative_area_id" v-model="administrative_area_id"/>
                       <div class="row">
                         <div class="col-xs-12">
