@@ -1,11 +1,11 @@
 <div class="form-group">
-    <label class="col-xs-12" for="register1-name">专业名称</label>
+    <label class="col-xs-12" for="register1-name">专业名称<span class="text-danger">*</span></label>
     <div class="col-xs-12">
         <input class="form-control" type="text" id="register1-name" name="name" placeholder="输入专业名称" value="{{$speciality->name}}">
     </div>
 </div>
 <div class="form-group">
-    <label class="col-xs-12" for="contact1-degree">专业学位</label>
+    <label class="col-xs-12" for="contact1-degree">专业学位<span class="text-danger">*</span></label>
     <div class="col-xs-12">
         <select class="form-control" id="contact1-degree" name="degree_id">
             @foreach($degrees as $degree)

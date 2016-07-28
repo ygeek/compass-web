@@ -68,3 +68,4 @@ attributes:
   chinese_name: 中文名
   english_name: 英文名
   degree_ids: 所拥有学历
+  name: 专业名称

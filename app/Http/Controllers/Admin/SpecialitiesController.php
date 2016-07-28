@@ -29,6 +29,11 @@ class SpecialitiesController extends Controller
     }
 
     public function store($college_id, Request $request){
+        $this->validate($request, [
+            'degree_id' => 'required',
+            'name' => 'required|unique:specialities,name,NULL,id,degree_id,' . $request->input('degree_id')
+        ]);
+
         $college = College::with('specialities')->find($college_id);
         $speciality = new Speciality($request->all());
         $speciality->college_id = $college_id;
