@@ -74,6 +74,8 @@
         <div class="college-page-nav" id="college-page-nav">
             <div class="app-content">
                 <ul>
+                    <img src="{{app('qiniu_uploader')->pathOfKey($college->icon_path)}}" alt="icon"/>
+                    <span class="separator">●</span>
                     <a href="{{ route('colleges.show', ['key' => $college->key]) }}#college-page-nav">
                         <li @if($article_key == 'xue-xiao-gai-kuang')class="active"@endif>
                             学校概况

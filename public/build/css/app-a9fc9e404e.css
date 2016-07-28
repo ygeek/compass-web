@@ -1681,12 +1681,24 @@ ul {
     clear: both; }
   .college-page .college-page-nav ul {
     float: left;
-    width: 600px;
+    width: 700px;
     font-size: 15px;
     color: #6c6c6c; }
     .college-page .college-page-nav ul a {
       font-size: 15px;
       color: #6c6c6c; }
+    .college-page .college-page-nav ul img {
+      display: inline-block;
+      width: 54px;
+      height: 54px;
+      vertical-align: top; }
+    .college-page .college-page-nav ul .separator {
+      display: inline-block;
+      margin: 0 15px;
+      font-size: 15px;
+      color: #0e2d60;
+      line-height: 50px;
+      font-weight: 900; }
     .college-page .college-page-nav ul li {
       height: 50px;
       line-height: 50px;

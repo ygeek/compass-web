@@ -51,6 +51,11 @@ class SpecialitiesController extends Controller
     }
 
     public function update($college_id, $speciality_id, Request $request){
+        $this->validate($request, [
+            'degree_id' => 'required',
+            'name' => 'required|unique:specialities,name,NULL,id,degree_id,' . $request->input('degree_id')
+        ]);
+
         $speciality = Speciality::find($speciality_id);
         $speciality->update($request->all());
         return redirect()->route('admin.colleges.specialities.index', $college_id);

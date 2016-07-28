@@ -219,7 +219,7 @@
         </div>
         <div class="link">
           <?php
-            $more = App\Setting::get('index_more',array('#','#','#'));
+            $more = App\Setting::get('index_more', ['#','#','#']);
           ?>
           <div class="text-box lang-study">
             <div class="clear">

@@ -97,6 +97,15 @@
                         @endif
                     </div>
 
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label for="background_image_path">小图标</label>
+                            <input @change="checkinfo" class="form-control input-lg" type="file" id="icon_path" name="icon_path">
+                        </div>
+                        @if($college->icon_path)
+                            <img src="{{app('qiniu_uploader')->pathOfKey($college->icon_path)}}" height="40px;"/>
+                        @endif
+                    </div>
 
                     <div class="form-group">
                       <label class="col-xs-12" for="country_select">院校地区<span class="text-danger">*</span></label>
@@ -129,7 +138,7 @@
                       </div>
 
                     <div class="form-group">
-                        <label class="col-xs-12">所拥有学位</label>
+                        <label class="col-xs-12">所拥有学位<span class="text-danger">*</span></label>
                         <div class="col-xs-12">
                             @foreach($degrees as $degree)
                                 <div class="checkbox">

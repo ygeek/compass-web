@@ -95,6 +95,13 @@ class CollegesController extends BaseController
                 $college->background_image_path = $key;
             }
 
+            $icon_path = $request->file('icon_path');
+            if($icon_path){
+                $result = app('qiniu_uploader')->upload_file($icon_path);
+                $key = $result['key'];
+                $college->icon_path = $key;
+            }
+
             $college->save();
             $degree_ids = $request->input('degree_ids');
             $college->degrees()->attach($degree_ids);
@@ -185,6 +192,13 @@ class CollegesController extends BaseController
             $result = app('qiniu_uploader')->upload_file($background_image_path);
             $key = $result['key'];
             $college->background_image_path = $key;
+        }
+
+        $icon_path = $request->file('icon_path');
+        if($icon_path){
+            $result = app('qiniu_uploader')->upload_file($icon_path);
+            $key = $result['key'];
+            $college->icon_path = $key;
         }
 
         $college->save();

@@ -1644,14 +1644,27 @@ ul{
     }
     ul{
       float: left;
-      width: 600px;
+      width: 700px;
       font-size: 15px;
       color: #6c6c6c;
       a{
         font-size: 15px;
         color: #6c6c6c;
       }
-
+      img{
+        display: inline-block;
+        width: 54px;
+        height: 54px;
+        vertical-align: top;
+      }
+      .separator{
+        display: inline-block;
+        margin: 0 15px;
+        font-size: 15px;
+        color: #0e2d60;
+        line-height: 50px;
+        font-weight: 900;
+      }
       li{
         height: 50px;
         line-height: 50px;
