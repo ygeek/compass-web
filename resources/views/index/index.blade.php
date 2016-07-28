@@ -218,10 +218,13 @@
           </div>
         </div>
         <div class="link">
+          <?php
+            $more = App\Setting::get('index_more',array('#','#','#'));
+          ?>
           <div class="text-box lang-study">
             <div class="clear">
               <h3>语言学习</h3>
-              <a href="#" class="more" target="_blank">更多></a>
+              <a href="{{ $more[0] }}" class="more" target="_blank">更多></a>
             </div>
             <?php
               $articles = App\Article::whereHas('category', function($q){
@@ -236,7 +239,7 @@
           <div class="text-box study-abroad">
             <div class="clear">
               <h3>留学攻略</h3>
-              <a href="#" class="more" target="_blank">更多></a>
+              <a href="{{ $more[1] }}" class="more" target="_blank">更多></a>
             </div>
             <?php
               $articles = App\Article::whereHas('category', function($q){
@@ -251,7 +254,7 @@
           <div class="text-box immigrant">
             <div class="clear">
               <h3>移民攻略</h3>
-              <a href="#" class="more" target="_blank">更多></a>
+              <a href="{{ $more[2] }}" class="more" target="_blank">更多></a>
             </div>
             <?php
               $articles = App\Article::whereHas('category', function($q){

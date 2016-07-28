@@ -55,6 +55,10 @@
           </li>
 
           <li>
+            <a href="{{ route('admin.setting.index', ['key' => 'index_more']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">首页“更多”链接设置</span></a>
+          </li>
+
+          <li>
             <a href="{{ route('admin.setting.index', ['key' => 'rankings']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">排行榜设置</span></a>
           </li>
 
