@@ -289,6 +289,8 @@ Vue.component('college-create-form', {
           value: item.id,
           name: item.name
         };
+      }).sort(function (a, b) {
+          return a.name.localeCompare(b.name);
       });
     },
     states: function(){
@@ -306,7 +308,9 @@ Vue.component('college-create-form', {
               name: _item.name
             };
           });
-          return children;
+          return children.sort(function (a, b) {
+              return a.name.localeCompare(b.name);
+          });
         }
       }
 
@@ -355,7 +359,9 @@ Vue.component('college-create-form', {
               };
             });
             if(children.length > 0){
-              return children;
+              return children.sort(function (a, b) {
+                  return a.name.localeCompare(b.name);
+              });
             }
           }
         }

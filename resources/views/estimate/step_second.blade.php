@@ -34,7 +34,14 @@
                             <label for="cee">高考</label>
                             <div class="estimate-short-select" style="position: relative; top: 15px;">
                                 <select name="cee_province" v-model="data['examinations']['高考']['tag']">
-                                    @foreach(config('provinces') as $province)
+                                    <?php
+                                        $provinces = collect(config('provinces'))->sortBy(function ($product, $key) {
+                                            if ($product==="重庆")
+                                                return iconv('UTF-8', 'GBK//IGNORE', "崇庆");
+                                            return iconv('UTF-8', 'GBK//IGNORE', $product);
+                                        });
+                                    ?>
+                                    @foreach($provinces as $province)
                                         <option value="{{ $province }}">{{$province}}</option>
                                     @endforeach
                                 </select>
