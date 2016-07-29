@@ -167,8 +167,8 @@ class CollegesController extends BaseController
     {
         $this->validate($request, [
             'administrative_area_id' => 'required',
-            'chinese_name' => 'required|unique:colleges',
-            'english_name' => 'required|unique:colleges',
+            'chinese_name' => 'required',
+            'english_name' => 'required',
             'degree_ids' => 'required'
         ]);
 
