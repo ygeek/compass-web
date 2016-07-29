@@ -1,6 +1,5 @@
-<html>
 <head>
-<meta charset="UTF-8" /> 
+<meta charset="GB2312" />
 </head>
 <body>
     <?php 
@@ -52,4 +51,3 @@
     </tr>
     </table>
     </body>
-</html>
