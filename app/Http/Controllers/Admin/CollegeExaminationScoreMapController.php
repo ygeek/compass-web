@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class CollegeExaminationScoreMapController extends Controller
+class CollegeExaminationScoreMapController extends BaseController
 {
     public function index($college_id){
         $college = College::find($college_id);

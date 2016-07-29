@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use Flash;
 use Excel;
 
-class IntentionsController extends Controller
+class IntentionsController extends BaseController
 {
     public function index(Request $request){
         $name = $request->input('name');
