@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class SpecialitiesController extends Controller
+class SpecialitiesController extends BaseController
 {
 
     public function index($college_id){

@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class MessagesController extends Controller
+class MessagesController extends BaseController
 {
 
     protected $client;

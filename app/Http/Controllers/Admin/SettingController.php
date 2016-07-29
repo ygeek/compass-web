@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Input;
-class SettingController extends Controller
+class SettingController extends BaseController
 {
     public function index($key){
         $value = Setting::get($key);
