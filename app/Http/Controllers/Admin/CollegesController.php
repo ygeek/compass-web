@@ -165,6 +165,13 @@ class CollegesController extends BaseController
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'administrative_area_id' => 'required',
+            'chinese_name' => 'required|unique:colleges',
+            'english_name' => 'required|unique:colleges',
+            'degree_ids' => 'required'
+        ]);
+
         $college = College::find($id);
         $college->update($request->all());
 
