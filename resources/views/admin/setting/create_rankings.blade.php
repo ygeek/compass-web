@@ -113,6 +113,10 @@
       <label>排行榜标签</label><input type="text" v-model="rank.tag" />
     </div>
 
+    <div class="form-group">
+      <label>文本格式</label><textarea v-model="textFormat"></textarea>
+    </div>
+
     <table class="table">
     <tr>
         <th>
@@ -163,14 +167,26 @@
 Vue.component('rank-editor', {
     template: '#rank-editor',
     props: ['rank', 'is_world_ranking'],
-    methods: {
-      add: function () {
-          var obj = {chinese_name: null, english_name: null};
-          if(!this.is_world_ranking){
-            obj['world_ranking'] = null;
-          }
 
-          this.rank.rank.push(obj);
+    methods: {
+      keys: function(){
+        var arr = [
+          'chinese_name', 'english_name'
+        ];
+
+        if(!this.is_world_ranking){
+          arr.push('world_ranking')
+        }
+        return arr;
+      },
+      add: function () {
+        var keys = this.keys();
+        var obj = {};
+        keys.forEach(function(key){
+          obj[key] = null;
+        });
+
+        this.rank.rank.push(obj);
       },
 
       remove: function (index) {
@@ -179,6 +195,47 @@ Vue.component('rank-editor', {
 
       save: function(){
         this.$dispatch('edit-rank', this.rank)
+      }
+    },
+    computed: {
+      textFormat: {
+        get: function(){
+          var text = '';
+          this.rank.rank.forEach(function(item){
+            var keys = Object.keys(item);
+
+            var values = [];
+
+            keys.forEach(function(key){
+              values.push(item[key])
+            });
+
+            text += values.join("#")
+            text += "\n"
+          });
+
+          return text;
+        },
+        set: function(newValue){
+          var keys = this.keys();
+
+          var rank = [];
+
+          var items = newValue.split("\n").filter(function(item){
+            return item != ""
+          });
+
+          items.map(function(item){
+            var rank_items = item.split('#');
+            var obj = {};
+            for (var i = 0; i < keys.length; i++) {
+              obj[keys[i]] = rank_items[i]
+            }
+            rank.push(obj);
+          });
+
+          this.rank.rank = rank;
+        }
       }
     }
 })
