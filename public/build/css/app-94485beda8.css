@@ -1494,8 +1494,19 @@ ul {
       .colleges-rank-page-content .rank-list .level-3.active {
         color: #0e2d60 !important;
         font-weight: bold; }
+  .colleges-rank-page-content .rank-content {
+    float: left;
+    width: 608px; }
+    .colleges-rank-page-content .rank-content:after {
+      content: "";
+      display: table;
+      clear: both; }
+    .colleges-rank-page-content .rank-content .colleges {
+      float: left; }
+    .colleges-rank-page-content .rank-content .pagination {
+      float: left; }
   .colleges-rank-page-content table {
-    width: 608px;
+    width: 100%;
     float: left;
     padding-top: 20px;
     border-spacing: 0;
