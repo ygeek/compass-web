@@ -114,7 +114,7 @@
     </div>
 
     <div class="form-group">
-      <label>文本格式</label><textarea v-model="textFormat"></textarea>
+      <label>文本格式</label><textarea rows="10" cols="70" v-model="textFormat"></textarea>
     </div>
 
     <table class="table">
