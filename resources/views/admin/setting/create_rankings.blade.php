@@ -22,7 +22,7 @@
   Tips: 排行榜标签设置为 us_new times qs 澳洲 美国 新西兰 英国 。设置为相应标签可以被院校读取到。
 </p>
 
-<rankings :rankings="{{ $data }}"></rankings>
+<rankings></rankings>
 <template id="rankings">
   <button @click="save">保存</button>
 <div class="row">
@@ -321,11 +321,11 @@ Vue.component('rank-editor', {
 
   Vue.component('rankings', {
     template: '#rankings',
-    props: ['rankings'],
     data: function(){
       return {
         selected_node_id: null,
         currentShowNode: null,
+        rankings: {!! $data !!}
       }
     },
     methods: {
