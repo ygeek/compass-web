@@ -2,6 +2,7 @@
 @section('content')
     <setting></setting>
     <template id="setting">
+        <p>支持"<="、">="、"<"、">"比较符及区间(-)，如0-50。不写符号默认为等于。</p>
         <table class="table">
             <thead>
             <tr>
