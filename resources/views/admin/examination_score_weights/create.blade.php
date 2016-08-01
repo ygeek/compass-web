@@ -14,7 +14,7 @@
             <div class="block-content block-content-narrow">
                 {!! Form::open(['route' => 'admin.examination_score_weights.store', 'class'=> 'form-horizontal']) !!}
                 <div class="form-group">
-                    <label class="col-xs-12" for="name">规则名称</label>
+                    <label class="col-xs-12" for="name">规则名称<span class="text-danger">*</span></label>
                     <div class="col-sm-9">
                         <input required class="form-control" type="text" id="name" name="name" placeholder="规则名称">
                     </div>
