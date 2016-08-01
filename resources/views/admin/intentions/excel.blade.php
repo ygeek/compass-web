@@ -1,5 +1,5 @@
 <head>
-<meta charset="GB2312" />
+<meta charset="UTF-8" />
 </head>
 <body>
     <?php 
