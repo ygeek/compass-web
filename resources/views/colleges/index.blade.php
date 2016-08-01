@@ -37,6 +37,11 @@
                         <tag-select label-name="选择类型" :selects="go8_selects" :selected_id.sync="selected_go8"></tag-select>
                         <input type="hidden" v-model="selected_go8" name="selected_go8" value="{{$selected_go8}}" number/>
                     </div>
+
+                    <div class="tag-select">
+                        <tag-select label-name="选择性质" :selects="property_selects" :selected_id.sync="selected_property"></tag-select>
+                        <input type="hidden" v-model="selected_property" name="selected_property" value="{{$selected_property}}" number/>
+                    </div>
                 </div>
 
                 <div class="order-area">
@@ -150,6 +155,7 @@
                     selected_city_id: null,
                     selected_go8: null,
                     selected_speciality_cateogry_id: null,
+                    selected_property: null,
                     go8_selects: [
                       {
                         id: 1,
@@ -159,6 +165,16 @@
                         id: 2,
                         name: '非八大'
                       }
+                    ],
+                    property_selects: [
+                        {
+                            id: 1,
+                            name: '公立',
+                        },
+                        {
+                            id: 2,
+                            name: '私立'
+                        }
                     ],
                     speciality_categories: <?php
     echo json_encode(

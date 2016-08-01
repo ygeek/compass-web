@@ -15,7 +15,7 @@
                 {!! Form::open(['route' => ['admin.examination_score_weights.update', $weight], 'method' => 'PATCH', 'class'=> 'form-horizontal']) !!}
 
                     <div class="form-group">
-                        <label class="col-xs-12" for="name">规则名称</label>
+                        <label class="col-xs-12" for="name">规则名称<span class="text-danger">*</span></label>
                         <div class="col-sm-9">
                             <input class="form-control" type="text" id="name" name="name" placeholder="规则名称" value="{{$weight->name}}">
                         </div>
