@@ -37,6 +37,10 @@
                     this.list.splice(index, 1);
                 },
                 save: function(){
+                    if (this.list.filter(function(name){ return name == "" }).length!=0){
+                        alert('存在空名称');
+                        return ;
+                    }
                     var url = '{{ route('admin.setting.store', ['key' => $key]) }}';
                     this.$http.post(url, {'value': this.list}).then(function(response){
                         alert('修改成功');
