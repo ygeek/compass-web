@@ -28,6 +28,8 @@ class CollegesController extends Controller
 
         $selected_go8 = $request->input('selected_go8');
 
+        $selected_property = $request->input('selected_property');
+
         $colleges_query = College::with('administrativeArea.parent.parent');
 
         if($college_name){
@@ -72,6 +74,16 @@ class CollegesController extends Controller
           $colleges_query = $colleges_query->where('go8', $condition);
         }
 
+        //查询性质
+        if($selected_property){
+            $condition = 'private';
+            if($selected_property == 1){
+                $condition = 'public';
+            }
+
+            $colleges_query = $colleges_query->where('type', $condition);
+        }
+
         $colleges = $colleges_query->paginate(15);
         return view('colleges.index', compact('areas',
             'speciality_categories',
@@ -81,7 +93,8 @@ class CollegesController extends Controller
             'selected_state_id',
             'selected_country_id',
             'college_name',
-            'selected_go8'
+            'selected_go8',
+            'selected_property'
         ));
     }
 
