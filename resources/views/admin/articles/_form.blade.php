@@ -8,6 +8,8 @@
 
     document.getElementsByTagName( "head" )[0].appendChild( link );
 </script>
+
+@if(isset($college_id))<a class="btn btn-primary" href="{{ route('admin.articles.index', [ 'college_id' => $college_id ]) }}">返回</a>@else<a class="btn btn-primary" href="{{route('admin.articles.index')}}">返回</a>@endif
 <div class="form-group">
     <label class="col-xs-12" for="contact1-category">文章分类</label>
     <div class="col-xs-12">

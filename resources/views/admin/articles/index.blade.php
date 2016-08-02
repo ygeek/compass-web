@@ -3,6 +3,7 @@
     <div class="block">
         <div class="block-header">
             <h3 class="block-title">@if($college){{$college->chinese_name}}@else系统@endif文章列表</h3>
+            @if($college)<a class="btn btn-primary" href="{{route('admin.colleges.index')}}">返回</a>@endif
             <a class="btn btn-primary" href="{{route('admin.articles.create', ['college_id' => $college_id])}}">新增文章</a>
         </div>
         <div class="block-content">

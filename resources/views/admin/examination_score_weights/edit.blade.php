@@ -2,6 +2,7 @@
 @section('content')
     <rule-form></rule-form>
     <template id="rule-form">
+        <a class="btn btn-primary" href="{{ route('admin.examination_score_weights.index') }}">返回</a>
         <div class="block">
             <div class="block-header">
                 <ul class="block-options">

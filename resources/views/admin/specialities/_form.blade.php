@@ -1,3 +1,4 @@
+<a class="btn btn-primary" href="{{ route('admin.colleges.specialities.index', [ 'college' => $college->id ]) }}">返回</a>
 <div class="form-group">
     <label class="col-xs-12" for="register1-name">专业名称<span class="text-danger">*</span></label>
     <div class="col-xs-12">

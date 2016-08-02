@@ -3,7 +3,6 @@
 <div class="block">
     <div class="block-header">
         <h3 class="block-title">院校列表</h3>
-        <a class="btn btn-primary" href="{{route('admin.colleges.create')}}">新增院校</a>
     </div>
     <div class="block-content">
         <form>
@@ -21,6 +20,7 @@
                 @endforeach
             </select>
             <button type="submit" class="btn btn-primary">查询</button>
+            <a class="btn btn-primary" href="{{route('admin.colleges.create')}}">新增院校</a>
             <span>查询到{{count($colleges)}}条记录</span>
         </form>
         <table class="table table-striped table-borderless table-header-bg">

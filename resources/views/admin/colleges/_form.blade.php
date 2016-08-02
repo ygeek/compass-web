@@ -1,6 +1,7 @@
 <college-create-form></college-create-form>
 <?php $degree_ids = $college->degrees->map(function($item){return $item->id;})->toArray() ?>
 <template id="create_form">
+<a class="btn btn-primary" href="{{route('admin.colleges.index')}}">返回</a>
 <div class="block block-bordered">
     <div class="block-header bg-gray-lighter">
         <ul class="block-options">

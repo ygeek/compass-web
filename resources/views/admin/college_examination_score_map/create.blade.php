@@ -3,6 +3,7 @@
     <examination-score-map></examination-score-map>
 
     <template id="examination-score-map">
+        <a class="btn btn-primary" href="{{route('admin.colleges.index')}}">返回</a>
         <div class="js-wizard-simple block">
             <!-- Step Tabs -->
             <ul class="nav nav-tabs nav-justified">
