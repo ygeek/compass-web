@@ -28,6 +28,12 @@
                                 <a class="btn btn-xs btn-primary" href="{{route('admin.colleges.specialities.edit', ['college' => $college->id, 'specialities' => $speciality->id])}}">修改</a>
 
                                 <a class="btn btn-xs btn-primary" href="{{ route('admin.requirement.index', ['type' => get_class($speciality), 'id' => $speciality->id ]) }}">设置申请要求</a>
+
+                                <form action="{{ URL::route('admin.colleges.specialities.destroy', ['colleges' => $college->id, 'specialities' => $speciality->id]) }}" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <button class="btn btn-xs btn-danger">删除</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

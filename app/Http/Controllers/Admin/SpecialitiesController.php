@@ -60,4 +60,11 @@ class SpecialitiesController extends BaseController
         $speciality->update($request->all());
         return redirect()->route('admin.colleges.specialities.index', $college_id);
     }
+
+    public function destroy($college_id, $speciality_id){
+        $speciality = Speciality::find($speciality_id);
+        $college_id = $speciality->college_id;
+        $speciality->delete();
+        return redirect()->route('admin.colleges.specialities.index', $college_id);
+    }
 }
