@@ -37,8 +37,12 @@ class RequirementController extends BaseController
                             $requirement = null;
 
                             if($item['examination_name'] == '高考'){
-                                $provinces = collect(config('provinces'));
-                                $requirement = $provinces->map(function($province){
+                                $provinces = collect(config('provinces'))->sortBy(function ($product, $key) {
+                                    if ($product==="重庆")
+                                        return iconv('UTF-8', 'GBK//IGNORE', "崇庆");
+                                    return iconv('UTF-8', 'GBK//IGNORE', $product);
+                                })->values()->all();
+                                $requirement = collect($provinces)->map(function($province){
                                     return [
                                         'tag_name' => $province,
                                         'tag_value' => null
