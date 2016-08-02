@@ -2168,4 +2168,17 @@ ul {
         background: #0e2d60;
         margin-right: 20px; }
 
+.property {
+  display: inline-block;
+  background-color: #00d8b3;
+  padding: 1px 2px;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 12px; }
+
+.top-right {
+  position: absolute;
+  right: 0;
+  top: 0; }
+
 /*# sourceMappingURL=app.css.map */

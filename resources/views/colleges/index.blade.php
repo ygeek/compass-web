@@ -60,6 +60,7 @@
                             <img class="college-badge" src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" />
                             <div class="college-info">
                                 <header>
+                                    <span class="property top-right">{{ ($college->type=="public")?'公立':'私立' }}</span>
                                     <h1><a href="{{route('colleges.show', $college->key)}}">{{$college->chinese_name}}</a></h1>
                                     <h2>{{$college->english_name}}</h2>
 
