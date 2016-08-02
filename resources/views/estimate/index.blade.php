@@ -38,8 +38,8 @@
                             </tr>
 
                             <tr class="comment">
-                                <td style="text-align: left;" v-bind:colspan="showRequirementContrastsContent.contrasts.length"v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
-                                    @{{ contrast['require'] }}
+                                <td style="text-align: left;line-height: 26px" v-bind:colspan="showRequirementContrastsContent.contrasts.length"v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
+                                    @{{{ changeLine(contrast['require']) }}}
                                 </td>
                             </tr>
 
@@ -165,6 +165,9 @@
                             alert('请先登录')
                         };
                     })
+                },
+                changeLine: function (old) {
+                    return old.replace(/\n/ig, "<br/>");
                 }
             }
         });
