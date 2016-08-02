@@ -21,6 +21,7 @@
                 @endforeach
             </select>
             <button type="submit" class="btn btn-primary">查询</button>
+            <span>查询到{{count($colleges)}}条记录</span>
         </form>
         <table class="table table-striped table-borderless table-header-bg">
             <thead>
