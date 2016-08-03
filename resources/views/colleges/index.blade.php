@@ -14,7 +14,7 @@
 
                 <div class="tag-area">
                     <div class="tag-select">
-                        <tag-select label-name="选择国家" :selects="areas" :selected_id.sync="selected_country_id"></tag-select>
+                        <tag-select label-name="选择国家" :selects="areas" :selected_id.sync="selected_country_id" ></tag-select>
                         <input type="hidden" number v-model="selected_country_id"  name="selected_country_id" value="{{$selected_country_id }}"/>
                     </div>
 
@@ -124,7 +124,7 @@
         <div>
             <label>@{{ labelName }}</label>
             <div class="tags">
-                <div class="tag"  v-bind:class="{'active': selected_id === null || selected_id === '' || selected_id === 0 }">
+                <div class="tag"  v-bind:class="{'active': selected_id === null || selected_id === '' || selected_id === 0 }" v-show="labelName!='选择国家'">
                     <span v-on:click="select_item(null)">不限</span>
                 </div>
                 <div v-for="item in selects" class="tag" v-on:click="select_item(item.id)" v-bind:class="{'active': selected_id === item.id}">
@@ -141,7 +141,8 @@
             props: ['labelName', 'selects', 'selected_id'],
             methods: {
                 select_item: function (item_id) {
-                    this.selected_id = item_id
+                    this.selected_id = item_id;
+                    this.$dispatch('call_submit');
                 }
             }
         });
@@ -226,6 +227,13 @@
                 },
                 select_city: function (city_id) {
                     this.selected_city_id = city_id;
+                }
+            },
+            events: {
+                'call_submit': function () {
+                    setTimeout(function(){
+                        document.getElementsByTagName('form')[0].submit()
+                    }, 1);
                 }
             }
         });

@@ -20,7 +20,7 @@ class CollegesController extends Controller
     public function index(Request $request){
         $areas = AdministrativeArea::get()->toTree();
         $speciality_categories = SpecialityCategory::all();
-        $selected_country_id = $request->input('selected_country_id');
+        $selected_country_id = $request->input('selected_country_id', 1);
         $selected_state_id = $request->input('selected_state_id');
         $selected_city_id = $request->input('selected_city_id');
         $college_name = $request->input('college_name');
