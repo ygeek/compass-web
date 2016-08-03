@@ -1519,12 +1519,26 @@ ul{
                 padding-left: 10px;
               }
             }
-
-            a{
-              font-size: 14px;
-              font-weight: bold;
-            }
           }
+        }
+        .cover{
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 825px;
+          height: 180px;
+          z-index: 998;
+          background-color: #fff;
+          opacity:0.01;
+        }
+        .calc-link{
+          position: absolute;
+          bottom: 6px;
+          right: 30px;
+          font-size: 14px;
+          font-weight: bold;
+          z-index: 999;
         }
       }
     }

@@ -57,11 +57,13 @@
                 <div class="colleges">
                     @foreach($colleges as $college)
                         <div class="college">
+                            <a href="{{route('estimate.step_first')}}" target="_blank" class="calc-link">测试录取几率-></a>
+                            <a href="{{route('colleges.show', $college->key)}}" target="_blank"><div class="cover"></div></a>
                             <img class="college-badge" src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" />
                             <div class="college-info">
                                 <header>
                                     <span class="property top-right">{{ ($college->type=="public")?'公立':'私立' }}</span>
-                                    <h1><a href="{{route('colleges.show', $college->key)}}">{{$college->chinese_name}}</a></h1>
+                                    <h1><a href="{{route('colleges.show', $college->key)}}" target="_blank">{{$college->chinese_name}}</a></h1>
                                     <h2>{{$college->english_name}}</h2>
 
                                     <div class="ielts-and-toelf-requirement">
@@ -106,8 +108,6 @@
                                             <td>{{$college->domestic_ranking}}</td>
                                         </tr>
                                     </table>
-
-                                    <a href="{{route('estimate.step_first')}}">测试录取几率-></a>
                                 </div>
 
                             </div>

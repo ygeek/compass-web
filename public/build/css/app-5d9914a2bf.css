@@ -1584,9 +1584,23 @@ ul {
             line-height: 27px; }
             .colleges-page .search-result .colleges .college .college-info .college-rank-info tr td {
               padding-left: 10px; }
-          .colleges-page .search-result .colleges .college .college-info .college-rank-info a {
-            font-size: 14px;
-            font-weight: bold; }
+      .colleges-page .search-result .colleges .college .cover {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 825px;
+        height: 180px;
+        z-index: 998;
+        background-color: #fff;
+        opacity: 0.01; }
+      .colleges-page .search-result .colleges .college .calc-link {
+        position: absolute;
+        bottom: 6px;
+        right: 30px;
+        font-size: 14px;
+        font-weight: bold;
+        z-index: 999; }
 
 .colleges-page .order-area {
   padding: 20px 0;
