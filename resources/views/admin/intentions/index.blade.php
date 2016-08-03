@@ -17,7 +17,7 @@
                 <button>查询</button>
             </form>
             <button id="multiple_assign">多选分配</button>
-            <!--<button id="multiple_export">多选导出Excel</button>-->
+            <button id="multiple_export">多选导出Excel</button>
             <table class="table table-striped table-borderless table-header-bg">
                 <thead>
                 <tr>
@@ -133,10 +133,15 @@
         }
 
         $('#multiple_export').on('click',function(){
+            var send_count=0;
             $("#table_body tr th input[type=checkbox]").each(function(){
                 if (this.checked){
                     var url = "{{ route('admin.intentions.export_to_excel', ['id' => 'tmp']) }}".replace('tmp', $(this).data('id'));
-                    ajax_download(url, {'_method': "POST", '_token': "{{ csrf_token() }}"});
+                    setTimeout(
+                            function () {
+                                ajax_download(url, {'_method': "POST", '_token': "{{ csrf_token() }}"})
+                            }, 1000*(send_count++)
+                    );
                 }
             });
         });
