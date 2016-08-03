@@ -5,7 +5,7 @@
         @foreach($articles as $article)
         @if($index % 2 == 0)
         <div class="article" >
-            <header>{{ $article->title }}</header>
+            <header><span class="color-{{ $index%5 }}">●</span>{{ $article->title }}</header>
             <div class="article-content">
                 {!! $article->content !!}
             </div>
@@ -20,7 +20,7 @@
         @foreach($articles as $article)
         @if($index % 2 != 0)
         <div class="article" >
-            <header>{{ $article->title }}</header>
+            <header><span class="color-{{ $index%5 }}">●</span>{{ $article->title }}</header>
             <div class="article-content">
                 {!! $article->content !!}
             </div>

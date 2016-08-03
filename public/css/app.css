@@ -1807,12 +1807,25 @@ ul {
       display: block;
       clear: both; }
     .college-page .college-pages .college-applications .left-grid {
-      width: 256px;
+      width: 405px;
       float: left; }
     .college-page .college-pages .college-applications .right-grid {
       width: 410px;
       margin-left: 10px;
       float: left; }
+    .college-page .college-pages .college-applications div .article header span {
+      font-size: 30px;
+      margin: 0px 7px 0 -26px; }
+    .college-page .college-pages .college-applications .color-0 {
+      color: #34a853; }
+    .college-page .college-pages .college-applications .color-1 {
+      color: #f9d339; }
+    .college-page .college-pages .college-applications .color-2 {
+      color: #0e2356; }
+    .college-page .college-pages .college-applications .color-3 {
+      color: #fb9c04; }
+    .college-page .college-pages .college-applications .color-4 {
+      color: #4dd9b7; }
     .college-page .college-pages .college-applications .article {
       width: calc(100% - 60px);
       display: inline-block;
