@@ -17,7 +17,7 @@
                         <div class="form">
                         <div class="form-group">
                             <label>专业方向</label>
-                            <select v-model="selected_category_id">
+                            <select v-model="selected_category_id" style="width: 250px;">
                                 <option v-bind:value="category.id" v-for="category in show_data.categories">
                                     @{{ category.chinese_name }}
                                 </option>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             <label>专业</label>
-                            <select v-model="selected_speciality_name">
+                            <select v-model="selected_speciality_name" style="width: 250px;">
                                 <option v-bind:value="speciality.name"v-for="speciality in select_specialities">
                                      @{{ speciality.name }}
                                 </option>
