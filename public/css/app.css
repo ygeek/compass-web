@@ -1411,10 +1411,10 @@ ul {
       display: table;
       clear: both; }
     .tag-area .tag-select label {
-      width: 130px;
+      width: 100px;
       display: inline-block; }
     .tag-area .tag-select .tags {
-      width: calc(100% - 130px);
+      width: calc(100% - 100px);
       float: right; }
       .tag-area .tag-select .tags .tag {
         cursor: pointer;
