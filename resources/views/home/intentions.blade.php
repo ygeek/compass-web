@@ -162,7 +162,14 @@ Array.prototype.contains = function(obj) {
         },
         computed: {
             score_keys: function(){
-                var keys = Object.keys(this.intentions.user_scores);
+                var Order = ['雅思','托福','听','说','读','写','高中平均成绩','高考','ACT','ACT作文','SAT','SAT阅读','SAT写作','SAT数学','GRE','GMAT','语文','数学','写作','相关专业工作年限','备注信息'];
+                var keys = Object.keys(this.intentions.user_scores).sort(function(a,b) {
+                    if (a.indexOf("高考") == 0)
+                        a = '高考';
+                    if (b.indexOf("高考") == 0)
+                        b = '高考';
+                    return Order.indexOf(a) - Order.indexOf(b);
+                });
                 return keys.filter(function(value){
                     return value != '备注';
                 });
