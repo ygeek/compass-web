@@ -64,7 +64,7 @@
                         </div>
                     </div>
 
-                    <button class="estimate-button">下一步</button>
+                    <button class="estimate-button" v-on:click="onSubmit">下一步</button>
                 </form>
             </template>
             <union-select></union-select>
@@ -94,6 +94,14 @@
                         }
                     }
                     return [];
+                }
+            },
+            methods: {
+                onSubmit: function (msg) {
+                    if (this.speciality_name==null){
+                        alert('专业库正在完善中，请选择其他专业。');
+                        event.preventDefault();
+                    }
                 }
             }
         });
