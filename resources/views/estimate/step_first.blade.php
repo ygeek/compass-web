@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="estimate-select">
-                            <select name="speciality_name">
+                            <select name="speciality_name" v-model="selected_speciality_name">
                                 <template v-for="speciality in children">
                                     <option v-bind:value="speciality.name">@{{ speciality.name }}</option>
                                 </template>
@@ -84,12 +84,14 @@
             },
             computed: {
                 children: function () {
+                    this.selected_speciality_name = "";
                     var that = this;
                     for(var i=0; i<this.speciality_categories.length; i++){
                         if(this.speciality_categories[i].id == this.selected_category_id){
                             $res = this.speciality_categories[i].specialities.filter(function (speciality) {
                                 return speciality.degree_id == that.selected_degree_id && speciality.country_id == that.selected_country_id;
                             });
+                            this.selected_speciality_name = $res[0].name
                             return $res;
                         }
                     }
@@ -98,7 +100,7 @@
             },
             methods: {
                 onSubmit: function (msg) {
-                    if (this.speciality_name==null){
+                    if (this.selected_speciality_name==""){
                         alert('专业库正在完善中，请选择其他专业。');
                         event.preventDefault();
                     }
