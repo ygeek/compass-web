@@ -203,6 +203,7 @@
                 methods: {
                     select_item: function (item_id) {
                         this.selected_id = item_id
+                        this.$dispatch('call_submit');
                     }
                 }
             });
@@ -222,6 +223,13 @@
                         degrees: {!!json_encode($college->degrees) !!},
                         selected_degree_id: null,
                         selected_category_id: null
+                    }
+                },
+                events: {
+                    'call_submit': function () {
+                        setTimeout(function(){
+                            document.getElementsByTagName('form')[0].submit()
+                        }, 1);
                     }
                 }
             });
