@@ -1915,6 +1915,11 @@ ul {
         color: #c1c1c1;
         padding-right: 10px; }
 
+.college-page .order-area {
+  padding: 20px 0;
+  border-top: solid #ebebeb 1px;
+  font-size: 14px; }
+
 .college-sidebar {
   width: 266px;
   float: right; }

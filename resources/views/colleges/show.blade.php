@@ -176,6 +176,10 @@
                             <tag-select label-name="选择专业方向" :selects="categories" :selected_id.sync="selected_category_id"></tag-select>
                             <input number type="hidden" v-model="selected_category_id" name="selected_category_id" value="{{ app('request')->input('selected_category_id') }}"/>
                         </div>
+
+                        <div class="order-area">
+                            <div class="order"></div>
+                        </div>
                     </div>
                     </form>
                 </template>
