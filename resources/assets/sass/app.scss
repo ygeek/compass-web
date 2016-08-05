@@ -1208,7 +1208,14 @@ ul{
     color: #fff;
     img {
       float: left;
-      margin: 25px;
+      margin: 10px;
+      width: 100px;
+    }
+    span {
+      display: inline-block;
+      width: 120px;
+      text-align: center;
+      margin-bottom: 10px;
     }
   }
 }

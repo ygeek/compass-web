@@ -29,8 +29,12 @@
         </div>
         <div class="copyright">
             <div class="clear">
-                <img src="/images/weibo_ico.png" alt="weibo_ico"/>
-                <img src="/images/wexin_ico.png" alt="wexin_ico"/>
+                <img src="/images/weibo_code.png" alt="weibo_ico"/>
+                <img src="/images/weixin_code.jpg" alt="wexin_ico"/>
+            </div>
+            <div class="clear">
+                <span>微博</span>
+                <span>微信</span>
             </div>
             <p>Copyright © 2013-2016  京ICP备11014111号-2</p>
         </div>
