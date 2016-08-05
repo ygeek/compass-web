@@ -47,6 +47,14 @@
           </li>
 
           <li>
+            <a href="{{ route('admin.setting.index', ['key' => 'master_colleges']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">硕士-最近就读学院设置</span></a>
+          </li>
+
+          <li>
+            <a href="{{ route('admin.setting.index', ['key' => 'master_speciality']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">硕士-最近就读专业设置</span></a>
+          </li>
+
+          <li>
             <a href="{{ route('admin.setting.index', ['key' => 'use_people_nums']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">使用人数设置</span></a>
           </li>
 

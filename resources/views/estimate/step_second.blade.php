@@ -17,10 +17,20 @@
                     @if($selected_degree->name == '硕士')
                         <div class="form-group">
                             <label for="recently_college_name">最近就读院校</label>
-                            <input class="estimate-input" type="text" id="recently_college_name" v-model="data.recently_college_name"/>
+                            <select id="recently_college_name" v-model="data.recently_college_name" class="estimate-input">
+                                <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
+                                @foreach($master_colleges as $college)
+                                    <option value="{{ $college }}">{{$college}}</option>
+                                @endforeach
+                            </select>
 
                             <label for="recently_speciality_name">最近就读专业</label>
-                            <input class="estimate-input" type="text" id="recently_speciality_name" v-model="data.recently_speciality_name"/>
+                            <select id="recently_speciality_name" v-model="data.recently_speciality_name" class="estimate-input">
+                                <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
+                                @foreach($master_speciality as $speciality)
+                                    <option value="{{ $speciality }}">{{$speciality}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -105,6 +115,7 @@
                         <group-examination :group.sync="group"></group-examination>
                     </div>
 
+                    <a href="{{ route('estimate.step_first') }}"><button class="estimate-button">返回上一步</button></a>
                     <button @click="submit" class="estimate-button">生成择校方案</button>
                 </div>
 

@@ -64,7 +64,7 @@
                         </div>
                     </div>
 
-                    <button class="estimate-button" v-on:click="onSubmit">下一步</button>
+                    <button class="estimate-button" v-on:click="onSubmit" style="margin-left: 210px;">下一步</button>
                 </form>
             </template>
             <union-select></union-select>
