@@ -1372,51 +1372,55 @@ ul{
     font-size: 14px;
     @include clearfix;
 
-    .rank-list{
-      width: 206px;
-      margin-right: 10px;
-      margin-top: 20px;
+    .rank-left{
+      width: 266px;
       float: left;
-      background-color: #fff;
-      .level-1{
-        display: block;
-        background-color: #00d8b3;
-        font-size: 14px;
-        line-height: 35px;
-        color: #fff;
-        text-align: center;
-        &.active{
-          color: #0e2d60 !important;
-          font-weight: bold;
+      margin-right: 10px;
+      @include clearfix;
+      .rank-list{
+        width: 266px;
+        margin: 20px 0 20px 0;
+        float: left;
+        background-color: #fff;
+        .level-1{
+          display: block;
+          background-color: #00d8b3;
+          font-size: 14px;
+          line-height: 35px;
+          color: #fff;
+          text-align: center;
+          &.active{
+            color: #0e2d60 !important;
+            font-weight: bold;
+          }
+        }
+        .level-2{
+          display: block;
+          font-size: 14px;
+          line-height: 30px;
+          padding-left: 26px;
+          color: #000;
+          &.active{
+            color: #0e2d60 !important;
+            font-weight: bold;
+          }
+        }
+        .level-3{
+          display: block;
+          font-size: 14px;
+          line-height: 30px;
+          padding-left: 36px;
+          color: #000;
+          &.active{
+            color: #0e2d60 !important;
+            font-weight: bold;
+          }
         }
       }
-      .level-2{
-        display: block;
-        font-size: 14px;
-        line-height: 30px;
-        padding-left: 26px;
-        color: #000;
-        &.active{
-          color: #0e2d60 !important;
-          font-weight: bold;
-        }
-      }
-      .level-3{
-        display: block;
-        font-size: 14px;
-        line-height: 30px;
-        padding-left: 36px;
-        color: #000;
-        &.active{
-          color: #0e2d60 !important;
-          font-weight: bold;
-        }
-      }
-
     }
     .rank-content{
       float: left;
-      width: 608px;
+      width: 824px;
       @include clearfix;
       .colleges{
         float: left;
@@ -1446,10 +1450,10 @@ ul{
         font-size: 18px;
       }
       .chinese_name{
-        width: 200px;
+        width: 220px;
       }
       .english_name{
-        width: 350px;
+        width: 330px;
       }
       .actions{
 

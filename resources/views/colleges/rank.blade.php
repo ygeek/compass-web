@@ -19,10 +19,15 @@
     <div class="colleges-rank-page-content">
         <div class="app-content">
 
-            <div class="rank-list">
-                @foreach($ranking_categories as $category)
-                  @include('colleges.rank_category', ['category' => $category, 'level' => 1, 'selected_category_id' => $selected_category_id])
-                @endforeach
+            <div class="rank-left">
+                <div class="rank-list">
+                    @foreach($ranking_categories as $category)
+                        @include('colleges.rank_category', ['category' => $category, 'level' => 1, 'selected_category_id' => $selected_category_id])
+                    @endforeach
+                </div>
+                <div style="padding-top: 20px;">
+                    @include('colleges.sidebar')
+                </div>
             </div>
 
             <div class="rank-content">
@@ -54,11 +59,6 @@
             </div>
 
             <?php unset($college) ?>
-            <div style="padding-top: 20px;">
-              @include('colleges.sidebar')
-            </div>
-
-
         </div>
     </div>
 
