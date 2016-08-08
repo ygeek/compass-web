@@ -84,7 +84,7 @@ class CollegesController extends Controller
             $colleges_query = $colleges_query->where('type', $condition);
         }
 
-        $colleges = $colleges_query->paginate(15);
+        $colleges = $colleges_query->paginate(10);
         return view('colleges.index', compact('areas',
             'speciality_categories',
             'colleges',
@@ -211,7 +211,7 @@ class CollegesController extends Controller
         });
 
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 10;
+        $perPage = 20;
         $current_rank_items = $rank_items->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $paginated_rank_items= new LengthAwarePaginator($current_rank_items, count($rank_items), $perPage, null, [
                 'path' => route('colleges.rank')
