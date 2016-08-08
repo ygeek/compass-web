@@ -22,7 +22,7 @@
         <a href="javascript:void(0)" onclick='easemobim.bind({tenantId: 21250})'>在线留学顾问</a>
       </li>
       <li class='nav-item'>
-        <a href="#">指南针官网</a>
+        <a href="http://www.zhinanzhen.org" target="_blank">指南针官网</a>
       </li>
       <li class='nav-item'>
         @if(Auth::check())

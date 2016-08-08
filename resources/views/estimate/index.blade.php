@@ -77,7 +77,7 @@
 
                                                 <div class="ielts-and-toelf-requirement">
                                                     <span class="toelf-requirement">托福: {{ $college['toefl_requirement'] }}</span>
-                                                    <span class="ielts-requirement">托福: {{ $college['ielts_requirement'] }}</span>
+                                                    <span class="ielts-requirement">雅思: {{ $college['ielts_requirement'] }}</span>
                                                 </div>
                                             </header>
 
