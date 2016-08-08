@@ -211,7 +211,7 @@ class CollegesController extends Controller
         });
 
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 20;
+        $perPage = 10;
         $current_rank_items = $rank_items->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $paginated_rank_items= new LengthAwarePaginator($current_rank_items, count($rank_items), $perPage, null, [
                 'path' => route('colleges.rank')

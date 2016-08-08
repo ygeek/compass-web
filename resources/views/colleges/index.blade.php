@@ -113,7 +113,7 @@
                         </div>
                     @endforeach
                 </div>
-                {{ $colleges->render() }}
+                {{ $colleges->appends(app('request')->except('page'))->render() }}
                 @include('colleges.recommend')
             </div>
         </div>
