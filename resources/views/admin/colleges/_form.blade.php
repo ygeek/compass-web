@@ -27,11 +27,11 @@
                     <div class="form-group">
                         <div class="col-xs-6">
                             <label for="chinese_name">中文名<span class="text-danger">*</span></label>
-                            <input class="form-control input-lg" type="text" value="{{$college->chinese_name}}" id="chinese_name" name="chinese_name" placeholder="输入院校的中文名称..">
+                            <input class="form-control input-lg" type="text" value="{{ $college->chinese_name or old('chinese_name') }}" id="chinese_name" name="chinese_name" placeholder="输入院校的中文名称..">
                         </div>
                         <div class="col-xs-6">
                             <label for="english_name">英文名<span class="text-danger">*</span></label>
-                            <input class="form-control input-lg" type="text" value="{{$college->english_name}}" id="english_name" name="english_name" placeholder="输入院校的英文名称..">
+                            <input class="form-control input-lg" type="text" value="{{$college->english_name or old('english_name')}}" id="english_name" name="english_name" placeholder="输入院校的英文名称..">
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <label for="founded_in">创始年份</label>
-                            <input class="form-control input-lg" type="text" value="{{$college->founded_in}}" id="founded_in" name="founded_in" placeholder="输入院校的创始年份..">
+                            <input class="form-control input-lg" type="text" value="{{$college->founded_in or old('founded_in')}}" id="founded_in" name="founded_in" placeholder="输入院校的创始年份..">
                         </div>
                     </div>
                 </div>
@@ -50,11 +50,11 @@
                     <div class="form-group">
                         <div class="col-xs-6">
                             <label for="telephone_number">电话</label>
-                            <input class="form-control input-lg" type="text" id="telephone_number" value="{{$college->telephone_number}}" name="telephone_number" placeholder="输入院校的电话..">
+                            <input class="form-control input-lg" type="text" id="telephone_number" value="{{$college->telephone_number or old('telephone_number')}}" name="telephone_number" placeholder="输入院校的电话..">
                         </div>
                         <div class="col-xs-6">
                             <label for="address">地址</label>
-                            <input class="form-control input-lg" type="text" id="address" name="address" value="{{$college->address}}" placeholder="输入院校的地址..">
+                            <input class="form-control input-lg" type="text" id="address" name="address" value="{{$college->address or old('address')}}" placeholder="输入院校的地址..">
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <label for="website">网站</label>
-                            <input class="form-control input-lg" type="text" id="website" value="{{$college->website}}" name="website" placeholder="输入院校的网站..">
+                            <input class="form-control input-lg" type="text" id="website" value="{{$college->website or old('website')}}" name="website" placeholder="输入院校的网站..">
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <label for="description">简介</label>
-                            <textarea class="form-control input-lg" id="description" name="description" rows="22" placeholder="输入院校的简介..">{{$college->description}}</textarea>
+                            <textarea class="form-control input-lg" id="description" name="description" rows="22" placeholder="输入院校的简介..">{{$college->description or old('description')}}</textarea>
                         </div>
                     </div>
                 </div>
