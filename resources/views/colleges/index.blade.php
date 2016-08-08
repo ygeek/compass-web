@@ -67,7 +67,7 @@
 
                                     <div class="ielts-and-toelf-requirement">
                                         <span class="toelf-requirement">托福: {{ $college->toeflRequirement('本科') }}</span>
-                                        <span class="ielts-requirement">雅思: {{ $college->ieltsRequirement('本科') }}</span>
+                                        <span class="ielts-requirement" style="margin-left: 20px">雅思: {{ $college->ieltsRequirement('本科') }}</span>
                                     </div>
 
                                     <div class="address-container">

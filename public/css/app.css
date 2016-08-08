@@ -1583,7 +1583,6 @@ ul {
               color: #000; }
           .colleges-page .search-result .colleges .college .college-info header h2 {
             font-size: 14px;
-            margin-top: -10px;
             color: #6c6c6c; }
           .colleges-page .search-result .colleges .college .college-info header .ielts-and-toelf-requirement {
             position: absolute;
@@ -1597,6 +1596,8 @@ ul {
             line-height: 27px; }
             .colleges-page .search-result .colleges .college .college-info .college-rank-info tr td {
               padding-left: 10px; }
+        .colleges-page .search-result .colleges .college .college-info .address-container {
+          margin-top: 10px; }
       .colleges-page .search-result .colleges .college .cover {
         display: block;
         position: absolute;
