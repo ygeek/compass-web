@@ -20,7 +20,7 @@
                 <div class="college-content-header">
                     <img class="college-logo" src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" alt="logo" />
                     <div class="college-info">
-                        <h1><span class="property">{{ ($college->type=="public")?'公立':'私立' }}</span>{{$college->chinese_name}}</h1>
+                        <h1>{{$college->chinese_name}}<span class="property">{{ ($college->type=="public")?'公立':'私立' }}</span></h1>
                         <h2>{{$college->english_name}}</h2>
                         <div class="location info">
                             <div class="img-container">

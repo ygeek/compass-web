@@ -2214,7 +2214,7 @@ ul {
         margin-right: 20px; }
 
 .property {
-  display: inline-block;
+  margin-left: 5px;
   background-color: #00d8b3;
   padding: 1px 2px;
   border-radius: 2px;
