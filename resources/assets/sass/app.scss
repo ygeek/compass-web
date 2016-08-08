@@ -1315,11 +1315,11 @@ ul{
     @include clearfix;
 
     label{
-      width: 100px;
+      width: 80px;
       display: inline-block;
     }
     .tags{
-      width: calc(100% - 100px);
+      width: calc(100% - 80px);
       float: right;
       .tag{
         cursor: pointer;
