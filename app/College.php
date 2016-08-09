@@ -217,7 +217,7 @@ class College extends Model
 
     public function getCollegeRanking($ranking_field){
       $rankings = Setting::get('rankings');
-      $null_ranking = 0;
+      $null_ranking = "-";
       if(!$rankings){
         return $null_ranking;
       }else{
