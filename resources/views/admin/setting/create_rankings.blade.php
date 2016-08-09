@@ -153,6 +153,7 @@
       <span @click="selectNode(node)" style="cursor: pointer">@{{node.name}}</span>
       <button @click="addChild" class="btn btn-xs btn-default">增加子分类</button>
       <button @click="removeNode(node)" class="btn btn-xs btn-default">删除该分类</button>
+      (院校查询显示<input type="checkbox" v-model="node.checked">)
     </div>
     <ul>
       <node
@@ -275,7 +276,12 @@ Vue.component('rank-editor', {
           this.$dispatch('remove-node', node)
         }
       }
+    },
+  watch: {
+    'node.checked': function(oldVal, newVal){
+      this.$dispatch('save')
     }
+  }
   })
 
   Vue.component('category-rankings', {
@@ -377,6 +383,9 @@ Vue.component('rank-editor', {
       }
     },
     events: {
+      'save': function(){
+        this.save()
+      },
       'select-node': function(node){
         this.selected_node_id = node._id
         this.currentShowNode = node
