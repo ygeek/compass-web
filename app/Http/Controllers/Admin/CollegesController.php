@@ -33,10 +33,13 @@ class CollegesController extends BaseController
             $colleges_query = $colleges_query->where('country_id', $country_id);
         }
         if($examination_id){
-            $colleges_query = $colleges_query->whereHas('examinationScoreWeight',
-                function($query) use ($examination_id){
-                    $query->where('id', '=', $examination_id);
-            });
+            if ($examination_id=="null")
+                $colleges_query = $colleges_query->has('examinationScoreWeight', '=', 0);
+            else
+                $colleges_query = $colleges_query->whereHas('examinationScoreWeight',
+                    function($query) use ($examination_id){
+                        $query->where('id', '=', $examination_id);
+                });
         }
 
         $colleges = $colleges_query->paginate(20);
