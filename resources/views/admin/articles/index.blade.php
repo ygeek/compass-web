@@ -35,7 +35,7 @@
                 </tbody>
             </table>
 
-            {{ $articles->render() }}
+            {{ $articles->appends(app('request')->except('page'))->render() }}
         </div>
     </div>
 @endsection
