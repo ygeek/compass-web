@@ -30,11 +30,11 @@
         <div class="copyright">
             <div class="clear">
                 <img src="/images/weibo_code.png" alt="weibo_ico"/>
-                <img src="/images/weixin_code.jpg" alt="wexin_ico"/>
+                <img src="/images/weixin_code.jpg" alt="wexin_ico" style="margin-left: 40px"/>
             </div>
             <div class="clear">
                 <span>微博</span>
-                <span>微信</span>
+                <span style="margin-left: 30px">微信</span>
             </div>
             <p>Copyright © 2013-2016  京ICP备11014111号-2</p>
         </div>
