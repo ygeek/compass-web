@@ -32,5 +32,23 @@ class ScoreMapSectionTest extends TestCase
 
         $section = new \App\ScoreMapSection('江西:<500');
         $this->assertTrue($section->matching('江西:400'));
+
+    }
+
+    public function testCloseRangeMatch(){
+        $section = new \App\ScoreMapSection('100-200)');
+        $this->assertTrue($section->matching('100'));
+        $this->assertTrue($section->matching('150'));
+        $this->assertFalse($section->matching('200'));
+
+        $section = new \App\ScoreMapSection('(100-200)');
+        $this->assertFalse($section->matching('100'));
+        $this->assertTrue($section->matching('150'));
+        $this->assertFalse($section->matching('200'));
+
+        $section = new \App\ScoreMapSection('(100-200');
+        $this->assertFalse($section->matching('100'));
+        $this->assertTrue($section->matching('150'));
+        $this->assertTrue($section->matching('200'));
     }
 }

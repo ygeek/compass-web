@@ -43,8 +43,45 @@ class ScoreMapSection
                 return $score < $this->score;
             },
             '-' => function($score){
-                $res =  ($score >= $this->score[0] && $score <= $this->score[1]);
-                return $res;
+                $left_open = false;
+                $right_open = false;
+
+                if(strpos($this->score[0], '(') !== false){
+                    $left_open = true;
+                }
+
+                if(strpos($this->score[1], ')') !== false){
+                    $right_open = true;
+                }
+
+                $left_compare_result = $score <=> str_replace('(', '', $this->score[0]);
+                $right_compare_result = $score <=> str_replace(')', '', $this->score[1]);
+
+                $left_result = false;
+                $right_result = false;
+
+                if($left_open){
+                    //左开区间
+                    if($left_compare_result == 1){
+                        $left_result = true;
+                    }
+                }else{
+                    if($left_compare_result == 1 || $left_compare_result == 0){
+                        $left_result = true;
+                    }
+                }
+
+                if($right_open){
+                    if($right_compare_result == -1){
+                        $right_result = true;
+                    }
+                }else{
+                    if($right_compare_result == -1 || $right_compare_result == 0){
+                        $right_result = true;
+                    }
+                }
+
+                return ($left_result && $right_result);
             },
             '=' => function($score){
                 return $score == $this->score;
