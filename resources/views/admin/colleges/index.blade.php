@@ -15,6 +15,7 @@
             </select>
             <select name="examination_id">
                 <option value="">所有规则</option>
+                <option value="null">无匹配规则</option>
                 @foreach($examinations as $weight)
                     <option value="{{ $weight->id }}" @if($examination_id == $weight->id) selected="selected" @endif>[{{$weight->degree->name}} : {{ $weight->name }}]</option>
                 @endforeach
