@@ -112,8 +112,8 @@
                             </div>
                         </div>
                     @endforeach
+                        {{ $colleges->appends(app('request')->except('page'))->render() }}
                 </div>
-                {{ $colleges->appends(app('request')->except('page'))->render() }}
 
                 <?php unset($college) ?>
                 <div class="hot-content" style="margin-top: 25px">
