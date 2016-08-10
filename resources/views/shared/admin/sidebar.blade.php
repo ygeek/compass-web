@@ -77,6 +77,11 @@
           <li>
             <a href="{{ route('admin.articles.index') }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">首页文章-页面管理</span></a>
           </li>
+
+          <li>
+            <a href="{{ route('admin.advertisements.index') }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">广告管理</span></a>
+          </li>
+
           <li>
             <a href="{{ route('admin.messages.index') }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">站内通知管理</span></a>
           </li>

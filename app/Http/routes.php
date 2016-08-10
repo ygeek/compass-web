@@ -71,4 +71,6 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::patch('/examination_score_weights/{weight_id}/colleges', 'Admin\ExaminationScoreWeightsController@updateColleges')
         ->name('admin.examination_score_weights.updateColleges');
+
+    Route::resource('advertisements', 'Admin\AdvertisementsController');
 });
