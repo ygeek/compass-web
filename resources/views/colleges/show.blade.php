@@ -248,6 +248,7 @@
                   </div>
 
                   <div class="hot-content">
+                      @include('shared.advertisements', ['tag' => 'page_colleges_show'])
                       @include('colleges.sidebar', ['college' => $college])
                   </div>
                 </div>

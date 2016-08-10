@@ -1114,6 +1114,7 @@ ul{
 
     .colleges{
       padding-top: 25px;
+      @include clearfix;
       .college{
         position: relative;
         width: 876px;
@@ -1373,52 +1374,6 @@ ul{
     font-size: 14px;
     @include clearfix;
 
-    .rank-left{
-      width: 266px;
-      float: left;
-      margin-right: 10px;
-      @include clearfix;
-      .rank-list{
-        width: 266px;
-        margin: 20px 0 20px 0;
-        float: left;
-        background-color: #fff;
-        .level-1{
-          display: block;
-          background-color: #00d8b3;
-          font-size: 14px;
-          line-height: 35px;
-          color: #fff;
-          text-align: center;
-          &.active{
-            color: #0e2d60 !important;
-            font-weight: bold;
-          }
-        }
-        .level-2{
-          display: block;
-          font-size: 14px;
-          line-height: 30px;
-          padding-left: 26px;
-          color: #000;
-          &.active{
-            color: #0e2d60 !important;
-            font-weight: bold;
-          }
-        }
-        .level-3{
-          display: block;
-          font-size: 14px;
-          line-height: 30px;
-          padding-left: 36px;
-          color: #000;
-          &.active{
-            color: #0e2d60 !important;
-            font-weight: bold;
-          }
-        }
-      }
-    }
     .rank-content{
       float: left;
       width: 824px;
@@ -1467,6 +1422,53 @@ ul{
     }
 }
 
+.rank-left{
+  width: 266px;
+  float: left;
+  margin-right: 10px;
+  @include clearfix;
+  .rank-list{
+    width: 266px;
+    margin: 20px 0 20px 0;
+    float: left;
+    background-color: #fff;
+    .level-1{
+      display: block;
+      background-color: #00d8b3;
+      font-size: 14px;
+      line-height: 35px;
+      color: #fff;
+      text-align: center;
+      &.active{
+        color: #0e2d60 !important;
+        font-weight: bold;
+      }
+    }
+    .level-2{
+      display: block;
+      font-size: 14px;
+      line-height: 30px;
+      padding-left: 26px;
+      color: #000;
+      &.active{
+        color: #0e2d60 !important;
+        font-weight: bold;
+      }
+    }
+    .level-3{
+      display: block;
+      font-size: 14px;
+      line-height: 30px;
+      padding-left: 36px;
+      color: #000;
+      &.active{
+        color: #0e2d60 !important;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
 .colleges-page{
   .search-result{
     background-color: #e0e0e0;
@@ -1477,6 +1479,8 @@ ul{
 
     .colleges{
       padding-top: 25px;
+      width: 825px;
+      float: left;
       .college{
         position: relative;
         width: 825px;
@@ -1556,6 +1560,11 @@ ul{
           z-index: 999;
         }
       }
+    }
+    .hot-content{
+      float: right;
+      width: 266px;
+      @include clearfix;
     }
   }
   .order-area{
@@ -1779,6 +1788,7 @@ ul{
     }
     .hot-content{
       float: right;
+      width: 266px;
     }
 
     @include clearfix;
@@ -1946,6 +1956,7 @@ ul{
   @include clearfix;
   width: 266px;
   float: right;
+  margin-bottom: 10px;
 
   .tab{
     height: 54px;
@@ -2312,4 +2323,8 @@ $heart_size: 12px;
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.clearfix {
+  @include clearfix;
 }

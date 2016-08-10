@@ -1260,6 +1260,10 @@ ul {
             cursor: pointer; }
     .home-page .home-content .colleges {
       padding-top: 25px; }
+      .home-page .home-content .colleges:after {
+        content: "";
+        display: table;
+        clear: both; }
       .home-page .home-content .colleges .college {
         position: relative;
         width: 876px;
@@ -1466,47 +1470,6 @@ ul {
     content: "";
     display: table;
     clear: both; }
-  .colleges-rank-page-content .rank-left {
-    width: 266px;
-    float: left;
-    margin-right: 10px; }
-    .colleges-rank-page-content .rank-left:after {
-      content: "";
-      display: table;
-      clear: both; }
-    .colleges-rank-page-content .rank-left .rank-list {
-      width: 266px;
-      margin: 20px 0 20px 0;
-      float: left;
-      background-color: #fff; }
-      .colleges-rank-page-content .rank-left .rank-list .level-1 {
-        display: block;
-        background-color: #00d8b3;
-        font-size: 14px;
-        line-height: 35px;
-        color: #fff;
-        text-align: center; }
-        .colleges-rank-page-content .rank-left .rank-list .level-1.active {
-          color: #0e2d60 !important;
-          font-weight: bold; }
-      .colleges-rank-page-content .rank-left .rank-list .level-2 {
-        display: block;
-        font-size: 14px;
-        line-height: 30px;
-        padding-left: 26px;
-        color: #000; }
-        .colleges-rank-page-content .rank-left .rank-list .level-2.active {
-          color: #0e2d60 !important;
-          font-weight: bold; }
-      .colleges-rank-page-content .rank-left .rank-list .level-3 {
-        display: block;
-        font-size: 14px;
-        line-height: 30px;
-        padding-left: 36px;
-        color: #000; }
-        .colleges-rank-page-content .rank-left .rank-list .level-3.active {
-          color: #0e2d60 !important;
-          font-weight: bold; }
   .colleges-rank-page-content .rank-content {
     float: left;
     width: 824px; }
@@ -1543,6 +1506,48 @@ ul {
     margin: 0 0;
     line-height: 30px; }
 
+.rank-left {
+  width: 266px;
+  float: left;
+  margin-right: 10px; }
+  .rank-left:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .rank-left .rank-list {
+    width: 266px;
+    margin: 20px 0 20px 0;
+    float: left;
+    background-color: #fff; }
+    .rank-left .rank-list .level-1 {
+      display: block;
+      background-color: #00d8b3;
+      font-size: 14px;
+      line-height: 35px;
+      color: #fff;
+      text-align: center; }
+      .rank-left .rank-list .level-1.active {
+        color: #0e2d60 !important;
+        font-weight: bold; }
+    .rank-left .rank-list .level-2 {
+      display: block;
+      font-size: 14px;
+      line-height: 30px;
+      padding-left: 26px;
+      color: #000; }
+      .rank-left .rank-list .level-2.active {
+        color: #0e2d60 !important;
+        font-weight: bold; }
+    .rank-left .rank-list .level-3 {
+      display: block;
+      font-size: 14px;
+      line-height: 30px;
+      padding-left: 36px;
+      color: #000; }
+      .rank-left .rank-list .level-3.active {
+        color: #0e2d60 !important;
+        font-weight: bold; }
+
 .colleges-page .search-result {
   background-color: #e0e0e0;
   background-image: url("/images/estimate-bg.png");
@@ -1550,7 +1555,9 @@ ul {
   background-repeat: repeat;
   background-position: center; }
   .colleges-page .search-result .colleges {
-    padding-top: 25px; }
+    padding-top: 25px;
+    width: 825px;
+    float: left; }
     .colleges-page .search-result .colleges .college {
       position: relative;
       width: 825px;
@@ -1615,6 +1622,13 @@ ul {
         font-size: 14px;
         font-weight: bold;
         z-index: 999; }
+  .colleges-page .search-result .hot-content {
+    float: right;
+    width: 266px; }
+    .colleges-page .search-result .hot-content:after {
+      content: "";
+      display: table;
+      clear: both; }
 
 .colleges-page .order-area {
   padding: 20px 0;
@@ -1791,7 +1805,8 @@ ul {
   .college-page .college-pages .page-content {
     float: left; }
   .college-page .college-pages .hot-content {
-    float: right; }
+    float: right;
+    width: 266px; }
   .college-page .college-pages:after {
     content: "";
     display: table;
@@ -1930,7 +1945,8 @@ ul {
 
 .college-sidebar {
   width: 266px;
-  float: right; }
+  float: right;
+  margin-bottom: 10px; }
   .college-sidebar:after {
     content: "";
     display: table;
@@ -2226,5 +2242,10 @@ ul {
   position: absolute;
   right: 0;
   top: 0; }
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both; }
 
 /*# sourceMappingURL=app.css.map */

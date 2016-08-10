@@ -26,6 +26,7 @@
                     @endforeach
                 </div>
                 <div style="padding-top: 20px;">
+                    @include('shared.advertisements', ['tag' => 'page_colleges_rank', 'test_rate' => false, 'rank' => false])
                     @include('colleges.sidebar')
                 </div>
             </div>

@@ -114,6 +114,13 @@
                     @endforeach
                 </div>
                 {{ $colleges->appends(app('request')->except('page'))->render() }}
+
+                <?php unset($college) ?>
+                <div class="hot-content" style="margin-top: 25px">
+                    @include('shared.advertisements', ['tag' => 'page_colleges_index'])
+                </div>
+                <div class="clearfix"></div>
+
                 @include('colleges.recommend')
             </div>
         </div>
