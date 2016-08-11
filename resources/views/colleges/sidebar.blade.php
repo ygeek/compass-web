@@ -27,7 +27,13 @@
                                 <span class="name left">{{$college->chinese_name}}</span>
                             </a>
 
-                            <span class="right">收藏数：{{$college->like_nums}}</span>
+                            <like-college-sidebar
+                                    college_id="{{ $college->id }}"
+                                    liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 0;}}else{echo 0;} ?>"
+                                    like_nums="{{ $college->like_nums }}"
+                            ></like-college-sidebar>
+
+                            <!--<span class="right">收藏数：{{$college->like_nums}}</span>-->
                             <!--<span class="right">本国排名：{{$college->domestic_ranking}}</span>-->
                         </div>
                         <!--<div class="row">
@@ -50,7 +56,11 @@
                                 <span class="name left">{{$college->chinese_name}}</span>
                             </a>
 
-                            <span class="right">收藏数：{{$college->like_nums}}</span>
+                            <like-college-sidebar
+                                    college_id="{{ $college->id }}"
+                                    liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 0;}}else{echo 0;} ?>"
+                                    like_nums="{{ $college->like_nums }}"
+                            ></like-college-sidebar>
                         </div>
                     </div>
                 @endforeach
@@ -59,6 +69,13 @@
     </div>
 
 </template>
+
+<template id="like-college-sidebar">
+    <span v-if="liked == 0" class="right" @click="likeCollege">收藏(@{{like_nums}})</span>
+    <span v-if="liked == 1" class="right" @click="dislikeCollege">取消收藏(@{{like_nums}})</span>
+</template>
+
+@include('shared.like_college', ['template_name' => 'like-college-sidebar'])
 
 <script>
     Vue.component('sidebar-panel', {
@@ -73,6 +90,6 @@
                 this.panel = panel;
             }
         }
-    })
+    });
 </script>
 

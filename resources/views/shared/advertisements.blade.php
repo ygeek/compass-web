@@ -5,18 +5,19 @@
 <advertisement-sidebar-panel></advertisement-sidebar-panel>
 <template id="advertisement-sidebar-panel-template">
 
-    @if(!isset($test_rate)||$test_rate==true)
-        <div class="college-sidebar">
-            <div class="college-single">
-                <a href="#" target="_blank">
-                    <img src="/images/test_rate.jpg" style="height: 156px"/>
-                </a>
+    <div>
+        @if(!isset($test_rate)||$test_rate==true)
+            <div class="college-sidebar">
+                <div class="college-single">
+                    <a href="#" target="_blank">
+                        <img src="/images/test_rate.jpg" style="height: 156px"/>
+                    </a>
+                </div>
             </div>
-        </div>
-    @endif
+        @endif
 
-    @if(!isset($test_rate)||$test_rate==true)
-        <?php
+        @if(!isset($rank)||$rank==true)
+            <?php
             $rankings = App\Setting::get('rankings');
             function echoRank($rankings){
                 foreach ($rankings as $ranking){
@@ -37,19 +38,20 @@
                     </div>
                 </div>
             </div>
-    @endif
+        @endif
 
-    @if(count($advertisements) > 0 )
-        @foreach($advertisements as $advertisement)
-            <div class="college-sidebar">
-                <div class="college-single">
-                    <a href="{{ $advertisement->link }}" target="_blank">
-                        <img src="{{app('qiniu_uploader')->pathOfKey($advertisement->background_image_path)}}" style="height: auto"/>
-                    </a>
+        @if($advertisements!=null && count($advertisements) > 0 )
+            @foreach($advertisements as $advertisement)
+                <div class="college-sidebar">
+                    <div class="college-single">
+                        <a href="{{ $advertisement->link }}" target="_blank">
+                            <img src="{{app('qiniu_uploader')->pathOfKey($advertisement->background_image_path)}}" style="height: auto"/>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        @endforeach
-    @endif
+            @endforeach
+        @endif
+    </div>
 
 </template>
 

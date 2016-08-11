@@ -2034,6 +2034,8 @@ ul{
     }
     .right{
       float: right;
+      font-size: 11px;
+      cursor:pointer;
     }
   }
 }
@@ -2327,4 +2329,20 @@ $heart_size: 12px;
 
 .clearfix {
   @include clearfix;
+}
+
+.alert-success {
+  font-weight: bold;
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  min-width: 200px;
+  height: 40px;
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  line-height: 40px;
+  padding-left: 40px;
+  display: none;
+  z-index: 9999;
 }

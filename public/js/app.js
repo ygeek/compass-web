@@ -5,5 +5,10 @@ new Vue({
   data: {
     showLoginAndRegisterPanel: false,
     showChangePhonePanel: false
+  },
+  events: {
+    'changeLikeDispatch': function (collegeid,like) {
+      this.$broadcast('changeCollegeLike',collegeid,like)
+    }
   }
 });
