@@ -107,7 +107,23 @@ class CollegesController extends Controller
         if(in_array($article_key, ['xue-xiao-gai-kuang', 'lu-qu-qing-kuang', 'liu-xue-gong-lue', 'tu-pian'])){
             $category = ArticleCategory::where('key', $article_key)->first();
 
-            $articles_query = $college->articles()->whereHas('category', function($q) use ($article_key){
+            $article_college = $college;
+            if ($article_key == 'liu-xue-gong-lue'){
+                if ($college->country->name == '澳洲'){
+                    $article_college = College::where('chinese_name', '悉尼大学')->first();
+                }
+                if ($college->country->name == '美国'){
+                    $article_college = College::where('chinese_name', '普林斯顿大学')->first();
+                }
+                if ($college->country->name == '英国'){
+                    $article_college = College::where('chinese_name', '牛津大学')->first();
+                }
+                if ($college->country->name == '新西兰'){
+                    $article_college = College::where('chinese_name', '奥克兰大学')->first();
+                }
+            }
+
+            $articles_query = $article_college->articles()->whereHas('category', function($q) use ($article_key){
                 return $q->where('key', $article_key);
             })->orderBy('articles.order_weight');
 
