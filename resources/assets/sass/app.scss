@@ -1559,6 +1559,15 @@ ul{
           font-weight: bold;
           z-index: 999;
         }
+        .like-button{
+          position: absolute;
+          top: 12px;
+          right: 30px;
+          font-size: 12px;
+          z-index: 999;
+          color: #6c6c6c;
+          cursor: pointer;
+        }
       }
     }
     .hot-content{

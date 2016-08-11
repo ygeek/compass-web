@@ -77,10 +77,14 @@
 
                                                 <div class="ielts-and-toelf-requirement">
                                                     <span class="toelf-requirement">托福: {{ $college['toefl_requirement'] }}</span>
-                                                    <span class="ielts-requirement">雅思: {{ $college['ielts_requirement'] }}</span>
+                                                    <span class="ielts-requirement" style="margin-left: 20px">雅思: {{ $college['ielts_requirement'] }}</span>
+                                                    <like-college
+                                                            college_id="{{ $college['college']['id'] }}"
+                                                            liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college['college']['id'])){echo 1;} else {echo 0;}}else{echo 0;} ?>"
+                                                            like_nums="{{ $college['college']['like_nums'] }}"
+                                                    ></like-college>
                                                 </div>
                                             </header>
-
                                             <div class="college-rank-info">
                                                 <table>
                                                     <tr>
@@ -120,6 +124,11 @@
                     </div>
                 </div>
             </template>
+            <template id="like-college">
+                <span v-if="liked == 0" class="right" style="margin-left: 20px;cursor: pointer;" @click="likeCollege">收藏(@{{like_nums}})</span>
+                <span v-if="liked == 1" class="right" style="margin-left: 20px;cursor: pointer;" @click="dislikeCollege">取消收藏(@{{like_nums}})</span>
+            </template>
+            @include('shared.like_college', ['template_name' => 'like-college'])
         </div>
     </div>
 

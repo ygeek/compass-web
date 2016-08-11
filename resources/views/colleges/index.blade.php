@@ -57,6 +57,17 @@
                 <div class="colleges">
                     @foreach($colleges as $college)
                         <div class="college">
+                            <like-college-sidebar
+                                    college_id="{{ $college->id }}"
+                                    liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 0;}}else{echo 0;} ?>"
+                                    like_nums="{{ $college->like_nums }}"
+                            ></like-college-sidebar>
+                            <template id="like-college-sidebar">
+                                <span v-if="liked == 0" class="like-button" @click="likeCollege">收藏(@{{like_nums}})</span>
+                                <span v-if="liked == 1" class="like-button" @click="dislikeCollege">取消收藏(@{{like_nums}})</span>
+                            </template>
+                            @include('shared.like_college', ['template_name' => 'like-college-sidebar'])
+
                             <a href="{{route('estimate.step_first')}}" target="_blank" class="calc-link">测试录取几率-></a>
                             <a href="{{route('colleges.show', $college->key)}}" target="_blank"><div class="cover"></div></a>
                             <img class="college-badge" src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" />

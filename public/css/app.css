@@ -1622,6 +1622,14 @@ ul {
         font-size: 14px;
         font-weight: bold;
         z-index: 999; }
+      .colleges-page .search-result .colleges .college .like-button {
+        position: absolute;
+        top: 12px;
+        right: 30px;
+        font-size: 12px;
+        z-index: 999;
+        color: #6c6c6c;
+        cursor: pointer; }
   .colleges-page .search-result .hot-content {
     float: right;
     width: 266px; }

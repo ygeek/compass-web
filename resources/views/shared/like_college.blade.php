@@ -1,4 +1,4 @@
-<div class="alert-success" id="alert-{{ $template_name }}">成功了</div>
+<div class="alert-success" id="alert-{{ $template_name }}"></div>
 
 <script type="text/javascript">
     Vue.component('{{ $template_name }}', {
