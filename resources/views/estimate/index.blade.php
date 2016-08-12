@@ -72,7 +72,13 @@
                                         <div class="college-info">
                                             <header>
                                                 <span class="property top-right">{{ ($college['college']['type']=="public")?'公立':'私立' }}</span>
-                                                <h1>{{$college['college']['chinese_name']}}</h1>
+                                                <h1>{{$college['college']['chinese_name']}}(<?php
+                                                        $area = App\AdministrativeArea::where('id',$college['college']['administrative_area_id'])->get();
+                                                        while ($area[0]->parent_id!=null){
+                                                            $area = App\AdministrativeArea::where('id',$area[0]->parent_id)->get();
+                                                        }
+                                                        echo ($area[0]->name);
+                                                    ?>)</h1>
                                                 <h2>{{$college['college']['english_name']}}</h2>
 
                                                 <div class="ielts-and-toelf-requirement">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Mail;
 use App\College;
+use App\AdministrativeArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
@@ -160,6 +161,12 @@ class HomeController extends Controller
                     if(app('auth')->user()->isLikeCollege($intention['college']['id']))
                         $intention['college']['liked'] = 1;
                 }
+
+                $area = AdministrativeArea::where('id',$intention['college']['administrative_area_id'])->get();
+                while ($area[0]->parent_id!=null){
+                    $area = AdministrativeArea::where('id',$area[0]->parent_id)->get();
+                }
+                $intention['college']['area'] = $area[0]->name;
 
                 return $intention;
             });

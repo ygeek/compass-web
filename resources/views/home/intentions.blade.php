@@ -46,7 +46,7 @@
                             <div class="college-info">
                                 <header>
                                     <a v-bind:href="intention.redirect_url" target="_blank">
-                                      <h1>@{{intention['college'].chinese_name}}<span class="property">@{{ (intention['college'].type=="public")?'公立':'私立' }}</span></h1>
+                                      <h1>@{{intention['college'].chinese_name}}(@{{intention['college'].area}})<span class="property">@{{ (intention['college'].type=="public")?'公立':'私立' }}</span></h1>
                                     </a>
 
                                     <h2>@{{intention['college'].english_name}}</h2>
