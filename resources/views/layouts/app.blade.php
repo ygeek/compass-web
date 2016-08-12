@@ -9,7 +9,9 @@
     <script src="/js/vue.js"></script>
     <script src="/js/vue-resource.min.js"></script>
   </head>
-  <body>
+  <body id="go-top">
+
+  <a href="#go-top"><img src="/images/top.gif" class="top" alt="top"/></a>
 
     @if (Session::has('flash_notification.message'))
       <div class="shanbox alert-{{ Session::get('flash_notification.level') }}">

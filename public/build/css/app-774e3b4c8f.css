@@ -2273,4 +2273,11 @@ ul {
   display: none;
   z-index: 9999; }
 
+.top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px; }
+
 /*# sourceMappingURL=app.css.map */
