@@ -154,6 +154,13 @@ class HomeController extends Controller
                 $intention['college']['ielts_requirement'] = $college->ieltsRequirement($intentions['degree']->name);
                 $intention['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
                 $intention['redirect_url'] = route('colleges.show', ['key' => $college->key]);
+
+                $intention['college']['liked'] = 0;
+                if(app('auth')->user()){
+                    if(app('auth')->user()->isLikeCollege($intention['college']['id']))
+                        $intention['college']['liked'] = 1;
+                }
+
                 return $intention;
             });
         }

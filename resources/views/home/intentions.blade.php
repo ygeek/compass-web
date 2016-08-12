@@ -53,7 +53,12 @@
 
                                     <div class="ielts-and-toelf-requirement">
                                    <span class="toelf-requirement">托福: @{{ intention['college'].toefl_requirement }}</span>
-                                    <span class="ielts-requirement">雅思: @{{ intention['college'].ielts_requirement }}</span>
+                                    <span class="ielts-requirement" style="margin-left: 20px">雅思: @{{ intention['college'].ielts_requirement }}</span>
+                                        <like-college
+                                                :college_id="intention['college'].id"
+                                                :liked="intention['college'].liked"
+                                                :like_nums="intention['college'].like_nums"
+                                        ></like-college>
                                     </div>
                                 </header>
 
@@ -122,6 +127,11 @@
                     </div>
                 </div>
                 </template>
+            <template id="like-college">
+                <span v-if="liked == 0" class="right" style="margin-left: 20px;cursor: pointer;" @click="likeCollege">收藏(@{{like_nums}})</span>
+                <span v-if="liked == 1" class="right" style="margin-left: 20px;cursor: pointer;" @click="dislikeCollege">取消收藏(@{{like_nums}})</span>
+            </template>
+            @include('shared.like_college', ['template_name' => 'like-college'])
             </div>
         </div>
     </div>
