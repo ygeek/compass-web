@@ -33,8 +33,10 @@ class CollegesController extends Controller
         $colleges_query = College::with('administrativeArea.parent.parent');
 
         if($college_name){
-            $colleges_query = $colleges_query->where('chinese_name', 'like', '%'.$college_name.'%')
-                                             ->orWhere('english_name', 'like', "%{$college_name}%");
+            $colleges_query = $colleges_query->where(function ($query) use ($college_name) {
+                $query->where('english_name', 'like', "%{$college_name}%")
+                    ->orWhere('chinese_name', 'like', '%'.$college_name.'%');
+            });
         }
 
 
