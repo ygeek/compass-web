@@ -1027,14 +1027,14 @@ ul {
           border: none;
           text-align: center; }
     #estimate-detail-pop .estimate-detail .estimate-button {
-      margin: 0 auto;
-      display: block;
-      margin-top: 10px; }
+      margin: 30px auto 0;
+      display: block; }
     #estimate-detail-pop .estimate-detail .close {
       position: absolute;
       right: 0;
       top: 0;
-      cursor: pointer; }
+      cursor: pointer;
+      font-size: 28px; }
 
 .college-badge {
   width: 345px;

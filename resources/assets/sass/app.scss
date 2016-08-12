@@ -809,9 +809,8 @@ ul{
     }
 
     .estimate-button{
-      margin: 0 auto;
+      margin: 30px auto 0;
       display: block;
-      margin-top: 10px;
     }
 
     .close{
@@ -819,6 +818,7 @@ ul{
       right: 0;
       top: 0;
       cursor: pointer;
+      font-size: 28px;
     }
   }
 }

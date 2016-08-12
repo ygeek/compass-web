@@ -9,7 +9,7 @@
                 <div id="estimate-detail-pop" class="mask" v-if="showRequirementContrasts">
                     <div class="estimate-detail">
                         <h1>@{{ showRequirementContrastsContent.college.chinese_name }}的@{{ selected_speciality_name }}专业匹配如下：</h1>
-                        <span @click="showRequirementContrasts=false" class="close">X</span>
+                        <span @click="showRequirementContrasts=false" class="close">×</span>
                         <table>
                             <tr>
                                 <th>
@@ -169,6 +169,7 @@
                         speciality_name: speciality_name
                     }).then(function(response){
                         alert('加入意向单成功');
+                        window.location = "{{ route('home.intentions') }}";
                     }, function(response){
                         if(response.status == 401){
                             alert('请先登录')
