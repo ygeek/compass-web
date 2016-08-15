@@ -252,6 +252,19 @@
                         document.getElementsByTagName('form')[0].submit()
                     }, 1);
                 }
+            },
+            watch: {
+                'selected_country_id': function (val, oldVal) {
+                    if (oldVal!=null && val!=oldVal){
+                        this.selected_state_id = null;
+                        this.selected_city_id = null;
+                    }
+                },
+                'selected_state_id': function (val, oldVal) {
+                    if (oldVal!=null && val!=oldVal){
+                        this.selected_city_id = null;
+                    }
+                }
             }
         });
     </script>
