@@ -72,13 +72,7 @@
                                         <div class="college-info">
                                             <header>
                                                 <span class="property top-right">{{ ($college['college']['type']=="public")?'公立':'私立' }}</span>
-                                                <h1>{{$college['college']['chinese_name']}}(<?php
-                                                        $area = App\AdministrativeArea::where('id',$college['college']['administrative_area_id'])->get();
-                                                        while ($area[0]->parent_id!=null){
-                                                            $area = App\AdministrativeArea::where('id',$area[0]->parent_id)->get();
-                                                        }
-                                                        echo ($area[0]->name);
-                                                    ?>)</h1>
+                                                <h1>{{$college['college']['chinese_name']}}</h1>
                                                 <h2>{{$college['college']['english_name']}}</h2>
 
                                                 <div class="ielts-and-toelf-requirement">
@@ -89,6 +83,24 @@
                                                             liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college['college']['id'])){echo 1;} else {echo 0;}}else{echo 0;} ?>"
                                                             like_nums="{{ $college['college']['like_nums'] }}"
                                                     ></like-college>
+                                                </div>
+
+                                                <div class="address-container">
+                                                    <div class="location">
+                                                        <img src="/images/location-identity.png" alt="location-identity" />
+                                                        <?php
+                                                        $area = App\AdministrativeArea::where('id',$college['college']['administrative_area_id'])->get();
+                                                        echo ($area[0]->name);
+                                                        while ($area[0]->parent_id!=null){
+                                                            $area = App\AdministrativeArea::where('id',$area[0]->parent_id)->get();
+                                                            echo (" , " . $area[0]->name);
+                                                        }
+                                                    ?>
+                                                    </div>
+
+                                                    <div class="address">
+                                                        {{ $college['college']['address'] }}
+                                                    </div>
                                                 </div>
                                             </header>
                                             <div class="college-rank-info">

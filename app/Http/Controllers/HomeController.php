@@ -163,10 +163,12 @@ class HomeController extends Controller
                 }
 
                 $area = AdministrativeArea::where('id',$intention['college']['administrative_area_id'])->get();
+                $area_string = $area[0]->name;
                 while ($area[0]->parent_id!=null){
                     $area = AdministrativeArea::where('id',$area[0]->parent_id)->get();
+                    $area_string .= " , ".$area[0]->name;
                 }
-                $intention['college']['area'] = $area[0]->name;
+                $intention['college']['area'] = $area_string;
 
                 return $intention;
             });
