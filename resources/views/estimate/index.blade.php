@@ -11,8 +11,8 @@
                         <h1>@{{ showRequirementContrastsContent.college.chinese_name }}的@{{ selected_speciality_name }}专业匹配如下：</h1>
                         <span @click="showRequirementContrasts=false" class="close">×</span>
                         <table>
-                            <tr>
-                                <th>
+                            <tr style="background: #f3f3f3;">
+                                <th style="padding-left: 30px;">
                                     专业
                                 </th>
                                 <th v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  != '备注'">
@@ -20,7 +20,7 @@
                                 </th>
                             </tr>
                             <tr>
-                                <td style="text-align: left;">
+                                <td style="text-align: left;padding-left: 30px;">
                                     您的成绩
                                 </td>
                                 <td v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  != '备注'">
@@ -28,8 +28,8 @@
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td style="text-align: left;">
+                            <tr style="background: #f3f3f3;">
+                                <td style="text-align: left;padding-left: 30px;">
                                     @{{ selected_speciality_name }}专业要求
                                 </td>
                                 <td v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  != '备注'">
@@ -38,7 +38,7 @@
                             </tr>
 
                             <tr class="comment">
-                                <td style="text-align: left;line-height: 26px" v-bind:colspan="showRequirementContrastsContent.contrasts.length"v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
+                                <td style="text-align: left;line-height: 26px;padding-left: 30px;" v-bind:colspan="showRequirementContrastsContent.contrasts.length"v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
                                     @{{{ changeLine(contrast['require']) }}}
                                 </td>
                             </tr>
