@@ -42,6 +42,17 @@
                         <tag-select label-name="选择性质" :selects="property_selects" :selected_id.sync="selected_property"></tag-select>
                         <input type="hidden" v-model="selected_property" name="selected_property" value="{{$selected_property}}" number/>
                     </div>
+
+                    <div class="tag-select">
+                        <label>国内排名</label>
+                        <div class="tags">
+                            <div class="tag">
+                                <input type="text" class="search-input" v-model="rank_start" name="rank_start" v-on:blur="call_submit_method()" value="{{$rank_start}}"/>
+                                <span style="cursor:auto">至</span>
+                                <input type="text" class="search-input" v-model="rank_end" name="rank_end" v-on:blur="call_submit_method()" value="{{$rank_end}}"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="order-area">
@@ -175,6 +186,8 @@
                     selected_go8: null,
                     selected_speciality_cateogry_id: null,
                     selected_property: null,
+                    rank_start: null,
+                    rank_end: null,
                     go8_selects: [
                       {
                         id: 1,
@@ -244,6 +257,11 @@
                 },
                 select_city: function (city_id) {
                     this.selected_city_id = city_id;
+                },
+                call_submit_method: function () {
+                    setTimeout(function(){
+                        document.getElementsByTagName('form')[0].submit()
+                    }, 1);
                 }
             },
             events: {

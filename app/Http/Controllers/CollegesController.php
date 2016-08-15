@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\AdministrativeArea;
 use App\College;
@@ -25,6 +26,8 @@ class CollegesController extends Controller
         $selected_city_id = $request->input('selected_city_id');
         $college_name = $request->input('college_name');
         $selected_speciality_cateogry_id = $request->input('selected_speciality_cateogry_id');
+        $rank_start = $request->input('rank_start');
+        $rank_end = $request->input('rank_end');
 
         $selected_go8 = $request->input('selected_go8');
 
@@ -86,6 +89,27 @@ class CollegesController extends Controller
             $colleges_query = $colleges_query->where('type', $condition);
         }
 
+        if ($rank_start!==null || $rank_end!==null) {
+            $rank_start_tmp = $rank_start;
+            $rank_end_tmp = $rank_end;
+            if ($rank_start===null || $rank_start==="") $rank_start_tmp=1;
+            if ($rank_end===null || $rank_end==="") $rank_end_tmp=99999;
+            $rankings = Setting::get('rankings');
+            $tag = AdministrativeArea::find($node_id);
+            $ranking_college = [];
+            foreach ($rankings['rankings'] as $ranking) {
+                $ranking_tag = $ranking['tag'];
+                if (strpos($ranking_tag, $tag['name']) !== false) {
+                    for ($i=intval($rank_start_tmp)-1;$i<intval($rank_end_tmp)&&$i<count($ranking['rank']);$i++){
+                        array_push($ranking_college,$ranking['rank'][$i]['english_name']);
+                    }
+                }
+            }
+            if (count($ranking_college)!=0){
+                $colleges_query = $colleges_query->whereIn('english_name',$ranking_college);
+            }
+        }
+
         $colleges = $colleges_query->paginate(10);
         return view('colleges.index', compact('areas',
             'speciality_categories',
@@ -96,7 +120,9 @@ class CollegesController extends Controller
             'selected_country_id',
             'college_name',
             'selected_go8',
-            'selected_property'
+            'selected_property',
+            'rank_start',
+            'rank_end'
         ));
     }
 

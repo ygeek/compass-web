@@ -1442,6 +1442,12 @@ ul {
         .tag-area .tag-select .tags .tag.active {
           color: #0e2d60;
           font-weight: bold; }
+    .tag-area .tag-select .search-input {
+      width: 50px;
+      background: #ebebeb;
+      height: 21px;
+      padding-left: 10px;
+      border: none; }
 
 .colleges-rank-page .app-content:after {
   content: "";
