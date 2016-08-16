@@ -31,7 +31,8 @@
         template: '#college-list-template',
         data: function(){
           return {
-            colleges: []
+            colleges: [],
+            page: 1
           }
         },
         created: function(){
@@ -40,9 +41,16 @@
         methods: {
             loadColleges: function(){
               this.$http.get("{{route('colleges.hot_colleges')}}",{
-                  'number': 4
+                  'page': this.page
               }).then(function(response){
-                  this.colleges = response.data;
+                  if (response.data.length==0 && this.page!=1) {
+                      this.page = 1;
+                     this.loadColleges();
+                  }
+                  else {
+                      this.colleges = response.data;
+                      this.page += 1;
+                  }
               });
             },
             change: function(){

@@ -273,7 +273,7 @@ class CollegesController extends Controller
 
     public function getRandomHotColleges(Request $request){
         $number = $request->input('number', 4);
-        $res = College::where('recommendatory', true)->orderByRaw('RAND()')->limit(4)->get()->map(function($item){
+        $res = College::where('recommendatory', true)->paginate(4)->map(function($item){
             $item->toefl_score = $item->toeflRequirement('本科');
             $item->ielts_score = $item->ieltsRequirement('本科');
             $item->badge_path = app('qiniu_uploader')->pathOfKey($item->badge_path);
