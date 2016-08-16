@@ -71,8 +71,7 @@
                                         <img class="college-badge" src="{{app('qiniu_uploader')->pathOfKey($college['college']['badge_path'])}}" />
                                         <div class="college-info">
                                             <header>
-                                                <span class="property top-right">{{ ($college['college']['type']=="public")?'公立':'私立' }}</span>
-                                                <h1>{{$college['college']['chinese_name']}}</h1>
+                                                <h1>{{$college['college']['chinese_name']}}<span class="property">{{ ($college['college']['type']=="public")?'公立':'私立' }}</span></h1>
                                                 <h2>{{$college['college']['english_name']}}</h2>
 
                                                 <div class="ielts-and-toelf-requirement">
