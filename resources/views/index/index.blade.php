@@ -8,7 +8,7 @@
 
         <estimate-nav></estimate-nav>
         <template id='estimate-nav'>
-        <form method="GET" action="{{ route('estimate.step_first') }}" v-on:mouseleave="selecting=null">
+        <form method="GET" action="{{ route('estimate.step_second') }}" v-on:mouseleave="selecting=null">
           <div class='evaluate-nav'>
           <h1>留学评估</h1>
           <ul class="select-item">
@@ -33,8 +33,22 @@
               <p>@{{ selected_years.name }}</p>
               <input type="hidden" name="selected_year" v-model='selected_years.id'>
             </li>
+            <li class="estimate-val" v-bind:class="{'active': selecting=='speciality_categories'}" v-on:mouseenter="selecting='speciality_categories'">
+              <p>
+                期望就读专业<span><img src="/images/right-arrow.png" /></span>
+              </p>
+              <p>@{{ selected_speciality_categories.name }}</p>
+              <input type="hidden" name="speciality_category_id" v-model='selected_speciality_categories.id'>
+            </li>
+            <li class="estimate-val" v-bind:class="{'active': selecting=='speciality_name'}" v-on:mouseenter="selecting='speciality_name'">
+              <p>
+                细分专业<span><img src="/images/right-arrow.png" /></span>
+              </p>
+              <p>@{{ selected_speciality_name.name }}</p>
+              <input type="hidden" name="speciality_name" v-model='selected_speciality_name.name'>
+            </li>
           </ul>
-          <button class='orange-btn'>我要评估</button>
+          <button class='orange-btn' v-on:click="onSubmit">我要评估</button>
 
           <div class="select-area" v-show="selecting">
             <ul>
@@ -54,21 +68,41 @@
                 countries: {!! json_encode($countries->toArray()) !!},
                 degrees: {!! json_encode($degrees->toArray()) !!},
                 years: {!! json_encode($years)!!},
+                speciality_categories: {!! json_encode($speciality_categories->toArray()) !!},
 
                 selected_countries: {name: null, id: null},
                 selected_degrees: {name: null, id: null},
                 selected_years: {name: null, id: null},
+                selected_speciality_categories: {name: null, id: null},
+                selected_speciality_name: null,
                 selecting: null
               }
             },
             computed: {
               selectes: function(){
-                if(this.selecting){
+                if(this.selecting=="speciality_name"){
+                  var values = this.children;
+                  return values;
+                } else if(this.selecting){
                   var values = this[this.selecting];
                   return values;
-                }else{
+                }
+                else{
                   return [];
                 }
+              },
+              children: function () {
+                this.selected_speciality_name = null;
+                var that = this;
+                for(var i=0; i<this.speciality_categories.length; i++){
+                  if(this.speciality_categories[i].id == this.selected_speciality_categories.id){
+                    var res = this.speciality_categories[i].specialities.filter(function (speciality) {
+                      return speciality.degree_id == that.selected_degrees.id && speciality.country_id == that.selected_countries.id;
+                    });
+                    return res;
+                  }
+                }
+                return [];
               }
             },
             methods: {
@@ -76,6 +110,12 @@
                 var key = 'selected_' + this.selecting;
                 console.log(key);
                 this[key] = selected;
+              },
+              onSubmit: function (msg) {
+                if (this.selected_countries.id==null||this.selected_degrees.id==null||this.selected_years.id==null||this.selected_speciality_categories.id==null||this.selected_speciality_name==null){
+                  alert('有选项未选择。');
+                  event.preventDefault();
+                }
               }
             }
           })

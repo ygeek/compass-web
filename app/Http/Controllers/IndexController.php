@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\AdministrativeArea;
 use App\Degree;
+use App\SpecialityCategory;
 class IndexController extends Controller
 {
     public function index(){
@@ -20,6 +21,10 @@ class IndexController extends Controller
                 'id' => $item
             ];
         });
-        return $this->view('index.index', compact('countries', 'degrees', 'years'));
+        $speciality_categories = collect(SpecialityCategory::with('specialities')->get())->map(function($item){
+            $item['name']=$item['chinese_name'];
+            return $item;
+        });
+        return $this->view('index.index', compact('countries', 'degrees', 'years', 'speciality_categories'));
     }
 }
