@@ -460,6 +460,32 @@ ul{
       }
     }
   }
+
+  .hidden-box{
+    width:110px;
+    position:absolute;
+    display:none;
+    background:#fff url(/images/user-arrow.png) no-repeat  top center;
+    top:54px;
+    right: 15px;
+    filter:alpha(opacity=80);
+    -moz-opacity:0.8;
+    opacity:0.8;
+    ul{
+      list-style-type:none;
+      cursor:pointer;
+      padding-top:12px;
+      padding-bottom:15px;
+      li{
+        line-height:30px;
+        height:30px;
+        font-weight:500;
+        a{
+          color:#404040 !important;
+        }
+      }
+    }
+  }
 }
 
 

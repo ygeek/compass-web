@@ -734,6 +734,27 @@ ul {
           width: 30px;
           height: 30px;
           border-radius: 30px; }
+  .top-nav-bar .hidden-box {
+    width: 110px;
+    position: absolute;
+    display: none;
+    background: #fff url(/images/user-arrow.png) no-repeat top center;
+    top: 54px;
+    right: 15px;
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    opacity: 0.8; }
+    .top-nav-bar .hidden-box ul {
+      list-style-type: none;
+      cursor: pointer;
+      padding-top: 12px;
+      padding-bottom: 15px; }
+      .top-nav-bar .hidden-box ul li {
+        line-height: 30px;
+        height: 30px;
+        font-weight: 500; }
+        .top-nav-bar .hidden-box ul li a {
+          color: #404040 !important; }
 
 #login-panel {
   width: 100%;

@@ -26,11 +26,32 @@
       </li>
       <li class='nav-item'>
         @if(Auth::check())
-          <a href="{{route('home.index')}}">
+          <a href="{{route('home.index')}}" id="user_avatar">
             <div class="user-avatar">
-              <img src="{{ app('auth')->user()->getAvatarPath() }}" />
+              <img src="{{ app('auth')->user()->getAvatarPath() }}"/>
             </div>
           </a>
+          <div id="hidden-box" class="hidden-box">
+            <ul>
+              <li><a href="{{route('home.index')}}">我的资料</a></li>
+              <li><a href="{{ route('home.messages') }}">我的消息</a></li>
+              <li><a href="{{ route('home.like_colleges') }}">我的收藏</a></li>
+              <li><a href="{{ route('home.intentions') }}">我的意向单</a></li>
+            </ul>
+          </div>
+          <script src="/js/jquery-3.0.0.min.js"></script>
+          <script>
+            $('#user_avatar').hover(function(){
+              $('#hidden-box').slideDown(300);
+            },function(){
+              $('#hidden-box').hide();
+            });
+            $('#hidden-box').hover(function(){
+              $(this).show();
+            },function(){
+              $(this).slideUp(200);
+            });
+          </script>
         @else
           <span v-on:click="showLoginAndRegisterPanel=true">登录</span>
         @endif
