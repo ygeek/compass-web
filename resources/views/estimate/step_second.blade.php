@@ -208,6 +208,13 @@
             },
             methods: {
                 submit: function(){
+                    @if($estimate_checked==true)
+                    if (confirm("您之前的留学评估将会被清空，是否继续？")==false){
+                        event.preventDefault();
+                        return ;
+                    }
+                    @endif
+
                     var examinations = {};
                     this.groups.forEach(function(group){
                         var selected_group = group.selected_group;

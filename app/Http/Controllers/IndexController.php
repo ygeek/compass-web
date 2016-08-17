@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\AdministrativeArea;
 use App\Degree;
 use App\SpecialityCategory;
+use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
 {
     public function index(){
@@ -25,6 +26,11 @@ class IndexController extends Controller
             $item['name']=$item['chinese_name'];
             return $item;
         });
-        return $this->view('index.index', compact('countries', 'degrees', 'years', 'speciality_categories'));
+        $estimate_checked = false;
+        $user = Auth::user();
+        if ($user!=null && $user->estimate!=null){
+            $estimate_checked = true;
+        }
+        return $this->view('index.index', compact('countries', 'degrees', 'years', 'speciality_categories', 'estimate_checked'));
     }
 }

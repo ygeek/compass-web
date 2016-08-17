@@ -40,7 +40,12 @@ class EstimateController extends Controller
         $selected_country = AdministrativeArea::find($request->input('selected_country_id'));
         $selected_degree = Degree::find($request->input('selected_degree_id'));
         $selected_speciality_name = $request->input('speciality_name');
-        return view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name'));
+        $estimate_checked = false;
+        $user = Auth::user();
+        if ($user!=null && $user->estimate!=null){
+            $estimate_checked = true;
+        }
+        return view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked'));
     }
 
     /*
