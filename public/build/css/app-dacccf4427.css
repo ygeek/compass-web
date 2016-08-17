@@ -991,6 +991,7 @@ ul {
         .estimate-result .college-list .college-show .college-info .college-rank-info tr {
           line-height: 27px; }
           .estimate-result .college-list .college-show .college-info .college-rank-info tr td {
+            text-align: right;
             padding-left: 10px; }
     .estimate-result .college-list .college-show .view-matching-detail {
       position: absolute;
@@ -1182,6 +1183,7 @@ ul {
         .home-page.intentions .college .college-info .college-rank-info tr {
           line-height: 27px; }
           .home-page.intentions .college .college-info .college-rank-info tr td {
+            text-align: right;
             padding-left: 10px; }
         .home-page.intentions .college .college-info .college-rank-info a {
           font-size: 14px;
@@ -1343,6 +1345,7 @@ ul {
             .home-page .home-content .colleges .college .college-info .college-rank-info tr {
               line-height: 27px; }
               .home-page .home-content .colleges .college .college-info .college-rank-info tr td {
+                text-align: right;
                 padding-left: 10px; }
             .home-page .home-content .colleges .college .college-info .college-rank-info a {
               font-size: 14px;
@@ -1642,6 +1645,7 @@ ul {
           .colleges-page .search-result .colleges .college .college-info .college-rank-info tr {
             line-height: 27px; }
             .colleges-page .search-result .colleges .college .college-info .college-rank-info tr td {
+              text-align: right;
               padding-left: 10px; }
         .colleges-page .search-result .colleges .college .college-info .address-container {
           margin-top: 10px; }
