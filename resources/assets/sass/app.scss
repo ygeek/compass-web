@@ -468,9 +468,10 @@ ul{
     background:#fff url(/images/user-arrow.png) no-repeat  top center;
     top:54px;
     right: 15px;
-    filter:alpha(opacity=80);
-    -moz-opacity:0.8;
-    opacity:0.8;
+    filter:alpha(opacity=90);
+    -moz-opacity:0.9;
+    opacity:0.9;
+    z-index: 99999;
     ul{
       list-style-type:none;
       cursor:pointer;
@@ -1602,8 +1603,8 @@ ul{
         }
         .like-button{
           position: absolute;
-          top: 12px;
-          right: 30px;
+          bottom: 6px;
+          right: 260px;
           font-size: 12px;
           z-index: 999;
           color: #6c6c6c;
@@ -2384,15 +2385,16 @@ $heart_size: 12px;
 .alert-success {
   font-weight: bold;
   position: fixed;
-  top: 30px;
-  right: 30px;
-  min-width: 200px;
+  top: calc(50% - 20px);
+  right: calc(50% - 40px);
+  min-width: 80px;
   height: 40px;
   color: #3c763d;
   background-color: #dff0d8;
   border-color: #d6e9c6;
   line-height: 40px;
-  padding-left: 40px;
+  padding: 0 30px;
+  text-align: center;
   display: none;
   z-index: 9999;
 }

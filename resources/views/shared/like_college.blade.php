@@ -13,9 +13,10 @@
                     //alert('收藏成功');
                     that.liked = true;
                     this.$dispatch('changeLikeDispatch', this.college_id, that.liked);
-                    document.getElementById('alert-{{ $template_name }}').innerHTML='收藏成功';
-                    document.getElementById('alert-{{ $template_name }}').style.display='block';
-                    setTimeout("document.getElementById('alert-{{ $template_name }}').style.display='none'",2000);
+
+                    $('#alert-{{ $template_name }}').html('收藏成功');
+                    $('#alert-{{ $template_name }}').fadeIn();
+                    setTimeout("$('#alert-{{ $template_name }}').fadeOut();",2000);
                 }, function(response){
                     if(response.status == 401){
                         alert('请登陆后收藏院校');
@@ -30,9 +31,9 @@
                     //alert('取消收藏成功');
                     that.liked = false;
                     this.$dispatch('changeLikeDispatch', this.college_id, that.liked);
-                    document.getElementById('alert-{{ $template_name }}').innerHTML='取消收藏成功';
-                    document.getElementById('alert-{{ $template_name }}').style.display='block';
-                    setTimeout("document.getElementById('alert-{{ $template_name }}').style.display='none'",1000);
+                    $('#alert-{{ $template_name }}').html('取消收藏成功');
+                    $('#alert-{{ $template_name }}').fadeIn();
+                    setTimeout("$('#alert-{{ $template_name }}').fadeOut();",2000);
                 }, function(response){
 
                 });

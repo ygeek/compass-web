@@ -142,8 +142,8 @@
                 </div>
             </template>
             <template id="like-college">
-                <span v-if="liked == 0" class="right" style="margin-left: 20px;cursor: pointer;" @click="likeCollege">收藏(@{{like_nums}})</span>
-                <span v-if="liked == 1" class="right" style="margin-left: 20px;cursor: pointer;" @click="dislikeCollege">取消收藏(@{{like_nums}})</span>
+                <span v-if="liked == 0" class="right" style="margin-left: 20px;cursor: pointer;" @click="likeCollege"><span class="gray-heart"></span>@{{like_nums}}</span>
+                <span v-if="liked == 1" class="right" style="margin-left: 20px;cursor: pointer;" @click="dislikeCollege"><span class="heart"></span>@{{like_nums}}</span>
             </template>
             @include('shared.like_college', ['template_name' => 'like-college'])
         </div>
