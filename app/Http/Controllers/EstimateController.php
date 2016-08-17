@@ -11,7 +11,9 @@ use App\Estimate;
 use App\Examination;
 use App\Setting;
 use App\SpecialityCategory;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Uuid;
 
 use App\Http\Requests;
@@ -117,6 +119,12 @@ class EstimateController extends Controller
 
         $estimate_id = Uuid::generate(4);
         Setting::set('estimate-'.$estimate_id, $data);
+
+        $user = Auth::user();
+        if ($user!=null){
+            $user->estimate = 'estimate-'.$estimate_id;
+            $user->save();
+        }
 
         return view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data'));
     }
