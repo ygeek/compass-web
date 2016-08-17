@@ -448,7 +448,7 @@ ul {
         vertical-align: middle;
         margin-top: 25px;
         margin-bottom: 25px;
-        overflow: scroll; }
+        overflow: auto; }
         .index-page .header .evaluate-nav .select-area ul li {
           cursor: pointer;
           font-size: 15px;
