@@ -74,6 +74,7 @@
               @endforeach
             </tbody>
         </table>
+        {{ $colleges->appends(app('request')->except('page'))->render() }}
     </div>
 </div>
 @endsection
