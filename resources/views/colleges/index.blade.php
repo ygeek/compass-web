@@ -79,7 +79,17 @@
                             </template>
                             @include('shared.like_college', ['template_name' => 'like-college-sidebar'])
 
-                            <a href="{{route('estimate.step_first')}}" target="_blank" class="calc-link">测试录取几率-></a>
+                            <?php
+                                $tmp = $college->administrativeArea->id;
+                                if ($college->administrativeArea->parent){
+                                    $tmp = $college->administrativeArea->parent->id;
+                                    if ($college->administrativeArea->parent->parent){
+                                        $tmp = $college->administrativeArea->parent->parent->id;
+                                    }
+                                }
+                                $estimate_url = route('estimate.step_first', ['selected_country_id' => $tmp]);
+                            ?>
+                            <a href="{{$estimate_url}}" target="_blank" class="calc-link">测试录取几率-></a>
                             <a href="{{route('colleges.show', $college->key)}}" target="_blank"><div class="cover"></div></a>
                             <img class="college-badge" src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" />
                             <div class="college-info">
@@ -243,6 +253,11 @@
                         }
                     });
                     return res;
+                },
+                estimate_url: function () {
+                    var url = '{{route('estimate.step_first', ['selected_country_id' => 'tmp'])}}';
+                    url = url.replace('tmp', selected_country_id);
+                    return url;
                 }
             },
             methods: {
