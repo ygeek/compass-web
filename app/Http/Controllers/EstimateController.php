@@ -52,7 +52,13 @@ class EstimateController extends Controller
      * 生成评估结果
      */
     public function store(Request $request){
-        $data = $request->input('data');
+        $estimate_id = $request->input('estimate_id');
+        if ($estimate_id!=null){
+            $data = Setting::get($estimate_id);
+        }
+        else{
+            $data = $request->input('data');
+        }
         if(is_string($data)){
             $data = json_decode($data, true);
         }
@@ -122,13 +128,18 @@ class EstimateController extends Controller
         //生成院校信息
         $reduce_colleges = Estimate::mapCollegeInfo($reduce_result, $selected_speciality_name, $selected_degree, $data);
 
-        $estimate_id = Uuid::generate(4);
-        Setting::set('estimate-'.$estimate_id, $data);
+        if ($estimate_id == null){
+            $estimate_id = Uuid::generate(4);
+            Setting::set('estimate-'.$estimate_id, $data);
 
-        $user = Auth::user();
-        if ($user!=null){
-            $user->estimate = 'estimate-'.$estimate_id;
-            $user->save();
+            $user = Auth::user();
+            if ($user!=null){
+                $user->estimate = 'estimate-'.$estimate_id;
+                $user->save();
+            }
+        }
+        else{
+            $estimate_id = str_replace('estimate-', '', $estimate_id);
         }
 
         return view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data'));
