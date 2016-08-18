@@ -239,7 +239,7 @@ class College extends Model
             foreach ($ranking['rank'] as $rank) {
               $index += 1;
 
-              if($rank['english_name'] == $this->english_name){
+              if(trim($rank['english_name']) == trim($this->english_name)){
                 return $index;
               }
               
