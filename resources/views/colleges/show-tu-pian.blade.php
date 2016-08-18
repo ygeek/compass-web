@@ -7,7 +7,7 @@
 
 <template id="college-galleries">
     <div class="college-galleries">
-        <college-gallery @click="showGallery(gallery)" v-for="gallery in galleries" :gallery="gallery"></college-gallery>
+        <college-gallery @click="showGallery($index)" v-for="gallery in galleries" :gallery="gallery"></college-gallery>
     </div>
 
     <gallery-view></gallery-view>
@@ -25,11 +25,11 @@
 
 <template id="gallery-view">
     <div class="gallery-view mask" v-show="show">
-        <span class="close" @click="show=false">X</span>
+        <span class="close" @click="show=false">×</span>
         <span class="icon-wrap" @click="preImage()"></span>
 
         <header>
-          <h1>@{{ gallery.name }}</h1>
+          <h1>@{{ gallerys[galleryIndex].name }}</h1>
         </header>
 
         <div class="image-viewer">
@@ -44,8 +44,8 @@
         template: "#college-galleries",
         props: ["galleries"],
         methods: {
-            showGallery: function(gallery){
-                this.$broadcast('show-gallery', gallery);
+            showGallery: function(galleryIndex){
+                this.$broadcast('show-gallery', this.galleries,galleryIndex);
             }
         }
     });
@@ -60,45 +60,60 @@
         data: function(){
             return {
                 show: false,
-                gallery: {name: null, images: []},
+                gallerys: [{name: "", images: [""]}],
                 showIndex: 0,
+                galleryIndex: 0
             }
         },
         computed: {
             currentShowImage: function(){
-                return this.gallery.images[this.showIndex];
+                return this.gallerys[this.galleryIndex].images[this.showIndex];
             },
             totalImages: function(){
-                return this.gallery.images.length;
+                return this.gallerys[this.galleryIndex].images.length;
+            },
+            totalGallery: function(){
+                return this.gallerys.length;
             },
             hasNext: function(){
-                return this.showIndex != this.totalImages -1;
+                return this.showIndex != this.totalImages -1 && this.galleryIndex != this.totalGallery -1;
             },
             hasPre: function(){
-                return this.showIndex != 0;
+                return this.showIndex != 0 && this.galleryIndex != 0;
             }
         },
         methods: {
           preImage: function(){
             var preIndex = this.showIndex - 1;
             if(preIndex < 0){
-              preIndex = this.totalImages - 1;
+                var preGallery = this.galleryIndex - 1;
+                if(preGallery < 0){
+                    preGallery = this.totalGallery -1;
+                }
+                this.galleryIndex = preGallery;
+                preIndex = this.totalImages - 1;
             }
             this.showIndex = preIndex;
           },
           nextImage: function(){
             var nextIndex = this.showIndex + 1;
             if(nextIndex > this.totalImages - 1){
-              nextIndex = 0;
+                var nextGallery = this.galleryIndex + 1;
+                if(nextGallery > this.totalGallery - 1){
+                    nextGallery = 0;
+                }
+                this.galleryIndex = nextGallery;
+                nextIndex = 0;
             }
             this.showIndex = nextIndex;
           }
         },
         events: {
-            'show-gallery': function(gallery){
-                this.gallery = gallery;
+            'show-gallery': function(gallerys,galleryIndex){
+                this.gallerys = gallerys;
                 this.show = true;
                 this.showIndex = 0;
+                this.galleryIndex = galleryIndex;
             },
         }
     })
