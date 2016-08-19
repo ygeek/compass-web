@@ -9,7 +9,7 @@
                 <div class="estimate-form" style="width: 860px;">
                     <h1>填写个人资料·2/2</h1>
                     <div class="form-group">
-                        <label for="name">姓名</label>
+                        <label for="name">姓名<span style="color: red">*</span></label>
                         <input class="estimate-input" type="text" id="name" v-model="data.name"/>
                     </div>
 
@@ -41,7 +41,7 @@
 
                     @if($selected_degree->name == '本科')
                         <div class="form-group">
-                            <label for="cee">高考</label>
+                            <label for="cee">高考<span style="color: red">*</span></label>
                             <div class="estimate-short-select" style="position: relative; top: 15px;">
                                 <select name="cee_province" v-model="data['examinations']['高考']['tag']">
                                     <?php
@@ -132,7 +132,7 @@
             </template>
 
             <template id="group-examination">
-                <label for="group@{{ $index }}">@{{ group.title }}</label>
+                <label for="group@{{ $index }}">@{{ group.title }}<span style="color: red">*</span></label>
                 <div class="estimate-short-select" style="position: relative; top: 15px;">
                     <select v-model="group['selected_group']">
                         <option v-for="option in group['selects']" value="@{{ option }}">
@@ -146,7 +146,7 @@
                     <input class="estimate-input" style="width: 120px;" type="text" v-model="selected_examination.score">
 
                     <template v-for="section in selected_examination['sections']">
-                        <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
+                        <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}<span style="color: red">*</span></label>
                         <input  class="estimate-input" style="width: 60px;" type="text" v-model="section.score">
                     </template>
                 </template>
@@ -247,37 +247,37 @@
                             var examination = this.groups[i].examinations[j];
                             if(examination.name == selected_group) {
                                 if (examination.name == "雅思") {
-                                    if (!(this.checked(examination.score, 0, 9, "雅思成绩") && this.checked(examination.sections[0].score, 0, 9, "雅思成绩") && this.checked(examination.sections[1].score, 0, 9, "雅思成绩") && this.checked(examination.sections[2].score, 0, 9, "雅思成绩") && this.checked(examination.sections[3].score, 0, 9, "雅思成绩"))) {
+                                    if (!(this.checked(examination.score, 0, 9, "雅思成绩"))) {
                                         event.preventDefault();
                                         return;
                                     }
                                 }
                                 if (examination.name == "托福IBT") {
-                                    if (!(this.checked(examination.score, 0, 120, "托福成绩") && this.checked(examination.sections[0].score, 0, 120, "托福成绩") && this.checked(examination.sections[1].score, 0, 120, "托福成绩") && this.checked(examination.sections[2].score, 0, 120, "托福成绩") && this.checked(examination.sections[3].score, 0, 120, "托福成绩"))) {
+                                    if (!(this.checked(examination.score, 0, 120, "托福成绩"))) {
                                         event.preventDefault();
                                         return;
                                     }
                                 }
                                 if (examination.name == "ACT") {
-                                    if (!(this.checked(examination.score, 0, 36, "ACT成绩") && this.checked(examination.sections[0].score, 0, 36, "ACT成绩"))) {
+                                    if (!(this.checked(examination.score, 0, 36, "ACT成绩"))) {
                                         event.preventDefault();
                                         return;
                                     }
                                 }
                                 if (examination.name == "SAT") {
-                                    if (!(this.checked(examination.score, 0, 2400, "SAT成绩") && this.checked(examination.sections[0].score, 0, 2400, "SAT成绩") && this.checked(examination.sections[1].score, 0, 2400, "SAT成绩") && this.checked(examination.sections[2].score, 0, 2400, "SAT成绩"))) {
+                                    if (!(this.checked(examination.score, 0, 2400, "SAT成绩"))) {
                                         event.preventDefault();
                                         return;
                                     }
                                 }
                                 if (examination.name == "GRE") {
-                                    if (!(this.checked(examination.score, 260, 340, "GRE成绩") && this.checked(examination.sections[0].score, 260, 340, "GRE成绩") && this.checked(examination.sections[1].score, 260, 340, "GRE成绩") && this.checked(examination.sections[2].score, 260, 340, "GRE成绩"))) {
+                                    if (!(this.checked(examination.score, 260, 340, "GRE成绩"))) {
                                         event.preventDefault();
                                         return;
                                     }
                                 }
                                 if (examination.name == "GMAT") {
-                                    if (!(this.checked(examination.score, 200, 800, "GMAT成绩") && this.checked(examination.sections[0].score, 200, 800, "GMAT成绩") && this.checked(examination.sections[1].score, 200, 800, "GMAT成绩") && this.checked(examination.sections[2].score, 200, 800, "GMAT成绩"))) {
+                                    if (!(this.checked(examination.score, 200, 800, "GMAT成绩"))) {
                                         event.preventDefault();
                                         return;
                                     }
