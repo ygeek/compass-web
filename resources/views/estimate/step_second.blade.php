@@ -58,6 +58,7 @@
                             </div>
 
                             <input class="estimate-input" style="width: 159px;left:-4px;position: relative;" type="text" id="cee" name="cee" v-model="data['examinations']['高考']['score_without_tag']"/>
+                            <span style="margin-left: 20px;color: red;">如果没有，请估算一个分值。</span>
                         </div>
                     @endif
                     <div class="form-group">
@@ -115,7 +116,16 @@
                         <group-examination :group.sync="group"></group-examination>
                     </div>
 
-                    <a href="{{ route('estimate.step_first') }}"><button class="estimate-button">返回上一步</button></a>
+                    <form action="{{ URL::route('estimate.step_first') }}" method="GET" style="display: none" id="return_form">
+                        <input type="hidden" name="selected_country_id" value="{{$selected_country['id']}}">
+                        <input type="hidden" name="selected_degree_id" value="{{$selected_degree['id']}}">
+                        <input type="hidden" name="selected_year" value="{{$selected_year}}">
+                        <input type="hidden" name="selected_category_id" value="{{$selected_category_id}}">
+                        <input type="hidden" name="selected_speciality_name" value="{{$selected_speciality_name}}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    </form>
+                    <a href="javascript:document.getElementById('return_form').submit();"><button class="estimate-button">返回上一步</button></a>
+
                     <button @click="submit" class="estimate-button">生成择校方案</button>
                 </div>
 
@@ -219,18 +229,17 @@
                     return true;
                 },
                 submit: function(){
+                    if(eval(document.getElementById('name')).value==""){
+                        alert("姓名未填写。");
+                        event.preventDefault();
+                        return ;
+                    }
+
                     var tmp = eval(document.getElementById('mean')).value;
                     if (!this.checked(tmp, 0, 100, "平均成绩")){
                         event.preventDefault();
                         return ;
                     }
-
-                    @if($estimate_checked==true)
-                    if (confirm("您之前的留学评估将会被清空，是否继续？")==false){
-                        event.preventDefault();
-                        return ;
-                    }
-                    @endif
 
                     for (var i in this.groups){
                         var selected_group = this.groups[i].selected_group;
@@ -276,6 +285,13 @@
                             }
                         }
                     }
+
+                    @if($estimate_checked==true)
+                    if (confirm("您之前的留学评估将会被清空，是否继续？")==false){
+                        event.preventDefault();
+                        return ;
+                    }
+                    @endif
 
                     var examinations = {};
                     this.groups.forEach(function(group){

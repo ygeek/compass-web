@@ -77,22 +77,28 @@
             data: function () {
                 return {
                     speciality_categories: {!! json_encode($speciality_categories) !!},
-                    selected_category_id: 1,
+                    selected_category_id: {{$selected_category_id or 1}},
+                    selected_speciality_name: {{$selected_speciality_name or 'null'}},
                     selected_country_id: 1,
                     selected_degree_id: 2
                 }
             },
             computed: {
                 children: function () {
-                    this.selected_speciality_name = "";
                     var that = this;
                     for(var i=0; i<this.speciality_categories.length; i++){
                         if(this.speciality_categories[i].id == this.selected_category_id){
-                            $res = this.speciality_categories[i].specialities.filter(function (speciality) {
+                            var res = this.speciality_categories[i].specialities.filter(function (speciality) {
                                 return speciality.degree_id == that.selected_degree_id && speciality.country_id == that.selected_country_id;
                             });
-                            this.selected_speciality_name = $res[0].name
-                            return $res;
+                            for (var j=0 ;j<res.length;j++){
+                                if (that.selected_speciality_name==res[j].name){
+                                    this.selected_speciality_name = res[j].name;
+                                    return res;
+                                }
+                            }
+                            that.selected_speciality_name = res[0].name;
+                            return res;
                         }
                     }
                     return [];

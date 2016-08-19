@@ -24,6 +24,8 @@ class EstimateController extends Controller
         $selected_country_id = $request->input('selected_country_id', null);
         $selected_degree_id = $request->input('selected_degree_id', null);
         $selected_year = $request->input('selected_year', null);
+        $selected_category_id = $request->input('selected_category_id');
+        $selected_speciality_name = $request->input('selected_speciality_name');
         $countries = AdministrativeArea::countries()->get();
         $degrees = Degree::estimatable()->get();
 
@@ -33,19 +35,21 @@ class EstimateController extends Controller
         ];
 
         $speciality_categories = SpecialityCategory::with('specialities')->get();
-        return view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year'));
+        return view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name'));
     }
 
     public function stepSecond(Request $request){
         $selected_country = AdministrativeArea::find($request->input('selected_country_id'));
         $selected_degree = Degree::find($request->input('selected_degree_id'));
+        $selected_category_id = $request->input('speciality_category_id');
         $selected_speciality_name = $request->input('speciality_name');
+        $selected_year = $request->input('selected_year', null);
         $estimate_checked = false;
         $user = Auth::user();
         if ($user!=null && $user->estimate!=null){
             $estimate_checked = true;
         }
-        return view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked'));
+        return view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id'));
     }
 
     /*
