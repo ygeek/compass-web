@@ -6,7 +6,7 @@
             @include('shared.top_bar', ['page' => 'colleges'])
             <search-form></search-form>
             <template id="search-form">
-                <form>
+                <form id="search_form">
                 <div class="search-area">
                     <input type="text" placeholder="输入院校名称" name="college_name" value="{{$college_name}}"/>
                     <button type="submit" class="search-button"></button>
@@ -275,14 +275,14 @@
                 },
                 call_submit_method: function () {
                     setTimeout(function(){
-                        document.getElementsByTagName('form')[0].submit()
+                        document.getElementById('search_form').submit()
                     }, 1);
                 }
             },
             events: {
                 'call_submit': function () {
                     setTimeout(function(){
-                        document.getElementsByTagName('form')[0].submit()
+                        document.getElementById('search_form').submit()
                     }, 1);
                 }
             },
