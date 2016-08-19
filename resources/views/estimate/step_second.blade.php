@@ -207,13 +207,75 @@
                 }
             },
             methods: {
+                checked: function (tmp, start, end, name) {
+                    if (tmp==""){
+                        alert(name+"未填写。");
+                        return false;
+                    }
+                    if (isNaN(tmp) || (tmp<start || tmp >end)){
+                        alert(name+"应在"+start+"到"+end+"之间。");
+                        return false;
+                    }
+                    return true;
+                },
                 submit: function(){
+                    var tmp = eval(document.getElementById('mean')).value;
+                    if (!this.checked(tmp, 0, 100, "平均成绩")){
+                        event.preventDefault();
+                        return ;
+                    }
+
                     @if($estimate_checked==true)
                     if (confirm("您之前的留学评估将会被清空，是否继续？")==false){
                         event.preventDefault();
                         return ;
                     }
                     @endif
+
+                    for (var i in this.groups){
+                        var selected_group = this.groups[i].selected_group;
+                        for (var j in this.groups[i].examinations){
+                            var examination = this.groups[i].examinations[j];
+                            if(examination.name == selected_group) {
+                                if (examination.name == "雅思") {
+                                    if (!(this.checked(examination.score, 0, 9, "雅思成绩") && this.checked(examination.sections[0].score, 0, 9, "雅思成绩") && this.checked(examination.sections[1].score, 0, 9, "雅思成绩") && this.checked(examination.sections[2].score, 0, 9, "雅思成绩") && this.checked(examination.sections[3].score, 0, 9, "雅思成绩"))) {
+                                        event.preventDefault();
+                                        return;
+                                    }
+                                }
+                                if (examination.name == "托福IBT") {
+                                    if (!(this.checked(examination.score, 0, 120, "托福成绩") && this.checked(examination.sections[0].score, 0, 120, "托福成绩") && this.checked(examination.sections[1].score, 0, 120, "托福成绩") && this.checked(examination.sections[2].score, 0, 120, "托福成绩") && this.checked(examination.sections[3].score, 0, 120, "托福成绩"))) {
+                                        event.preventDefault();
+                                        return;
+                                    }
+                                }
+                                if (examination.name == "ACT") {
+                                    if (!(this.checked(examination.score, 0, 36, "ACT成绩") && this.checked(examination.sections[0].score, 0, 36, "ACT成绩"))) {
+                                        event.preventDefault();
+                                        return;
+                                    }
+                                }
+                                if (examination.name == "SAT") {
+                                    if (!(this.checked(examination.score, 0, 2400, "SAT成绩") && this.checked(examination.sections[0].score, 0, 2400, "SAT成绩") && this.checked(examination.sections[1].score, 0, 2400, "SAT成绩") && this.checked(examination.sections[2].score, 0, 2400, "SAT成绩"))) {
+                                        event.preventDefault();
+                                        return;
+                                    }
+                                }
+                                if (examination.name == "GRE") {
+                                    if (!(this.checked(examination.score, 260, 340, "GRE成绩") && this.checked(examination.sections[0].score, 260, 340, "GRE成绩") && this.checked(examination.sections[1].score, 260, 340, "GRE成绩") && this.checked(examination.sections[2].score, 260, 340, "GRE成绩"))) {
+                                        event.preventDefault();
+                                        return;
+                                    }
+                                }
+                                if (examination.name == "GMAT") {
+                                    if (!(this.checked(examination.score, 200, 800, "GMAT成绩") && this.checked(examination.sections[0].score, 200, 800, "GMAT成绩") && this.checked(examination.sections[1].score, 200, 800, "GMAT成绩") && this.checked(examination.sections[2].score, 200, 800, "GMAT成绩"))) {
+                                        event.preventDefault();
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     var examinations = {};
                     this.groups.forEach(function(group){
@@ -223,8 +285,8 @@
                                 examinations[examination.name] = examination;
                             }
                         });
-
                     });
+
                     for (var attrname in examinations) {
                         this.data.examinations[attrname] = examinations[attrname];
                     }
