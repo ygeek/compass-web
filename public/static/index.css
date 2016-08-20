@@ -1,0 +1,42 @@
+/* 页面整体样式 */
+
+
+/* 院校样式 */
+.main {
+    overflow: hidden;
+    font-size: .14rem;
+    background-color: #fff;
+}
+
+.select-wrapper{
+/* overflow: hidden; */
+border-top: 1px solid #ebebeb; 
+background-color: #fff;
+}
+
+
+
+/* 全局样式 */
+  .fright{
+    float: right;
+  }
+
+  .fleft{
+    float: left;
+  }
+
+  .nowrap{
+  	overflow: hidden;
+  	white-space: nowrap;
+  }
+
+  .content-95{
+    width: 95%;
+    margin: 0 auto;
+  }
+
+    .content-90{
+    width: 90%;
+    margin: 0 auto;
+  }
+
