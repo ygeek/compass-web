@@ -89,7 +89,7 @@ class CollegesController extends Controller
             $colleges_query = $colleges_query->where('type', $condition);
         }
 
-        if ($rank_start!==null || $rank_end!==null) {
+        if ($rank_start!=="" || $rank_end!=="") {
             $rank_start_tmp = $rank_start;
             $rank_end_tmp = $rank_end;
             if ($rank_start===null || $rank_start==="") $rank_start_tmp=1;
