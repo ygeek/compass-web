@@ -49,7 +49,21 @@
                         @if(isset($college['world_ranking']))
                         <td class="english_name">世界排名: {{$college['world_ranking']}}</td>
                         @endif
-                        <td class="actions">@if($college['key'])<a href="{{ route('estimate.step_first') }}"><button class="estimate-button">测试录取率 -></button></a>@endif</td>
+                        <td class="actions">@if($college['key'])
+                                <?php
+                                    $college = \App\College::where('key', \App\College::generateKey($college['key']))->first();
+                                    $tmp = "";
+                                    if ($college!=null){
+                                        $tmp = $college->administrativeArea->id;
+                                        if ($college->administrativeArea->parent){
+                                            $tmp = $college->administrativeArea->parent->id;
+                                            if ($college->administrativeArea->parent->parent){
+                                                $tmp = $college->administrativeArea->parent->parent->id;
+                                            }
+                                        }
+                                    }
+                                ?>
+                                <a href="{{ route('estimate.step_first', ['selected_country_id' => $tmp]) }}"><button class="estimate-button">测试录取率 -></button></a>@endif</td>
                         </tr>
                     @endforeach
                 </table>
