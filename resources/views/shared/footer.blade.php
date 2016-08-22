@@ -32,9 +32,9 @@
                 <img src="/images/weibo_code.png" alt="weibo_ico"/>
                 <span>微博</span>
                 <img src="/images/weixin_code.jpg" alt="wexin_ico" style="margin-left: 40px"/>
-                <span>微信</span>
+                <span style="margin-right: 0;">微信</span>
             </div>
-            <p>Copyright © 2013-2016  京ICP备11014111号-2</p>
+            <p style="text-align: center;">Copyright © 2013-2016  京ICP备11014111号-2</p>
         </div>
     </div>
 </div>
