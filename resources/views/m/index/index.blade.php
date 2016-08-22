@@ -98,7 +98,7 @@
     </script>
 </head>
 <body>
-<app></app>
+<app page="Person"></app>
 <script type=text/javascript src=/static/js/manifest.js></script>
 <script type=text/javascript src=/static/js/vendor.js></script>
 <script type=text/javascript src=/static/js/app.js></script>
