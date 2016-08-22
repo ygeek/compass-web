@@ -46,10 +46,41 @@
                     <div class="tag-select">
                         <label>国内排名</label>
                         <div class="tags">
+                            <div class="tag"  v-bind:class="{'active': (rank_start == null && rank_end == null) || (rank_start == '' && rank_end == '')}">
+                                <span v-on:click="set_rank(null,null)">不限</span>
+                            </div>
+                            <div class="tag"  v-bind:class="{'active': (rank_start == 1 && rank_end == 8)}" v-if="selected_country_id == 1">
+                                <span v-on:click="set_rank(1,8)">1-8名</span>
+                            </div>
+                            <div class="tag"  v-bind:class="{'active': (rank_start == 9 && rank_end == 20)}" v-if="selected_country_id == 1">
+                                <span v-on:click="set_rank(9,20)">9-20名</span>
+                            </div>
+                            <div class="tag"  v-bind:class="{'active': (rank_start == 21 && rank_end == 50)}" v-if="selected_country_id == 1">
+                                <span v-on:click="set_rank(21,50)">21-50名</span>
+                            </div>
+                            <div class="tag"  v-bind:class="{'active': (rank_start == 1 && rank_end == 20)}" v-if="selected_country_id == 31">
+                                <span v-on:click="set_rank(1,20)">1-20名</span>
+                            </div>
+                            <div class="tag"  v-bind:class="{'active': (rank_start == 21 && rank_end == 30)}" v-if="selected_country_id == 31">
+                                <span v-on:click="set_rank(21,30)">21-30名</span>
+                            </div>
+                            <div class="tag"  v-bind:class="{'active': (rank_start == 31 && rank_end == 60)}" v-if="selected_country_id == 31">
+                                <span v-on:click="set_rank(31,60)">31-60名</span>
+                            </div>
+                            <div class="tag"  v-bind:class="{'active': (rank_start == 1 && rank_end == 10)}" v-if="selected_country_id == 71 || selected_country_id == 146">
+                                <span v-on:click="set_rank(1,10)">1-10名</span>
+                            </div>
+                            <div class="tag"  v-bind:class="{'active': (rank_start == 11 && rank_end == 20)}" v-if="selected_country_id == 71 || selected_country_id == 146">
+                                <span v-on:click="set_rank(11,20)">11-20名</span>
+                            </div>
+                            <div class="tag"  v-bind:class="{'active': (rank_start == 21 && rank_end == 50)}" v-if="selected_country_id == 71 || selected_country_id == 146">
+                                <span v-on:click="set_rank(21,50)">21-50名</span>
+                            </div>
                             <div class="tag">
-                                <input type="text" class="search-input" v-model="rank_start" name="rank_start" v-on:blur="call_submit_method()" value="{{$rank_start}}"/>
-                                <span style="cursor:auto">至</span>
-                                <input type="text" class="search-input" v-model="rank_end" name="rank_end" v-on:blur="call_submit_method()" value="{{$rank_end}}"/>
+                                <input type="text" v-model="rank_start" class="search-input" name="rank_start" value="{{$rank_start}}"/>
+                                <span style="cursor:auto">~</span>
+                                <input type="text" v-model="rank_end" class="search-input" name="rank_end" value="{{$rank_end}}"/>
+                                <button v-on:click="set_rank(-1,-1)">确定</button>
                             </div>
                         </div>
                     </div>
@@ -277,6 +308,15 @@
                     setTimeout(function(){
                         document.getElementById('search_form').submit()
                     }, 1);
+                },
+                set_rank: function (start, end){
+                    if (start == -1 && end == -1){
+                        this.call_submit_method();
+                        return;
+                    }
+                    this.rank_start = start;
+                    this.rank_end = end;
+                    this.call_submit_method();
                 }
             },
             events: {
@@ -291,6 +331,8 @@
                     if (oldVal!=null && val!=oldVal){
                         this.selected_state_id = null;
                         this.selected_city_id = null;
+                        this.rank_start = null;
+                        this.rank_end = null;
                     }
                 },
                 'selected_state_id': function (val, oldVal) {

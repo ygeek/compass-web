@@ -1478,8 +1478,14 @@ ul {
         .tag-area .tag-select .tags .tag.active {
           color: #0e2d60;
           font-weight: bold; }
+        .tag-area .tag-select .tags .tag button {
+          width: 60px;
+          height: 21px;
+          background: #fa8c55;
+          margin-left: 10px;
+          border: none; }
     .tag-area .tag-select .search-input {
-      width: 50px;
+      width: 30px;
       background: #ebebeb;
       height: 21px;
       padding-left: 10px;

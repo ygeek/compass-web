@@ -26,8 +26,8 @@ class CollegesController extends Controller
         $selected_city_id = $request->input('selected_city_id');
         $college_name = $request->input('college_name');
         $selected_speciality_cateogry_id = $request->input('selected_speciality_cateogry_id');
-        $rank_start = $request->input('rank_start');
-        $rank_end = $request->input('rank_end');
+        $rank_start = $request->input('rank_start', null);
+        $rank_end = $request->input('rank_end', null);
 
         $selected_go8 = $request->input('selected_go8');
 
@@ -105,9 +105,7 @@ class CollegesController extends Controller
                     }
                 }
             }
-            if (count($ranking_college)!=0){
-                $colleges_query = $colleges_query->whereIn('english_name',$ranking_college);
-            }
+            $colleges_query = $colleges_query->whereIn('english_name',$ranking_college);
         }
 
         $colleges = $colleges_query->paginate(10);
