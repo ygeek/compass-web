@@ -756,8 +756,14 @@ ul{
           tr{
             line-height: 27px;
             td{
-              text-align: right;
-              padding-left: 10px;
+              &:first-child{
+                text-align: right;
+                padding-left: 10px;
+              }
+              &:nth-child(2){
+                text-align: left;
+                padding-left: 5px;
+              }
             }
           }
         }
@@ -1001,8 +1007,14 @@ ul{
           tr{
             line-height: 27px;
             td{
-              text-align: right;
-              padding-left: 10px;
+              &:first-child{
+                text-align: right;
+                padding-left: 10px;
+              }
+              &:nth-child(2){
+                text-align: left;
+                padding-left: 5px;
+              }
             }
           }
 
@@ -1205,8 +1217,14 @@ ul{
             tr{
               line-height: 27px;
               td{
-                text-align: right;
-                padding-left: 10px;
+                &:first-child{
+                  text-align: right;
+                  padding-left: 10px;
+                }
+                &:nth-child(2){
+                  text-align: left;
+                  padding-left: 5px;
+                }
               }
             }
 
@@ -1580,8 +1598,14 @@ ul{
             tr{
               line-height: 27px;
               td{
-                text-align: right;
-                padding-left: 10px;
+                &:first-child{
+                  text-align: right;
+                  padding-left: 10px;
+                }
+                &:nth-child(2){
+                  text-align: left;
+                  padding-left: 5px;
+                }
               }
             }
           }
