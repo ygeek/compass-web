@@ -1901,15 +1901,15 @@ ul {
       display: block;
       clear: both; }
     .college-page .college-pages .college-applications .left-grid {
-      width: 405px;
+      width: 355px;
       float: left; }
     .college-page .college-pages .college-applications .right-grid {
-      width: 410px;
+      width: 460px;
       margin-left: 10px;
       float: left; }
     .college-page .college-pages .college-applications div .article header span {
       font-size: 30px;
-      margin: 0px 7px 0 -26px; }
+      margin: 0 7px 0 -26px; }
     .college-page .college-pages .college-applications .color-0 {
       color: #34a853; }
     .college-page .college-pages .college-applications .color-1 {
@@ -1921,7 +1921,7 @@ ul {
     .college-page .college-pages .college-applications .color-4 {
       color: #4dd9b7; }
     .college-page .college-pages .college-applications .article {
-      width: calc(100% - 60px);
+      width: calc(100% - 75px);
       display: inline-block;
       background: #fff;
       padding-top: 30px;
