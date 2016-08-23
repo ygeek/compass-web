@@ -246,8 +246,11 @@ class CollegesController extends Controller
 
         $rank_items = $rank_items->map(function($rank_item) use ($exist_colleges_english_name){
             $rank_item['key'] = false;
-            if($exist_colleges_english_name->contains($rank_item['english_name'])){
-                $rank_item['key'] = $rank_item['english_name'];
+            foreach ($exist_colleges_english_name as $tmp){
+                if (trim($tmp)==trim($rank_item['english_name'])){
+                    $rank_item['key'] = $tmp;
+                    break;
+                }
             }
             return $rank_item;
         });
