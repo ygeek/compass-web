@@ -26,8 +26,8 @@ class CollegesController extends Controller
         $selected_city_id = $request->input('selected_city_id');
         $college_name = $request->input('college_name');
         $selected_speciality_cateogry_id = $request->input('selected_speciality_cateogry_id');
-        $rank_start = $request->input('rank_start', null);
-        $rank_end = $request->input('rank_end', null);
+        $rank_start = $request->input('rank_start', "");
+        $rank_end = $request->input('rank_end', "");
 
         $selected_go8 = $request->input('selected_go8');
 
