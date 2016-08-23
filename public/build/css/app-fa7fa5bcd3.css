@@ -1483,7 +1483,8 @@ ul {
           height: 21px;
           background: #fa8c55;
           margin-left: 10px;
-          border: none; }
+          border: none;
+          color: #fff; }
     .tag-area .tag-select .search-input {
       width: 30px;
       background: #ebebeb;
