@@ -22,7 +22,7 @@
             </select>
             <button type="submit" class="btn btn-primary">查询</button>
             <a class="btn btn-primary" href="{{route('admin.colleges.create')}}">新增院校</a>
-            <span>查询到{{count($colleges)}}条记录</span>
+            <span>查询到{{$colleges->total()}}条记录</span>
         </form>
         <table class="table table-striped table-borderless table-header-bg">
             <thead>
