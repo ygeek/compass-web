@@ -6,12 +6,15 @@
             @include('shared.top_bar', ['page' => 'colleges'])
             <search-form></search-form>
             <template id="search-form">
-                <form id="search_form">
+                <form>
                 <div class="search-area">
                     <input type="text" placeholder="输入院校名称" name="college_name" value="{{$college_name}}"/>
+                    <input type="hidden" name="selected_country_id" value="-1"/>
                     <button type="submit" class="search-button"></button>
                 </div>
+                </form>
 
+                <form id="search_form">
                 <div class="tag-area">
                     <div class="tag-select">
                         <tag-select label-name="选择国家" :selects="areas" :selected_id.sync="selected_country_id" ></tag-select>

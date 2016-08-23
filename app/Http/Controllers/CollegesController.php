@@ -54,7 +54,7 @@ class CollegesController extends Controller
             $node_id = $selected_country_id;
         }
 
-        if($node_id){
+        if($node_id && $node_id!=-1){
             $area = AdministrativeArea::find($node_id);
             $descendants = $area->descendants()->lists('id');
             $descendants[] = $area->getKey();
