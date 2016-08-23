@@ -6,13 +6,13 @@ class VerifyCodeService{
     const CACHE_PREFIX = 'verify_code_';
     const CACHE_TTL = 1;
 
-    public function setVerifyCodeForPhoneNumber(string $phone_number) : string{
+    public function setVerifyCodeForPhoneNumber($phone_number) {
         $code = $this->getRandomCode();
         $this->setVerifyCodeToCache($code, $phone_number);
         return $code;
     }
 
-    public function testingVerifyCodeWithPhoneNumber(string $phone_number, string $verify_code) : bool {
+    public function testingVerifyCodeWithPhoneNumber($phone_number, $verify_code)  {
         try{
             $cached_code = $this->getVerifyCodeFromCache($phone_number);
             return $verify_code == $cached_code;
@@ -21,11 +21,11 @@ class VerifyCodeService{
         }
     }
     
-    private function setVerifyCodeToCache(string $verify_code, string $phone_number){
+    private function setVerifyCodeToCache($verify_code, $phone_number){
         Cache::put($this->getKey($phone_number), $verify_code, self::CACHE_TTL);
     }
 
-    private function getVerifyCodeFromCache(string $phone_number) : string {
+    private function getVerifyCodeFromCache($phone_number)  {
         $code = Cache::get($this->getKey($phone_number));
         if(!$code){
             throw new \Exception('code not found');
@@ -33,7 +33,7 @@ class VerifyCodeService{
         return $code;
     }
 
-    private function getKey(string $key) : string{
+    private function getKey($key) {
         return self::CACHE_PREFIX . $key;
     }
 
