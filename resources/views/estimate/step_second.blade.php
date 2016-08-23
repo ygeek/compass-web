@@ -16,19 +16,21 @@
 
                     @if($selected_degree->name == '硕士')
                         <div class="form-group">
-                            <label for="recently_college_name">最近就读院校</label>
+                            <label for="recently_college_name">最近就读院校<span style="color: red">*</span></label>
                             <select id="recently_college_name" v-model="data.recently_college_name" class="estimate-input">
                                 <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
+                                <?php $index = 0; ?>
                                 @foreach($master_colleges as $college)
-                                    <option value="{{ $college }}">{{$college}}</option>
+                                    <option value="{{ $college }}" @if($index++ == 0 ) selected @endif>{{$college}}</option>
                                 @endforeach
                             </select>
 
                             <label for="recently_speciality_name">最近就读专业</label>
                             <select id="recently_speciality_name" v-model="data.recently_speciality_name" class="estimate-input">
                                 <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
+                                <?php $index = 0; ?>
                                 @foreach($master_speciality as $speciality)
-                                    <option value="{{ $speciality }}">{{$speciality}}</option>
+                                    <option value="{{ $speciality }}" @if($index++ == 0 ) selected @endif>{{$speciality}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -45,14 +47,15 @@
                             <div class="estimate-short-select" style="position: relative; top: 15px;">
                                 <select name="cee_province" v-model="data['examinations']['高考']['tag']">
                                     <?php
-                                        $provinces = collect(config('provinces'))->sortBy(function ($product, $key) {
-                                            if ($product==="重庆")
-                                                return iconv('UTF-8', 'GBK//IGNORE', "崇庆");
-                                            return iconv('UTF-8', 'GBK//IGNORE', $product);
-                                        });
+                                    $provinces = collect(config('provinces'))->sortBy(function ($product, $key) {
+                                        if ($product==="重庆")
+                                            return iconv('UTF-8', 'GBK//IGNORE', "崇庆");
+                                        return iconv('UTF-8', 'GBK//IGNORE', $product);
+                                    });
                                     ?>
+                                    <?php $index = 0; ?>
                                     @foreach($provinces as $province)
-                                        <option value="{{ $province }}">{{$province}}</option>
+                                        <option value="{{ $province }}" @if($index++ == 0 ) selected @endif>{{$province}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -62,7 +65,7 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <label for="mean">平均成绩</label>
+                        <label for="mean">平均成绩<span style="color: red">*</span></label>
                         @if($selected_degree->name == '本科')
                             <input class="estimate-input" type="text" id="mean" v-model="data['examinations']['高中平均成绩']['score']"/>
                         @else
@@ -146,7 +149,7 @@
                     <input class="estimate-input" style="width: 120px;" type="text" v-model="selected_examination.score">
 
                     <template v-for="section in selected_examination['sections']">
-                        <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}<span style="color: red">*</span></label>
+                        <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
                         <input  class="estimate-input" style="width: 60px;" type="text" v-model="section.score">
                     </template>
                 </template>
@@ -154,7 +157,7 @@
         </div>
     </div>
     {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form']) !!}
-        <input name="data" type="hidden" id="estimate-form-data"/>
+    <input name="data" type="hidden" id="estimate-form-data"/>
     {!! Form::close() !!}
     <script type="text/javascript">
         Vue.component('group-examination', {
@@ -164,6 +167,9 @@
                 return  {
                     degree_id: {{ $selected_degree->id }}
                 };
+            },
+            created: function () {
+                this.group['selected_group'] = this.group['selects'][0];
             },
             computed: {
                 selected_examination: function(){
@@ -291,7 +297,7 @@
                         event.preventDefault();
                         return ;
                     }
-                    @endif
+                            @endif
 
                     var examinations = {};
                     this.groups.forEach(function(group){

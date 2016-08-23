@@ -78,7 +78,7 @@
                 return {
                     speciality_categories: {!! json_encode($speciality_categories) !!},
                     selected_category_id: {{$selected_category_id or 1}},
-                    selected_speciality_name: {{$selected_speciality_name or 'null'}},
+                    selected_speciality_name: '{{$selected_speciality_name or 'null'}}',
                     selected_country_id: 1,
                     selected_degree_id: 2
                 }
