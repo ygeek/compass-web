@@ -95,7 +95,7 @@ class CollegesController extends Controller
             if ($rank_start===null || $rank_start==="") $rank_start_tmp=1;
             if ($rank_end===null || $rank_end==="") $rank_end_tmp=99999;
             $rankings = Setting::get('rankings');
-            $tag = AdministrativeArea::find($node_id);
+            $tag = AdministrativeArea::find($selected_country_id);
             $ranking_college = [];
             foreach ($rankings['rankings'] as $ranking) {
                 $ranking_tag = $ranking['tag'];
