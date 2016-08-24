@@ -157,7 +157,7 @@ class CollegesController extends Controller
                 $articles_query = $articles_query->orderBy('articles.created_at', 'desc');
             }
 
-            $articles = $articles_query->get();
+            $articles = $articles_query->paginate(15);
 
         }else{
             //学校专业
