@@ -114,21 +114,21 @@
                       <div class="row">
                         <div class="col-xs-12">
                           <div class="col-sm-4" v-show="!!countries">
-                              <select v-model="selected_country"  class="form-control" id="country_select">
+                              <select v-model="selected_country"  class="form-control" name="country_select">
                                 <option v-for="option in countries" v-bind:value="option.value">
                                   @{{ option.name }}
                                 </option>
                               </select>
                             </div>
                             <div class="col-sm-4" v-show="!!states">
-                              <select class="form-control" v-model="selected_state">
+                              <select class="form-control" v-model="selected_state" name="state_select">
                                 <option v-for="option in states" v-bind:value="option.value">
                                   @{{ option.name }}
                                 </option>
                               </select>
                             </div>
                             <div class="col-sm-4" v-show="!!cities">
-                              <select class="form-control" v-model="selected_city">
+                              <select class="form-control" v-model="selected_city" name="city_select">
                                 <option v-for="option in cities" v-bind:value="option.value">
                                   @{{ option.name }}
                                 </option>
@@ -150,6 +150,7 @@
                                                @if(in_array($degree->id, $degree_ids))
                                                checked
                                                @endif
+                    <?php if (old('degree_ids')!=null && in_array($degree->id, old('degree_ids'))) echo 'checked'; ?>
                                                value="{{$degree->id}}"> {{$degree->name}}
                                     </label>
                                 </div>
@@ -162,10 +163,10 @@
                         <label class="col-xs-12">八大院校</label>
                         <div class="col-xs-12">
                             <label class="css-input css-radio css-radio-warning push-10-r">
-                                <input name="go8" type="radio" value="1" @if($college->go8) checked @endif><span></span> 八大
+                                <input name="go8" type="radio" value="1" @if($college->go8) checked @endif <?php if(old('go8')!=null && old('go8')) echo 'checked'; ?>><span></span> 八大
                             </label>
                             <label class="css-input css-radio css-radio-warning">
-                                <input name="go8" type="radio" value="0" @if(!$college->go8) checked @endif><span></span> 非八大
+                                <input name="go8" type="radio" value="0" <?php if((old('go8')!=null && (!old('go8')))) echo 'checked'; else if(($college->go8!=null) && (!$college->go8)) echo 'checked'; ?>><span></span> 非八大
                             </label>
                         </div>
                     </div>
@@ -174,10 +175,10 @@
                         <label class="col-xs-12">院校类型</label>
                         <div class="col-xs-12">
                             <label class="css-input css-radio css-radio-warning push-10-r">
-                                <input name="type" type="radio" value="public" @if($college->type == 'public') checked @endif><span></span> 公立
+                                <input name="type" type="radio" value="public" @if($college->type == 'public' || old('type')=='public') checked @endif><span></span> 公立
                             </label>
                             <label class="css-input css-radio css-radio-warning">
-                                <input name="type" type="radio" value="private" @if($college->type == 'private') checked @endif><span></span> 私立
+                                <input name="type" type="radio" value="private" @if($college->type == 'private' || old('type')=='private') checked @endif><span></span> 私立
                             </label>
                         </div>
                     </div>
@@ -186,7 +187,7 @@
                         <label class="col-xs-12">热门院校</label>
                         <div class="col-xs-12">
                           <label class="css-input css-checkbox css-checkbox-success">
-                              <input name="hot" type="checkbox" @if($college->hot) checked @endif><span></span>
+                              <input name="hot" type="checkbox" @if($college->hot || old('hot')==true) checked @endif><span></span>
                           </label>
                         </div>
                     </div>
@@ -195,7 +196,7 @@
                         <label class="col-xs-12">推荐院校</label>
                         <div class="col-xs-12">
                           <label class="css-input css-checkbox css-checkbox-success">
-                              <input name="recommendatory" type="checkbox" @if($college->recommendatory) checked @endif)><span></span>
+                              <input name="recommendatory" type="checkbox" @if($college->recommendatory || old('recommendatory')==true) checked @endif)><span></span>
                           </label>
                         </div>
                     </div>
@@ -248,10 +249,10 @@ Vue.component('college-create-form', {
   template: '#create_form',
   data: function(){
     return {
-      areas: {!! $areas !!},
-      selected_country: {{$country or 'null'}},
-      selected_state: {{$state or 'null'}},
-      selected_city: {{$city or 'null'}}
+        selected_country: <?php if(old('country_select')!=null) echo "'".old('country_select')."'"; else echo "'".$country."'" or 'null';?>,
+        selected_state: <?php if(old('state_select')!=null) echo "'".old('state_select')."'"; else echo "'".$state."'" or 'null';?>,
+        selected_city: <?php if(old('city_select')!=null) echo "'".old('city_select')."'"; else echo "'".$city."'" or 'null';?>,
+        areas: {!! $areas !!}
     }
   },
   methods: {

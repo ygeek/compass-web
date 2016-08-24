@@ -65,9 +65,9 @@
                           <a href="{{ route('admin.articles.index', [ 'college_id' => $college->id ]) }}" class="btn btn-xs btn-default">
                               查看文章－页面设置
                           </a>
-                          <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="Remove Client">
+                          <!--<button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="Remove Client">
                             <i class="fa fa-times"></i>
-                          </button>
+                          </button>-->
                       </div>
                   </td>
               </tr>
