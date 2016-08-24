@@ -28,6 +28,7 @@ class CollegesController extends Controller
         $selected_speciality_cateogry_id = $request->input('selected_speciality_cateogry_id');
         $rank_start = $request->input('rank_start', "");
         $rank_end = $request->input('rank_end', "");
+        $selected_order = $request->input('selected_order', "domestic_ranking");
 
         $selected_go8 = $request->input('selected_go8');
 
@@ -89,13 +90,13 @@ class CollegesController extends Controller
             $colleges_query = $colleges_query->where('type', $condition);
         }
 
+        $rankings = Setting::get('rankings');
+        $tag = AdministrativeArea::find($selected_country_id);
         if ($rank_start!=="" || $rank_end!=="") {
             $rank_start_tmp = $rank_start;
             $rank_end_tmp = $rank_end;
             if ($rank_start===null || $rank_start==="") $rank_start_tmp=1;
             if ($rank_end===null || $rank_end==="") $rank_end_tmp=99999;
-            $rankings = Setting::get('rankings');
-            $tag = AdministrativeArea::find($selected_country_id);
             $ranking_college = [];
             foreach ($rankings['rankings'] as $ranking) {
                 $ranking_tag = $ranking['tag'];
@@ -108,7 +109,43 @@ class CollegesController extends Controller
             $colleges_query = $colleges_query->whereIn('english_name',$ranking_college);
         }
 
-        $colleges = $colleges_query->paginate(10);
+        $colleges_english_name = collect($colleges_query->select('english_name')->get()->map(function($item){
+            return $item->english_name;
+        }));
+        $tmp_tag = str_replace("_ranking", "", $selected_order);
+        if($selected_order == 'domestic_ranking')
+            $tmp_tag = $tag['name'];
+        foreach ($rankings['rankings'] as $ranking) {
+            $ranking_tag = $ranking['tag'];
+            if (strpos($ranking_tag, $tmp_tag) !== false) {
+                $now_rank = collect($ranking['rank'])->map(function($item){
+                    return $item['english_name'];
+                })->sortBy('rank')->toArray();
+                $colleges_english_name = $colleges_english_name->sortBy(function ($product, $key) use($now_rank) {
+                    $count = count($now_rank);
+                    for($index = 0;$index<$count;$index++) {
+                        if(trim($product) == trim($now_rank[$index])){
+                            return $index;
+                        }
+                    }
+                    return 9999;
+                })->values()->all();
+                break;
+            }
+        }
+
+        $colleges = $colleges_query->select('*')->whereIn('english_name',$colleges_english_name)->paginate(10);
+
+        $array_colleges = $colleges->sortBy(function ($product, $key) use($colleges_english_name) {
+            $count = count($colleges_english_name);
+            for($index = 0;$index<$count;$index++) {
+                if(trim($product->english_name) == trim($colleges_english_name[$index])){
+                    return $index;
+                }
+            }
+            return 9999;
+        })->values()->all();
+
         return view('colleges.index', compact('areas',
             'speciality_categories',
             'colleges',
@@ -120,7 +157,9 @@ class CollegesController extends Controller
             'selected_go8',
             'selected_property',
             'rank_start',
-            'rank_end'
+            'rank_end',
+            'selected_order',
+            'array_colleges'
         ));
     }
 
@@ -149,15 +188,19 @@ class CollegesController extends Controller
                 }
             }
 
-            $articles_query = $article_college->articles()->whereHas('category', function($q) use ($article_key){
-                return $q->where('key', $article_key);
-            })->orderBy('articles.order_weight');
+            if ($article_college==null)
+                $articles = [];
+            else {
+                $articles_query = $article_college->articles()->whereHas('category', function($q) use ($article_key){
+                    return $q->where('key', $article_key);
+                })->orderBy('articles.order_weight');
 
-            if($request->input('desc', false)){
-                $articles_query = $articles_query->orderBy('articles.created_at', 'desc');
+                if($request->input('desc', false)){
+                    $articles_query = $articles_query->orderBy('articles.created_at', 'desc');
+                }
+
+                $articles = $articles_query->paginate(15);
             }
-
-            $articles = $articles_query->paginate(15);
 
         }else{
             //学校专业

@@ -1701,6 +1701,13 @@ ul {
   padding: 20px 0;
   border-top: solid #ebebeb 1px;
   font-size: 14px; }
+  .colleges-page .order-area:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .colleges-page .order-area .result-tips {
+    float: left;
+    margin-right: 80px; }
 
 .pagination li {
   display: inline-block;

@@ -91,7 +91,29 @@
 
                 <div class="order-area">
                     <div class="result-tips">为您找到<span style="color: #38deba;font-weight: bold"> {{ $colleges->total() }} </span>个相关院校</div>
-                    <div class="order"></div>
+                    <div class="tag-area" style="float: left;margin-top: 0">
+                        <div class="tag-select" style="margin-bottom: 0">
+                            <div class="tags" style="width: auto">
+                                <div class="tag"  v-bind:class="{'active': (selected_order == 'us_new_ranking')}">
+                                    <span v-on:click="set_order('us_new_ranking')">U.S.News排名</span>
+                                    <img v-if="selected_order == 'us_new_ranking'" src="/images/up.png" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                </div>
+                                <div class="tag"  v-bind:class="{'active': (selected_order == 'times_ranking')}">
+                                    <span v-on:click="set_order('times_ranking')">Times排名</span>
+                                    <img v-if="selected_order == 'times_ranking'" src="/images/up.png" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                </div>
+                                <div class="tag"  v-bind:class="{'active': (selected_order == 'qs_ranking')}">
+                                    <span v-on:click="set_order('qs_ranking')">QS排名</span>
+                                    <img v-if="selected_order == 'qs_ranking'" src="/images/up.png" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                </div>
+                                <div class="tag"  v-bind:class="{'active': (selected_order == 'domestic_ranking')}">
+                                    <span v-on:click="set_order('domestic_ranking')">本国排名</span>
+                                    <img v-if="selected_order == 'domestic_ranking'" src="/images/up.png" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                </div>
+                            </div>
+                            <input type="hidden" v-model="selected_order"  name="selected_order" value="{{$selected_order }}"/>
+                        </div>
+                    </div>
                 </div>
                 </form>
             </template>
@@ -100,7 +122,7 @@
         <div class="search-result">
             <div class="app-content">
                 <div class="colleges">
-                    @foreach($colleges as $college)
+                    @foreach($array_colleges as $college)
                         <div class="college">
                             <like-college-sidebar
                                     college_id="{{ $college->id }}"
@@ -232,6 +254,7 @@
                     selected_property: null,
                     rank_start: null,
                     rank_end: null,
+                    selected_order: 'domestic_ranking',
                     go8_selects: [
                       {
                         id: 1,
@@ -319,6 +342,10 @@
                     }
                     this.rank_start = start;
                     this.rank_end = end;
+                    this.call_submit_method();
+                },
+                set_order: function (order){
+                    this.selected_order = order;
                     this.call_submit_method();
                 }
             },
