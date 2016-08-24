@@ -146,7 +146,7 @@ class CollegesController extends Controller
             return 9999;
         })->values()->all();
 
-        return view('colleges.index', compact('areas',
+        return $this->view('colleges.index', compact('areas',
             'speciality_categories',
             'colleges',
             'selected_speciality_cateogry_id',
@@ -224,7 +224,7 @@ class CollegesController extends Controller
             $articles = $specialities_query->paginate(15);
         }
 
-        return view('colleges.show', compact('college', 'article_key', 'articles'));
+        return $this->view('colleges.show', compact('college', 'article_key', 'articles'));
     }
 
     //院校排名
@@ -305,7 +305,7 @@ class CollegesController extends Controller
                 'path' => route('colleges.rank')
             ]);
 
-        return view('colleges.rank', [
+        return $this->view('colleges.rank', [
           'colleges' => $paginated_rank_items,
           'rank' => $rank,
           'ranking_categories' => $ranking_categories,

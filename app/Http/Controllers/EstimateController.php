@@ -35,7 +35,7 @@ class EstimateController extends Controller
         ];
 
         $speciality_categories = SpecialityCategory::with('specialities')->get();
-        return view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name'));
+        return $this->view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name'));
     }
 
     public function stepSecond(Request $request){
@@ -49,7 +49,7 @@ class EstimateController extends Controller
         if ($user!=null && $user->estimate!=null){
             $estimate_checked = true;
         }
-        return view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id'));
+        return $this->view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id'));
     }
 
     /*
@@ -146,7 +146,7 @@ class EstimateController extends Controller
             $estimate_id = str_replace('estimate-', '', $estimate_id);
         }
 
-        return view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data'));
+        return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data'));
     }
 
 
