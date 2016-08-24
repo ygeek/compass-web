@@ -96,19 +96,19 @@
                             <div class="tags" style="width: auto">
                                 <div class="tag"  v-bind:class="{'active': (selected_order == 'us_new_ranking')}">
                                     <span v-on:click="set_order('us_new_ranking')">U.S.News排名</span>
-                                    <img v-if="selected_order == 'us_new_ranking'" src="/images/up.png" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                    <img v-if="selected_order == 'us_new_ranking'" src="/images/up.jpg" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
                                 </div>
                                 <div class="tag"  v-bind:class="{'active': (selected_order == 'times_ranking')}">
                                     <span v-on:click="set_order('times_ranking')">Times排名</span>
-                                    <img v-if="selected_order == 'times_ranking'" src="/images/up.png" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                    <img v-if="selected_order == 'times_ranking'" src="/images/up.jpg" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
                                 </div>
                                 <div class="tag"  v-bind:class="{'active': (selected_order == 'qs_ranking')}">
                                     <span v-on:click="set_order('qs_ranking')">QS排名</span>
-                                    <img v-if="selected_order == 'qs_ranking'" src="/images/up.png" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                    <img v-if="selected_order == 'qs_ranking'" src="/images/up.jpg" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
                                 </div>
                                 <div class="tag"  v-bind:class="{'active': (selected_order == 'domestic_ranking')}">
                                     <span v-on:click="set_order('domestic_ranking')">本国排名</span>
-                                    <img v-if="selected_order == 'domestic_ranking'" src="/images/up.png" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                    <img v-if="selected_order == 'domestic_ranking'" src="/images/up.jpg" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
                                 </div>
                             </div>
                             <input type="hidden" v-model="selected_order"  name="selected_order" value="{{$selected_order }}"/>
