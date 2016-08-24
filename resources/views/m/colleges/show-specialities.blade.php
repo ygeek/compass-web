@@ -11,7 +11,7 @@
     <link href=/static/css/app.css rel=stylesheet>
 </head>
 <body>
-<app page=CollegeQuery></app>
+<app page=Major></app>
 <script type=text/javascript src=/static/js/manifest.js></script>
 <script type=text/javascript src=/static/js/vendor.js></script>
 <script type=text/javascript src=/static/js/app.js></script>

@@ -9,6 +9,21 @@
     <link rel=stylesheet href=/static/index.css>
     <script src=//cdn.bootcss.com/jquery/2.2.4/jquery.min.js></script>
     <link href=/static/css/app.css rel=stylesheet>
+    <script>
+        <?php
+        foreach ($array_colleges as $college) {
+            $college->imgPath = app('qiniu_uploader')->pathOfKey($college->badge_path);
+        }
+        app('qiniu_uploader')->pathOfKey($college->badge_path)
+        ?>
+        var data = {
+            country: '澳大利亚',
+            province: '新男威尔士洲',
+            city: '墨尔本',
+            major: '设计 与艺术系统',
+            results:{!! json_encode($array_colleges) !!}
+        }
+    </script>
 </head>
 <body>
 <app page=CollegeQuery></app>
