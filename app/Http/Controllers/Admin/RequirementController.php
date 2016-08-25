@@ -23,6 +23,18 @@ class RequirementController extends BaseController
         }
 
         if($requirement){
+
+            for ($i=0; $i<count($requirement); $i++){
+                for ($j=0; $j<count($requirement[$i]['examinations']); $j++){
+                    if($requirement[$i]['examinations'][$j]['examination_name'] == '高考'){
+                        $requirement[$i]['examinations'][$j]['requirement'] = collect($requirement[$i]['examinations'][$j]['requirement'])->sortBy(function ($product, $key) {
+                            if ($product['tag_name']==="重庆")
+                                return iconv('UTF-8', 'GBK//IGNORE', "崇庆");
+                            return iconv('UTF-8', 'GBK//IGNORE', $product['tag_name']);
+                        })->values()->all();
+                    }
+                }
+            }
             //已存在 修改
             return view('admin.requirement.create', compact('requirement', 'type', 'id'));
         }else{
