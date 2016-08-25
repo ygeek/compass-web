@@ -1709,17 +1709,19 @@ ul {
     float: left;
     margin-right: 80px; }
 
-.pagination li {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  background: #fff;
-  text-align: center;
-  line-height: 30px;
-  margin-right: 10px; }
-  .pagination li.active {
-    color: #0e2d60;
-    font-weight: bold; }
+.pagination {
+  text-align: center; }
+  .pagination li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    line-height: 30px;
+    margin-right: 10px; }
+    .pagination li.active {
+      color: #0e2d60;
+      font-weight: bold; }
 
 .college-page .college-page-header {
   background-repeat: no-repeat;
