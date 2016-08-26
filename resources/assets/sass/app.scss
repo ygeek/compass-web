@@ -439,7 +439,7 @@ ul{
       list-style-type: none;
     }
     float: right;
-    width: 715px;
+    width: 580px;
     @include clearfix;
     .nav-item{
       float: left;
@@ -2448,4 +2448,16 @@ $heart_size: 12px;
   right: 20px;
   width: 40px;
   height: 40px;
+  z-index: 99999;
+}
+
+.counselor{
+  position: fixed;
+  bottom: 16px;
+  right: 80px;
+  z-index: 99999;
+  img {
+    width: 107px;
+    height: 40px;
+  }
 }

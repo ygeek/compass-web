@@ -714,7 +714,7 @@ ul {
     margin-right: -55px;
     margin-top: 15px;
     float: right;
-    width: 715px; }
+    width: 580px; }
     .top-nav-bar .top-bar-content a {
       color: #7de6ca; }
     .top-nav-bar .top-bar-content .title-nav-bar {
@@ -2348,6 +2348,16 @@ ul {
   bottom: 20px;
   right: 20px;
   width: 40px;
-  height: 40px; }
+  height: 40px;
+  z-index: 99999; }
+
+.counselor {
+  position: fixed;
+  bottom: 16px;
+  right: 80px;
+  z-index: 99999; }
+  .counselor img {
+    width: 107px;
+    height: 40px; }
 
 /*# sourceMappingURL=app.css.map */
