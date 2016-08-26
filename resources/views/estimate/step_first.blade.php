@@ -88,9 +88,18 @@
                     var that = this;
                     for(var i=0; i<this.speciality_categories.length; i++){
                         if(this.speciality_categories[i].id == this.selected_category_id){
-                            var res = this.speciality_categories[i].specialities.filter(function (speciality) {
+                            var tmp = this.speciality_categories[i].specialities.filter(function (speciality) {
                                 return speciality.degree_id == that.selected_degree_id && speciality.country_id == that.selected_country_id;
                             });
+
+                            var res = [], tmp_name = [];
+                            for (var k=0, l=tmp.length; k<l; k++)
+                                if (tmp_name.indexOf(tmp[k].name) === -1 && tmp[k] !== '') {
+                                    tmp_name.push(tmp[k].name);
+                                    res.push(tmp[k]);
+                                }
+
+
                             for (var j=0 ;j<res.length;j++){
                                 if (that.selected_speciality_name==res[j].name){
                                     this.selected_speciality_name = res[j].name;

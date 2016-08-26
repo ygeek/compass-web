@@ -31,8 +31,12 @@ class SpecialitiesController extends BaseController
     public function store($college_id, Request $request){
         $this->validate($request, [
             'degree_id' => 'required',
-            'name' => 'required|unique:specialities,name,NULL,id,degree_id,' . $request->input('degree_id')
+            'name' => 'required'
         ]);
+
+        if (count(Speciality::where('name', $request->input('name'))->where('degree_id', $request->input('degree_id'))->where('college_id', $college_id)->get())!=0) {
+            return redirect()->back()->withInput()->withErrors('专业名已存在');
+        }
 
         $college = College::with('specialities')->find($college_id);
         $speciality = new Speciality($request->all());
@@ -53,8 +57,12 @@ class SpecialitiesController extends BaseController
     public function update($college_id, $speciality_id, Request $request){
         $this->validate($request, [
             'degree_id' => 'required',
-            'name' => 'required|unique:specialities,name,NULL,id,degree_id,' . $request->input('degree_id')
+            'name' => 'required'
         ]);
+
+        if (count(Speciality::where('name', $request->input('name'))->where('degree_id', $request->input('degree_id'))->where('college_id', $college_id)->get())!=0) {
+            return redirect()->back()->withInput()->withErrors('专业名已存在');
+        }
 
         $speciality = Speciality::find($speciality_id);
         $speciality->update($request->all());
