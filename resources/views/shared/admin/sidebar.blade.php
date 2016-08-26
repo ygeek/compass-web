@@ -35,6 +35,10 @@
           </li>
           <li class="nav-main-heading"><span class="sidebar-mini-hide">系统管理</span></li>
           <li>
+            <a href="{{ route('admin.users.index') }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">用户管理</span></a>
+          </li>
+
+          <li>
               <a href="{{ route('admin.setting.index', ['key' => 'core_range']) }}"><i class="si si-rocket"></i><span class="sidebar-mini-hide">核心冲刺概率设置</span></a>
           </li>
 
