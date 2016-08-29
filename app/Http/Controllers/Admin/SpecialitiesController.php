@@ -14,9 +14,23 @@ use App\Http\Controllers\Controller;
 class SpecialitiesController extends BaseController
 {
 
-    public function index($college_id){
+    public function index($college_id, Request $request){
+        $speciality_name = $request->input('speciality_name');
+        $degree_id = $request->input('degree_id');
+        $degrees = Degree::all();
+
         $college = College::with('specialities.degree')->find($college_id);
-        return view('admin.specialities.index', compact('college'));
+        $specialities = collect($college->specialities)->filter(function($item) use ($speciality_name, $degree_id) {
+            if($speciality_name && strpos($item->name, $speciality_name)===false){
+                return false;
+            }
+            if ($degree_id && $item->degree->id != $degree_id){
+                return false;
+            }
+            return true;
+        });
+
+        return view('admin.specialities.index', compact('college', 'specialities', 'speciality_name', 'degree_id', 'degrees'));
     }
 
     public function create($college_id){
