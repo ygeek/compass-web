@@ -13,35 +13,35 @@
           <h1>留学评估</h1>
           <ul class="select-item">
             <li class="estimate-val" v-bind:class="{'active': selecting=='countries'}" v-on:mouseenter="selecting='countries'">
-              <p>
+              <p style="font-weight: bold">
                 选择国家 <span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_countries.name }}</p>
               <input type="hidden" name="selected_country_id" v-model='selected_countries.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='degrees'}" v-on:mouseenter="selecting='degrees'">
-              <p>
+              <p style="font-weight: bold">
                 选择学历 <span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_degrees.name }}</p>
               <input type="hidden" name="selected_degree_id" v-model='selected_degrees.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='years'}" v-on:mouseenter="selecting='years'">
-              <p>
+              <p style="font-weight: bold">
                 计划留学时间<span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_years.name }}</p>
               <input type="hidden" name="selected_year" v-model='selected_years.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='speciality_categories'}" v-on:mouseenter="selecting='speciality_categories'">
-              <p>
+              <p style="font-weight: bold">
                 期望就读专业<span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_speciality_categories.name }}</p>
               <input type="hidden" name="speciality_category_id" v-model='selected_speciality_categories.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='speciality_name'}" v-on:mouseenter="selecting='speciality_name'">
-              <p>
+              <p style="font-weight: bold">
                 细分专业<span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_speciality_name.name }}</p>
