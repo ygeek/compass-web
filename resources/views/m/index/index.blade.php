@@ -25,7 +25,7 @@
             return $q->where('key', 'yu-yan-xue-xi');
         })->orderBy('articles.order_weight')->limit(7)->get();
         foreach($articles as $a){
-            $a->l=$a->link();
+            $a->l=html_entity_decode($a->link());
         }
         ?>
             yuyanxuexi:{!! json_encode($articles->toArray()) !!},

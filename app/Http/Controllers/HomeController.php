@@ -66,6 +66,7 @@ class HomeController extends Controller
                 });
             }
 
+
             $data = [
                 'username' => $user['name'],
                 'userAvatar' => $user['avatar_path'],
