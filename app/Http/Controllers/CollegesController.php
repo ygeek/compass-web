@@ -146,6 +146,8 @@ class CollegesController extends Controller
             return 9999;
         })->values()->all();
 
+        $selected_country_id = $selected_country_id==-1?1:$selected_country_id;
+
         return $this->view('colleges.index', compact('areas',
             'speciality_categories',
             'colleges',
