@@ -7,6 +7,17 @@
             <a class="btn btn-primary" href="{{route('admin.colleges.specialities.create', ['college' => $college->id])}}">新增专业</a>
         </div>
         <div class="block-content">
+            <form>
+                <input type="text" name="speciality_name" value="{{ $speciality_name }}" placeholder="专业名称" />
+                <select name="degree_id">
+                    <option value="">所有层次</option>
+                    @foreach($degrees as $degree)
+                        <option value="{{$degree->id}}" @if($degree_id == $degree->id) selected @endif>{{$degree->name}}</option>
+                    @endforeach
+                </select>
+                <button type="submit" class="btn btn-primary">查询</button>
+                <span>查询到{{count($specialities)}}条记录</span>
+            </form>
             <table class="table table-striped table-borderless table-header-bg">
                 <thead>
                 <tr>
@@ -16,7 +27,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($college->specialities as $speciality)
+                    @foreach($specialities as $speciality)
                         <tr>
                             <td>
                                 {{$speciality->name}}

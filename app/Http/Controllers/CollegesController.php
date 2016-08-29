@@ -146,6 +146,8 @@ class CollegesController extends Controller
             return 9999;
         })->values()->all();
 
+        $selected_country_id = $selected_country_id==-1?1:$selected_country_id;
+
         return $this->view('colleges.index', compact('areas',
             'speciality_categories',
             'colleges',
@@ -325,6 +327,7 @@ class CollegesController extends Controller
             $item->toefl_score = $item->toeflRequirement('本科');
             $item->ielts_score = $item->ieltsRequirement('本科');
             $item->badge_path = app('qiniu_uploader')->pathOfKey($item->badge_path);
+            $item->link = route('colleges.show', $item->key);
             return $item;
         });
         return $res;

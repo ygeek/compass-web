@@ -67,9 +67,9 @@
                     <div class="form-group">
                         <label for="mean">平均成绩<span style="color: red">*</span></label>
                         @if($selected_degree->name == '本科')
-                            <input class="estimate-input" type="text" id="mean" v-model="data['examinations']['高中平均成绩']['score']"/>
+                            <input class="estimate-input" type="text" id="mean" v-model="data['examinations']['高中平均成绩']['score']" placeholder="0~100"/>
                         @else
-                            <input class="estimate-input" type="text" id="mean" v-model="data['examinations']['大学平均成绩']['score']"/>
+                            <input class="estimate-input" type="text" id="mean" v-model="data['examinations']['大学平均成绩']['score']" placeholder="0~100"/>
                         @endif
                     </div>
 
@@ -138,15 +138,19 @@
                 <label for="group@{{ $index }}">@{{ group.title }}<span style="color: red">*</span></label>
                 <div class="estimate-short-select" style="position: relative; top: 15px;">
                     <select v-model="group['selected_group']">
-                        <option v-for="option in group['selects']" value="@{{ option }}">
-                            @{{ option }}
-                        </option>
+                        <template v-for="option in group['selects']">
+                            <option value="@{{ option }}" v-if="option == group['selects'][0]" selected>
+                                @{{ option }}
+                            </option>
+                            <option value="@{{ option }}" v-else>
+                                @{{ option }}
+                            </option>
+                        </template>
                     </select>
-
                 </div>
 
                 <template v-if="selected_examination">
-                    <input class="estimate-input" style="width: 120px;" type="text" v-model="selected_examination.score">
+                    <input class="estimate-input" style="width: 120px;" type="text" v-model="selected_examination.score" v-bind:placeholder="default_value">
 
                     <template v-for="section in selected_examination['sections']">
                         <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
@@ -168,9 +172,6 @@
                     degree_id: {{ $selected_degree->id }}
                 };
             },
-            created: function () {
-                this.group['selected_group'] = this.group['selects'][0];
-            },
             computed: {
                 selected_examination: function(){
                     var that = this;
@@ -179,6 +180,27 @@
                             return true;
                         }
                     }).pop();
+                },
+                default_value: function () {
+                    var examination = this.group.selected_group;
+                    if (examination == "雅思") {
+                        return "0~9";
+                    }
+                    if (examination == "托福IBT") {
+                        return "0~120";
+                    }
+                    if (examination == "ACT") {
+                        return "0~36";
+                    }
+                    if (examination == "SAT") {
+                        return "0~2400";
+                    }
+                    if (examination == "GRE") {
+                        return "260~340";
+                    }
+                    if (examination == "GMAT") {
+                        return "200~800";
+                    }
                 }
             }
         });
@@ -241,8 +263,14 @@
                         return ;
                     }
 
-                    var tmp = eval(document.getElementById('mean')).value;
-                    if (!this.checked(tmp, 0, 100, "平均成绩")){
+                    var tmp_1 = eval(document.getElementById('cee')).value;
+                    if (!this.checked(tmp_1, 0, 1000, "高考成绩")){
+                        event.preventDefault();
+                        return ;
+                    }
+
+                    var tmp_2 = eval(document.getElementById('mean')).value;
+                    if (!this.checked(tmp_2, 0, 100, "平均成绩")){
                         event.preventDefault();
                         return ;
                     }

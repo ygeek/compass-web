@@ -12,23 +12,33 @@
                 <template id="intentions">
                 <div class="mask" v-if="show_pop">
                     <div class="add-speciality-pop">
-                        <div class="close" @click="show_pop=false">x</div>
+                        <div class="close" @click="show_pop=false">×</div>
                         <div>
                         <div class="form">
                         <div class="form-group">
                             <label>专业方向</label>
                             <select v-model="selected_category_id" style="width: 250px;">
-                                <option v-bind:value="category.id" v-for="category in show_data.categories">
-                                    @{{ category.chinese_name }}
-                                </option>
+                                <template  v-for="category in show_data.categories">
+                                    <option v-bind:value="category.id" v-if="category == show_data.categories[0]" selected>
+                                        @{{ category.chinese_name }}
+                                    </option>
+                                    <option v-bind:value="category.id" v-else>
+                                        @{{ category.chinese_name }}
+                                    </option>
+                                </template>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>专业</label>
                             <select v-model="selected_speciality_name" style="width: 250px;">
-                                <option v-bind:value="speciality.name"v-for="speciality in select_specialities">
-                                     @{{ speciality.name }}
-                                </option>
+                                <template v-for="speciality in select_specialities">
+                                    <option v-bind:value="speciality.name" v-if="speciality == select_specialities[0]" selected>
+                                        @{{ speciality.name }}
+                                    </option>
+                                    <option v-bind:value="speciality.name" v-else">
+                                        @{{ speciality.name }}
+                                    </option>
+                                </template>
                             </select>
                         </div>
                         <button class="estimate-button" @click="postSpeciality">添加专业</button>

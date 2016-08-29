@@ -18,9 +18,9 @@
       <li class="nav-item @if($page == 'colleges') active @endif">
         <a href="{{ route('colleges.index') }}">院校查询</a>
       </li>
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a href="javascript:void(0)" onclick='easemobim.bind({tenantId: 21250})'>在线留学顾问</a>
-      </li>
+      </li>-->
       <li class='nav-item'>
         <a href="http://www.zhinanzhen.org" target="_blank">指南针官网</a>
       </li>
@@ -66,6 +66,7 @@
       </li>
     </ul>
   </div>
+    <div class="counselor"><a href="javascript:void(0)" onclick='easemobim.bind({tenantId: 21250})'><img src="/images/counselor.jpg" /></a></div>
 </div>
 <script>
 window.easemobim = window.easemobim || {};

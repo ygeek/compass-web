@@ -73,4 +73,5 @@ Route::group(['prefix' => 'admin'], function(){
         ->name('admin.examination_score_weights.updateColleges');
 
     Route::resource('advertisements', 'Admin\AdvertisementsController');
+    Route::resource('users', 'Admin\UsersController');
 });

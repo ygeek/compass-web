@@ -8,6 +8,7 @@
 
 <template id="college-template">
     <div class="college-single">
+        <a href="@{{ college.link }}" target="_blank"><div class="cover"></div></a>
         <img v-bind:src="college.badge_path"/>
         <div class="separator"></div>
 
@@ -17,7 +18,7 @@
         </div>
 
         <div class="row">
-            <span>@{{ college.english_name }}</span>
+            <span class="english_name">@{{ college.english_name }}</span>
         </div>
         <div class="row">
             <span class="left">托福：@{{ college.toefl_score }}</span>

@@ -9,7 +9,7 @@
         @if(!isset($test_rate)||$test_rate==true)
             <div class="college-sidebar">
                 <div class="college-single">
-                    <a href="#" target="_blank">
+                    <a href="{{ route('estimate.step_first') }}" target="_blank">
                         <img src="/images/test_rate.jpg" style="height: 156px"/>
                     </a>
                 </div>
@@ -22,7 +22,7 @@
             function echoRank($rankings){
                 foreach ($rankings as $ranking){
                     if (isset($ranking['checked'])){
-                        echo "<a href='".route('colleges.rank', ['category_id' => $ranking['_id']])."' class='level-2' >".$ranking['name']."</a>";
+                        echo "<a href='".route('colleges.rank', ['category_id' => $ranking['_id']])."' class='level-2'  target='_blank'>".$ranking['name']."</a>";
                     }
                     if (count($ranking['children'])>0){
                         echoRank($ranking['children']);

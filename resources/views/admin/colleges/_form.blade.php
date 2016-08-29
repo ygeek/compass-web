@@ -114,7 +114,7 @@
                       <div class="row">
                         <div class="col-xs-12">
                           <div class="col-sm-4" v-show="!!countries">
-                              <select v-model="selected_country"  class="form-control" name="country_select">
+                              <select v-model="selected_country"  class="form-control" name="country_select" id="country_select">
                                 <option v-for="option in countries" v-bind:value="option.value">
                                   @{{ option.name }}
                                 </option>
@@ -249,9 +249,9 @@ Vue.component('college-create-form', {
   template: '#create_form',
   data: function(){
     return {
-        selected_country: <?php if(old('country_select')!=null) echo "'".old('country_select')."'"; else echo "'".$country."'" or 'null';?>,
-        selected_state: <?php if(old('state_select')!=null) echo "'".old('state_select')."'"; else echo "'".$state."'" or 'null';?>,
-        selected_city: <?php if(old('city_select')!=null) echo "'".old('city_select')."'"; else echo "'".$city."'" or 'null';?>,
+        selected_country: <?php if(old('country_select')!=null) echo "'".old('country_select')."'"; else if($country!=null) echo $country; else echo 'null';?>,
+        selected_state: <?php if(old('state_select')!=null) echo "'".old('state_select')."'"; else if($state!=null) echo $state; else echo 'null';?>,
+        selected_city: <?php if(old('city_select')!=null) echo "'".old('city_select')."'"; else if($city!=null) echo $city; else echo 'null';?>,
         areas: {!! $areas !!}
     }
   },

@@ -1,7 +1,7 @@
 <template id="college-overview">
     <div class="college-overview">
         <ul class="tabs">
-            <li v-for="article in articles" 
+            <li v-for="article in articles.data"
                 v-bind:class="{'active': this.active_article.id == article.id}"
                 @click="changeActiveArticle(article)"
             >
@@ -25,7 +25,7 @@
             } 
         },
         created: function(){
-            this.active_article = this.articles[0];
+            this.active_article = this.articles.data[0];
         },
         methods: {
             changeActiveArticle: function(article){

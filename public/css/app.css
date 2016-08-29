@@ -714,7 +714,7 @@ ul {
     margin-right: -55px;
     margin-top: 15px;
     float: right;
-    width: 715px; }
+    width: 580px; }
     .top-nav-bar .top-bar-content a {
       color: #7de6ca; }
     .top-nav-bar .top-bar-content .title-nav-bar {
@@ -1709,17 +1709,19 @@ ul {
     float: left;
     margin-right: 80px; }
 
-.pagination li {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  background: #fff;
-  text-align: center;
-  line-height: 30px;
-  margin-right: 10px; }
-  .pagination li.active {
-    color: #0e2d60;
-    font-weight: bold; }
+.pagination {
+  text-align: center; }
+  .pagination li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    line-height: 30px;
+    margin-right: 10px; }
+    .pagination li.active {
+      color: #0e2d60;
+      font-weight: bold; }
 
 .college-page .college-page-header {
   background-repeat: no-repeat;
@@ -2075,7 +2077,8 @@ ul {
   padding: 13px;
   margin-bottom: 1px;
   background-color: #fff;
-  float: left; }
+  float: left;
+  position: relative; }
   .college-single .separator {
     margin: 10px 0;
     background-color: #ebebeb;
@@ -2088,15 +2091,34 @@ ul {
     display: table;
     clear: both; }
   .college-single .row .name {
-    color: #000; }
+    display: inline-block;
+    color: #000;
+    max-width: 160px;
+    height: 19px;
+    overflow: hidden; }
   .college-single .row span {
     color: #6c6c6c; }
+  .college-single .row .english_name {
+    display: inline-block;
+    max-width: 240px;
+    height: 19px;
+    overflow: hidden; }
   .college-single .row .left {
     float: left; }
   .college-single .row .right {
     float: right;
     font-size: 11px;
     cursor: pointer; }
+  .college-single .cover {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 266px;
+    height: 185px;
+    z-index: 998;
+    background-color: #fff;
+    opacity: 0.01; }
 
 .icon-wrap {
   cursor: pointer;
@@ -2346,6 +2368,16 @@ ul {
   bottom: 20px;
   right: 20px;
   width: 40px;
-  height: 40px; }
+  height: 40px;
+  z-index: 99999; }
+
+.counselor {
+  position: fixed;
+  bottom: 16px;
+  right: 80px;
+  z-index: 99999; }
+  .counselor img {
+    width: 107px;
+    height: 40px; }
 
 /*# sourceMappingURL=app.css.map */
