@@ -9,7 +9,7 @@
         @if(!isset($test_rate)||$test_rate==true)
             <div class="college-sidebar">
                 <div class="college-single">
-                    <a href="#" target="_blank">
+                    <a href="{{ route('estimate.step_first') }}" target="_blank">
                         <img src="/images/test_rate.jpg" style="height: 156px"/>
                     </a>
                 </div>
