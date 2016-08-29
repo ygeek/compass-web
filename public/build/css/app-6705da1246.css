@@ -2077,7 +2077,8 @@ ul {
   padding: 13px;
   margin-bottom: 1px;
   background-color: #fff;
-  float: left; }
+  float: left;
+  position: relative; }
   .college-single .separator {
     margin: 10px 0;
     background-color: #ebebeb;
@@ -2090,15 +2091,32 @@ ul {
     display: table;
     clear: both; }
   .college-single .row .name {
-    color: #000; }
+    color: #000;
+    max-width: 160px;
+    height: 19px;
+    overflow: hidden; }
   .college-single .row span {
-    color: #6c6c6c; }
+    display: inline-block;
+    color: #6c6c6c;
+    max-width: 240px;
+    height: 19px;
+    overflow: hidden; }
   .college-single .row .left {
     float: left; }
   .college-single .row .right {
     float: right;
     font-size: 11px;
     cursor: pointer; }
+  .college-single .cover {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 266px;
+    height: 185px;
+    z-index: 998;
+    background-color: #fff;
+    opacity: 0.01; }
 
 .icon-wrap {
   cursor: pointer;

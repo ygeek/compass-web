@@ -2106,6 +2106,7 @@ ul{
   margin-bottom: 1px;
   background-color: #fff;
   float: left;
+  position: relative;
   .separator{
     margin: 10px 0;
     background-color: #ebebeb;
@@ -2119,9 +2120,16 @@ ul{
     @include clearfix;
     .name{
       color: #000;
+      max-width: 160px;
+      height: 19px;
+      overflow: hidden;
     }
     span{
+      display: inline-block;
       color: #6c6c6c;
+      max-width: 240px;
+      height: 19px;
+      overflow: hidden;
     }
     .left{
       float: left;
@@ -2131,6 +2139,17 @@ ul{
       font-size: 11px;
       cursor:pointer;
     }
+  }
+  .cover{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 266px;
+    height: 185px;
+    z-index: 998;
+    background-color: #fff;
+    opacity:0.01;
   }
 }
 

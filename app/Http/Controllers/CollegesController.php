@@ -323,6 +323,7 @@ class CollegesController extends Controller
             $item->toefl_score = $item->toeflRequirement('本科');
             $item->ielts_score = $item->ieltsRequirement('本科');
             $item->badge_path = app('qiniu_uploader')->pathOfKey($item->badge_path);
+            $item->link = route('colleges.show', $item->key);
             return $item;
         });
         return $res;

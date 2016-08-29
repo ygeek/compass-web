@@ -8,6 +8,7 @@
 
 <template id="college-template">
     <div class="college-single">
+        <a href="@{{ college.link }}" target="_blank"><div class="cover"></div></a>
         <img v-bind:src="college.badge_path"/>
         <div class="separator"></div>
 
