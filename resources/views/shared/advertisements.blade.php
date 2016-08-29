@@ -22,7 +22,7 @@
             function echoRank($rankings){
                 foreach ($rankings as $ranking){
                     if (isset($ranking['checked'])){
-                        echo "<a href='".route('colleges.rank', ['category_id' => $ranking['_id']])."' class='level-2' >".$ranking['name']."</a>";
+                        echo "<a href='".route('colleges.rank', ['category_id' => $ranking['_id']])."' class='level-2'  target='_blank'>".$ranking['name']."</a>";
                     }
                     if (count($ranking['children'])>0){
                         echoRank($ranking['children']);
