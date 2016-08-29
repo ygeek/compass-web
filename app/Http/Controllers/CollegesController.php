@@ -166,6 +166,10 @@ class CollegesController extends Controller
     public function show($key, Request $request){
         $college = College::where('key', $key)->first();
         $article_type = $request->input('article_type', '学校概况');
+
+        $college->badge_url=app('qiniu_uploader')->pathOfKey($college->badge_path);
+        $college->background_image_url=app('qiniu_uploader')->pathOfKey($college->background_image_path);
+
         $pinyin = new Pinyin();
         $article_key = $pinyin->permalink($article_type);
 
