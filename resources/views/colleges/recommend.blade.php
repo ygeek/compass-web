@@ -18,7 +18,7 @@
         </div>
 
         <div class="row">
-            <span>@{{ college.english_name }}</span>
+            <span class="english_name">@{{ college.english_name }}</span>
         </div>
         <div class="row">
             <span class="left">托福：@{{ college.toefl_score }}</span>

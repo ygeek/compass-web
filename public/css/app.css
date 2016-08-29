@@ -2091,13 +2091,15 @@ ul {
     display: table;
     clear: both; }
   .college-single .row .name {
+    display: inline-block;
     color: #000;
     max-width: 160px;
     height: 19px;
     overflow: hidden; }
   .college-single .row span {
+    color: #6c6c6c; }
+  .college-single .row .english_name {
     display: inline-block;
-    color: #6c6c6c;
     max-width: 240px;
     height: 19px;
     overflow: hidden; }

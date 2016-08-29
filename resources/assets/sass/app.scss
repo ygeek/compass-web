@@ -2119,14 +2119,17 @@ ul{
   .row{
     @include clearfix;
     .name{
+      display: inline-block;
       color: #000;
       max-width: 160px;
       height: 19px;
       overflow: hidden;
     }
     span{
-      display: inline-block;
       color: #6c6c6c;
+    }
+    .english_name {
+      display: inline-block;
       max-width: 240px;
       height: 19px;
       overflow: hidden;
