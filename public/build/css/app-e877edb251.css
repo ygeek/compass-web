@@ -1919,6 +1919,8 @@ ul {
       float: left;
       background: #fff;
       width: calc(100% - 270px); }
+      .college-page .college-pages .college-overview .content-areas p, .college-page .college-pages .college-overview .content-areas h1, .college-page .college-pages .college-overview .content-areas h2, .college-page .college-pages .college-overview .content-areas h3 {
+        line-height: 1.5; }
   .college-page .college-pages .college-applications {
     width: 827px;
     float: left; }

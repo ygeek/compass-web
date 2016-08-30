@@ -1918,6 +1918,9 @@ ul{
         float: left;
         background: #fff;
         width: calc(100% - 270px);
+        p, h1, h2, h3 {
+          line-height: 1.5;
+        }
       }
     }
     .college-applications{
