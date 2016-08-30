@@ -134,9 +134,9 @@ class CollegesController extends Controller
             }
         }
 
-        $colleges = $colleges_query->select('*')->whereIn('english_name',$colleges_english_name)->paginate(10);
+        $colleges = $colleges_query->select('*')->whereIn('english_name',$colleges_english_name)->get();
 
-        $array_colleges = $colleges->sortBy(function ($product, $key) use($colleges_english_name) {
+        $all_array_colleges = $colleges->sortBy(function ($product, $key) use($colleges_english_name) {
             $count = count($colleges_english_name);
             for($index = 0;$index<$count;$index++) {
                 if(trim($product->english_name) == trim($colleges_english_name[$index])){
@@ -145,6 +145,13 @@ class CollegesController extends Controller
             }
             return 9999;
         })->values()->all();
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 10;
+        $current_rank_items = collect($all_array_colleges)->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $colleges= new LengthAwarePaginator($current_rank_items, count($all_array_colleges), $perPage, null, [
+            'path' => route('colleges.index')
+        ]);
 
         $selected_country_id = $selected_country_id==-1?1:$selected_country_id;
 
@@ -160,8 +167,7 @@ class CollegesController extends Controller
             'selected_property',
             'rank_start',
             'rank_end',
-            'selected_order',
-            'array_colleges'
+            'selected_order'
         ));
     }
 
