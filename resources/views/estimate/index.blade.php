@@ -28,6 +28,7 @@
                                 </td>
                             </tr>
 
+                            @if(Auth::check())
                             <tr style="background: #f3f3f3;">
                                 <td style="text-align: left;padding-left: 30px;">
                                     @{{ selected_speciality_name }}专业要求
@@ -36,9 +37,14 @@
                                     @{{ contrast['require'] }}
                                 </td>
                             </tr>
+                             @else
+                                <tr style="background: #f3f3f3;">
+                                    <td v-bind:colspan="showRequirementContrastsContent.contrasts.length">请登录后查看</td>
+                                </tr>
+                            @endif
 
                             <tr class="comment">
-                                <td style="text-align: left;line-height: 26px;padding-left: 30px;" v-bind:colspan="showRequirementContrastsContent.contrasts.length"v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
+                                <td style="text-align: left;line-height: 26px;padding-left: 30px;" v-bind:colspan="showRequirementContrastsContent.contrasts.length" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
                                     @{{{ changeLine(contrast['require']) }}}
                                 </td>
                             </tr>
