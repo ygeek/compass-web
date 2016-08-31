@@ -35,7 +35,7 @@
                                     <option v-bind:value="speciality.name" v-if="speciality == select_specialities[0]" selected>
                                         @{{ speciality.name }}
                                     </option>
-                                    <option v-bind:value="speciality.name" v-else">
+                                    <option v-bind:value="speciality.name" v-else>
                                         @{{ speciality.name }}
                                     </option>
                                 </template>
@@ -216,8 +216,9 @@ Array.prototype.contains = function(obj) {
             },
             specialities_count: function(){
                 var nums = 0;
+                var that = this;
                 this.intentions.intentions.forEach(function(college){
-                    nums += college.specialities.length
+                    nums += that.countArray(college.specialities);
                 });
                 return nums;
             },
@@ -225,7 +226,7 @@ Array.prototype.contains = function(obj) {
                 var res = [];
                 this.intentions.intentions.forEach(function(college){
                     var keys = Object(college.specialities);
-                    for(key in keys){
+                    for(var key in keys){
                         if(college.specialities[key].checked){
                             res.push(college.specialities[key])
                         }
@@ -233,7 +234,6 @@ Array.prototype.contains = function(obj) {
                 });
                 return res;
             },
-
             selected_specialities_count: function(){
                 return this.selected_specialities.length;
             }
@@ -259,6 +259,7 @@ Array.prototype.contains = function(obj) {
                 var degree_id = this.intentions.degree_id;
                 var estimate_id = this.intentions.estimate_id;
                 var speciality_name = this.selected_speciality_name;
+                alert(speciality_name);
 
                 this.$http.post("{{ route('intentions.store') }}", {
                     college_id: college_id,
@@ -304,6 +305,19 @@ Array.prototype.contains = function(obj) {
                 }, function(response){
                     alert('提交审核成功');
                 });
+            },
+            countArray: function count(o){
+                var t = typeof o;
+                if(t == 'string'){
+                    return o.length;
+                }else if(t == 'object'){
+                    var n = 0;
+                    for(var i in o){
+                        n++;
+                    }
+                    return n;
+                }
+                return false;
             }
         }
     });
