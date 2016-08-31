@@ -127,7 +127,7 @@
             <div class="app-content">
                 <search-form></search-form>
                 <template id="search-form">
-                <form>
+                <form id="specialities_search_form">
                     <input type="hidden" name="article_type" value="specialities" />
                     <div class="search-area">
                         <input type="text" placeholder="输入要查询的专业" name="speciality_name" value="{{ app('request')->input('speciality_name') }}"/>
@@ -201,7 +201,7 @@
                 events: {
                     'call_submit': function () {
                         setTimeout(function(){
-                            document.getElementsByTagName('form')[0].submit()
+                            document.getElementById('specialities_search_form').submit()
                         }, 1);
                     }
                 }
