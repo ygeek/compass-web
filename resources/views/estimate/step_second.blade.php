@@ -257,17 +257,19 @@
                     return true;
                 },
                 submit: function(){
-                    if(eval(document.getElementById('name')).value==""){
+                    if(document.getElementById('name').value==""){
                         alert("姓名未填写。");
                         event.preventDefault();
                         return ;
                     }
 
+                    @if($selected_degree->name == '本科')
                     var tmp_1 = eval(document.getElementById('cee')).value;
                     if (!this.checked(tmp_1, 0, 1000, "高考成绩")){
                         event.preventDefault();
                         return ;
                     }
+                    @endif
 
                     var tmp_2 = eval(document.getElementById('mean')).value;
                     if (!this.checked(tmp_2, 0, 100, "平均成绩")){
