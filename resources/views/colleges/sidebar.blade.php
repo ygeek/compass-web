@@ -16,8 +16,9 @@
         </div>
         <div v-show="panel == 'local'">
             @if(count($local_colleges) > 0 )
+                <?php $index = .0; ?>
                 @foreach($local_colleges as $college)
-                    <div class="college-single">
+                    <div class="college-single" @if(++$index>10) v-if="show_more_local" @endif>
                         <!--<a href="{{route('colleges.show', ['key' => $college->key])}}" target="_blank">
                             <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"/>
                         </a>
@@ -45,12 +46,19 @@
                         </div>-->
                     </div>
                 @endforeach
+                    @if($index>10)
+                        <div class="college-single">
+                            <span style="display: inline-block;width: 100%;text-align: center;cursor: pointer;" @click="toggleShowLocal(true)" v-if="!show_more_local">加载更多</span>
+                            <span style="display: inline-block;width: 100%;text-align: center;cursor: pointer;" @click="toggleShowLocal(false)" v-if="show_more_local">收起更多</span>
+                        </div>
+                    @endif
             @endif
         </div>
         <div v-show="panel == 'hot'">
             @if(count($hot_colleges) > 0 )
+                <?php $index = .0; ?>
                 @foreach($hot_colleges as $college)
-                    <div class="college-single">
+                    <div class="college-single" @if(++$index>10) v-if="show_more_hot" @endif>
                         <div class="row">
                             <a style="color: #6c6c6c" href="{{route('colleges.show', ['key' => $college->key])}}" target="_blank">
                                 <span class="name left">{{$college->chinese_name}}</span>
@@ -64,6 +72,12 @@
                         </div>
                     </div>
                 @endforeach
+                    @if($index>10)
+                        <div class="college-single">
+                            <span style="display: inline-block;width: 100%;text-align: center;cursor: pointer;" @click="toggleShowHot(true)" v-if="!show_more_hot">加载更多</span>
+                            <span style="display: inline-block;width: 100%;text-align: center;cursor: pointer;" @click="toggleShowHot(false)" v-if="show_more_hot">收起更多</span>
+                        </div>
+                    @endif
             @endif
         </div>
     </div>
@@ -82,12 +96,20 @@
         template: '#sidebar-panel-template',
         data: function(){
             return {
-                panel: '<?=(count($local_colleges)>0)?"local":"hot"?>'
+                panel: '<?=(count($local_colleges)>0)?"local":"hot"?>',
+                show_more_hot: false,
+                show_more_local: false
             };
         },
         methods: {
             togglePanel: function(panel){
                 this.panel = panel;
+            },
+            toggleShowHot: function (v) {
+                this.show_more_hot = v;
+            },
+            toggleShowLocal: function (v) {
+                this.show_more_local = v;
             }
         }
     });
