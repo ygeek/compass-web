@@ -24,7 +24,7 @@
 </template>
 
 <template id="gallery-view">
-    <div class="gallery-view mask" v-show="show">
+    <div class="gallery-view mask" v-show="show" style="z-index: 9999999;">
         <span class="close" @click="show=false">×</span>
         <span class="icon-wrap" @click="preImage()"></span>
 
