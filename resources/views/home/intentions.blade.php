@@ -210,6 +210,8 @@ Array.prototype.contains = function(obj) {
 
                 var data = this.show_data.specialities.filter(function(item){
                     return item.category_id == self.selected_category_id;
+                }).sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
                 });
 
                 return data;
