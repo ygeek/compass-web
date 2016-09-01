@@ -76,11 +76,11 @@
             template: '#union-select',
             data: function () {
                 return {
-                    speciality_categories: {!! json_encode($speciality_categories) !!},
                     selected_category_id: {{$selected_category_id or 1}},
                     selected_speciality_name: '{{$selected_speciality_name or 'null'}}',
-                    selected_country_id: 1,
-                    selected_degree_id: 2
+                    speciality_categories: {!! json_encode($speciality_categories) !!},
+                    selected_country_id: {{$selected_country_id or 1}},
+                    selected_degree_id: {{$selected_degree_id or 2}}
                 }
             },
             computed: {
@@ -102,7 +102,7 @@
 
                             for (var j=0 ;j<res.length;j++){
                                 if (that.selected_speciality_name==res[j].name){
-                                    this.selected_speciality_name = res[j].name;
+                                    that.selected_speciality_name = res[j].name;
                                     return res;
                                 }
                             }
