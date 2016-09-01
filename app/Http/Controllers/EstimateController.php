@@ -133,11 +133,10 @@ class EstimateController extends Controller
         $reduce_colleges = Estimate::mapCollegeInfo($reduce_result, $selected_speciality_name, $selected_degree, $data);
 
         if ($estimate_id == null){
-            $estimate_id = Uuid::generate(4);
-            Setting::set('estimate-'.$estimate_id, $data);
-
             $user = Auth::user();
             if ($user!=null){
+                $estimate_id = Uuid::generate(4);
+                Setting::set('estimate-'.$estimate_id, $data);
                 $user->estimate = 'estimate-'.$estimate_id;
                 $user->save();
             }
