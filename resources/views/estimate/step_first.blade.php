@@ -106,7 +106,10 @@
                                     return res;
                                 }
                             }
-                            that.selected_speciality_name = res[0].name;
+                            if (res.length==0)
+                                that.selected_speciality_name = "";
+                            else
+                                that.selected_speciality_name = res[0].name;
                             return res;
                         }
                     }
@@ -114,7 +117,7 @@
                 }
             },
             methods: {
-                onSubmit: function (msg) {
+                onSubmit: function (event) {
                     if (this.selected_speciality_name==""){
                         alert('专业库正在完善中，请选择其他专业。');
                         event.preventDefault();
