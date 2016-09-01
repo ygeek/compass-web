@@ -259,7 +259,18 @@ Array.prototype.contains = function(obj) {
                 var degree_id = this.intentions.degree_id;
                 var estimate_id = this.intentions.estimate_id;
                 var speciality_name = this.selected_speciality_name;
-                alert(speciality_name);
+
+                if(this.selected_speciality_name==null){
+                    this.selected_speciality_name = this.select_specialities[0].name;
+                    speciality_name = this.selected_speciality_name;
+                }
+
+                for(var i in this.show_data.intention.specialities){
+                    if(this.show_data.intention.specialities[i].speciality_name==speciality_name){
+                        alert("该专业已存在");
+                        return;
+                    }
+                }
 
                 this.$http.post("{{ route('intentions.store') }}", {
                     college_id: college_id,
