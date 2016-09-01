@@ -50,6 +50,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $specialities->appends(app('request')->except('page'))->render() }}
         </div>
     </div>
     <script>

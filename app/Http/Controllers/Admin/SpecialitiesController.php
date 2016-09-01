@@ -7,6 +7,7 @@ use App\Degree;
 use App\Speciality;
 use App\SpecialityCategory;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -29,6 +30,13 @@ class SpecialitiesController extends BaseController
             }
             return true;
         });
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 20;
+        $current_rank_items = $specialities->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $specialities= new LengthAwarePaginator($current_rank_items, count($specialities), $perPage, null, [
+            'path' => route('admin.colleges.specialities.index', [ 'college' => $college->id ])
+        ]);
 
         return view('admin.specialities.index', compact('college', 'specialities', 'speciality_name', 'degree_id', 'degrees'));
     }
