@@ -58,7 +58,8 @@
                         <div class="estimate-select">
                             <select name="speciality_name" v-model="selected_speciality_name">
                                 <template v-for="speciality in children">
-                                    <option v-bind:value="speciality.name">@{{ speciality.name }}</option>
+                                    <option v-bind:value="speciality.name" v-if="speciality.name == selected_speciality_name" selected>@{{ speciality.name }}</option>
+                                    <option v-bind:value="speciality.name" v-else>@{{ speciality.name }}</option>
                                 </template>
                             </select>
                         </div>
@@ -95,8 +96,13 @@
                     for(var i=0; i<this.speciality_categories.length; i++){
                         if(this.speciality_categories[i].id == this.selected_category_id){
                             if(this.speciality_categories[i].specialities==null){
-                                that.selected_speciality_name = '专业加载中';
-                                return [{'name': '专业加载中'}];
+                                if (this.selected_speciality_name == "") {
+                                    this.selected_speciality_name = '专业加载中';
+                                    return [{'name': '专业加载中'}];
+                                }
+                                else {
+                                    return [{'name': this.selected_speciality_name}];
+                                }
                             }
                             var tmp = this.speciality_categories[i].specialities.filter(function (speciality) {
                                 return speciality.degree_id == that.selected_degree_id && speciality.country_id == that.selected_country_id;
@@ -108,7 +114,6 @@
                                     tmp_name.push(tmp[k].name);
                                     res.push(tmp[k]);
                                 }
-
 
                             for (var j=0 ;j<res.length;j++){
                                 if (that.selected_speciality_name==res[j].name){
