@@ -71,6 +71,14 @@
             <div class="row">
                 <div class="col-sm-7">
                     <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="average_enrollment">平均录取率</label>
+                            <input class="form-control input-lg" type="text" id="average_enrollment" value="{{$college->average_enrollment or old('average_enrollment')}}" name="average_enrollment" number>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="international_ratio">国际学生比例</label>
+                            <input class="form-control input-lg" type="text" id="international_ratio" value="{{$college->international_ratio or old('international_ratio')}}" name="international_ratio" number>
+                        </div>
                         <div class="col-xs-12">
                             <label for="description">简介</label>
                             <textarea class="form-control input-lg" id="description" name="description" rows="22" placeholder="输入院校的简介..">{{$college->description or old('description')}}</textarea>

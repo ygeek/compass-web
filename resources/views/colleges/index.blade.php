@@ -110,6 +110,18 @@
                                     <span v-on:click="set_order('domestic_ranking')">本国排名</span>
                                     <img v-if="selected_order == 'domestic_ranking'" src="/images/up.jpg" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
                                 </div>
+                                <div class="tag"  v-bind:class="{'active': (selected_order == 'read_count_order')}">
+                                    <span v-on:click="set_order('read_count_order')">浏览热度</span>
+                                    <img v-if="selected_order == 'read_count_order'" src="/images/up.jpg" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                </div>
+                                <div class="tag"  v-bind:class="{'active': (selected_order == 'average_enrollment_order')}">
+                                    <span v-on:click="set_order('average_enrollment_order')">平均录取率</span>
+                                    <img v-if="selected_order == 'average_enrollment_order'" src="/images/up.jpg" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                </div>
+                                <div class="tag"  v-bind:class="{'active': (selected_order == 'international_ratio_order')}">
+                                    <span v-on:click="set_order('international_ratio_order')">国际学生比例</span>
+                                    <img v-if="selected_order == 'international_ratio_order'" src="/images/up.jpg" style="margin-left:2px;width:15px;height: 15px;vertical-align:middle;"/>
+                                </div>
                             </div>
                             <input type="hidden" v-model="selected_order"  name="selected_order" value="{{$selected_order }}"/>
                         </div>

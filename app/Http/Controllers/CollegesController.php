@@ -109,49 +109,56 @@ class CollegesController extends Controller
             $colleges_query = $colleges_query->whereIn('english_name',$ranking_college);
         }
 
-        $colleges_english_name = collect($colleges_query->select('english_name')->get()->map(function($item){
-            return $item->english_name;
-        }));
-        $tmp_tag = str_replace("_ranking", "", $selected_order);
-        if($selected_order == 'domestic_ranking')
-            $tmp_tag = $tag['name'];
-        foreach ($rankings['rankings'] as $ranking) {
-            $ranking_tag = $ranking['tag'];
-            if (strpos($ranking_tag, $tmp_tag) !== false) {
-                $now_rank = collect($ranking['rank'])->map(function($item){
-                    return $item['english_name'];
-                })->sortBy('rank')->toArray();
-                $colleges_english_name = $colleges_english_name->sortBy(function ($product, $key) use($now_rank) {
-                    $count = count($now_rank);
-                    for($index = 0;$index<$count;$index++) {
-                        if(trim($product) == trim($now_rank[$index])){
-                            return $index;
-                        }
-                    }
-                    return 9999;
-                })->values()->all();
-                break;
-            }
+        $colleges = [];
+        if($selected_order.endsWith("_order")){
+            $tmp_tag = str_replace("_order", "", $selected_order);
+            $colleges = $colleges_query->orderBy($tmp_tag, 'desc')->paginate(20);
         }
-
-        $colleges = $colleges_query->select('*')->whereIn('english_name',$colleges_english_name)->get();
-
-        $all_array_colleges = $colleges->sortBy(function ($product, $key) use($colleges_english_name) {
-            $count = count($colleges_english_name);
-            for($index = 0;$index<$count;$index++) {
-                if(trim($product->english_name) == trim($colleges_english_name[$index])){
-                    return $index;
+        else {
+            $colleges_english_name = collect($colleges_query->select('english_name')->get()->map(function($item){
+                return $item->english_name;
+            }));
+            $tmp_tag = str_replace("_ranking", "", $selected_order);
+            if($selected_order == 'domestic_ranking')
+                $tmp_tag = $tag['name'];
+            foreach ($rankings['rankings'] as $ranking) {
+                $ranking_tag = $ranking['tag'];
+                if (strpos($ranking_tag, $tmp_tag) !== false) {
+                    $now_rank = collect($ranking['rank'])->map(function($item){
+                        return $item['english_name'];
+                    })->sortBy('rank')->toArray();
+                    $colleges_english_name = $colleges_english_name->sortBy(function ($product, $key) use($now_rank) {
+                        $count = count($now_rank);
+                        for($index = 0;$index<$count;$index++) {
+                            if(trim($product) == trim($now_rank[$index])){
+                                return $index;
+                            }
+                        }
+                        return 9999;
+                    })->values()->all();
+                    break;
                 }
             }
-            return 9999;
-        })->values()->all();
 
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 10;
-        $current_rank_items = collect($all_array_colleges)->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-        $colleges= new LengthAwarePaginator($current_rank_items, count($all_array_colleges), $perPage, null, [
-            'path' => route('colleges.index')
-        ]);
+            $colleges = $colleges_query->select('*')->whereIn('english_name',$colleges_english_name)->get();
+
+            $all_array_colleges = $colleges->sortBy(function ($product, $key) use($colleges_english_name) {
+                $count = count($colleges_english_name);
+                for($index = 0;$index<$count;$index++) {
+                    if(trim($product->english_name) == trim($colleges_english_name[$index])){
+                        return $index;
+                    }
+                }
+                return 9999;
+            })->values()->all();
+
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            $perPage = 10;
+            $current_rank_items = collect($all_array_colleges)->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+            $colleges= new LengthAwarePaginator($current_rank_items, count($all_array_colleges), $perPage, null, [
+                'path' => route('colleges.index')
+            ]);
+        }
 
         $selected_country_id = $selected_country_id==-1?1:$selected_country_id;
 
@@ -173,6 +180,9 @@ class CollegesController extends Controller
 
     public function show($key, Request $request){
         $college = College::where('key', $key)->first();
+        $college->read_count++;
+        $college->save();
+
         $article_type = $request->input('article_type', '学校概况');
 
         $college->badge_url=app('qiniu_uploader')->pathOfKey($college->badge_path);

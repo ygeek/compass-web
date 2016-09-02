@@ -32,7 +32,9 @@ class College extends Model
         'hot',
         'recommendatory',
         'type',
-        'go8'
+        'go8',
+        'average_enrollment',
+        'international_ratio'
     ];
 
 
