@@ -78,6 +78,12 @@
                 selecting: null
               }
             },
+            created: function(){
+              this.$http.get("{{route('index.get_speciality')}}").then(function(response){
+                this.speciality_categories = response.data;
+                var tmp = this.children;
+              });
+            },
             computed: {
               selectes: function(){
                 if(this.selecting=="speciality_name"){
@@ -96,6 +102,10 @@
                 var that = this;
                 for(var i=0; i<this.speciality_categories.length; i++){
                   if(this.speciality_categories[i].id == this.selected_speciality_categories.id){
+                    if(this.speciality_categories[i].specialities==null){
+                      that.selected_speciality_name = '专业加载中';
+                      return [{'name': '专业加载中'}];
+                    }
                     var res = this.speciality_categories[i].specialities.filter(function (speciality) {
                       return speciality.degree_id == that.selected_degrees.id && speciality.country_id == that.selected_countries.id;
                     });
@@ -108,10 +118,14 @@
             methods: {
               select: function(selected){
                 var key = 'selected_' + this.selecting;
-                console.log(key);
+                //console.log(key);
                 this[key] = selected;
               },
               onSubmit: function (event) {
+                if (this.selected_speciality_name=="专业加载中"){
+                  alert('专业加载中，请稍等。');
+                  event.preventDefault();
+                }
                 @if($estimate_checked==true)
                  if (confirm("您之前的留学评估将会被清空，是否继续？")==false){
                   event.preventDefault();

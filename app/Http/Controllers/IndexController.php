@@ -22,7 +22,7 @@ class IndexController extends Controller
                 'id' => $item
             ];
         });
-        $speciality_categories = collect(SpecialityCategory::with('specialities')->get())->map(function($item){
+        $speciality_categories = collect(SpecialityCategory::get())->map(function($item){
             $item['name']=$item['chinese_name'];
             return $item;
         });
@@ -32,5 +32,13 @@ class IndexController extends Controller
             $estimate_checked = true;
         }
         return $this->view('index.index', compact('countries', 'degrees', 'years', 'speciality_categories', 'estimate_checked'));
+    }
+
+    public function getSpeciality(Request $request){
+        $speciality_categories = collect(SpecialityCategory::with('specialities')->get())->map(function($item){
+            $item['name']=$item['chinese_name'];
+            return $item;
+        });
+        return $speciality_categories;
     }
 }

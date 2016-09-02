@@ -34,8 +34,13 @@ class EstimateController extends Controller
             $now_year, $now_year + 1, $now_year + 2, '三年以后'
         ];
 
-        $speciality_categories = SpecialityCategory::with('specialities')->get();
+        $speciality_categories = SpecialityCategory::get();
         return $this->view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name'));
+    }
+
+    public function getSpeciality(Request $request){
+        $speciality_categories = SpecialityCategory::with('specialities')->get();
+        return $speciality_categories;
     }
 
     public function stepSecond(Request $request){

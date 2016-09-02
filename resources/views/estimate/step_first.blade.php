@@ -83,11 +83,21 @@
                     selected_degree_id: {{$selected_degree_id or 2}}
                 }
             },
+            created: function(){
+                this.$http.get("{{route('estimate.get_speciality')}}").then(function(response){
+                    this.speciality_categories = response.data;
+                    var tmp = this.children;
+                });
+            },
             computed: {
                 children: function () {
                     var that = this;
                     for(var i=0; i<this.speciality_categories.length; i++){
                         if(this.speciality_categories[i].id == this.selected_category_id){
+                            if(this.speciality_categories[i].specialities==null){
+                                that.selected_speciality_name = '专业加载中';
+                                return [{'name': '专业加载中'}];
+                            }
                             var tmp = this.speciality_categories[i].specialities.filter(function (speciality) {
                                 return speciality.degree_id == that.selected_degree_id && speciality.country_id == that.selected_country_id;
                             });
@@ -118,6 +128,10 @@
             },
             methods: {
                 onSubmit: function (event) {
+                    if (this.selected_speciality_name=="专业加载中"){
+                        alert('专业加载中，请稍等。');
+                        event.preventDefault();
+                    }
                     if (this.selected_speciality_name==""){
                         alert('专业库正在完善中，请选择其他专业。');
                         event.preventDefault();
