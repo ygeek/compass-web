@@ -49,6 +49,7 @@ ul{
   background: rgba(0,0,0,0.5);
   width: 100%;
   height: 100%;
+  z-index: 9999999;
 }
 
 .index-page{
@@ -670,6 +671,95 @@ ul{
   }
 }
 
+.cpm-estimate-page{
+  background-color: #f3f3f3;
+  .estimate-form{
+    width: 420px;
+    height: 400px;
+    padding: 0 40px;
+    label{
+      font-size: 12px;
+      color: #a1a1a1;
+      line-height: 30px;
+      width: 100px;
+      display: inline-block;
+    }
+
+    h1{
+      font-size: 15px;
+      color: #000;
+      margin: 20px 0 30px;
+      font-weight: normal;
+    }
+    .form-group{
+      display: block;
+      width: 100%;
+      @include clearfix;
+    }
+    .estimate-input{
+      width: 298px;
+      height: 30px;
+      border: none;
+      margin-bottom: 12px;
+      padding-left: 2px;
+    }
+
+    .estimate-select{
+      background: #fff url("/images/select_arrow.png") no-repeat 98%;
+      height: 30px;
+      width: 280px;
+      border: none;
+      overflow: hidden;
+      padding-left: 20px;
+      float: right;
+      margin-bottom: 12px;
+      select{
+        background: transparent;
+        border: none;
+        height: 30px;
+        width: 298px;
+        -webkit-appearance: none;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+    .estimate-short-select{
+      background: #fff url("/images/select_arrow.png") no-repeat 98%;
+      height: 30px;
+      border: none;
+      overflow: hidden;
+      padding-left: 20px;
+      width: 120px;
+      float: none;
+      display: inline-block;
+      select{
+        -moz-appearance: window;
+        text-indent: 0.01px;
+        text-overflow: '';
+        background: transparent;
+        border: none;
+        height: 30px;
+        width: 118px;
+        -webkit-appearance: none;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+  }
+  .estimate-button{
+    width: 140px;
+    height: 40px;
+    color: #ffffff;
+    border: none;
+    background-color: #0e2d60;
+    //margin-left: 210px;
+    margin-left: 45px;
+    margin-top: 10px;
+  }
+}
+
 .estimate-result{
   .close{
     font-size: 20px;
@@ -884,7 +974,7 @@ ul{
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 9999999;
     .add-speciality-pop{
       .close{
         position: absolute;

@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="estimate-page">
-        <div class="app-content">
-            @include('shared.top_bar', ['page' => 'estimate'])
+    @if(!(isset($cpm) && $cpm))
+        <div class="estimate-page">
+            <div class="app-content">
+                @include('shared.top_bar', ['page' => 'estimate'])
+    @else
+         <div class="cpm-estimate-page">
+    @endif
             <step-second-form></step-second-form>
             <template id="step-second-form">
                 <div class="estimate-form" style="width: 860px;">
@@ -25,6 +29,11 @@
                                 @endforeach
                             </select>
 
+                            @if(isset($cpm) && $cpm)
+                            </div>
+                            <div class="form-group">
+                            @endif
+
                             <label for="recently_speciality_name">最近就读专业</label>
                             <select id="recently_speciality_name" v-model="data.recently_speciality_name" class="estimate-input">
                                 <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
@@ -44,7 +53,7 @@
                     @if($selected_degree->name == '本科')
                         <div class="form-group">
                             <label for="cee">高考<span style="color: red">*</span></label>
-                            <div class="estimate-short-select" style="position: relative; top: 15px;">
+                            <div class="estimate-short-select" style="position: relative; top:<?php if(!(isset($cpm) && $cpm)) echo "15px"; else echo "10px" ?>">
                                 <select name="cee_province" v-model="data['examinations']['高考']['tag']">
                                     <?php
                                     $provinces = collect(config('provinces'))->sortBy(function ($product, $key) {
@@ -61,7 +70,9 @@
                             </div>
 
                             <input class="estimate-input" style="width: 159px;left:-4px;position: relative;" type="text" id="cee" name="cee" v-model="data['examinations']['高考']['score_without_tag']"/>
+                            @if(!(isset($cpm) && $cpm))
                             <span style="margin-left: 20px;color: red;">如果没有，请估算一个分值。</span>
+                            @endif
                         </div>
                     @endif
                     <div class="form-group">
@@ -126,6 +137,9 @@
                         <input type="hidden" name="selected_category_id" value="{{$selected_category_id}}">
                         <input type="hidden" name="selected_speciality_name" value="{{$selected_speciality_name}}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        @if(isset($cpm))
+                            <input type="hidden" name="cpm" value="{{ $cpm }}">
+                        @endif
                     </form>
                     <a href="javascript:document.getElementById('return_form').submit();"><button class="estimate-button">返回上一步</button></a>
 
@@ -136,7 +150,7 @@
 
             <template id="group-examination">
                 <label for="group@{{ $index }}">@{{ group.title }}<span style="color: red">*</span></label>
-                <div class="estimate-short-select" style="position: relative; top: 15px;">
+                <div class="estimate-short-select" style="position: relative; top: <?php if(!(isset($cpm) && $cpm)) echo "15px"; else echo "10px" ?>;">
                     <select v-model="group['selected_group']">
                         <template v-for="option in group['selects']">
                             <option value="@{{ option }}" v-if="option == group['selects'][0]" selected>
@@ -150,17 +164,28 @@
                 </div>
 
                 <template v-if="selected_examination">
-                    <input class="estimate-input" style="width: 120px;" type="text" v-model="selected_examination.score" v-bind:placeholder="default_value">
+                    <input class="estimate-input" style="width: <?php if(!(isset($cpm) && $cpm)) echo "120px"; else echo "155px" ?>;" type="text" v-model="selected_examination.score" v-bind:placeholder="default_value">
 
+                    @if(isset($cpm) && $cpm)
+                    <div class="form-group">
+                    @endif
                     <template v-for="section in selected_examination['sections']">
                         <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
                         <input  class="estimate-input" style="width: 60px;" type="text" v-model="section.score">
                     </template>
+                    @if(isset($cpm) && $cpm)
+                    </div>
+                    @endif
+
                 </template>
             </template>
         </div>
     </div>
-    {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form']) !!}
+            @if(!(isset($cpm) && $cpm))
+                {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form']) !!}
+            @else
+                {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form', 'target' => '_parent']) !!}
+            @endif
     <input name="data" type="hidden" id="estimate-form-data"/>
     {!! Form::close() !!}
     <script type="text/javascript">

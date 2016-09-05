@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(!(isset($cpm) && $cpm))
     <div class="estimate-page">
         <div class="app-content">
             @include('shared.top_bar', ['page' => 'estimate'])
+    @else
+    <div class="cpm-estimate-page">
+    @endif
             <template id="union-select">
 
                 <form class="estimate-form" action="{{route('estimate.step_second')}}">
@@ -65,13 +69,22 @@
                         </div>
                     </div>
 
-                    <button class="estimate-button" v-on:click="onSubmit" style="margin-left: 210px;">下一步</button>
+                    @if(isset($cpm))
+                    <input type="hidden" name="cpm" value="{{ $cpm }}">
+                    @endif
+
+                    <button class="estimate-button" v-on:click="onSubmit" @if(!(isset($cpm) && $cpm)) style="margin-left: 210px;" @else style="margin-left: 140px;" @endif>下一步</button>
                 </form>
             </template>
             <union-select></union-select>
 
+    @if(!(isset($cpm) && $cpm))
         </div>
     </div>
+    @else
+    </div>
+    @endif
+
     <script>
         Vue.component('union-select', {
             template: '#union-select',

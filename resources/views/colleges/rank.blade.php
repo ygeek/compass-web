@@ -63,7 +63,7 @@
                                         }
                                     }
                                 ?>
-                                <a href="{{ route('estimate.step_first', ['selected_country_id' => $tmp]) }}"><button class="estimate-button">测试录取率 -></button></a>@endif</td>
+                                <a href="javascript:void(0)" v-on:click="setEstimatePanel('{{route('estimate.step_first', ['selected_country_id' => $tmp, 'cpm' => true])}}')"><button class="estimate-button">测试录取率 -></button></a>@endif</td>
                         </tr>
                     @endforeach
                 </table>
@@ -76,6 +76,8 @@
             <?php unset($college) ?>
         </div>
     </div>
+
+    @include('shared.estimate')
 
     @include('shared.footer')
 @endsection

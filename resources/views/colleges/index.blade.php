@@ -141,11 +141,6 @@
                                     liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 0;}}else{echo 0;} ?>"
                                     like_nums="{{ $college->like_nums }}"
                             ></like-college-sidebar>
-                            <template id="like-college-sidebar">
-                                <span v-if="liked == 0" class="like-button" @click="likeCollege"><span class="gray-heart"></span>@{{like_nums}}</span>
-                                <span v-if="liked == 1" class="like-button" @click="dislikeCollege"><span class="heart"></span>@{{like_nums}}</span>
-                            </template>
-                            @include('shared.like_college', ['template_name' => 'like-college-sidebar'])
 
                             <?php
                                 $tmp = $college->administrativeArea->id;
@@ -155,9 +150,9 @@
                                         $tmp = $college->administrativeArea->parent->parent->id;
                                     }
                                 }
-                                $estimate_url = route('estimate.step_first', ['selected_country_id' => $tmp]);
+                                $estimate_url = route('estimate.step_first', ['selected_country_id' => $tmp, 'cpm' => true]);
                             ?>
-                            <a href="{{$estimate_url}}" target="_blank" class="calc-link">测试录取几率-></a>
+                            <a href="javascript:void(0)" class="calc-link" v-on:click="setEstimatePanel('{{$estimate_url}}')">测试录取几率-></a>
                             <a href="{{route('colleges.show', $college->key)}}" target="_blank"><div class="cover"></div></a>
                             <img class="college-badge" src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" />
                             <div class="college-info">
@@ -225,6 +220,13 @@
             </div>
         </div>
 
+        <template id="like-college-sidebar">
+            <span v-if="liked == 0" class="like-button" @click="likeCollege"><span class="gray-heart"></span>@{{like_nums}}</span>
+            <span v-if="liked == 1" class="like-button" @click="dislikeCollege"><span class="heart"></span>@{{like_nums}}</span>
+        </template>
+        @include('shared.like_college', ['template_name' => 'like-college-sidebar'])
+
+        @include('shared.estimate')
 
     <template id="tag-select">
         <div>

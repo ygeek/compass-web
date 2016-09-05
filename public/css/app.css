@@ -397,7 +397,8 @@ ul {
 .mask {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  z-index: 9999999; }
 
 .index-page .header {
   height: 542px;
@@ -912,6 +913,82 @@ ul {
         .estimate-page .estimate-form .estimate-short-select select:focus {
           outline: none; }
 
+.cpm-estimate-page {
+  background-color: #f3f3f3; }
+  .cpm-estimate-page .estimate-form {
+    width: 420px;
+    height: 400px;
+    padding: 0 40px; }
+    .cpm-estimate-page .estimate-form label {
+      font-size: 12px;
+      color: #a1a1a1;
+      line-height: 30px;
+      width: 100px;
+      display: inline-block; }
+    .cpm-estimate-page .estimate-form h1 {
+      font-size: 15px;
+      color: #000;
+      margin: 20px 0 30px;
+      font-weight: normal; }
+    .cpm-estimate-page .estimate-form .form-group {
+      display: block;
+      width: 100%; }
+      .cpm-estimate-page .estimate-form .form-group:after {
+        content: "";
+        display: table;
+        clear: both; }
+    .cpm-estimate-page .estimate-form .estimate-input {
+      width: 298px;
+      height: 30px;
+      border: none;
+      margin-bottom: 12px;
+      padding-left: 2px; }
+    .cpm-estimate-page .estimate-form .estimate-select {
+      background: #fff url("/images/select_arrow.png") no-repeat 98%;
+      height: 30px;
+      width: 280px;
+      border: none;
+      overflow: hidden;
+      padding-left: 20px;
+      float: right;
+      margin-bottom: 12px; }
+      .cpm-estimate-page .estimate-form .estimate-select select {
+        background: transparent;
+        border: none;
+        height: 30px;
+        width: 298px;
+        -webkit-appearance: none; }
+        .cpm-estimate-page .estimate-form .estimate-select select:focus {
+          outline: none; }
+    .cpm-estimate-page .estimate-form .estimate-short-select {
+      background: #fff url("/images/select_arrow.png") no-repeat 98%;
+      height: 30px;
+      border: none;
+      overflow: hidden;
+      padding-left: 20px;
+      width: 120px;
+      float: none;
+      display: inline-block; }
+      .cpm-estimate-page .estimate-form .estimate-short-select select {
+        -moz-appearance: window;
+        text-indent: 0.01px;
+        text-overflow: '';
+        background: transparent;
+        border: none;
+        height: 30px;
+        width: 118px;
+        -webkit-appearance: none; }
+        .cpm-estimate-page .estimate-form .estimate-short-select select:focus {
+          outline: none; }
+  .cpm-estimate-page .estimate-button {
+    width: 140px;
+    height: 40px;
+    color: #ffffff;
+    border: none;
+    background-color: #0e2d60;
+    margin-left: 45px;
+    margin-top: 10px; }
+
 .estimate-result .close {
   font-size: 20px;
   padding-top: 10px;
@@ -1090,7 +1167,7 @@ ul {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 999; }
+    z-index: 9999999; }
     .home-page .mask .add-speciality-pop {
       font-size: 16px;
       width: 800px;

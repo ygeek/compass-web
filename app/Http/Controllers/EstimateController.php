@@ -21,6 +21,7 @@ use App\Http\Requests;
 class EstimateController extends Controller
 {
     public function stepFirst(Request $request){
+        $cpm = (bool)($request->input('cpm', false));
         $selected_country_id = $request->input('selected_country_id', null);
         $selected_degree_id = $request->input('selected_degree_id', null);
         $selected_year = $request->input('selected_year', null);
@@ -35,7 +36,7 @@ class EstimateController extends Controller
         ];
 
         $speciality_categories = SpecialityCategory::get();
-        return $this->view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name'));
+        return $this->view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name', 'cpm'));
     }
 
     public function getSpeciality(Request $request){
@@ -44,6 +45,7 @@ class EstimateController extends Controller
     }
 
     public function stepSecond(Request $request){
+        $cpm = (bool)($request->input('cpm', false));
         $selected_country = AdministrativeArea::find($request->input('selected_country_id'));
         $selected_degree = Degree::find($request->input('selected_degree_id'));
         $selected_category_id = $request->input('speciality_category_id');
@@ -54,7 +56,7 @@ class EstimateController extends Controller
         if ($user!=null && $user->estimate!=null){
             $estimate_checked = true;
         }
-        return $this->view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id'));
+        return $this->view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id', 'cpm'));
     }
 
     /*

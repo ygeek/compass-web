@@ -10,8 +10,9 @@
     <script src="/js/vue-resource.min.js"></script>
   </head>
   <body id="go-top">
-
+  @if(!(isset($cpm) && $cpm))
   <a href="#go-top"><img src="/images/top.gif" class="top" alt="top"/></a>
+  @endif
 
     @if (Session::has('flash_notification.message'))
       <div class="shanbox alert-{{ Session::get('flash_notification.level') }}">
@@ -29,9 +30,11 @@
 
 
     <div id="app">
+      @if(!(isset($cpm) && $cpm))
       @unless(Auth::check())
         @include('shared.login_panel')
       @endunless
+      @endif
       <div>
         @yield('content')
       </div>
