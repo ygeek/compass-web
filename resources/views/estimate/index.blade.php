@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+  @if(!$college_id)
     <div class="estimate-page estimate-result">
         <div class="app-content">
             @include('shared.top_bar', ['page' => 'estimate'])
+  @else
+    <div class="estimate-page estimate-result">
+  @endif
             <estimate-result-list></estimate-result-list>
             <template id="estimate-result-list">
                 <div id="estimate-detail-pop" class="mask" v-if="showRequirementContrasts">
@@ -56,6 +60,7 @@
 
                 <div class="estimate-result-list">
 
+                    @if(!$college_id)
                     <div class="identity">
                         <h1>匹配结果</h1>
 
@@ -145,7 +150,11 @@
                             </div>
                         @endforeach
                     </div>
+                    @else
+
+                    @endif
                 </div>
+
             </template>
             <template id="like-college">
                 <span v-if="liked == 0" class="right" style="margin-left: 20px;cursor: pointer;" @click="likeCollege"><span class="gray-heart"></span>@{{like_nums}}</span>
@@ -164,11 +173,18 @@
                     selected_speciality_name: "{{ $data['selected_speciality_name'] }}",
                     estimate_id: "{{ $estimate_id }}",
                     selected_degree_id: {{ $selected_degree->id }},
+                    @if(!$college_id)
                     showRequirementContrastsContent: {
                         contrasts: [],
                         college: {college_name: null},
                     },
-                    showRequirementContrasts: false
+                    @else
+                    showRequirementContrastsContent: {
+                        contrasts: {!! json_encode($res['requirement_contrast']) !!},
+                        college: {!! json_encode($res['college']) !!},
+                    },
+                    @endif
+                    showRequirementContrasts: @if(!$college_id) false @else true @endif
                 }
             },
             methods: {

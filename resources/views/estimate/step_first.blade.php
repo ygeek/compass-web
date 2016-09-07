@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     @if(!(isset($cpm) && $cpm))
     <div class="estimate-page">
         <div class="app-content">
@@ -13,6 +14,7 @@
                 <form class="estimate-form" action="{{route('estimate.step_second')}}">
                     <h1>选择留学意向·1/2</h1>
 
+                    @if(!$college_id)
                     <div class="form-group">
                         <label for="country">选择目标国家</label>
                         <div class="estimate-select">
@@ -25,7 +27,7 @@
 
 
                     </div>
-
+                    @endif
                     <div class="form-group">
                         <label for="degree">将要攻读学历</label>
                         <div class="estimate-select">
@@ -36,7 +38,7 @@
                             </select>
                         </div>
                     </div>
-
+                    @if(!$college_id)
                     <div class="form-group">
                         <label for="years">计划留学时间</label>
                         <div class="estimate-select">
@@ -68,9 +70,13 @@
                             </select>
                         </div>
                     </div>
-
+                    @endif
                     @if(isset($cpm))
                     <input type="hidden" name="cpm" value="{{ $cpm }}">
+                    @endif
+
+                    @if($college_id)
+                    <input type="hidden" name="college_id" value="{{ $college_id }}">
                     @endif
 
                     <button class="estimate-button" v-on:click="onSubmit" @if(!(isset($cpm) && $cpm)) style="margin-left: 210px;" @else style="margin-left: 140px;" @endif>下一步</button>
@@ -146,6 +152,7 @@
             },
             methods: {
                 onSubmit: function (event) {
+                    @if(!$college_id)
                     if (this.selected_speciality_name=="专业加载中"){
                         alert('专业加载中，请稍等。');
                         event.preventDefault();
@@ -154,6 +161,9 @@
                         alert('专业库正在完善中，请选择其他专业。');
                         event.preventDefault();
                     }
+                    @else
+
+                    @endif
                 }
             }
         });

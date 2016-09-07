@@ -51,28 +51,36 @@ class Estimate{
             foreach ($reduce_colleges as $reduce_college){
                 $res = $reduce_college;
                 $college = $colleges->where('id', $reduce_college['college_id'])->first();
-                //根据选择的专业和学历获取到申请要求
-                $college_requirement = $college->getSpecialityRequirement($selected_speciality_name, $selected_degree);
-                $res['college'] = $college->toArray();
-                $res['requirement'] = $college_requirement;
-
-                //获取 托福/雅思的需求分
-                $ielts_requirement = collect($college_requirement['requirement'])->filter(function ($require){
-                    return $require['examination_name'] == '雅思';
-                })->first()['requirement'];
-
-                $toefl_requirement = collect($college_requirement['requirement'])->filter(function ($require){
-                    return $require['examination_name'] == '托福IBT';
-                })->first()['requirement'];
-
-                $res['toefl_requirement'] = $toefl_requirement;
-                $res['ielts_requirement'] = $ielts_requirement;
-
-                $res['requirement_contrast'] = self::grabContrastFromRequirement($college_requirement['requirement'], $data);
+                $res = array_merge($res, self::grabCollegeRequirementInfo($college, $data, $selected_speciality_name, $selected_degree));
                 $result[$reduce_college_key][] = $res;
             }
         }
+
         return $result;
+    }
+
+    public static function grabCollegeRequirementInfo($college, $data, $selected_speciality_name, $selected_degree){
+      $res = [];
+
+      //根据选择的专业和学历获取到申请要求
+      $college_requirement = $college->getSpecialityRequirement($selected_speciality_name, $selected_degree);
+      $res['college'] = $college->toArray();
+      $res['requirement'] = $college_requirement;
+
+      //获取 托福/雅思的需求分
+      $ielts_requirement = collect($college_requirement['requirement'])->filter(function ($require){
+          return $require['examination_name'] == '雅思';
+      })->first()['requirement'];
+
+      $toefl_requirement = collect($college_requirement['requirement'])->filter(function ($require){
+          return $require['examination_name'] == '托福IBT';
+      })->first()['requirement'];
+
+      $res['toefl_requirement'] = $toefl_requirement;
+      $res['ielts_requirement'] = $ielts_requirement;
+
+      $res['requirement_contrast'] = self::grabContrastFromRequirement($college_requirement['requirement'], $data);
+      return $res;
     }
 
     //根据院校名称获取院校的类型 985 211或者双非

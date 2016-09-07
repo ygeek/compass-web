@@ -27,6 +27,8 @@ class EstimateController extends Controller
         $selected_year = $request->input('selected_year', null);
         $selected_category_id = $request->input('selected_category_id');
         $selected_speciality_name = $request->input('selected_speciality_name');
+        $college_id = $request->input('college_id', false);
+
         $countries = AdministrativeArea::countries()->get();
         $degrees = Degree::estimatable()->get();
 
@@ -36,7 +38,7 @@ class EstimateController extends Controller
         ];
 
         $speciality_categories = SpecialityCategory::get();
-        return $this->view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name', 'cpm'));
+        return $this->view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name', 'cpm', 'college_id'));
     }
 
     public function getSpeciality(Request $request){
@@ -46,7 +48,15 @@ class EstimateController extends Controller
 
     public function stepSecond(Request $request){
         $cpm = (bool)($request->input('cpm', false));
-        $selected_country = AdministrativeArea::find($request->input('selected_country_id'));
+        $college_id = $request->input('college_id', false);
+
+        if($college_id){
+          $selected_college = College::find($college_id);
+          $selected_country = $selected_college->country;
+        }else{
+          $selected_country = AdministrativeArea::find($request->input('selected_country_id'));
+        }
+
         $selected_degree = Degree::find($request->input('selected_degree_id'));
         $selected_category_id = $request->input('speciality_category_id');
         $selected_speciality_name = $request->input('speciality_name');
@@ -56,7 +66,7 @@ class EstimateController extends Controller
         if ($user!=null && $user->estimate!=null){
             $estimate_checked = true;
         }
-        return $this->view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id', 'cpm'));
+        return $this->view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id', 'cpm', 'college_id'));
     }
 
     /*
@@ -64,6 +74,8 @@ class EstimateController extends Controller
      */
     public function store(Request $request){
         $estimate_id = $request->input('estimate_id');
+        $college_id = $request->input('college_id', false);
+
         if ($estimate_id!=null){
             $data = Setting::get($estimate_id);
         }
@@ -120,39 +132,68 @@ class EstimateController extends Controller
             $student_scores[] = $item;
         }
 
-        $colleges = $this->estimateColleges($selected_degree, $selected_speciality_name);
+        if($college_id){
+          $college = College::find($college_id);
 
-        $res = [];
-        foreach ($colleges as $college){
-            try{
-                $res[] = [
-                    'college_id' => $college->id,
-                    'score' => $college->calculateWeightScore($student_scores, $selected_degree)
-                ];
-            }catch (\Exception $e){
-                continue;
-            }
-        }
-        //Reduce结果
-        $core_range_setting = (new CoreRangeSetting())->getCountryDegreeSetting($selected_country->id, $selected_degree->id);
-        $reduce_result = Estimate::reduceScoreResult($res, $core_range_setting);
-        //生成院校信息
-        $reduce_colleges = Estimate::mapCollegeInfo($reduce_result, $selected_speciality_name, $selected_degree, $data);
+          $res = [
+              'college_id' => $college->id,
+              'score' => $college->calculateWeightScore($student_scores, $selected_degree)
+          ];
 
-        if ($estimate_id == null){
-            $user = Auth::user();
-            if ($user!=null){
-                $estimate_id = Uuid::generate(4);
-                Setting::set('estimate-'.$estimate_id, $data);
-                $user->estimate = 'estimate-'.$estimate_id;
-                $user->save();
-            }
-        }
-        else{
-            $estimate_id = str_replace('estimate-', '', $estimate_id);
+          $requirement_info = Estimate::grabCollegeRequirementInfo($college, $data, $selected_speciality_name, $selected_degree);
+          $res = array_merge($res, $requirement_info);
+
+          if ($estimate_id == null){
+              $user = Auth::user();
+              if ($user!=null){
+                  $estimate_id = Uuid::generate(4);
+                  Setting::set('estimate-'.$estimate_id, $data);
+                  $user->estimate = 'estimate-'.$estimate_id;
+                  $user->save();
+              }
+          }
+          else{
+              $estimate_id = str_replace('estimate-', '', $estimate_id);
+          }
+          $reduce_colleges = [$res];
+          return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data', 'college_id', 'res'));
+        }else{
+
+          $colleges = $this->estimateColleges($selected_degree, $selected_speciality_name);
+
+          $res = [];
+          foreach ($colleges as $college){
+              try{
+                  $res[] = [
+                      'college_id' => $college->id,
+                      'score' => $college->calculateWeightScore($student_scores, $selected_degree)
+                  ];
+              }catch (\Exception $e){
+                  continue;
+              }
+          }
+          //Reduce结果
+          $core_range_setting = (new CoreRangeSetting())->getCountryDegreeSetting($selected_country->id, $selected_degree->id);
+          $reduce_result = Estimate::reduceScoreResult($res, $core_range_setting);
+          //生成院校信息
+          $reduce_colleges = Estimate::mapCollegeInfo($reduce_result, $selected_speciality_name, $selected_degree, $data);
+
+          if ($estimate_id == null){
+              $user = Auth::user();
+              if ($user!=null){
+                  $estimate_id = Uuid::generate(4);
+                  Setting::set('estimate-'.$estimate_id, $data);
+                  $user->estimate = 'estimate-'.$estimate_id;
+                  $user->save();
+              }
+          }
+          else{
+              $estimate_id = str_replace('estimate-', '', $estimate_id);
+          }
+
+          return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data'));
         }
 
-        return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data'));
     }
 
 
