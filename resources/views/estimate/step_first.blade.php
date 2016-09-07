@@ -28,6 +28,7 @@
 
                     </div>
                     @endif
+
                     <div class="form-group">
                         <label for="degree">将要攻读学历</label>
                         <div class="estimate-select">
@@ -38,6 +39,7 @@
                             </select>
                         </div>
                     </div>
+
                     @if(!$college_id)
                     <div class="form-group">
                         <label for="years">计划留学时间</label>
@@ -50,6 +52,7 @@
                         </div>
 
                     </div>
+                    @endif
 
                     <div class="form-group">
                         <label for="speciality_categories">期望就读专业</label>
@@ -70,7 +73,7 @@
                             </select>
                         </div>
                     </div>
-                    @endif
+
                     @if(isset($cpm))
                     <input type="hidden" name="cpm" value="{{ $cpm }}">
                     @endif
@@ -104,7 +107,13 @@
                 }
             },
             created: function(){
-                this.$http.get("{{route('estimate.get_speciality')}}").then(function(response){
+                @if(!$college_id){
+                  var url = "{{route('estimate.get_speciality')}}";
+                @else
+                  var url = "{{route('estimate.get_speciality', ['college_id' => $college_id])}}"
+                @endif
+
+                this.$http.get(url).then(function(response){
                     this.speciality_categories = response.data;
                     var tmp = this.children;
                 });
@@ -152,7 +161,6 @@
             },
             methods: {
                 onSubmit: function (event) {
-                    @if(!$college_id)
                     if (this.selected_speciality_name=="专业加载中"){
                         alert('专业加载中，请稍等。');
                         event.preventDefault();
@@ -161,9 +169,6 @@
                         alert('专业库正在完善中，请选择其他专业。');
                         event.preventDefault();
                     }
-                    @else
-
-                    @endif
                 }
             }
         });

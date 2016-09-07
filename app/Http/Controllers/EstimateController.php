@@ -42,7 +42,14 @@ class EstimateController extends Controller
     }
 
     public function getSpeciality(Request $request){
-        $speciality_categories = SpecialityCategory::with('specialities')->get();
+        $college_id = $request->input('college_id', false);
+        $speciality_categories = SpecialityCategory::with(['specialities' => function($query) use ($college_id){
+          if($college_id){
+            return $query->where('specialities.college_id', $college_id);
+          }else{
+            return $query;
+          }
+        }])->get();
         return $speciality_categories;
     }
 
