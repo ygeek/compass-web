@@ -63,7 +63,7 @@
                                         }
                                     }
                                 ?>
-                                <a href="javascript:void(0)" v-on:click="setEstimatePanel('{{route('estimate.step_first', ['selected_country_id' => $tmp, 'cpm' => true])}}')"><button class="estimate-button">测试录取率 -></button></a>@endif</td>
+                                <a href="javascript:void(0)" v-on:click="setEstimatePanel('{{route('estimate.step_first', ['selected_country_id' => $tmp, 'cpm' => true, 'college_id' => $college['id']])}}')"><button class="estimate-button">测试录取率 -></button></a>@endif</td>
                         </tr>
                     @endforeach
                 </table>

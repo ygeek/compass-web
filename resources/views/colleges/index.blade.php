@@ -150,7 +150,7 @@
                                         $tmp = $college->administrativeArea->parent->parent->id;
                                     }
                                 }
-                                $estimate_url = route('estimate.step_first', ['selected_country_id' => $tmp, 'cpm' => true]);
+                                $estimate_url = route('estimate.step_first', ['selected_country_id' => $tmp, 'cpm' => true, 'college_id' => $college->id]);
                             ?>
                             <a href="javascript:void(0)" class="calc-link" v-on:click="setEstimatePanel('{{$estimate_url}}')">测试录取几率-></a>
                             <a href="{{route('colleges.show', $college->key)}}" target="_blank"><div class="cover"></div></a>
