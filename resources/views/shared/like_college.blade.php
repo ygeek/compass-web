@@ -3,7 +3,7 @@
 <script type="text/javascript">
     Vue.component('{{ $template_name }}', {
         template: '#{{ $template_name }}',
-        props: ['college_id', 'liked', 'like_nums'],
+        props: ['college_id', 'liked', 'like_nums', 'showLoginAndRegisterPanel'],
         data: function () {
             return {
                 posting: 0
@@ -29,8 +29,10 @@
                     that.posting = 0;
                 }, function(response){
                     if(response.status == 401){
-                        alert('请登陆后收藏院校');
-                    };
+                        //alert('请登陆后收藏院校');
+                        //this.showLoginAndRegisterPanel = true;
+                        this.$dispatch('toShowLoginAndRegisterPanel');
+                    }
                     that.posting = 0;
                 });
             },

@@ -11,6 +11,9 @@ new Vue({
   events: {
     'changeLikeDispatch': function (collegeid,like) {
       this.$broadcast('changeCollegeLike',collegeid,like)
+    },
+    'toShowLoginAndRegisterPanel': function () {
+      this.showLoginAndRegisterPanel = true;
     }
   },
   methods: {

@@ -1,6 +1,6 @@
 <login-panel v-bind:show-login-and-register-panel.sync="showLoginAndRegisterPanel"></login-panel>
 <template id="login-panel-template">
-  <div id="login-panel" v-show="showLoginAndRegisterPanel">
+  <div id="login-panel" v-show="showLoginAndRegisterPanel" style="z-index: 999999;">
     <div class="mask"></div>
     <div class="panel">
       <div class="close" v-on:click="close">
