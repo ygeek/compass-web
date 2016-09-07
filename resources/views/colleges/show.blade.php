@@ -146,7 +146,7 @@
                         </div>
 
                         <div class="order-area">
-                            <div class="result-tips">为您找到<span style="color: #38deba;font-weight: bold"> {{ count($articles) }} </span>个相关专业</div>
+                            <div class="result-tips">为您找到<span style="color: #38deba;font-weight: bold"> {{ $articles->total() }} </span>个相关专业</div>
                             <div class="order"></div>
                         </div>
                     </div>

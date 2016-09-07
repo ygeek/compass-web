@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="order-area">
-                    <div class="result-tips">为您找到<span style="color: #38deba;font-weight: bold"> {{ count($colleges) }} </span>个相关院校</div>
+                    <div class="result-tips">为您找到<span style="color: #38deba;font-weight: bold"> {{ $colleges->total() }} </span>个相关院校</div>
                     <div class="tag-area" style="float: left;margin-top: 0">
                         <div class="tag-select" style="margin-bottom: 0">
                             <div class="tags" style="width: auto">

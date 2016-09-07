@@ -112,7 +112,7 @@ class CollegesController extends Controller
         $colleges = [];
         if($selected_order.endsWith("_order")){
             $tmp_tag = str_replace("_order", "", $selected_order);
-            $colleges = $colleges_query->orderBy($tmp_tag, 'desc')->paginate(20);
+            $colleges = $colleges_query->orderBy($tmp_tag, 'desc')->paginate(10);
         }
         else {
             $colleges_english_name = collect($colleges_query->select('english_name')->get()->map(function($item){
@@ -243,7 +243,7 @@ class CollegesController extends Controller
                 $specialities_query = $specialities_query->where('name', 'like', '%'.$speciality_name.'%');
             }
 
-            $articles = $specialities_query->paginate(15);
+            $articles = $specialities_query->paginate(10);
         }
 
         return $this->view('colleges.show', compact('college', 'article_key', 'articles'));
