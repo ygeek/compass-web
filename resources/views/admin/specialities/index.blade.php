@@ -9,6 +9,12 @@
         <div class="block-content">
             <form>
                 <input type="text" name="speciality_name" value="{{ $speciality_name }}" placeholder="专业名称" />
+                <select name="category_id">
+                    <option value="">所有方向</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}" @if($category_id == $category->id) selected @endif>{{$category->english_name}} {{$category->chinese_name}} </option>
+                    @endforeach
+                </select>
                 <select name="degree_id">
                     <option value="">所有层次</option>
                     @foreach($degrees as $degree)
@@ -22,6 +28,7 @@
                 <thead>
                 <tr>
                     <th>专业名称</th>
+                    <th>专业方向</th>
                     <th>专业层次</th>
                     <th class="text-center" style="width: 150px;">操作</th>
                 </tr>
@@ -31,6 +38,10 @@
                         <tr>
                             <td>
                                 {{$speciality->name}}
+                            </td>
+                            <td>
+                                {{$speciality->category->english_name}}
+                                {{$speciality->category->chinese_name}}
                             </td>
                             <td>
                               {{$speciality->degree->name}}

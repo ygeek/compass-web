@@ -18,27 +18,32 @@ class SpecialitiesController extends BaseController
     public function index($college_id, Request $request){
         $speciality_name = $request->input('speciality_name');
         $degree_id = $request->input('degree_id');
+        $category_id = $request->input('category_id');
         $degrees = Degree::all();
+        $categories = SpecialityCategory::all();
 
-        $college = College::with('specialities.degree')->find($college_id);
-        $specialities = collect($college->specialities)->filter(function($item) use ($speciality_name, $degree_id) {
+        $college = College::with('specialities.degree')->with('specialities.category')->find($college_id);
+        $specialities = collect($college->specialities)->filter(function($item) use ($speciality_name, $degree_id, $category_id) {
             if($speciality_name && strpos($item->name, $speciality_name)===false){
                 return false;
             }
             if ($degree_id && $item->degree->id != $degree_id){
                 return false;
             }
+            if ($category_id && $item->category->id != $category_id){
+                return false;
+            }
             return true;
         });
 
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 20;
+        $perPage = 10;
         $current_rank_items = $specialities->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $specialities= new LengthAwarePaginator($current_rank_items, count($specialities), $perPage, null, [
             'path' => route('admin.colleges.specialities.index', [ 'college' => $college->id ])
         ]);
 
-        return view('admin.specialities.index', compact('college', 'specialities', 'speciality_name', 'degree_id', 'degrees'));
+        return view('admin.specialities.index', compact('college', 'specialities', 'speciality_name', 'degree_id', 'degrees', 'category_id', 'categories'));
     }
 
     public function create($college_id){
