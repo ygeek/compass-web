@@ -50,7 +50,7 @@
                             @endif
 
                             <tr class="comment">
-                                <td style="text-align: left;line-height: 26px;padding-left: 30px;" v-bind:colspan="showRequirementContrastsContent.contrasts.length" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
+                                <td style="text-align: left;line-height: 26px;padding-left: 30px;display: inline-block;height: 110px;overflow: hidden" v-bind:colspan="showRequirementContrastsContent.contrasts.length" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
                                     @{{{ changeLine(contrast['require']) }}}
                                 </td>
                             </tr>
