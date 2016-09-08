@@ -13,7 +13,9 @@
                 <div id="estimate-detail-pop" class="mask" v-if="showRequirementContrasts">
                     <div class="estimate-detail">
                         <h1>@{{ showRequirementContrastsContent.college.chinese_name }}的@{{ selected_speciality_name }}专业匹配如下：</h1>
-                        <span @click="showRequirementContrasts=false" class="close">×</span>
+                        @if(!(isset($cpm) && $cpm))
+                            <span @click="showRequirementContrasts=false" class="close">×</span>
+                        @endif
                         <table>
                             <tr style="background: #f3f3f3;">
                                 <th style="padding-left: 30px;">
@@ -43,7 +45,7 @@
                             </tr>
                              @else
                                 <tr style="background: #f3f3f3;">
-                                    <td v-bind:colspan="showRequirementContrastsContent.contrasts.length">请登录后查看</td>
+                                    <td v-bind:colspan="showRequirementContrastsContent.contrasts.length">您好，请&nbsp;<a href="javascript:void(0)" v-on:click="callLogin">登录</a>&nbsp;以查看更多内容</td>
                                 </tr>
                             @endif
 
@@ -187,6 +189,16 @@
                     showRequirementContrasts: @if(!$college_id) false @else true @endif
                 }
             },
+
+            @if($college_id)
+            created: function () {
+                parent.window.document.getElementById("estimate_iframe").width='870px';
+                parent.window.document.getElementById("estimate_iframe").height='360px';
+                parent.window.document.getElementById("position_div").style.top='calc(50% - 180px)';
+                parent.window.document.getElementById("position_div").style.right='calc(50% - 435px)';
+            },
+            @endif
+
             methods: {
                 showDetail: function (contrasts) {
                     this.showRequirementContrastsContent.contrasts =
@@ -208,7 +220,11 @@
                         speciality_name: speciality_name
                     }).then(function(response){
                         alert('加入意向单成功');
-                        window.location = "{{ route('home.intentions') }}";
+                        @if(!(isset($cpm) && $cpm))
+                            window.location = "{{ route('home.intentions') }}";
+                        @else
+                            parent.window.document.getElementById("close_iframe").click();
+                        @endif
                     }, function(response){
                         if(response.status == 401){
                             alert('请先登录')
@@ -217,6 +233,9 @@
                 },
                 changeLine: function (old) {
                     return old.replace(/\n/ig, "<br/>");
+                },
+                callLogin: function () {
+                    this.$dispatch('toShowLoginAndRegisterPanel');
                 }
             }
         });

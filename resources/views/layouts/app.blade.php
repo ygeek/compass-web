@@ -30,11 +30,9 @@
 
 
     <div id="app">
-      @if(!(isset($cpm) && $cpm))
       @unless(Auth::check())
         @include('shared.login_panel')
       @endunless
-      @endif
       <div>
         @yield('content')
       </div>

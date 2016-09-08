@@ -107,7 +107,7 @@
                 }
             },
             created: function(){
-                @if(!$college_id){
+                @if(!$college_id)
                   var url = "{{route('estimate.get_speciality')}}";
                 @else
                   var url = "{{route('estimate.get_speciality', ['college_id' => $college_id])}}"
@@ -117,6 +117,12 @@
                     this.speciality_categories = response.data;
                     var tmp = this.children;
                 });
+                    @if($college_id)
+                    parent.window.document.getElementById("estimate_iframe").width='500px';
+                    parent.window.document.getElementById("estimate_iframe").height='500px';
+                    parent.window.document.getElementById("position_div").style.top='calc(50% - 250px)';
+                    parent.window.document.getElementById("position_div").style.right='calc(50% - 250px)';
+                    @endif
             },
             computed: {
                 children: function () {

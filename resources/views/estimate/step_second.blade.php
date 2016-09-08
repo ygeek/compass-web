@@ -180,16 +180,14 @@
             </template>
         </div>
     </div>
-            @if(!(isset($cpm) && $cpm))
-                {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form']) !!}
-            @else
-                {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form', 'target' => '_parent']) !!}
-            @endif
+            {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form']) !!}
     <input name="data" type="hidden" id="estimate-form-data"/>
     @if($college_id)
       <input type="hidden" name="college_id" value="{{ $college_id }}">
     @endif
-
+            @if($cpm)
+                <input type="hidden" name="cpm" value="{{ $cpm }}">
+            @endif
     {!! Form::close() !!}
     <script type="text/javascript">
         Vue.component('group-examination', {
