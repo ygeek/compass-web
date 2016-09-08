@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta name="viewport" content="width=device-width"/>
+<meta name="MobileOptimized" content="320"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" name="viewport" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=no" name="format-detection" />
+<title>租房网</title>
+<link type="text/css" href="css/main.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery1.js"></script>
+<script type="text/javascript" src="js/modernizr.custom.js"></script>
+<script type="text/javascript" src="js/jquery.dlmenu.js"></script>
+</head>
+<body>
+<div class="header">
+      <a href="#"><div class="header_logo"><img src="images/logo.png" width="200" /></div></a>
+     <div class="header_r">
+             <div id="dl-menu" class="dl-menuwrapper">
+		<button id="dl-menu-button">Open Menu</button>
+		<ul class="dl-menu">
+			<li><a href="http://www.777moban.com/">首页</a></li>
+			<li><a href="http://www.777moban.com/">台湾游</a></li>
+			<li><a href="http://www.777moban.com/">出境游</a></li>
+			<li><a href="http://www.777moban.com/">国内游</a></li>
+			<li><a href="http://www.777moban.com/">周边游</a></li>
+			<li>
+				<a href="Line">自由行</a>
+				<ul class="dl-submenu">
+					<li class="dl-back"><a href="#">返回上一级</a></li>
+					<li><a href="http://www.777moban.com/">线路</a></li>
+					<li><a href="http://www.777moban.com/">签证</a></li>
+					<li><a href="http://www.777moban.com/">门票</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+     </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$( '#dl-menu' ).dlmenu();
+});
+</script>
+<div class="clear"></div>
+<div class="main">
+        <div class="login_resgister">
+              <form action="" method="get">
+              <input type="text" class="login_resgister_input" onfocus="if (value =='姓名'){value =''}"   onblur="if (value ==''){value='姓名'}" value="姓名">
+              <input type="text" class="login_resgister_input" onfocus="if (value =='手机号码'){value =''}"   onblur="if (value ==''){value='手机号码'}" value="手机号码">
+              <input type="text" class="login_resgister_input" onfocus="if (value =='手机号码'){value =''}"   onblur="if (value ==''){value='手机号码'}" value="手机号码">
+              <select name="" class="select01">
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+              </select>
+             <div class="select_text">
+                    <select name="" class="select02">
+                <option>请选择专业</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+              </select>
+              <input type="text" class="login_resgister_input01" onfocus="if (value =='高考成绩'){value =''}"   onblur="if (value ==''){value='高考成绩'}" value="高考成绩">
+             </div>
+             <div class="select_text">
+                    <select name="" class="select02">
+                <option>请选择省份</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+              </select>
+              <input type="text" class="login_resgister_input01" onfocus="if (value =='0-9分'){value =''}"   onblur="if (value ==''){value='0-9分'}" value="0-9分">
+             </div>
+             <div class="select_radio">
+                        <a href="#">听</a>
+                        <a href="#">说</a>
+                        <a href="#">读</a>
+                        <a href="#" style="float:right; margin:0;">写</a>
+             </div>       
+                    
+                <input type="submit" value="生成选校方案" class="select_button" >
+                 <input type="submit" value="返回" class="select_button01">
+              </form>
+        </div>
+       <div class="clear"></div>
+</div>
+</body>
+</html>
