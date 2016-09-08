@@ -193,8 +193,8 @@
             @if($college_id)
             created: function () {
                 parent.window.document.getElementById("estimate_iframe").width='870px';
-                parent.window.document.getElementById("estimate_iframe").height='360px';
-                parent.window.document.getElementById("position_div").style.top='calc(50% - 180px)';
+                parent.window.document.getElementById("estimate_iframe").height='400px';
+                parent.window.document.getElementById("position_div").style.top='calc(50% - 200px)';
                 parent.window.document.getElementById("position_div").style.right='calc(50% - 435px)';
             },
             @endif
