@@ -110,7 +110,7 @@ class CollegesController extends Controller
         }
 
         $colleges = [];
-        if($selected_order.endsWith("_order")){
+        if(strpos($selected_order, "_order")!== false){
             $tmp_tag = str_replace("_order", "", $selected_order);
             $colleges = $colleges_query->orderBy($tmp_tag, 'desc')->paginate(10);
         }
