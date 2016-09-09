@@ -167,10 +167,11 @@
 
                     @if(isset($cpm) && $cpm)
                     <div class="form-group">
+                        <label >&nbsp;</label>
                     @endif
                     <template v-for="section in selected_examination['sections']">
                         <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
-                        <input  class="estimate-input" style="width: 60px;" type="text" v-model="section.score">
+                        <input  class="estimate-input" style="width: 40px;" type="text" v-model="section.score">
                     </template>
                     @if(isset($cpm) && $cpm)
                     </div>
