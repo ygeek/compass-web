@@ -1,0 +1,162 @@
+
+//View切换
+function changeView(newView) {
+    $("#content").hide();
+    
+    $("#header").hide();
+    $("#login").hide();
+    $(newView).show();
+}
+
+function goBlack(newView) {
+    
+    location.reload();
+}
+
+function shaixuan(newView) {
+    $("#main02").hide();
+    
+    $("#header").hide();
+    $(".tiaojian").hide();
+    $(newView).show();
+}
+//返回到条件筛选
+function goBlack2(newView) {
+    
+    shaixuan(newView);
+}
+$(function() {
+    //选择国家
+    $(".childpar").click(function(){
+        var areaid = $(this).attr('area_id');
+        if(areaid=='0')
+        {
+            $('.areachild').show();
+            
+        }
+        else
+        {
+            $('.areachild').hide();
+            $(".area"+areaid).show();
+        }
+        $('.didian').attr('selected_state_id','0');
+        $('.didian').attr('selected_state_id_name','');
+        $('.childpar').attr('id','');
+        $(this).attr('id','main03_l_menu');
+        $('.didian').attr('selected_country_id',areaid);
+        $('.didian').attr('selected_country_id_name',$(this).html());
+        
+    });
+    $(".areachilds").click(function(){
+        var areaid = $(this).attr('childarea_id');
+        
+        
+        $('.areachilds').attr('id','');
+        $(this).attr('id','main03_r_menu');
+        $('.didian').attr('selected_state_id',areaid);
+        $('.didian').attr('selected_state_id_name',$(this).html());
+        if(areaid=='0')
+        {
+           
+            $('.didian').attr('selected_state_id_name','');
+        }
+    });
+    $(".zhuanyechilds").click(function(){
+        var areaid = $(this).attr('cateid');
+        
+        
+        $('.zhuanyechilds').attr('id','');
+        $(this).attr('id','yuanxiao_sx');
+        $('.zhuanye').attr('selected_speciality_cateogry_id',areaid);
+        $('.zhuanye').attr('selected_speciality_cateogry_id_name',$(this).html());
+        
+    });
+    $(".leixingchilds").click(function(){
+        var areaid = $(this).attr('leiid');
+        
+        
+        $('.leixingchilds').attr('id','');
+        $(this).attr('id','yuanxiao_sx');
+        $('.leixing').attr('selected_property',areaid);
+        $('.leixing').attr('selected_property_name',$(this).html());
+        
+    });
+    
+    $(".paimingchilds").click(function(){
+        var start = $(this).attr('rank_start');
+        var end = $(this).attr('rank_end');
+        
+        $('.paimingchilds').attr('id','');
+        $(this).attr('id','yuanxiao_sx');
+        $('.paiming').attr('rank_start',start);
+        $('.paiming').attr('rank_end',end);
+        if(start=='0'||end=='0')
+        {
+            $('.paiming').attr('rank_start','');
+            $('.paiming').attr('rank_end','');
+        }
+        $('.paiming').attr('paiminghtm',$(this).html());
+    });
+});
+
+//确认选择返回
+function queding(classStr,valStr)
+{
+    var htm = '';
+    if(classStr=='didian')
+    {
+        //赋值input
+        assignValue('selected_country_id',$('.didian').attr('selected_country_id'));
+        assignValue('selected_state_id',$('.didian').attr('selected_state_id'));
+        htm = $('.didian').attr('selected_country_id_name') +' '+ $('.didian').attr('selected_state_id_name');
+    }
+    else
+    {
+        assignValue(valStr,$('.'+classStr).attr(valStr));
+        htm = $('.'+classStr).attr(valStr+'_name')
+    }
+    $('.'+classStr+'a').html(htm);
+    goBlack2('.shaixuan');
+}
+//赋值input
+function assignValue(valName,valStr)
+{
+    $('input[name="'+valName+'"]').val(valStr);
+}
+
+function pmqueding()
+{
+    var htm = '';
+    assignValue('rank_start',$('.paiming').attr('rank_start'));
+    assignValue('rank_end',$('.paiming').attr('rank_end'));
+    htm = $('.paiming').attr('paiminghtm');
+    $('.paiminga').html(htm);
+   
+    goBlack2('.shaixuan');
+}
+
+function pmqueding2()
+{
+    var htm = '';
+    assignValue('rank_start',$('.start').val());
+    assignValue('rank_end',$('.end').val());
+    htm = $('.start').val()+'-'+$('.end').val();
+    $('.paiminga').html(htm);
+   
+    goBlack2('.shaixuan');
+}
+
+
+function showPm()
+{
+    $(".xyxiangqing").hide();
+    $("#header").hide();
+    $('.yxpaiming').show();
+}
+
+function gobackCel()
+{
+     $(".xyxiangqing").show();
+    $("#header").show();
+    $('.yxpaiming').hide();
+}
