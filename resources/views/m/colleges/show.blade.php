@@ -26,52 +26,29 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div class="yuanxiao_pm01">
-        <h1>院校排名</h1>
-        <a href="javascript:showPm()"><img src="/static/images/yuanxi_paim.jpg"></a>
-        <div class="clear"></div>
-    </div>
-    <div class="yuanxiao_jj">
-        <div class="yuanxiao_jj_name">简介</div>
-        <div class="yuanxiao_jj_m">
-            {{ $articles }}
-        </div>
-    </div>
-    <div class="yuanxiao_jj">
-        <div class="yuanxiao_jj_name">校园生活</div>
-        <div class="yuanxiao_jj_m">
-            测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
-            <img src="/static/images/img01.jpg">
-        </div>
-    </div>
-    <div class="yuanxiao_jj">
-        <div class="yuanxiao_jj_name">地理位置</div>
-        <div class="yuanxiao_jj_m">
-            测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
-            <img src="/static/images/img01.jpg">
-        </div>
-    </div>
-    <div class="main05">
-        <div class="topPic">
-            <div class="imgSlideMain">
-                <div id="imgSlide"  class="imgSlide">
-                    <ul style="list-style: none; margin: 0px; width:100%;">
-                        <li style="width:100%; display: table-cell; vertical-align: top; ">
-                            <a href="#"><img src="/static/images/img01.jpg"></a></li>
-                        <li style="width:100%; display: table-cell; vertical-align: top; ">
-                            <a href="#"><img src="/static/images/img01.jpg"></a></li>
-                        <li style="width:100%; display: table-cell; vertical-align: top; ">
-                            <a href="#"><img src="/static/images/img01.jpg"></a></li>
-                    </ul>
-                </div>
-                <ul class="navSlide">
-                    <li class="i_point active"></li>
-                    <li class="i_point"></li>
-                    <li class="i_point"></li>
-                    <li class="i_point"></li></ul>
-            </div>
-        </div>
-    </div>
+    <!--院校概况-->
+
+    @if($article_key == 'xue-xiao-gai-kuang')
+    @include('m.colleges.gaikuang')
+    @endif
+    
+    <!--录取情况-->
+    @if($article_key == 'lu-qu-qing-kuang')
+    @include('m.colleges.luqu')
+    @endif
+    
+    <!--zhuanye-->
+    @if($article_key == 'specialities')
+    @include('m.colleges.zhuanye')
+    @endif
+    
+    @if($article_key == 'tu-pian')
+    @include('m.colleges.tupian')
+    @endif
+    
+    @if($article_key == 'liu-xue-gong-lue')
+    @include('m.colleges.gonglue')
+    @endif
     <div class="footer_top"></div>
     <div class="footer01">
         <ul>

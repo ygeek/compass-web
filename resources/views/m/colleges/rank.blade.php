@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <title>front-end</title>
-    <link rel=stylesheet href=/static/font/iconfont.css>
-    <link rel=stylesheet href=/static/index.css>
-    <script src=//cdn.bootcss.com/jquery/2.2.4/jquery.min.js></script>
-    <link href=/static/css/app.css rel=stylesheet>
-</head>
-<body>
-<app page=OurSchoolRank></app>
-<script type=text/javascript src=/static/js/manifest.js></script>
-<script type=text/javascript src=/static/js/vendor.js></script>
-<script type=text/javascript src=/static/js/app.js></script>
-</body>
-</html>
+
+@include('m.public.header')
+<div class="clear"></div>
+
+<div class="main06">
+    <div class="yuanxiao_pm6">
+        <ul>
+            @foreach($colleges as $key=>$college)
+            <li @if($key%2==1)class="yuanxiao_white"@endif><h1>{{ $college['rank'] }}</h1><h2>{{ $college['chinese_name'] }}</h2><h3>{{ $college['english_name'] }}</h3><span><a href="{{route('colleges.show', ['key' => \App\College::generateKey($college['key']) ])}}">排名</a></span><div class="clear"></div></li>
+            @endforeach
+        </ul>
+        <div class="yuyanxiao_gxl">
+            <a href="#" style="width:10%;"><img src="/static/images/icon36.png"></a>
+            <a id="yuyanxiao_gxl" href="#">U.S.News排名</a>
+            <a href="#">QS排名</a>
+            <a href="#">Times排名</a>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+
