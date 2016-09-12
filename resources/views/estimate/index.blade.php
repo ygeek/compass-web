@@ -17,7 +17,7 @@
                         @if(!(isset($cpm) && $cpm))
                             <span @click="showRequirementContrasts=false" class="close">×</span>
                         @endif
-                        <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showRequirementContrastsContent.college.score }}%</span>，@{{ selected_speciality_name }}专业匹配如下：</p>
+                        <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showRequirementContrastsContent.score }}%</span>，@{{ selected_speciality_name }}专业匹配如下：</p>
                         <table>
                             <tr>
                                 <th style="padding-left: 30px;">
@@ -187,6 +187,7 @@
                     showRequirementContrastsContent: {
                         contrasts: {!! json_encode($res['requirement_contrast']) !!},
                         college: {!! json_encode($res['college']) !!},
+                        score: {!! $res['score'] !!}
                     },
                     @endif
                     showRequirementContrasts: @if(!$college_id) false @else true @endif
@@ -209,7 +210,7 @@
                     this.showRequirementContrastsContent.college =
                         JSON.parse(contrasts.target.getAttribute('data-college'));
                     this.showRequirementContrasts = true;
-                    this.showRequirementContrastsContent.college.score =
+                    this.showRequirementContrastsContent.score =
                             JSON.parse(contrasts.target.getAttribute('data-score'));
                 },
                 addIntention: function(){
