@@ -53,7 +53,7 @@
                                     </td>
                                 </tr>
                              @else
-                                <tr style="background: #f3f3f3;">
+                                <tr style="background: #f3f3f3;height: 160px">
                                     <td v-bind:colspan="showRequirementContrastsContent.contrasts.length">您好，请&nbsp;<a href="javascript:void(0)" v-on:click="callLogin">登录</a>&nbsp;以查看更多内容</td>
                                 </tr>
                             @endif
