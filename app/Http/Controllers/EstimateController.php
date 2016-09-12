@@ -82,6 +82,7 @@ class EstimateController extends Controller
     public function store(Request $request){
         $estimate_id = $request->input('estimate_id');
         $college_id = $request->input('college_id', false);
+        $cpm = (bool)($request->input('cpm', false));
 
         if ($estimate_id!=null){
             $data = Setting::get($estimate_id);
@@ -163,7 +164,7 @@ class EstimateController extends Controller
               $estimate_id = str_replace('estimate-', '', $estimate_id);
           }
           $reduce_colleges = [$res];
-          return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data', 'college_id', 'res'));
+          return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data', 'college_id', 'res', 'cpm'));
         }else{
 
           $colleges = $this->estimateColleges($selected_degree, $selected_speciality_name);
@@ -198,7 +199,7 @@ class EstimateController extends Controller
               $estimate_id = str_replace('estimate-', '', $estimate_id);
           }
 
-          return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data'));
+          return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data', 'cpm', 'college_id'));
         }
 
     }

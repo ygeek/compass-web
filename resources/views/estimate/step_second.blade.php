@@ -167,10 +167,11 @@
 
                     @if(isset($cpm) && $cpm)
                     <div class="form-group">
+                        <label >&nbsp;</label>
                     @endif
                     <template v-for="section in selected_examination['sections']">
                         <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
-                        <input  class="estimate-input" style="width: 60px;" type="text" v-model="section.score">
+                        <input  class="estimate-input" style="width: 40px;" type="text" v-model="section.score">
                     </template>
                     @if(isset($cpm) && $cpm)
                     </div>
@@ -180,16 +181,14 @@
             </template>
         </div>
     </div>
-            @if(!(isset($cpm) && $cpm))
-                {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form']) !!}
-            @else
-                {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form', 'target' => '_parent']) !!}
-            @endif
+            {!! Form::open(['route' => 'estimate.store', 'id' => 'estimate-form']) !!}
     <input name="data" type="hidden" id="estimate-form-data"/>
     @if($college_id)
       <input type="hidden" name="college_id" value="{{ $college_id }}">
     @endif
-
+            @if($cpm)
+                <input type="hidden" name="cpm" value="{{ $cpm }}">
+            @endif
     {!! Form::close() !!}
     <script type="text/javascript">
         Vue.component('group-examination', {
