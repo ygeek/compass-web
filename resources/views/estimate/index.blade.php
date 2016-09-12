@@ -12,12 +12,14 @@
             <template id="estimate-result-list">
                 <div id="estimate-detail-pop" class="mask" v-if="showRequirementContrasts">
                     <div class="estimate-detail">
-                        <h1>@{{ showRequirementContrastsContent.college.chinese_name }}的@{{ selected_speciality_name }}专业匹配如下：</h1>
+                        <p class="match-title">匹配结果</p>
+                        <h1>@{{ showRequirementContrastsContent.college.chinese_name }}</h1>
                         @if(!(isset($cpm) && $cpm))
                             <span @click="showRequirementContrasts=false" class="close">×</span>
                         @endif
+                        <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showRequirementContrastsContent.college.score }}%</span>，@{{ selected_speciality_name }}专业匹配如下：</p>
                         <table>
-                            <tr style="background: #f3f3f3;">
+                            <tr>
                                 <th style="padding-left: 30px;">
                                     专业
                                 </th>
@@ -25,7 +27,7 @@
                                     @{{ contrast['name'] }}
                                 </th>
                             </tr>
-                            <tr>
+                            <tr style="background: #fff">
                                 <td style="text-align: left;padding-left: 30px;">
                                     您的成绩
                                 </td>
@@ -35,7 +37,7 @@
                             </tr>
 
                             @if(Auth::check())
-                            <tr style="background: #f3f3f3;">
+                            <tr>
                                 <td style="text-align: left;padding-left: 30px;">
                                     @{{ selected_speciality_name }}专业要求
                                 </td>
@@ -43,17 +45,18 @@
                                     @{{ contrast['require'] }}
                                 </td>
                             </tr>
+                                <tr class="comment">
+                                    <td style="text-align: left;line-height: 26px;padding-left: 30px;background: #fff;" v-bind:colspan="showRequirementContrastsContent.contrasts.length" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
+                                        <div style="height: 115px;overflow: hidden">
+                                            @{{{ changeLine(contrast['require']) }}}
+                                        </div>
+                                    </td>
+                                </tr>
                              @else
                                 <tr style="background: #f3f3f3;">
                                     <td v-bind:colspan="showRequirementContrastsContent.contrasts.length">您好，请&nbsp;<a href="javascript:void(0)" v-on:click="callLogin">登录</a>&nbsp;以查看更多内容</td>
                                 </tr>
                             @endif
-
-                            <tr class="comment">
-                                <td style="text-align: left;line-height: 26px;padding-left: 30px;display: inline-block;height: 110px;overflow: hidden" v-bind:colspan="showRequirementContrastsContent.contrasts.length" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
-                                    @{{{ changeLine(contrast['require']) }}}
-                                </td>
-                            </tr>
 
                         </table>
                         <button class="estimate-button" @click="addIntention">加入意向单</button>
@@ -145,7 +148,7 @@
                                         </div>
 
                                         <div class="view-matching-detail">
-                                            <button data-college='{!! json_encode($college['college']) !!}' data-requirement-contrasts='{!! json_encode($college['requirement_contrast']) !!}' v-on:click="showDetail($event)" class="view-details-button">查看匹配详情-></button>
+                                            <button data-college='{!! json_encode($college['college']) !!}' data-requirement-contrasts='{!! json_encode($college['requirement_contrast']) !!}' data-score="{{$college['score']}}" v-on:click="showDetail($event)" class="view-details-button">查看匹配详情-></button>
                                         </div>
                                     </div>
                                 @endforeach
@@ -205,7 +208,9 @@
                         JSON.parse(contrasts.target.getAttribute('data-requirement-contrasts'));
                     this.showRequirementContrastsContent.college =
                         JSON.parse(contrasts.target.getAttribute('data-college'));
-                    this.showRequirementContrasts = true
+                    this.showRequirementContrasts = true;
+                    this.showRequirementContrastsContent.college.score =
+                            JSON.parse(contrasts.target.getAttribute('data-score'));
                 },
                 addIntention: function(){
                     var college_id = this.showRequirementContrastsContent.college.id;
