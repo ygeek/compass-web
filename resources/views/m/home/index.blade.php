@@ -1,10 +1,7 @@
 @include('m.public.header')
 
 <div class="main02">
-    <div class="grzy_wdxx">
-        <img src="{{ app('auth')->user()->getAvatarPath() }}" width="100" height="100" style="border-radius:100px;">
-        <br>{{ app('auth')->user()->username }}<a href="#"><img src="/static/images/icon13.png" style="margin:0 0 0 5px;"></a>
-    </div>
+   @include('m.home.editUser')
     <div class="grzy_wdxx_meun">
         <span>
             <a   id="grzy_wdxx_meun"  href="{{ route('home.messages') }}">消息</a>
