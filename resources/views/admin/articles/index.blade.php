@@ -24,7 +24,7 @@
                         <td>{{$article->order_weight}}</td>
                         <td class="text-center">
                             <a class="btn btn-primary" href="{{route('admin.articles.edit', ['id' => $article->id, 'college_id' => $college_id])}}">修改文章</a>
-                            <form action="{{ URL::route('admin.articles.destroy', $article->id) }}" method="POST">
+                            <form action="{{ URL::route('admin.articles.destroy', $article->id) }}" method="POST" onsubmit='return ConfirmDelete()'>
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button class="btn btn-danger">删除文章</button>

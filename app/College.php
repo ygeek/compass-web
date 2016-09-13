@@ -4,11 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Setting;
 
 class College extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     protected $casts = [
       'requirement' => 'array'
@@ -244,7 +247,7 @@ class College extends Model
               if(trim($rank['english_name']) == trim($this->english_name)){
                 return $index;
               }
-              
+
             }
           }
         }

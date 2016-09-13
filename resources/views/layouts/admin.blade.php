@@ -97,6 +97,11 @@
   </style>
 </head>
 <body>
+  <script>
+    function ConfirmDelete(){
+      return confirm('确定删除？')
+    }
+  </script>
   @if (Session::has('flash_notification.message'))
     <div class="shanbox alert-{{ Session::get('flash_notification.level') }}">
       {{ Session::get('flash_notification.message') }}

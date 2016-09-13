@@ -32,7 +32,7 @@
                     <th>英文名</th>
                     <th>国家</th>
                     <th>收藏数量</th>
-                    <th class="text-center" style="width: 100px;">操作</th>
+                    <th class="text-center" style="width: 300px;">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,9 +65,11 @@
                           <a href="{{ route('admin.articles.index', [ 'college_id' => $college->id ]) }}" class="btn btn-xs btn-default">
                               查看文章－页面设置
                           </a>
-                          <!--<button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="Remove Client">
-                            <i class="fa fa-times"></i>
-                          </button>-->
+                          <form action="{{ URL::route('admin.colleges.destroy', $college->id) }}" method="POST" onsubmit="return ConfirmDelete()">
+                              <input type="hidden" name="_method" value="DELETE">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              <button class="btn btn-danger btn-xs">删除院校</button>
+                          </form>
                       </div>
                   </td>
               </tr>
