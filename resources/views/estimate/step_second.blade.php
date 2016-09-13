@@ -26,8 +26,13 @@
                                 <?php
                                   $index = 0;
                                   $user = Auth::user();
-                                  $user_recently_college_name = $user->getEstimateInput('recently_college_name');
+                                  if($user){
+                                    $user_recently_college_name = $user->getEstimateInput('recently_college_name');
+                                  }else{
+                                    $user_recently_college_name = false;
+                                  }
                                 ?>
+
                                 @foreach($master_colleges as $college)
                                     <option value="{{ $college }}" @if($index++ == 0 and !$user_recently_college_name) selected @endif>{{$college}}</option>
                                 @endforeach
@@ -44,7 +49,12 @@
                                 <?php
                                   $index = 0;
                                   $user = Auth::user();
-                                  $user_recently_speciality_name = $user->getEstimateInput('recently_speciality_name');
+                                  if($user){
+                                    $user_recently_speciality_name = $user->getEstimateInput('recently_speciality_name');
+                                  }
+                                  else{
+                                    $user_recently_speciality_name = false;
+                                  }
                                 ?>
                                 @foreach($master_speciality as $speciality)
                                     <option value="{{ $speciality }}" @if($index++ == 0 and !$user_recently_speciality_name) selected @endif>{{$speciality}}</option>
@@ -73,7 +83,11 @@
                                     <?php
                                       $index = 0;
                                       $user = Auth::user();
-                                      $user_gaokao_input = $user->getEstimateInput('examinations.高考');
+                                      if($user){
+                                        $user_gaokao_input = $user->getEstimateInput('examinations.高考');
+                                      }else{
+                                        $user_gaokao_input = false;
+                                      }
                                     ?>
 
                                     @foreach($provinces as $province)
