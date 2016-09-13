@@ -66,7 +66,7 @@
                 <div class="estimate-result-list">
 
                     @if(!$college_id)
-                    <div class="identity">
+                    <div class="identity" style="position: relative">
                         <h1>匹配结果</h1>
 
                         <ul>
@@ -77,6 +77,8 @@
                             核心院校({{count($reduce_colleges['core'])}})
                             </li>
                         </ul>
+
+                        <a @click="returnStepFirst" href="{{ URL::route('estimate.step_first') }}" style="display:inline-block;text-align:center;width: 138px;color: #ffffff;border: none;background-color: #0e2d60;height: 40px;position: absolute;right: 10px;top: 12px;">重新生成解决方案</a>
                     </div>
 
                     <div class="college-list">
@@ -242,6 +244,11 @@
                 },
                 callLogin: function () {
                     this.$dispatch('toShowLoginAndRegisterPanel');
+                },
+                returnStepFirst: function (event) {
+                    if (confirm("您之前的留学评估将会被清空，是否继续？")==false){
+                        event.preventDefault();
+                    }
                 }
             }
         });
