@@ -10,7 +10,8 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta content="telephone=no" name="format-detection" />
-        <title>租房网</title>
+        <meta name="_token" content="{{ csrf_token() }}"/>
+        <title>指南针留学</title>
         <link type="text/css" href="/static/css/main.css" rel="stylesheet" />
 
         <script type="text/javascript" src="/static/js/jquery-1.8.0.min.js"></script>
@@ -32,8 +33,13 @@
                 <li><a href="/index.php">首页</a></li>
                 <li><a href="/estimate/step-1">留学评估</a></li>
                 <li><a href="/colleges">院校查询</a></li>
-                <li><a href="javascript:changeView('#login')"  >登录</a></li>
+                @if(Auth::check())
+                <li><a href="{{route('home.index')}}"  >个人中心</a></li>
+                @else
+                 <li><a href="javascript:changeView('#login')"  >登录</a></li>
                 <li><a href="javascript:changeView('#region')">注册</a></li>
+                @endif
+               
                 <!--
                 <li>
                     <a href="Line">自由行</a>
@@ -67,14 +73,14 @@
     <div class="clear"></div>
     <div class="main">
         <div class="login_resgister">
-            <form action="" method="get">
+            <form action="" method="post" >
                 <input type="text" class="login_resgister_input" placeholder="手机号码" name="phone_number">
                 <input type="password" class="login_resgister_input" placeholder="密码" name='password'>
                 <div class="login_mima">
                     <a href="javascript:changeView('#region')">注册</a>
                     <a href="#" style="float:right;">忘记密码？</a>
                 </div>
-                <input type="submit" value="登录" class="login_button">
+                <input type="button"  value="登录" class="login_button toLogin">
             </form>
         </div>
         <div class="clear"></div>
@@ -91,8 +97,8 @@
     <div class="main">
         <div class="login_resgister">
             <form action="" method="get">
-                <input type="text" class="login_resgister_input" placeholder="手机号码" v-model="phone_number" name="phone_number">
-                <input type="password" class="login_resgister_input" placeholder="密码" v-model="password" name="password">
+                <input type="text" class="login_resgister_input" placeholder="手机号码" v-model="phone_number" name="zcphone_number">
+                <input type="password" class="login_resgister_input" placeholder="密码" v-model="password" name="zcpassword">
                 <!--
                 <div class="yanzhenma">
                     <input type="text" class="yzm01" placeholder="验证码" v-model="verify_code" name="verify_code">
@@ -103,11 +109,11 @@
                 <div class="clear"></div>
                 <div class="yanzhenma01">
                     <input type="text" class="yzm01" placeholder="短信验证" v-model="verify_code" name="verify_code">
-                    <em><a href="javascript:getVerify()">获取验证码</a></em>
+                    <em><a href="javascript:void(0)" class="getVerify">获取验证码</a></em>
                 </div>
                 <div class="clear"></div>
                 <div class="resgister_xy"><a href="#">注册即同意《指南针用户协议》</a></div>
-                <input type="submit" value="注册" class="login_button">
+                <input type="button" value="注册" class="login_button toRegion">
             </form>
         </div>
         <div class="clear"></div>

@@ -97,6 +97,78 @@ $(function() {
         }
         $('.paiming').attr('paiminghtm',$(this).html());
     });
+    //登录与注册
+    $(".toLogin").click(function(){
+        var phone_number = $("input[name='phone_number']").val();
+        var password = $("input[name='password']").val();
+        if(!checkSubmitMobil(phone_number)) return false;
+        if(password=='')
+        {
+            alert('请输入密码!');return false;
+        }
+        $.ajax({
+            type:'POST',
+            url:'/auth/login',
+            data:'phone_number='+phone_number+'&password='+password,
+            async:false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            dataType:'json',
+            success:function(e){
+                if(e.status == 'ok'){
+                    location.href = '/home';
+                }
+                else
+                {
+                    alert('登录失败!');
+                }
+            }
+        });
+    });
+    //注册
+    $(".toRegion").click(function(){
+        var phone_number = $("input[name='zcphone_number']").val();
+        var password = $("input[name='zcpassword']").val();
+        if(!checkSubmitMobil(phone_number)) return false;
+        if(password=='')
+        {
+            alert('请输入密码!');return false;
+        }
+        $.ajax({
+            type:'POST',
+            url:'/auth/register',
+            data:'phone_number='+phone_number+'&password='+password,
+            async:false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            dataType:'json',
+            success:function(e){
+                if(e.status == 'ok'){
+                    location.href = '/home';
+                }
+                else
+                {
+                    alert('登录失败!');
+                }
+            }
+        });
+    });
+    //获取验证码
+    $(".getVerify").click(function(){
+        
+        $.ajax({
+            type:'POST',
+            url:'/auth/verify-codes',
+            data:'',
+            async:false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            dataType:'json',
+            success:function(e){
+                if(e.status == 'ok'){
+                    $("input[name='verify_code']").val(e.data.code);
+                }
+                
+            }
+        });
+    });
 });
 
 //确认选择返回
@@ -160,3 +232,32 @@ function gobackCel()
     $("#header").show();
     $('.yxpaiming').hide();
 }
+
+
+
+
+function checkSubmitEmail(str) {
+    if (str == "") {
+        alert("邮箱不能为空!") 
+        return false;
+    }
+    if (!str.match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
+        alert("邮箱格式不正确");
+        return false;
+    }
+    return true;
+}
+
+//jquery验证手机号码 
+function checkSubmitMobil(str) {
+    if (str == "") {
+        alert("手机号码不能为空！");
+        return false;
+    }
+
+    if (!str.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/)) {
+        alert("手机号码格式不正确！");
+        return false;
+    }
+    return true;
+} 

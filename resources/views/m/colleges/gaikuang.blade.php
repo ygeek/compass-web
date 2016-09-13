@@ -3,26 +3,16 @@
     <a href="javascript:showPm()"><img src="/static/images/yuanxi_paim.jpg"></a>
     <div class="clear"></div>
 </div>
+
+@foreach($articles as $article)
 <div class="yuanxiao_jj">
-    <div class="yuanxiao_jj_name">简介</div>
+    <div class="yuanxiao_jj_name">{{ $article->title }}</div>
     <div class="yuanxiao_jj_m">
-        {{ $articles }}
+      {{ $article->content }}
     </div>
 </div>
-<div class="yuanxiao_jj">
-    <div class="yuanxiao_jj_name">校园生活</div>
-    <div class="yuanxiao_jj_m">
-        测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
-        <img src="/static/images/img01.jpg">
-    </div>
-</div>
-<div class="yuanxiao_jj">
-    <div class="yuanxiao_jj_name">地理位置</div>
-    <div class="yuanxiao_jj_m">
-        测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
-        <img src="/static/images/img01.jpg">
-    </div>
-</div>
+@endforeach
+
 <div class="main05">
     <div class="topPic">
         <div class="imgSlideMain">
