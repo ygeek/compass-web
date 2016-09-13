@@ -261,3 +261,42 @@ function checkSubmitMobil(str) {
     }
     return true;
 } 
+
+
+//第一步选择专业
+function changeZy()
+{
+    var country_id = $("select[name='selected_country_id']").val();
+    var degree_id = $("select[name='selected_degree_id']").val();
+    var category_id = $("select[name='speciality_category_id']").val();
+    var num = parseInt(category_id) - 1 ;
+    $("select[name='speciality_name']").html('');
+    $.ajax({
+        type:'GET',
+        url:'/estimate/get_speciality',
+        data:'country_id='+country_id+'&degree_id='+degree_id+'&category_id='+category_id,
+        async:false,
+        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+        dataType:'json',
+        success:function(e){
+            var htm = '';
+            console.log(e);
+            for(var i=0;i<e[num].specialities.length;i++){
+               
+                htm += '<option value="'+e[num].specialities[i]['name']+'" >'+e[num].specialities[i]['name']+'</option>';
+            } 
+           
+            console.log(htm);
+            $("select[name='speciality_name']").html(htm);
+        }
+    }); 
+}
+
+function choseInput(v,n)
+{
+    var sval = v.val();
+  
+    $('.st'+n).hide();
+    $('.yt'+n+sval).show();
+    console.log(n+sval);
+}

@@ -1120,9 +1120,11 @@ select::-ms-expand { display: none; }
   -moz-appearance:none;
   -webkit-appearance:none; }
    .login_resgister_input01{ float:right;width:55%; height:60px; line-height:60px; display:block;   text-indent:30px; background:#fff; border:0; color:#666; border-left:1px solid #666; margin:5px 0 0 0;}
-     .select_radio{width:90%; margin:0 auto; overflow:hidden;}
+     .select_radio{width:90%; margin: 0 auto 20px auto; overflow:hidden;}
 		.select_radio a{width:21.2%; padding:3% 0; display:block; float:left; text-align:center; background:#fff; margin:0 5% 0 0;}
-		.select_button01{height:70px;  width:90%; line-height:70px;display:block; margin:3% auto 0 auto; background:#a0a0a0; color:#fff; cursor:pointer; border:0;}
+		.select_radio input{width:21.2%;  text-indent: 0px; display:block; float:left; text-align:center; background:#fff; margin:0 5% 0 0;}
+		
+                .select_button01{height:70px;  width:90%; line-height:70px;display:block; margin:3% auto 0 auto; background:#a0a0a0; color:#fff; cursor:pointer; border:0;}
 		
 		.pingguo_meun{height:90px; line-height:90px; background:#fff; margin:90px 0 0 0; font-size:1.6em; text-align:center;}
 		   .pingguo_meun h1{float:left; width:30%; background:url(../images/icon08.png) no-repeat 95%; background-size:8px; margin:0 0 0 4%;}

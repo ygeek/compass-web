@@ -4,7 +4,7 @@
     @include('m.home.editUser')
     <div class="grzy_wdxx_meun">
         <span>
-            <a href="{{ route('home.messages') }}">消息</a>
+            <a href="{{ route('home.index') }}">消息</a>
             <a id="grzy_wdxx_meun" href="{{ route('home.like_colleges') }}" >收藏</a>
             <a href="{{ route('home.intentions') }}" >意向单</a>
         </span>

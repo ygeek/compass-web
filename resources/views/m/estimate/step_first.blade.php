@@ -3,34 +3,31 @@
 <div class="main">
     <div class="login_resgister">
         <form action="{{route('estimate.step_second')}}" method="get">
-            <select name="selected_country_id" class="select01" >
+            <select name="selected_country_id" class="select01"  onchange="changeZy();">
                 @foreach($countries as $country)
                     <option value="{{$country->id}}" @if($country->id == $selected_country_id) selected @endif>{{$country->name}}</option>
                 @endforeach
                
             </select>
-            <select name="selected_degree_id" class="select01">
+            <select name="selected_degree_id" class="select01"   onchange="changeZy();">
                 @foreach($degrees as $degree)
                     <option value="{{$degree->id}}" @if($degree->id == $selected_degree_id) selected @endif>{{$degree->name}}</option>
                 @endforeach
             </select>
-            <select name="selected_year" class="select01" id="years">
+            <select name="selected_year" class="select01" id="years" >
                 @foreach($years as $year)
                     <option value="{{$year}}" @if($year == $selected_year) selected @endif>{{$year}}</option>
                 @endforeach
             </select>
-            <select name="speciality_category_id" class="select01" id="speciality_categories" v-model="selected_category_id">
+            <select name="speciality_category_id" class="select01" id="speciality_categories"   onchange="changeZy();" v-model="selected_category_id">
                 @foreach($speciality_categories as $speciality_category)
                     <option value="{{ $speciality_category->id }}" @if($speciality_category->id == $selected_category_id) selected @endif >{{ $speciality_category->chinese_name }}</option>
                 @endforeach
                 
             </select>
+            
             <select name="speciality_name" class="select01" v-model="selected_speciality_name">
-                @foreach($speciality_categories as $speciality_category)
-                    
-                    <option value="{{ $speciality_category->name }}" >{{ $speciality_category->name }}</option>
-                    
-                @endforeach
+              
                 
                
             </select>
@@ -47,3 +44,6 @@
     <div class="clear"></div>
 </div>
 
+<script>
+    changeZy();
+</script>
