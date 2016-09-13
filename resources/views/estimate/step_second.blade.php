@@ -243,6 +243,14 @@
             @endif
     {!! Form::close() !!}
     <script type="text/javascript">
+
+    function merge_options(obj1,obj2){
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
+    }
+
         Vue.component('group-examination', {
             template: "#group-examination",
             props: ['group'],
@@ -331,10 +339,9 @@
 
                 @endif
 
-                console.log(data);
                 return {
                     groups: {!! json_encode($groups) !!},
-                    data: Object.assign({
+                    data: merge_options({
                         selected_degree: {{ $selected_degree->id }},
                         selected_country: {{ $selected_country->id }},
                         selected_speciality_name: '{{$selected_speciality_name}}'

@@ -79,10 +79,12 @@ class EstimateController extends Controller
         $selected_speciality_name = $request->input('speciality_name');
         $selected_year = $request->input('selected_year', null);
         $estimate_checked = false;
+
         $user = Auth::user();
         if ($user!=null && $user->estimate!=null){
             $estimate_checked = true;
         }
+
         return $this->view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id', 'cpm', 'college_id'));
     }
 
