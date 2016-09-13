@@ -254,7 +254,7 @@ class HomeController extends Controller
             $intentions['degree'] = \App\Degree::find($intentions['degree_id']);
 
             $intentions['intentions'] = collect($intentions['intentions'])->map(function ($intention) use ($intentions) {
-                $college = College::with(['specialities' => function ($q) use ($intentions) {
+                $college = College::withTrashed()->with(['specialities' => function ($q) use ($intentions) {
                     $q->where('specialities.degree_id', $intentions['degree']->id);
                 }])->where('id', $intention['college_id'])->get()->first();
                 $intention['college'] = $college->toArray();
