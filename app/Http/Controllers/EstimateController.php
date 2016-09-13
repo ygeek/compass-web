@@ -38,6 +38,16 @@ class EstimateController extends Controller
         ];
 
         $speciality_categories = SpecialityCategory::get();
+
+        try {
+          if($college_id){
+            $college = College::find($college_id);
+            $college->examinationScoreMap->map;
+          }
+        } catch (\Exception $e) {
+          return "当前院校无法进行评估，请选择其他院校";
+        }
+
         return $this->view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name', 'cpm', 'college_id'));
     }
 
