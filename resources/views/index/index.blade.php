@@ -221,6 +221,10 @@
     </div>
 
     <div class="middle">
+      <div class="mark" style="top: 418px;left: 528px;">
+        <label>悉尼分公司</label>
+        <img src="/images/mark-arrow.png">
+      </div>
       <div class='app-content'>
         <div class='consult'>
           <img src="/images/msg_ic.png" alt="msg_ic" />

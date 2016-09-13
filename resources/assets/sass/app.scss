@@ -179,6 +179,27 @@ ul{
   .middle {
     height: 2560px;
     background: url('/images/bg.jpg') no-repeat scroll top;
+    position: relative;
+
+    .mark {
+      position: absolute;
+      label {
+        display: inline-block;
+        -moz-box-shadow: 0 0 5px #888888;
+        box-shadow: 0 0 5px #888888;
+        width: 110px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 14px;
+        background-color: #fff;
+      }
+      img {
+        position: absolute;
+        left: calc(50% - 7px);
+        bottom: -9px;
+      }
+    }
 
     .consult {
       margin: 0 auto;
