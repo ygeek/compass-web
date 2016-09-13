@@ -53,14 +53,30 @@ class EstimateController extends Controller
 
     public function getSpeciality(Request $request){
         $college_id = $request->input('college_id', false);
-        $speciality_categories = SpecialityCategory::with(['specialities' => function($query) use ($college_id){
+        $degree_id = $request->input('degree_id', false);
+        $category_id = $request->input('category_id', false);
+        $country_id = $request->input('country_id', false);
+
+        $speciality_categories_query = SpecialityCategory::with(['specialities' => function($query) use ($college_id, $degree_id, $category_id, $country_id){
           if($college_id){
-            return $query->where('specialities.college_id', $college_id);
-          }else{
-            return $query;
+            $query = $query->where('specialities.college_id', $college_id);
           }
-        }])->get();
-        return $speciality_categories;
+
+          if($degree_id){
+            $query = $query->where('specialities.degree_id', $degree_id);
+          }
+
+          if($category_id){
+            $query = $query->where('specialities.category_id', $category_id);
+          }
+
+          if($country_id){
+            $query = $query->where('specialities.country_id', $country_id);
+          }
+
+          return $query;
+        }]);
+        return $speciality_categories_query->get();
     }
 
     public function stepSecond(Request $request){
