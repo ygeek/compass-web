@@ -92,7 +92,7 @@
 
                                                 <div class="ielts-and-toelf-requirement">
                                                     <span class="toelf-requirement">托福: {{ $college['toefl_requirement'] }}</span>
-                                                    <span class="ielts-requirement" style="margin-left: 20px">雅思: {{ $college['ielts_requirement'] }}</span>
+                                                    <span class="ielts-requirement" style="margin-left: 35px">雅思: {{ $college['ielts_requirement'] }}</span>
                                                     <like-college
                                                             college_id="{{ $college['college']['id'] }}"
                                                             liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college['college']['id'])){echo 1;} else {echo 0;}}else{echo 0;} ?>"
