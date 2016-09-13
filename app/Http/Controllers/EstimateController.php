@@ -100,9 +100,13 @@ class EstimateController extends Controller
         else{
             $data = $request->input('data');
         }
+
+
         if(is_string($data)){
             $data = json_decode($data, true);
         }
+
+        dd($data);
         $selected_country = AdministrativeArea::find($data['selected_country']);
         $selected_degree = Degree::find($data['selected_degree']);
         $selected_speciality_name = $data['selected_speciality_name'];
@@ -202,12 +206,24 @@ class EstimateController extends Controller
                   $estimate_id = Uuid::generate(4);
                   Setting::set('estimate-'.$estimate_id, $data);
                   $user->estimate = 'estimate-'.$estimate_id;
+
+                  foreach ($data as $key => $value) {
+                    if($key == 'examinations'){
+                      foreach ($data['examinations'] as $examination_name => $examination_content) {
+                        $user->setEstimateInput('examinations.' . $examination_name, $examination_content);
+                      }
+                    }else{
+                      $user->setEstimateInput($key, $value);
+                    }
+                  }
+
                   $user->save();
               }
           }
           else{
               $estimate_id = str_replace('estimate-', '', $estimate_id);
           }
+
 
           return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data', 'cpm', 'college_id'));
         }

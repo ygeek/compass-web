@@ -29,7 +29,8 @@ class User extends Model implements AuthenticatableContract
     ];
 
     protected $casts = [
-        'intentions' => 'array'
+        'intentions' => 'array',
+        'estimate_input' => 'array'
     ];
     public function likedCollegeIds(){
         $key = User::likeKey($this->id);
@@ -59,6 +60,31 @@ class User extends Model implements AuthenticatableContract
     }
 
     public function defaultAvatarPath(){
-        return '/images/default-avatar.jpg'; 
+        return '/images/default-avatar.jpg';
+    }
+
+    public function getEstimateInput($key, $default=null){
+      try {
+        $value = $this->estimate_input[$key];
+      } catch (\ErrorException $e) {
+        return $default;
+      }
+
+
+      if($value){
+        return $value;
+      }else{
+        return $default;
+      }
+    }
+
+    public function setEstimateInput($key, $value){
+      if(!$this->estimate_input){
+        $this->estimate_input = [];
+      }
+
+      $estimate = $this->estimate_input;
+      $estimate[$key] = $value;
+      $this->estimate_input = $estimate;
     }
 }

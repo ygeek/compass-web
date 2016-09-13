@@ -23,9 +23,13 @@
                             <label for="recently_college_name">最近就读院校<span style="color: red">*</span></label>
                             <select id="recently_college_name" v-model="data.recently_college_name" class="estimate-input">
                                 <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
-                                <?php $index = 0; ?>
+                                <?php
+                                  $index = 0;
+                                  $user = Auth::user();
+                                  $user_recently_college_name = $user->getEstimateInput('recently_college_name');
+                                ?>
                                 @foreach($master_colleges as $college)
-                                    <option value="{{ $college }}" @if($index++ == 0 ) selected @endif>{{$college}}</option>
+                                    <option value="{{ $college }}" @if($index++ == 0 and !$user_recently_college_name) selected @endif>{{$college}}</option>
                                 @endforeach
                             </select>
 
@@ -37,9 +41,13 @@
                             <label for="recently_speciality_name">最近就读专业</label>
                             <select id="recently_speciality_name" v-model="data.recently_speciality_name" class="estimate-input">
                                 <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
-                                <?php $index = 0; ?>
+                                <?php
+                                  $index = 0;
+                                  $user = Auth::user();
+                                  $user_recently_speciality_name = $user->getEstimateInput('recently_speciality_name');
+                                ?>
                                 @foreach($master_speciality as $speciality)
-                                    <option value="{{ $speciality }}" @if($index++ == 0 ) selected @endif>{{$speciality}}</option>
+                                    <option value="{{ $speciality }}" @if($index++ == 0 and !$user_recently_speciality_name) selected @endif>{{$speciality}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -62,9 +70,14 @@
                                         return iconv('UTF-8', 'GBK//IGNORE', $product);
                                     });
                                     ?>
-                                    <?php $index = 0; ?>
+                                    <?php
+                                      $index = 0;
+                                      $user = Auth::user();
+                                      $user_gaokao_input = $user->getEstimateInput('examinations.高考');
+                                    ?>
+
                                     @foreach($provinces as $province)
-                                        <option value="{{ $province }}" @if($index++ == 0 ) selected @endif>{{$province}}</option>
+                                        <option value="{{ $province }}" @if($index++ == 0 and !$user_gaokao_input) selected @endif>{{$province}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -89,6 +102,8 @@
                             ['雅思', '托福IBT']
                     ];
 
+                    $user = Auth::user();
+
                     if($selected_country->name == '美国'){
                         if($selected_degree->name == '硕士'){
                             $groups[] = ['GRE', 'GMAT'];
@@ -97,20 +112,42 @@
                         }
                     }
 
-                    $groups = collect($groups)->map(function($items) use ($selected_degree){
-                        $examinations = collect($items)->map(function($item) use ($selected_degree){
+                    $groups = collect($groups)->map(function($items) use ($selected_degree, $user){
+                        $examinations = collect($items)->map(function($item) use ($selected_degree, $user){
                             $examination = \App\Examination::where('name', $item)->select(['id', 'name', 'sections', 'multiple_degree'])->first();
                             $res = $examination->toArray();
                             if($examination->multiple_degree){
                                 $res['degree'] = $selected_degree->id;
                             }
 
-                            $res['sections'] = collect($res['sections'])->map(function($item){
+                            $res['sections'] = collect($res['sections'])->map(function($item) use ($user, $examination){
+
+                                $score = '';
+                                if($user){
+                                  $key = 'examinations.' . $examination->name;
+                                  if($user->getEstimateInput($key)){
+                                    $ex = $user->getEstimateInput($key);
+                                    foreach ($ex['sections'] as $section) {
+                                      if($section['name'] == $item){
+                                        $score = $section['score'];
+                                      }
+                                    }
+                                  }
+                                }
+
                                 return [
                                         'name' => $item,
-                                        'score' => ''
+                                        'score' => $score
                                 ];
                             });
+
+                            if($user){
+                              $key = 'examinations.' . $examination->name;
+                              if($user->getEstimateInput($key)){
+                                $res['score'] = $user->getEstimateInput($key)['score'];
+                              }
+                            }
+
                             return $res;
                         });
 
@@ -123,6 +160,7 @@
                                 'selects' => $selects
                         ];
                     });
+
                     ?>
 
                     <div class="form-group" style="margin-top: -12px;" v-for="group in groups">
@@ -234,24 +272,59 @@
         Vue.component('step-second-form', {
             template: '#step-second-form',
             data: function(){
+                var data = {
+                  examinations: {
+                      高中平均成绩: {
+                          score: ''
+                      },
+                      大学平均成绩: {
+                          score: ''
+                      },
+                      高考: {
+                          score: ''
+                      }
+                  }
+                };
+
+                <?php $user = Auth::user() ?>
+                @if($user)
+                  @if($user->getEstimateInput('name'))
+                    data['name'] = "{{$user->getEstimateInput('name')}}";
+                  @endif
+
+                  @if($user->getEstimateInput('examinations.高考'))
+                    data['examinations']['高考'] = {!! json_encode($user->getEstimateInput('examinations.高考')) !!};
+                  @endif
+
+                  @if($user->getEstimateInput('examinations.高中平均成绩'))
+                    data['examinations']['高中平均成绩'] =  {!! json_encode($user->getEstimateInput('examinations.高中平均成绩')) !!};
+                  @endif
+
+                  @if($user->getEstimateInput('examinations.大学平均成绩'))
+                    data['examinations']['大学平均成绩'] =  {!! json_encode($user->getEstimateInput('examinations.大学平均成绩')) !!};
+                  @endif
+
+                  @if($user->getEstimateInput('related_length_of_working'))
+                    data['related_length_of_working'] =  {!! json_encode($user->getEstimateInput('related_length_of_working')) !!};
+                  @endif
+
+                  @if($user->getEstimateInput('recently_college_name'))
+                    data['recently_college_name'] =  {!! json_encode($user->getEstimateInput('recently_college_name')) !!};
+                  @endif
+                  @if($user->getEstimateInput('recently_speciality_name'))
+                    data['recently_speciality_name'] =  {!! json_encode($user->getEstimateInput('recently_speciality_name')) !!};
+                  @endif
+
+                @endif
+
+                console.log(data);
                 return {
                     groups: {!! json_encode($groups) !!},
-                    data: {
+                    data: Object.assign({
                         selected_degree: {{ $selected_degree->id }},
                         selected_country: {{ $selected_country->id }},
-                        selected_speciality_name: '{{$selected_speciality_name}}',
-                        examinations: {
-                            高中平均成绩: {
-                                score: ''
-                            },
-                            大学平均成绩: {
-                                score: ''
-                            },
-                            高考: {
-                                score: ''
-                            }
-                        }
-                    }
+                        selected_speciality_name: '{{$selected_speciality_name}}'
+                    }, data)
                 }
             },
             watch: {
