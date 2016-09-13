@@ -348,6 +348,14 @@
                     }, data)
                 }
             },
+            created: function(){
+                @if($college_id)
+                    parent.window.document.getElementById("estimate_iframe").width='500px';
+                parent.window.document.getElementById("estimate_iframe").height='500px';
+                parent.window.document.getElementById("position_div").style.top='calc(50% - 250px)';
+                parent.window.document.getElementById("position_div").style.right='calc(50% - 250px)';
+                @endif
+            },
             watch: {
                 'data.examinations.高考.score_without_tag': function(newVal, oldVal){
                     if(!this.data.examinations.高考.tag){
