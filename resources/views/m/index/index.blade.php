@@ -1,64 +1,161 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <title>front-end</title>
-    <link rel=stylesheet href=/static/font/iconfont.css>
-    <link rel=stylesheet href=/static/index.css>
-    <script src=//cdn.bootcss.com/jquery/2.2.4/jquery.min.js></script>
-    <link href=/static/css/app.css rel=stylesheet>
-    <script>
-        var data={
-            countries:{!! json_encode($countries->toArray()) !!},
-            majors:[
-                {name:'法学',link:'{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}'},
-                {name:'医学',link:'{{ route('colleges.index', ['selected_speciality_cateogry_id' => 6]) }}'},
-                {name:'工科',link:'{{ route('colleges.index', ['selected_speciality_cateogry_id' => 3]) }}'},
-                {name:'人文艺术',link:'{{ route('colleges.index', ['selected_speciality_cateogry_id' => 4]) }}'},
-                {name:'商科',link:'{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}'},
-                {name:'经济金融',link:'{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}'}
-            ],
-        <?php
-        $articles = App\Article::whereHas('category', function($q){
-            return $q->where('key', 'yu-yan-xue-xi');
-        })->orderBy('articles.order_weight')->limit(7)->get();
-        foreach($articles as $a){
-            $a->l=html_entity_decode($a->link());
-        }
-        ?>
-            yuyanxuexi:{!! json_encode($articles->toArray()) !!},
-        <?php
-        $articles = App\Article::whereHas('category', function($q){
-            return $q->where('key', 'liu-xue-gong-lue');
-        })->whereNull('college_id')->orderBy('articles.order_weight')->limit(7)->get();
-        foreach($articles as $a){
-            $a->l=$a->link();
-        }
-        ?>
-            liuxuegonglue:{!! json_encode($articles->toArray()) !!},
-        <?php
-        $articles = App\Article::whereHas('category', function($q){
-            return $q->where('key', 'yi-min-gong-lue');
-        })->orderBy('articles.order_weight')->limit(7)->get();
-        foreach($articles as $a){
-            $a->l=$a->link();
-        }
-        ?>
-            yimingonglue:{!! json_encode($articles->toArray()) !!},
 
-        <?php
-        $more = App\Setting::get('index_more', ['#','#','#']);
-        ?>
-            more:{!! json_encode($more) !!}
-        }
-    </script>
-</head>
-<body>
-<app page=Home ></app>
-<script type=text/javascript src=/static/js/manifest.js></script>
-<script type=text/javascript src=/static/js/vendor.js></script>
-<script type=text/javascript src=/static/js/app.js></script>
-</body>
-</html>
+@include('m.public.header')
+
+<div class="clear"></div>
+<div class="h_banner">
+    <h1><a href="/estimate/step-1">我要评估</a></h1>
+    <img src="/static/images/banner.jpg">
+    <div class="clear"></div>
+
+</div>
+<div class="h_main">
+    <div class="gxm_name01">
+        <h1>留学流程</h1>
+    </div>
+    <div class="h_icon01">
+        <span>
+            <a href="#">
+                <img src="/static/images/icon01.png"><br><font>1.在线留学评估</font>
+            </a>
+        </span>
+        <span>
+            <a href="#">
+                <img src="/static/images/icon02.png"><br><font>2.专家电话复核</font>
+            </a>
+        </span>
+        <span>
+            <a href="#">
+                <img src="/static/images/icon03.png"><br><font>3.办公室签约</font>
+            </a>
+        </span>
+        <span>
+            <a href="#">
+                <img src="/static/images/icon04.png"><br><font>4.顾问线下为您<br />
+                院校申请</font>
+            </a>
+        </span>
+        <span>
+            <a href="#">
+                <img src="/static/images/icon05.png"><br><font>5.顾问线下为您<br />
+                办理签证</font>
+            </a>
+        </span>
+        <span>
+            <a href="#">
+                <img src="/static/images/icon06.png"><br><font>6.海外公司提供<br />
+                后续服务</font>
+            </a>
+        </span>
+    </div>
+    <div class="clear"></div>
+    <div class="h_message">
+        <h1>
+            <img src="/static/images/icon07.png">
+            <a href="#">我要咨询</a>
+        </h1>
+    </div>
+    <div class="clear"></div>
+
+    <div class="tabbox" id="statetab">
+        <ul class="tabbtn">
+
+            @foreach($countries as $key=>$country)
+            <li @if ($key==0) class="current" @endif ><a>{{ $country->name }}</a></li>
+
+            @endforeach
+        </ul><!--tabbtn end-->
+
+        <div class="clear"></div>
+        @foreach($countries as $country)
+        <?php $index = 0; ?>
+        <div class="tabcon">
+            @foreach($country->children as $state)
+            <?php if ($index == 7) { ?>
+                <a target="_blank" href="{{ route('colleges.index', ['selected_country_id' => $country->id]) }}">更多</a>
+                <?php break;
+            } ?>
+            <a target="_blank" href="{{ route('colleges.index', ['selected_country_id' => $country->id, 'selected_state_id' => $state->id]) }}">{{ $state->name }}</a>
+<?php $index++; ?>
+            @endforeach
+            <div class="clear"></div>
+        </div><!--tabcon end-->
+        @endforeach
+    </div>
+    <div class="clear"></div>
+    <div class="yx_chaxun">
+        <form method="GET" action="{{ route('colleges.index') }}">
+            <input type="text" class="chax_input" name="college_name" placeholder="院校查询" >
+            <input type="submit" class="chax_so" value="">
+        </form>
+    </div>
+    <div class="h_kemu">
+        <ul>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}"><img src="/static/images/img.jpg"><h1>法学</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 3]) }}"><img src="/static/images/img.jpg"><h1>医学</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 4]) }}"><img src="/static/images/img.jpg"><h1>工科</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}"><img src="/static/images/img.jpg"><h1>人文艺术</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 6]) }}"><img src="/static/images/img.jpg"><h1>商科</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}"><img src="/static/images/img.jpg"><h1>经济金融</h1></a></li>
+        </ul>
+        <div class="clear"></div>
+        <div class="kemu_more"><a href="#">更多专业</a></div>
+    </div>
+    <?php
+    $more = App\Setting::get('index_more', ['#', '#', '#']);
+    ?>
+    <div class="clear"></div>
+    <div class="yuyanxx">
+        <div class="yuyanxx_m">
+            <h1>语言学习</h1><em><a href="{{ $more[0] }}">更多></a></em>
+            <div class="clear"></div>
+            <?php
+            $articles = App\Article::whereHas('category', function($q) {
+                    return $q->where('key', 'yu-yan-xue-xi');
+                })->orderBy('articles.order_weight')->limit(7)->get();
+            ?>
+            @foreach($articles as $article)
+            <p><a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a></p>
+            @endforeach
+
+            <p><a href="{{ $more[0] }}">更多>></a></p>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="h_ad"><img src="/static/images/img01.jpg"></div>
+    <div class="yuyanxx">
+        <div class="yuyanxx_m">
+            <h1>留学攻略</h1><em><a href="{{ $more[1] }}">更多></a></em>
+            <div class="clear"></div>
+            <?php
+            $articles = App\Article::whereHas('category', function($q) {
+                    return $q->where('key', 'liu-xue-gong-lue');
+                })->whereNull('college_id')->orderBy('articles.order_weight')->limit(7)->get();
+            ?>
+            @foreach($articles as $article)
+            <p><a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a></p>
+            @endforeach
+            <p><a href="{{ $more[1] }}">更多>></a></p>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="h_ad"><img src="/static/images/img01.jpg"></div>
+    <div class="yuyanxx">
+        <div class="yuyanxx_m">
+            <h1>移民攻略</h1><em><a href="{{ $more[2] }}">更多></a></em>
+            <div class="clear"></div>
+            <?php
+            $articles = App\Article::whereHas('category', function($q) {
+                    return $q->where('key', 'yi-min-gong-lue');
+                })->orderBy('articles.order_weight')->limit(7)->get();
+            ?>
+            @foreach($articles as $article)
+            <p><a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a></p>
+            @endforeach
+            <p><a href="{{ $more[2] }}">更多>></a></p>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+</div>
+@include('m.public.footer')
+

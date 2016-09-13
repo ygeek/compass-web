@@ -112,7 +112,11 @@ class CollegesController extends Controller
         $colleges = [];
         if(strpos($selected_order, "_order")!== false){
             $tmp_tag = str_replace("_order", "", $selected_order);
-            $colleges = $colleges_query->orderBy($tmp_tag, 'desc')->paginate(10);
+
+            if($tmp_tag == 'international_ratio')
+                $colleges = $colleges_query->orderBy($tmp_tag)->paginate(10);
+            else
+                $colleges = $colleges_query->orderBy($tmp_tag, 'desc')->paginate(10);
         }
         else {
             $colleges_english_name = collect($colleges_query->select('english_name')->get()->map(function($item){

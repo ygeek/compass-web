@@ -183,7 +183,7 @@ class HomeController extends Controller
         $college_ids = $this->user->likedCollegeIds();
         $colleges = College::whereIn('id', $college_ids)->get();
 
-        return view('home.like_colleges', compact('colleges'));
+        return $this->view('home.like_colleges', compact('colleges'));
     }
 
     public function messages()
@@ -191,7 +191,7 @@ class HomeController extends Controller
         $message_client = new Mail();
         $messages = $message_client->getUnreadMessage(Auth::user()->id);
 
-        return view('home.messages', compact('messages'));
+        return $this->view('home.messages', compact('messages'));
     }
 
     public function readMessage($message_id)
@@ -282,7 +282,7 @@ class HomeController extends Controller
         }
 
         $speciality_categories = \App\SpecialityCategory::all()->toArray();
-        return view('home.intentions', compact('intentions', 'speciality_categories'));
+        return $this->view('home.intentions', compact('intentions', 'speciality_categories'));
     }
 
     private function validateVerifyCode($phone_number, $code)

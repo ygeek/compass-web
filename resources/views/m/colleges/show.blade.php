@@ -1,43 +1,114 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <title>front-end</title>
-    <link rel=stylesheet href=/static/font/iconfont.css>
-    <link rel=stylesheet href=/static/index.css>
-    <script src=//cdn.bootcss.com/jquery/2.2.4/jquery.min.js></script>
-    <link href=/static/css/app.css rel=stylesheet>
-    <script>
-        var dataS={
-            'college':{!! json_encode($college->toArray()) !!},
-            'article_key':{!! json_encode($article_key) !!},
-            'articles':{!! json_encode($articles->toArray()) !!}
-        }
+@include('m.public.header')
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/scroll.js"></script>
+<script type="text/javascript" src="js/scrollload.js"></script>
 
-        var data={
-            schoolPhoto: dataS.college.background_image_url,
-            schoolBadge:dataS.college.badge_url,
-            cname: dataS.college.chinese_name,
-            ename: dataS.college.english_name,
-            buildTime: 'since ' +
-            dataS.college.founded_in,
-            schoolTele: dataS.college.telephone_number,
-            schoolWebsite: dataS.college.website,
-            schoolKey:dataS.college.key,
-            page:dataS.article_key
-        }
 
-    </script>
-</head>
-<body>
-<?php
-$map=["xue-xiao-gai-kuang"=>"SchoolHome","lu-qu-qing-kuang"=>"SchoolNews","liu-xue-gong-lue"=>"SchoolNews","tu-pian"=>"Picture","specialities"=>"Major"]
-?>
-<app page=<?php echo $map[$article_key]?>></app>
-<script type=text/javascript src=/static/js/manifest.js></script>
-<script type=text/javascript src=/static/js/vendor.js></script>
-<script type=text/javascript src=/static/js/app.js></script>
-</body>
-</html>
+<div class="xyxiangqing">
+
+    <div class="clear"></div>
+    <div class="n_banner">
+        <h1><a href="#"></a></h1>
+        <img src="{{app('qiniu_uploader')->pathOfKey($college->background_image_path)}}">
+        <div class="clear"></div>
+
+    </div>
+    <div class="pinggu_xx01" >
+        <div class="pinggu_xx_name01">
+            <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}">
+            <h1>{{$college->chinese_name}}<br>{{$college->english_name}}</h1>
+            <div class="clear"></div>
+        </div>
+        <div class="yuanxiao_xx">
+            <p><img src="/static/images/icon21.jpg"><span>{{$college->administrativeArea->name}} · since {{$college->founded_in}}</span></p>
+            <p><img src="/static/images/icon22.jpg"><span>{{$college->telephone_number}}</span></p>
+            <p><img src="/static/images/icon23.jpg"><span>{{$college->website}}</span></p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--院校概况-->
+
+    @if($article_key == 'xue-xiao-gai-kuang')
+    @include('m.colleges.gaikuang')
+    @endif
+    
+    <!--录取情况-->
+    @if($article_key == 'lu-qu-qing-kuang')
+    @include('m.colleges.luqu')
+    @endif
+    
+    <!--zhuanye-->
+    @if($article_key == 'specialities')
+    @include('m.colleges.zhuanye')
+    @endif
+    
+    @if($article_key == 'tu-pian')
+    @include('m.colleges.tupian')
+    @endif
+    
+    @if($article_key == 'liu-xue-gong-lue')
+    @include('m.colleges.gonglue')
+    @endif
+    <div class="footer_top"></div>
+    <div class="footer01">
+        <ul>
+            <li class="home01"><a href="{{ route('colleges.show', ['key' => $college->key]) }}#college-page-nav" @if($article_key == 'xue-xiao-gai-kuang') id="current" @endif  >学校概况</a></li>
+            <li class="home02"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}#college-page-nav" @if($article_key == 'lu-qu-qing-kuang') id="current" @endif >录取情况</a></li>
+            <li class="home03"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'specialities']) }}#college-page-nav" @if($article_key == 'specialities')id="current"@endif >专业</a></li>
+            <li class="home04"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'tu-pian']) }}#college-page-nav" @if($article_key == 'tu-pian')id="current"@endif >图片</a></li>
+            <li class="home05"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue', 'desc' => '1']) }}#college-page-nav" @if($article_key == 'liu-xue-gong-lue')id="current"@endif>留学攻略</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="yxpaiming" style="display: none" >
+    <div class="header">
+        <a href="javascript:gobackCel();"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
+        <div class="header_c">本校排名</div>
+    </div>
+    <div class="clear"></div>
+    <div class="main02">
+        <div class="yuanxiao_pm02">
+            <ul>
+                <li>
+                    <h1 class="color01">{{$college->qs_ranking}}</h1>
+                    <span>QS排名</span>
+                </li>
+                <li>
+                    <h1 class="color02">{{$college->us_new_ranking}}</h1>
+                    <span>US New排名</span>
+                </li>
+                <li>
+                    <h1 class="color03">{{$college->times_ranking}}</h1>
+                    <span>Times排名</span>
+                </li>
+                <li>
+                    <h1 class="color04">{{$college->domestic_ranking}}</h1>
+                    <span>国内排名</span>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div class="yuanxiao_pm_name"><h1>院校排名</h1></div>
+        <div class="clear"></div>
+        <?php
+            $rankings = App\Setting::get('rankings');
+            function echoRank($rankings){
+                foreach ($rankings as $ranking){
+                    if (isset($ranking['checked'])){
+                        echo "<div class=\"yxpaiming01\"><a href='".route('colleges.rank', ['category_id' => $ranking['_id']])."' class='level-2'  target='_blank'>".$ranking['name']."</a></div>";
+                    }
+                    if (count($ranking['children'])>0){
+                        echoRank($ranking['children']);
+                    }
+                }
+            }
+            ?>
+         <?php echoRank($rankings['categories']); ?>
+        
+       
+        <div class="clear"></div>
+    </div>
+</div>

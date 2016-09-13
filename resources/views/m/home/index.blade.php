@@ -1,107 +1,79 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <title>front-end</title>
-    <link rel=stylesheet href=/static/font/iconfont.css>
-    <link rel=stylesheet href=/static/index.css>
-    <link rel=stylesheet href=/src/assets/css/index.css>
-    <link href=/static/css/app.css rel=stylesheet>
-    <script>
-        data = {
-            username: 'Er kang',
-            userAvatar: 'xxx',
-            messages: [
-                {image: '', title: 'test', content: 'test', time: +new Date()},
-                {image: '', title: 'test', content: 'test', time: +new Date()},
-                {image: '', title: 'test', content: 'test', time: +new Date()}
-            ],
-            collections: [
-                {
-                    image: 'http://www.w3school.com.cn/tiy/loadtext.asp?f=html_image_test',
-                    cnName: '悉尼大学',
-                    enName: 'The University of Sydney'
-                },
-                {image: '', cnName: '悉尼大学', enName: 'The University of Sydney'},
-                {image: '', cnName: '悉尼大学', enName: 'The University of Sydney'}
+@include('m.public.header')
 
-            ],
-            willings: [{
-                college: {
-                    image: 'http://www.w3school.com.cn/tiy/loadtext.asp?f=html_image_test',
-                    cnName: '悉尼大学',
-                    enName: 'The University of Sydney',
-                    demand: {
-                        IELTS: 7.0,
-                        TOEFL: 90,
-                        listening: 7.5,
-                        speaking: 7.5,
-                        reading: 8.5,
-                        writing: 8.5,
-                        majorGrade: 90,
-                        majorWork: 2
-                    }
-                },
-                selectedMajors: []
-            }, {
-                college: {
-                    image: 'http://www.w3school.com.cn/tiy/loadtext.asp?f=html_image_test',
-                    cnName: '悉尼大学',
-                    enName: 'The University of Sydney',
-                    demand: {
-                        IELTS: 7.0,
-                        TOEFL: 90,
-                        listening: 7.5,
-                        speaking: 7.5,
-                        reading: 8.5,
-                        writing: 8.5,
-                        majorGrade: 90,
-                        majorWork: 2
-                    }
-                },
-                selectedMajors: [{
-                    name: '计算机',
-                    IELTS: 5.5,
-                    TOEFL: 70,
-                    listening: 7.5,
-                    speaking: 7.0,
-                    reading: 6.0,
-                    writing: 7.5,
-                    majorGrade: 80,
-                    majorWork: 2
-                }, {
-                    name: '会计',
-                    IELTS: 6.5,
-                    TOEFL: 80,
-                    listening: 8.0,
-                    speaking: 7.0,
-                    reading: 9.0,
-                    writing: 7.5,
-                    majorGrade: 80,
-                    majorWork: 2
-                }, {
-                    name: '机械制造',
-                    IELTS: 5.5,
-                    TOEFL: 70,
-                    listening: 7.5,
-                    speaking: 7.0,
-                    reading: 6.0,
-                    writing: 7.5,
-                    majorGrade: 80,
-                    majorWork: 2
-                }]
-
-            }]
-        }
-        data={!! json_encode($data) !!};
-    </script>
-</head>
-<body>
-<app page="Person"></app>
-<script type=text/javascript src=/static/js/manifest.js></script>
-<script type=text/javascript src=/static/js/vendor.js></script>
-<script type=text/javascript src=/static/js/app.js></script>
+<div class="main02">
+    <div class="grzy_wdxx">
+        <img src="{{ app('auth')->user()->getAvatarPath() }}" width="100" height="100" style="border-radius:100px;">
+        <br>{{ app('auth')->user()->username }}<a href="#"><img src="/static/images/icon13.png" style="margin:0 0 0 5px;"></a>
+    </div>
+    <div class="grzy_wdxx_meun">
+        <span>
+            <a   id="grzy_wdxx_meun"  href="{{ route('home.messages') }}">消息</a>
+            <a href="{{ route('home.like_colleges') }}" >收藏</a>
+            <a href="{{ route('home.intentions') }}" >意向单</a>
+        </span>
+    </div>
+    <div class="grzy_wdxx_list">
+        <ul>
+            <li>
+                <img src="/static/images/icon14.png">
+                <h1>指南针<br><em>优惠活动</em></h1>
+                <span>2016-05-05</span>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <img src="/static/images/icon15.png">
+                <h1>指南针<br><em>优惠活动</em></h1>
+                <span>2016-05-05</span>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <img src="/static/images/icon16.png">
+                <h1>指南针<br><em>优惠活动</em></h1>
+                <span>2016-05-05</span>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <img src="/static/images/icon17.png">
+                <h1>指南针<br><em>优惠活动</em></h1>
+                <span>2016-05-05</span>
+                <div class="clear"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="main02 editUser" style="display: none;">
+    <div class="grzy_wdzl">
+        <ul>
+            <li style="padding:7% 5%; line-height:90px; height:90px; ">
+                <span>头像</span>
+                <a href="#"><img src="/static/images/banner.jpg" width="90" height="90"></a>
+                <div class="clear"></div>
+            </li>
+            <li class="grzy_wdzl01">
+                <span>用户名</span>
+                <em><a href="#">小野妹子</a></em>
+                <div class="clear"></div>
+            </li>
+            <li class="grzy_wdzl01">
+                <span>密码</span>
+                <em><a href="#">********</a></em>
+                <div class="clear"></div>
+            </li>
+            <li class="grzy_wdzl01">
+                <span>手机号</span>
+                <em><a href="#">0824-13390783621</a></em>
+                <div class="clear"></div>
+            </li>
+            <li class="grzy_wdzl01">
+                <span>邮箱</span>
+                <em><a href="#">是您找回密码的方式之一，建t议您设置并验证邮箱</a></em>
+                <div class="clear"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
 </body>
 </html>

@@ -58,10 +58,11 @@ class SpecialitiesController extends BaseController
     public function store($college_id, Request $request){
         $this->validate($request, [
             'degree_id' => 'required',
-            'name' => 'required'
+            'name' => 'required',
+            'category_id' => 'required'
         ]);
 
-        if (count(Speciality::where('name', $request->input('name'))->where('degree_id', $request->input('degree_id'))->where('college_id', $college_id)->get())!=0) {
+        if (count(Speciality::where('name', $request->input('name'))->where('degree_id', $request->input('degree_id'))->where('category_id', $request->input('category_id'))->where('college_id', $college_id)->get())!=0) {
             return redirect()->back()->withInput()->withErrors('专业名已存在');
         }
 
@@ -84,10 +85,11 @@ class SpecialitiesController extends BaseController
     public function update($college_id, $speciality_id, Request $request){
         $this->validate($request, [
             'degree_id' => 'required',
-            'name' => 'required'
+            'name' => 'required',
+            'category_id' => 'required'
         ]);
 
-        if (count(Speciality::where('name', $request->input('name'))->where('degree_id', $request->input('degree_id'))->where('college_id', $college_id)->get())!=0) {
+        if (count(Speciality::where('name', $request->input('name'))->where('degree_id', $request->input('degree_id'))->where('category_id', $request->input('category_id'))->where('college_id', $college_id)->get())!=0) {
             return redirect()->back()->withInput()->withErrors('专业名已存在');
         }
 

@@ -63,7 +63,7 @@
 
                                     <div class="ielts-and-toelf-requirement">
                                    <span class="toelf-requirement">托福: @{{ intention['college'].toefl_requirement }}</span>
-                                    <span class="ielts-requirement" style="margin-left: 20px">雅思: @{{ intention['college'].ielts_requirement }}</span>
+                                    <span class="ielts-requirement" style="margin-left: 35px">雅思: @{{ intention['college'].ielts_requirement }}</span>
                                         <like-college
                                                 :college_id="intention['college'].id"
                                                 :liked="intention['college'].liked"

@@ -1,19 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <title>front-end</title>
-    <link rel=stylesheet href=/static/font/iconfont.css>
-    <link rel=stylesheet href=/static/index.css>
-    <script src=//cdn.bootcss.com/jquery/2.2.4/jquery.min.js></script>
-    <link href=/static/css/app.css rel=stylesheet>
-</head>
-<body>
-<app page=EvaluateResult></app>
-<script type=text/javascript src=/static/js/manifest.js></script>
-<script type=text/javascript src=/static/js/vendor.js></script>
-<script type=text/javascript src=/static/js/app.js></script>
+@include('m.public.header')
+<div class="clear"></div>
+<div class="main">
+    <div class="login_resgister">
+        <form action="" method="get">
+            <select name="" class="select01">
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+            </select>
+            <select name="" class="select01">
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+            </select>
+            <select name="" class="select01">
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+            </select>
+            <select name="" class="select01">
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+            </select>
+            <select name="" class="select01">
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+                <option>澳大利亚</option>
+            </select>
+
+            <input type="submit" value="下一步" class="select_button">
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
 </body>
 </html>

@@ -12,12 +12,14 @@
             <template id="estimate-result-list">
                 <div id="estimate-detail-pop" class="mask" v-if="showRequirementContrasts">
                     <div class="estimate-detail">
-                        <h1>@{{ showRequirementContrastsContent.college.chinese_name }}的@{{ selected_speciality_name }}专业匹配如下：</h1>
+                        <p class="match-title">匹配结果</p>
+                        <h1>@{{ showRequirementContrastsContent.college.chinese_name }}</h1>
                         @if(!(isset($cpm) && $cpm))
                             <span @click="showRequirementContrasts=false" class="close">×</span>
                         @endif
+                        <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showRequirementContrastsContent.score }}%</span>，@{{ selected_speciality_name }}专业匹配如下：</p>
                         <table>
-                            <tr style="background: #f3f3f3;">
+                            <tr>
                                 <th style="padding-left: 30px;">
                                     专业
                                 </th>
@@ -25,7 +27,7 @@
                                     @{{ contrast['name'] }}
                                 </th>
                             </tr>
-                            <tr>
+                            <tr style="background: #fff">
                                 <td style="text-align: left;padding-left: 30px;">
                                     您的成绩
                                 </td>
@@ -35,7 +37,7 @@
                             </tr>
 
                             @if(Auth::check())
-                            <tr style="background: #f3f3f3;">
+                            <tr>
                                 <td style="text-align: left;padding-left: 30px;">
                                     @{{ selected_speciality_name }}专业要求
                                 </td>
@@ -43,17 +45,18 @@
                                     @{{ contrast['require'] }}
                                 </td>
                             </tr>
+                                <tr class="comment">
+                                    <td style="text-align: left;line-height: 26px;padding-left: 30px;background: #fff;" v-bind:colspan="showRequirementContrastsContent.contrasts.length" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
+                                        <div style="height: 115px;overflow: hidden">
+                                            @{{{ changeLine(contrast['require']) }}}
+                                        </div>
+                                    </td>
+                                </tr>
                              @else
-                                <tr style="background: #f3f3f3;">
+                                <tr style="background: #f3f3f3;height: 160px">
                                     <td v-bind:colspan="showRequirementContrastsContent.contrasts.length">您好，请&nbsp;<a href="javascript:void(0)" v-on:click="callLogin">登录</a>&nbsp;以查看更多内容</td>
                                 </tr>
                             @endif
-
-                            <tr class="comment">
-                                <td style="text-align: left;line-height: 26px;padding-left: 30px;display: inline-block;height: 110px;overflow: hidden" v-bind:colspan="showRequirementContrastsContent.contrasts.length" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  == '备注'">
-                                    @{{{ changeLine(contrast['require']) }}}
-                                </td>
-                            </tr>
 
                         </table>
                         <button class="estimate-button" @click="addIntention">加入意向单</button>
@@ -63,7 +66,7 @@
                 <div class="estimate-result-list">
 
                     @if(!$college_id)
-                    <div class="identity">
+                    <div class="identity" style="position: relative">
                         <h1>匹配结果</h1>
 
                         <ul>
@@ -74,6 +77,8 @@
                             核心院校({{count($reduce_colleges['core'])}})
                             </li>
                         </ul>
+
+                        <a @click="returnStepFirst" href="{{ URL::route('estimate.step_first') }}" style="display:inline-block;text-align:center;width: 138px;color: #ffffff;border: none;background-color: #0e2d60;height: 40px;position: absolute;right: 10px;top: 12px;">重新生成解决方案</a>
                     </div>
 
                     <div class="college-list">
@@ -89,7 +94,7 @@
 
                                                 <div class="ielts-and-toelf-requirement">
                                                     <span class="toelf-requirement">托福: {{ $college['toefl_requirement'] }}</span>
-                                                    <span class="ielts-requirement" style="margin-left: 20px">雅思: {{ $college['ielts_requirement'] }}</span>
+                                                    <span class="ielts-requirement" style="margin-left: 35px">雅思: {{ $college['ielts_requirement'] }}</span>
                                                     <like-college
                                                             college_id="{{ $college['college']['id'] }}"
                                                             liked="<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college['college']['id'])){echo 1;} else {echo 0;}}else{echo 0;} ?>"
@@ -145,7 +150,7 @@
                                         </div>
 
                                         <div class="view-matching-detail">
-                                            <button data-college='{!! json_encode($college['college']) !!}' data-requirement-contrasts='{!! json_encode($college['requirement_contrast']) !!}' v-on:click="showDetail($event)" class="view-details-button">查看匹配详情-></button>
+                                            <button data-college='{!! json_encode($college['college']) !!}' data-requirement-contrasts='{!! json_encode($college['requirement_contrast']) !!}' data-score="{{$college['score']}}" v-on:click="showDetail($event)" class="view-details-button">查看匹配详情-></button>
                                         </div>
                                     </div>
                                 @endforeach
@@ -184,6 +189,7 @@
                     showRequirementContrastsContent: {
                         contrasts: {!! json_encode($res['requirement_contrast']) !!},
                         college: {!! json_encode($res['college']) !!},
+                        score: {!! $res['score'] !!}
                     },
                     @endif
                     showRequirementContrasts: @if(!$college_id) false @else true @endif
@@ -205,7 +211,9 @@
                         JSON.parse(contrasts.target.getAttribute('data-requirement-contrasts'));
                     this.showRequirementContrastsContent.college =
                         JSON.parse(contrasts.target.getAttribute('data-college'));
-                    this.showRequirementContrasts = true
+                    this.showRequirementContrasts = true;
+                    this.showRequirementContrastsContent.score =
+                            JSON.parse(contrasts.target.getAttribute('data-score'));
                 },
                 addIntention: function(){
                     var college_id = this.showRequirementContrastsContent.college.id;
@@ -236,6 +244,11 @@
                 },
                 callLogin: function () {
                     this.$dispatch('toShowLoginAndRegisterPanel');
+                },
+                returnStepFirst: function (event) {
+                    if (confirm("您之前的留学评估将会被清空，是否继续？")==false){
+                        event.preventDefault();
+                    }
                 }
             }
         });
