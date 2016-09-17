@@ -118,12 +118,12 @@ class EstimateController extends Controller
         else{
             $data = $request->input('data');
         }
-
-
+      
         if(is_string($data)){
             $data = json_decode($data, true);
         }
-
+       
+        
         $selected_country = AdministrativeArea::find($data['selected_country']);
         $selected_degree = Degree::find($data['selected_degree']);
         $selected_speciality_name = $data['selected_speciality_name'];
@@ -265,4 +265,83 @@ class EstimateController extends Controller
                   ->where('specialities.name', $speciality_name);
         })->get();
     }
+    
+    public function stepSecondPost()
+    {
+        
+          
+            $str = '<form action="/estimate" id="formid" method="post">';
+            $str .= '<input type="hidden" name="data" value=\''.  json_encode($_POST).'\' ><input type="hidden" name="_token" value="'.  csrf_token().'" >' ;
+            $str .= '</form><script>document.getElementById("formid").submit();</script>';
+            echo $str;
+           
+    }
+    
+    public function stepSecondForm() 
+    {
+        
+        
+        
+        $value = $_POST['value'];
+        $groups = $_POST['groups'];
+        $key = $_POST['key'];
+        $str = '';
+        $groups = $this->object_to_array(json_decode($groups));
+       
+        $val = $groups[$key];
+        if(is_object($val)) $val = get_object_vars ($val);
+        $leixing = $val['selects'][$value];
+        $leixingOption = '';
+        foreach($val['selects'] as $k=>$option)
+        {
+            $seled = '';
+            if($k==$value) $seled = 'selected="selected"';
+            $leixingOption .= '<option value="'.$k.'"   '.$seled.'>'.$option.'</option>';
+        }
+
+        $leixingAddhtml = '';
+
+        foreach($val['examinations'][$value]['sections'] as $k=>$v)
+        {
+            $style = '';
+
+            if($k==3) $style = 'style="margin-right:0px;"';
+            $leixingAddhtml .= '<input type="hidden"  name="examinations['.$leixing.'][sections]['.$k.'][name]" value="'.$v['name'].'"  >
+                <input type="text" class="login_resgister_input" name="examinations['.$leixing.'][sections]['.$k.'][score]" value="" placeholder="'.$v['name'].'"  '.$style.'  >
+                ';
+        }
+        $leixingHidden = '';
+        foreach($val['examinations'][$value] as $k=>$v)
+        {
+            if(!is_array($v)&&!is_object($v)) $leixingHidden .= '<input type="hidden"  name="examinations['.$leixing.']['.$k.']" value="'.$v.'"  >
+                ';
+        }
+        $str .= 
+        '<div class="select_text">
+
+            <select name="examinations['.$leixing.']" class="select02" onchange="choseInputs($(this).val(),'.$key.')" >
+                '.$leixingOption.'
+            </select>
+            <input name="examinations['.$leixing.'][score]" type="text" class="login_resgister_input01 " value=""  placeholder="">
+        </div>
+        <!--听说读写-->
+        <div class="select_radio " >
+            '.$leixingAddhtml.'
+        </div>  
+
+        '.$leixingHidden;
+        
+        
+        return json_encode($str);
+    }
+    function object_to_array($obj)
+    {
+        $_arr = is_object($obj) ? get_object_vars($obj) : $obj;
+        foreach ($_arr as $key => $val) {
+            $val = (is_array($val) || is_object($val)) ? $this->object_to_array($val) : $val;
+            $arr[$key] = $val;
+        }
+        return $arr;
+    }
+
 }

@@ -7,6 +7,8 @@ Route::get('/get_speciality', 'IndexController@getSpeciality')->name('index.get_
 Route::get('/estimate/step-1', 'EstimateController@stepFirst')->name('estimate.step_first');
 Route::get('/estimate/get_speciality', 'EstimateController@getSpeciality')->name('estimate.get_speciality');
 Route::get('/estimate/step-2', 'EstimateController@stepSecond')->name('estimate.step_second');
+Route::post('/estimate/stepSecondForm', 'EstimateController@stepSecondForm')->name('estimate.stepSecondFrom');
+Route::post('/estimate/stepSecondPost', 'EstimateController@stepSecondPost')->name('estimate.stepSecondPost');
 Route::post('/estimate', 'EstimateController@store')->name('estimate.store');
 Route::resource('/intentions', 'IntentionsController');
 Route::post('/intentions/create', 'IntentionsController@create')->name('intentions.create');

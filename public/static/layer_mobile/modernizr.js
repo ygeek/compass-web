@@ -115,9 +115,21 @@ $(function() {
             dataType:'json',
             success:function(e){
                 if(e.status == 'ok'){
-                    location.href = '/home';
+                    //location.href = location.href;
+                    alert('登录成功!');
+                    $("#content").show();
+    
+                    $("#header").show();
+                    $("#login").hide();
+                    $(".dl-menu").append('<li class="headuser"><a href="/home"  >个人中心</a></li><li class="headuser"><a href="/auth/logout"  >退出</a></li>');
+                    $(".headlogin").remove();
+                    //隐藏菜单栏
+                    $("#dl-menu-button").removeClass("dl-active");
+                    $(".dl-menu").removeClass("dl-menuopen");
+                    $(".dl-menu").addClass("dl-menu-toggle");
                 }
-                else
+                
+                if(e.status == 'error')
                 {
                     alert('登录失败!');
                 }
@@ -142,7 +154,7 @@ $(function() {
             dataType:'json',
             success:function(e){
                 if(e.status == 'ok'){
-                    location.href = '/home';
+                    location.href = location.href;
                 }
                 else
                 {
@@ -168,6 +180,21 @@ $(function() {
                 
             }
         });
+    });
+    
+    $(".makePlan").click(function(){
+        var name = $("input[name='name']").val();
+        
+        $('.gkscore').val($('.gktag').val()+':'+$('.gkwithout').val());
+        
+        $('#stepSecondPost').submit();
+    });
+    
+    $(".pingguo_meun_hover").click(function(){
+        $(".pingguo_meun_hover").not(this).attr("id",'');
+        $(this).attr("id",'pingguo_meun_hover');
+        $("."+$(this).attr("dclass")).show();
+        $("."+$(".pingguo_meun_hover").not(this).attr("dclass")).hide();
     });
 });
 

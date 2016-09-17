@@ -2,7 +2,7 @@
 <div class="clear"></div>
 <div class="main">
     <div class="login_resgister">
-        <form action="" method="get">
+        <form action="/estimate/stepSecondPost" id="stepSecondPost" method="post">
             <input type="text" class="login_resgister_input" name="name" placeholder="姓名" value="">
             @if($selected_degree->name == '硕士')
             <select id="recently_college_name" v-model="data.recently_college_name" name="recently_college_name" class="select01">
@@ -42,7 +42,7 @@
             @endif
             @if($selected_degree->name == '本科')
             <div class="select_text">
-                <select name="cee_province" class="select02">
+                <select name="examinations[高考][tag]" class="select02 gktag">
                     <?php
                     $provinces = collect(config('provinces'))->sortBy(function ($product, $key) {
                         if ($product==="重庆")
@@ -64,11 +64,15 @@
                         <option value="{{ $province }}" @if($index++ == 0 and !$user_gaokao_input) selected @endif>{{$province}}</option>
                     @endforeach
                 </select>
-                <input type="text" class="login_resgister_input01" name="cee" placeholder="高考成绩">
+                <input type="text" class="login_resgister_input01 gkwithout" name="examinations[高考][score_without_tag]" placeholder="高考成绩">
+                <input type="hidden" class="gkscore" name="examinations[高考][score]" placeholder="高考成绩">
             </div>
             @endif
-            
-            <input type="text" class="login_resgister_input" name="score" placeholder="平均成绩(0~100)" value="">
+            @if($selected_degree->name == '本科')
+                <input class="login_resgister_input" type="text" id="mean" name="examinations[高中平均成绩][score]" placeholder="0~100"/>
+            @else
+                <input class="login_resgister_input" type="text" id="mean" name="examinations[大学平均成绩][score]" placeholder="0~100"/>
+            @endif
             <?php
                     $groups = [
                             ['雅思', '托福IBT']
@@ -83,7 +87,7 @@
                             $groups[] = ['ACT', 'SAT'];
                         }
                     }
-
+                    
                     $groups = collect($groups)->map(function($items) use ($selected_degree, $user){
                         $examinations = collect($items)->map(function($item) use ($selected_degree, $user){
                             $examination = \App\Examination::where('name', $item)->select(['id', 'name', 'sections', 'multiple_degree'])->first();
@@ -132,44 +136,48 @@
                                 'selects' => $selects
                         ];
                     });
-                 //print_r($groups);
+                    $groups = objToArr($groups);
+                    foreach($groups as $gkey=>$gval){
                     ?>
-            <?php foreach($groups as $key=>$val){  ?>
-            <div class="select_text">
-               
-                <select name="" class="select02 yt{{ $key }}" onchange="choseInput($(this),{{ $key }})" >
-                    <?php foreach($val['examinations'] as $k=>$v){  ?>
-                  
-                    <option value="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></option>
+            <div class="choseInputs{{$gkey}}" ></div>
+            
                     <?php } ?>
-                   
-                 
-                </select>
-                <?php foreach($val['examinations'] as $k=>$v){  ?>
-                <input type="text" @if($k>0) style="display:none" @endif class="login_resgister_input01 st{{ $key }}  yt{{ $key }}{{ $v['id'] }}" value="<?php if(isset($v['score'])) echo $v['score']; ?>"  placeholder="">
-                <?php } ?>
-            </div>
-            
-            <?php foreach($val['examinations'] as $k=>$v){  ?>
-            <div class="select_radio st{{ $key }} yt{{ $key }}{{ $v['id'] }}" @if($k>0) style="display:none" @endif>
-
-                    <?php foreach($v['sections'] as $jian=>$zhi){  ?>
-                    <input type="text" class="login_resgister_input" name="score" value="{{ $zhi['score'] }}" placeholder="{{ $zhi['name'] }}" @if($jian==3) style="float:right; margin:0;" @endif >
-                    <?php } ?>
-
-
-
-            </div>   
-            <?php } ?>
-            
-            <?php } ?>
-              
-            
-            <input type="submit" value="生成选校方案" class="select_button" >
+            <input type="hidden" name="selected_country" value="{{$selected_country['id']}}">
+            <input type="hidden" name="selected_degree" value="{{$selected_degree['id']}}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="selected_speciality_name" value="{{$selected_speciality_name}}">
+            <input type="submit" name="makePlan" value="生成选校方案" class="select_button makePlan" >
             <input type="button" value="返回" onclick="history.go(-1)" class="select_button01">
         </form>
+       
     </div>
     <div class="clear"></div>
 </div>
-</body>
-</html>
+<script>
+
+function choseInputs(v,key)
+{
+    var groups = '<?php echo json_encode($groups); ?>';
+    
+    $.ajax({
+        type:'POST',
+        url:'/estimate/stepSecondForm',
+        data:'value='+v+'&groups='+groups+'&key='+key,
+        async:false,
+        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+        dataType:'json',
+        success:function(e){
+           
+           console.log(e);
+            $('.choseInputs'+key).html(e)
+        }
+    }); 
+  
+    
+}
+<?php foreach($groups as $gkey=>$gval){ ?>
+choseInputs('0',{{$gkey}});
+<?php } ?>
+   
+            
+</script>

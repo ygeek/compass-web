@@ -26,6 +26,9 @@
         </ul>
     </div>
     <div class="clear"></div>
+    <div class='page'>
+    {{ $colleges->appends(app('request')->except('page'))->render() }}
+    </div>
 </div>
 
 <!--隐藏内容-->

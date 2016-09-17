@@ -34,10 +34,11 @@
                 <li><a href="/estimate/step-1">留学评估</a></li>
                 <li><a href="/colleges">院校查询</a></li>
                 @if(Auth::check())
-                <li><a href="{{route('home.index')}}"  >个人中心</a></li>
+                <li class="headuser"><a href="{{route('home.index')}}"  >个人中心</a></li>
+                <li class="headuser"><a href="{{route('auth.logout_user')}}"  >退出</a></li>
                 @else
-                 <li><a href="javascript:changeView('#login')"  >登录</a></li>
-                <li><a href="javascript:changeView('#region')">注册</a></li>
+                 <li class="headlogin"><a href="javascript:changeView('#login')"  >登录</a></li>
+                <li  class="headlogin"><a href="javascript:changeView('#region')">注册</a></li>
                 @endif
                
                 <!--
@@ -121,3 +122,16 @@
 </div>
 
 <div id="content" >
+<?php
+    function objToArr($obj)
+    {
+        if(!is_array($obj)&&!is_object($obj)) return $obj; 
+        if(is_object($obj)) $obj = $obj->toArray();
+        foreach ($obj as $key=>$val)
+        {
+            $obj[$key] = objToArr($val);
+           
+        }
+        return $obj;
+    }
+?>

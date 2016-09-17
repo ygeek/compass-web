@@ -3,12 +3,14 @@
 <script type="text/javascript" src="js/scroll.js"></script>
 <script type="text/javascript" src="js/scrollload.js"></script>
 
-
+<style>
+    #liked { background: url(/static/images/icon24_1.jpg) center no-repeat;}
+</style>
 <div class="xyxiangqing">
 
     <div class="clear"></div>
     <div class="n_banner">
-        <h1><a href="#"></a></h1>
+        <h1><a href="javascript:shoucang({{$college->id}})" @if($college->liked=='1') id="liked" @endif></a></h1>
         <img src="{{app('qiniu_uploader')->pathOfKey($college->background_image_path)}}">
         <div class="clear"></div>
 
@@ -112,3 +114,30 @@
         <div class="clear"></div>
     </div>
 </div>
+<script>
+function shoucang(num)
+{
+    $.ajax({
+        type:'POST',
+        url:'/like_college',
+        data:'college_id='+num,
+        async:false,
+        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+        dataType:'json',
+        success:function(e){
+            if(e.status == 'ok'){
+                alert('收藏成功!');
+            }
+
+        },
+        error:function(){
+            @if(Auth::check())
+                 alert('请求失败!');
+            @else
+                 alert('请先登录!');
+                 changeView('#login');
+            @endif
+        }
+    });
+}
+</script>
