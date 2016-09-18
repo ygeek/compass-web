@@ -1076,7 +1076,7 @@ All this is done for any sub-level being entered.
 			   
 	    .yuyanxx{width:92%; margin:8% auto; border-left:2px solid #fcb600; font-size:1.5em;}
 		   .yuyanxx_m{padding:0 0 0 5%;}
-		      .yuyanxx_m h1{color:#0e2d60; font-size:1.5em; margin:0 0 5% 0; float:left;}
+		      .yuyanxx_m h1{color:#0e2d60; font-size:1.3em; margin:0 0 5% 0; float:left;}
 			  .yuyanxx_m em{display:block; float:right;}
               .yuyanxx_m p{line-height:40px;}
 			  
@@ -1212,8 +1212,8 @@ select::-ms-expand { display: none; }
 				   .grzy_wdxx_list li h1 em{color:#666;}
 				.grzy_wdxx_list li span{display:block; float:right;}
 				.grzy_wdsc_list{margin:5% 0 0 0;}
-			     .grzy_wdsc_list li{width:43%; background:#fff; display:block; float:left; padding:2%; margin:0 0 2% 2%; font-size:1.2em; color:#0e2d60;}
-			     .grzy_wdsc_list li img{width:86%;}
+			     .grzy_wdsc_list li{width:43%; background:#fff; display:block; float:left; padding:2%; margin:0 0 2% 2%; font-size:1.2em; height: 113px; color:#0e2d60;}
+			     .grzy_wdsc_list li img{ height: 40%}
 			     .grzy_wdsc_list li h1{font-weight:normal;color:#0e2d60; border-top:1px solid #ddd; padding:3% 0 2% 0;}
                              .grzy_wdsc_list li h1 font { font-size: 0.8em;}
 		           .grzy_wdsc_list li h1 a{color:#0e2d60;}
@@ -1352,15 +1352,15 @@ select::-ms-expand { display: none; }
    .home05 #current{background:url(../images/bottom_icon05.png) center 20px no-repeat; background-size:32px; color:#0e2d60;}
 
 
-   .chaxun10{height:70px; line-height:70px; margin:1px 0 0 0; padding:0 4%; font-size:1.5em; background:#fff;}
+   .chaxun10{height:60px; line-height:60px; margin:1px 0 0 0; padding:0 4%; font-size:1.3em; background:#fff;}
      .chaxun10 h1{float:right; font-weight:normal;}
 	     .chaxun10 h1 span{color:#1ddab0;}
 	 .chaxun10 h2{float:left; font-weight:normal;  padding:0 25px 0 0;}
 	 
-	.yuanxiao_gzy li{width:44%; float:left; background:#fff;  display:block; padding:3% 0 0 0; margin:4% 0 0 4%;}
-        .yuanxiao_gzy li h1{font-size:1.6em; padding:8%;}
-		.yuanxiao_gzy li p{font-size:1.2em; padding:8%;}
-		.yuanxiao_gzy li a{font-size:1.2em; padding:3% 0 3% 8%; background:url(../images/icon35.png) 92% no-repeat #0e2d60; display:block; background-size:15px; color:#fff; margin:8% 0 0 0;}
+	.yuanxiao_gzy li{width:44%; float:left; background:#fff;  display:block; padding:0 0 0 0; margin:4% 0 0 4%;}
+        .yuanxiao_gzy li h1{font-size:1.2em; padding:5%;}
+		.yuanxiao_gzy li p{font-size:1.0em; padding:5%;}
+		.yuanxiao_gzy li a{font-size:1.0em; padding:3% 0 3% 5%; background:url(../images/icon35.png) 92% no-repeat #0e2d60; display:block; background-size:15px; color:#fff; margin:5% 0 0 0;}
 	
 	.yuanxiao_pic{padding:0 0 5% 0;}	
    .yuanxiao_pic a{width:44%; float:left; display:block; background:#fff; text-align:center; font-size:1.5em; margin:4% 0 0 4%;}	

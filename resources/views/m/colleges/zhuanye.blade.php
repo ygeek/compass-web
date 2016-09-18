@@ -35,4 +35,8 @@
         </ul>
     </div>
     <div class="clear"></div>
+    <div class="page">
+        {{ $articles->appends(app('request')->except('page'))->render() }}
+    </div>
 </div>
+
