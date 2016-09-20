@@ -266,6 +266,7 @@
             <div class="search clear">
               <form method="GET" action="{{ route('colleges.index') }}">
                 <input type="text" placeholder="院校查询" class="search-text" name="college_name"/>
+                <input type="hidden" name="selected_country_id" value="-1"/>
                 <button type="submit" class="search-button"></button>
               </form>
             </div>
