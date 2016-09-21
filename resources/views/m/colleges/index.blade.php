@@ -18,7 +18,7 @@
         <ul>
             @foreach($colleges as $college)
             <a href="{{route('colleges.show', $college->key)}}" ><li>
-                <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}">
+                    <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" style="display: block; margin: 0 auto;">
                 <h1>{{$college->chinese_name}}<br><font>{{$college->english_name}}</font></h1>
                 </li></a>
            @endforeach

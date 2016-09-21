@@ -8,7 +8,7 @@
 <div class="yuanxiao_jj">
     <div class="yuanxiao_jj_name">{{ $article->title }}</div>
     <div class="yuanxiao_jj_m">
-      {{ $article->content }}
+      {{ html_entity_decode($article->content) }}
     </div>
 </div>
 @endforeach

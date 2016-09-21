@@ -1266,7 +1266,7 @@ select::-ms-expand { display: none; }
 	   .paiming02{height:60px; line-height:60px; width:110px; background:#fc8a53; border:0; border-radius:5px; color:#fff; font-size:1.6em; cursor:pointer;}
 	   
 	   
-	   .n_banner{padding:5% 0 0 0; max-width:800px; margin:0 auto; position:relative;}
+	   .n_banner{padding:60px 0 0 0; max-width:800px; margin:0 auto; position:relative;}
 			 .n_banner h1{height:70px; line-height:70px; width:70px; border-radius:70px; -moz-border-radius:70px; -o-border-radius:70px; background:#fff; color:#fff; font-size:2em; text-align:center;position:absolute; top:80%; right:10%; }
 			  .n_banner h1 a{color:#fff; display:block; background:url(../images/icon24.jpg) center no-repeat;height:70px; line-height:70px; }
 			 .n_banner img{width:100%; display:block;}
@@ -1358,13 +1358,13 @@ select::-ms-expand { display: none; }
 	 .chaxun10 h2{float:left; font-weight:normal;  padding:0 25px 0 0;}
 	 
 	.yuanxiao_gzy li{width:44%; float:left; background:#fff;  display:block; padding:0 0 0 0; margin:4% 0 0 4%;}
-        .yuanxiao_gzy li h1{font-size:1.2em; padding:5%;}
-		.yuanxiao_gzy li p{font-size:1.0em; padding:5%;}
+        .yuanxiao_gzy li h1{font-size:1.2em; padding:10px 5%; height: 50px; line-height: 50px; overflow: hidden;}
+		.yuanxiao_gzy li p{font-size:1.0em; padding:5%; height: 70px; line-height: 20px; overflow: hidden;}
 		.yuanxiao_gzy li a{font-size:1.0em; padding:3% 0 3% 5%; background:url(../images/icon35.png) 92% no-repeat #0e2d60; display:block; background-size:15px; color:#fff; margin:5% 0 0 0;}
 	
 	.yuanxiao_pic{padding:0 0 5% 0;}	
    .yuanxiao_pic a{width:44%; float:left; display:block; background:#fff; text-align:center; font-size:1.5em; margin:4% 0 0 4%;}	
-      .yuanxiao_pic a img{width:100%;}	
+      .yuanxiao_pic a img{width:100%; height: 150px;}	
 	   .yuanxiao_pic a h1{padding:4% 0; font-weight:normal;}
 		
 	.yuanxiao_gl{padding:2% 0 5% 0;}

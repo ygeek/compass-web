@@ -14,34 +14,34 @@
     </div>
     <div class="h_icon01">
         <span>
-            <a href="#">
+            <a >
                 <img src="/static/images/icon01.png"><br><font>1.在线留学评估</font>
             </a>
         </span>
         <span>
-            <a href="#">
+            <a >
                 <img src="/static/images/icon02.png"><br><font>2.专家电话复核</font>
             </a>
         </span>
         <span>
-            <a href="#">
+            <a >
                 <img src="/static/images/icon03.png"><br><font>3.办公室签约</font>
             </a>
         </span>
         <span>
-            <a href="#">
+            <a >
                 <img src="/static/images/icon04.png"><br><font>4.顾问线下为您<br />
                 院校申请</font>
             </a>
         </span>
         <span>
-            <a href="#">
+            <a >
                 <img src="/static/images/icon05.png"><br><font>5.顾问线下为您<br />
                 办理签证</font>
             </a>
         </span>
         <span>
-            <a href="#">
+            <a >
                 <img src="/static/images/icon06.png"><br><font>6.海外公司提供<br />
                 后续服务</font>
             </a>
@@ -90,12 +90,12 @@
     </div>
     <div class="h_kemu">
         <ul>
-            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}"><img src="/static/images/img.jpg"><h1>法学</h1></a></li>
-            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 3]) }}"><img src="/static/images/img.jpg"><h1>医学</h1></a></li>
-            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 4]) }}"><img src="/static/images/img.jpg"><h1>工科</h1></a></li>
-            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}"><img src="/static/images/img.jpg"><h1>人文艺术</h1></a></li>
-            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 6]) }}"><img src="/static/images/img.jpg"><h1>商科</h1></a></li>
-            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}"><img src="/static/images/img.jpg"><h1>经济金融</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}"><img src="/static/images/kemu_img01.jpg"><h1>法学</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 3]) }}"><img src="/static/images/kemu_img02.jpg"><h1>医学</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 4]) }}"><img src="/static/images/kemu_img03.jpg"><h1>工科</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}"><img src="/static/images/kemu_img04.jpg"><h1>人文艺术</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 6]) }}"><img src="/static/images/kemu_img05.jpg"><h1>商科</h1></a></li>
+            <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}"><img src="/static/images/kemu_img06.jpg"><h1>经济金融</h1></a></li>
         </ul>
         <div class="clear"></div>
         <div class="kemu_more"><a href="#">更多专业</a></div>
@@ -121,7 +121,7 @@
         </div>
     </div>
     <div class="clear"></div>
-    <div class="h_ad"><img src="/static/images/img01.jpg"></div>
+    <div class="h_ad"><img src="/static/images/liuxuegonglue.jpg"></div>
     <div class="yuyanxx">
         <div class="yuyanxx_m">
             <h1>留学攻略</h1><em><a href="{{ $more[1] }}">更多></a></em>

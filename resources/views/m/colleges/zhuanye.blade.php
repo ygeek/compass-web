@@ -10,7 +10,7 @@
         </div>
 
     </div>
-    <div class="chaxun10"><h2><a href="#">· 硕士 · 商科 ·</a></h2><h1>您找到<span>{{ $articles->total() }} </span>所相关学校</h1></div>
+    <div class="chaxun10"><h2><a href="#">· 硕士 · 商科 ·</a></h2><h1>您找到<span>{{ $articles->total() }} </span>个相关专业</h1></div>
 
     <div class="yuanxiao_gzy">
         <ul>
