@@ -6,7 +6,7 @@
     <div class="yuanxiao_jj01">
         <div class="yuanxiao_jj_name01">{{ $article->title }}</div>
         <div class="yuanxiao_jj_m01">
-            {!! html_entity_decode($article->content) !!}
+            <?php echo  html_entity_decode($article->content); ?>
         </div>
     </div>
         @endforeach

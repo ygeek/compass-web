@@ -8,29 +8,39 @@
 <div class="yuanxiao_jj">
     <div class="yuanxiao_jj_name">{{ $article->title }}</div>
     <div class="yuanxiao_jj_m">
-      {{ html_entity_decode($article->content) }}
+      <?php echo  html_entity_decode($article->content); ?>
     </div>
 </div>
 @endforeach
+<link type="text/css" href="/static/swiper/swiper.min.css" rel="stylesheet" />
 
+<script type="text/javascript" src="/static/swiper/swiper.min.js"></script>
 <div class="main05">
-    <div class="topPic">
-        <div class="imgSlideMain">
-            <div id="imgSlide"  class="imgSlide">
-                <ul style="list-style: none; margin: 0px; width:100%;">
-                    <li style="width:100%; display: table-cell; vertical-align: top; ">
-                        <a href="#"><img src="/static/images/img01.jpg"></a></li>
-                    <li style="width:100%; display: table-cell; vertical-align: top; ">
-                        <a href="#"><img src="/static/images/img01.jpg"></a></li>
-                    <li style="width:100%; display: table-cell; vertical-align: top; ">
-                        <a href="#"><img src="/static/images/img01.jpg"></a></li>
-                </ul>
-            </div>
-            <ul class="navSlide">
-                <li class="i_point active"></li>
-                <li class="i_point"></li>
-                <li class="i_point"></li>
-                <li class="i_point"></li></ul>
+    <div class="topPic swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/static/images/img01.jpg" width="100%"></div>
+            <div class="swiper-slide"><img src="/static/images/img01.jpg"  width="100%"></div>
+            <div class="swiper-slide"><img src="/static/images/img01.jpg"  width="100%"></div>
+            
         </div>
+         <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div> -->
     </div>
 </div>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+       // nextButton: '.swiper-button-next',
+       // prevButton: '.swiper-button-prev',
+        slidesPerView: 1,
+        paginationClickable: true,
+        centeredSlides: true,
+        spaceBetween: 30,
+         autoplay: 2500,
+        loop: true
+    });
+</script>
