@@ -187,7 +187,7 @@ $(function() {
         
         $('.gkscore').val($('.gktag').val()+':'+$('.gkwithout').val());
         
-        $('#stepSecondPost').submit();
+       // $('#stepSecondPost').submit();
     });
     
     $(".pingguo_meun_hover").click(function(){

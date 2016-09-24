@@ -307,7 +307,7 @@ class EstimateController extends Controller
 
             if($k==3) $style = 'style="margin-right:0px;"';
             $leixingAddhtml .= '<input type="hidden"  name="examinations['.$leixing.'][sections]['.$k.'][name]" value="'.$v['name'].'"  >
-                <input type="text" class="login_resgister_input" name="examinations['.$leixing.'][sections]['.$k.'][score]" value="" placeholder="'.$v['name'].'"  '.$style.'  >
+                <input type="number" class="login_resgister_input" name="examinations['.$leixing.'][sections]['.$k.'][score]" ismust="1" value="" placeholder="'.$v['name'].'"  '.$style.'  >
                 ';
         }
         $leixingHidden = '';
@@ -322,7 +322,7 @@ class EstimateController extends Controller
             <select name="examinations['.$leixing.']" class="select02" onchange="choseInputs($(this).val(),'.$key.')" >
                 '.$leixingOption.'
             </select>
-            <input name="examinations['.$leixing.'][score]" type="text" class="login_resgister_input01 " value=""  placeholder="">
+            <input name="examinations['.$leixing.'][score]" type="number" ismust="1" class="login_resgister_input01 " value=""  placeholder="">
         </div>
         <!--听说读写-->
         <div class="select_radio " >

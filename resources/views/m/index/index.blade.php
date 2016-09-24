@@ -51,7 +51,7 @@
     <div class="h_message">
         <h1>
             <img src="/static/images/icon07.png">
-            <a href="#">我要咨询</a>
+            <a href="javascript:void(0)" onclick='easemobim.bind({tenantId: 21250})'>我要咨询</a>
         </h1>
     </div>
     <div class="clear"></div>
@@ -157,5 +157,13 @@
     <div class="clear"></div>
 
 </div>
+<script>
+window.easemobim = window.easemobim || {};
+easemobim.config = {
+    hide: true,   //是否隐藏小的悬浮按钮
+    autoConnect: true    //自动连接
+};
+</script>
+<script src='//kefu.easemob.com/webim/easemob.js?tenantId=21250' async='async'></script>
 @include('m.public.footer')
 

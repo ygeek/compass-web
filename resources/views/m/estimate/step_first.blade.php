@@ -2,7 +2,7 @@
 <div class="clear"></div>
 <div class="main">
     <div class="login_resgister">
-        <form action="{{route('estimate.step_second')}}" method="get">
+        <form action="{{route('estimate.step_second')}}" method="get" onsubmit="return checkFirst()">
             <select name="selected_country_id" class="select01"  onchange="changeZy();">
                 @foreach($countries as $country)
                     <option value="{{$country->id}}" @if($country->id == $selected_country_id) selected @endif>{{$country->name}}</option>
@@ -46,4 +46,18 @@
 
 <script>
     changeZy();
+    function checkFirst()
+    {
+        var speciality_name = $("#speciality_categories").val();
+        if(!speciality_name)
+        {
+            alert('专业正在加载中...');
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+        
+    }
 </script>
