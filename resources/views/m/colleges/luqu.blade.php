@@ -1,5 +1,5 @@
 <div class="main04">
-    <div class="yxpaiming01"><a href="#">测试录取率</a></div>
+    <div class="yxpaiming01"><a href="/estimate/step-1">测试录取率</a></div>
      <?php $index = 0; ?>
         @foreach($articles as $article)
         
