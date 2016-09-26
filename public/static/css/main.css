@@ -1309,7 +1309,8 @@ select::-ms-expand { display: none; }
 .main05 .tab .tabli { width: 50%;  text-align: center; float: left;}
 .main05 .tab .act { color: #0e2e61; height: 58px;  display: inline-block;  border-bottom: 2px  solid #0e2e61; }
 .main05 .sc { background-color:#0e2e61; padding: 0px; margin: 0px;  }
-.main05 .sc img { padding: 10px 10px 10px 0; width: 150%; height: 120px;}
+.main05 .sc .swiper-wrapper .swiper-slide { height: 140px;}
+.main05 .sc img { padding: 10px 10px 10px 0; width: 100%; height: 120px;}
    .yuanxiao_pm02{background:#fff; padding:3% 0;}
    .yuanxiao_pm02 li{width:16%; display:block; float:left; text-align:center; margin:5% 0 0 7%;}
       .yuanxiao_pm02 li h1{padding:20%; height:50px; line-height:50px; width:50px; display:block;  font-size:3em; border-radius:100%; font-weight:normal; color:#fff; margin:0 auto;}
