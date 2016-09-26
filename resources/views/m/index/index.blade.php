@@ -98,7 +98,7 @@
             <li><a href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}"><img src="/static/images/kemu_img06.jpg"><h1>经济金融</h1></a></li>
         </ul>
         <div class="clear"></div>
-        <div class="kemu_more"><a href="#">更多专业</a></div>
+      <!--  <div class="kemu_more"><a href="#">更多专业</a></div>-->
     </div>
     <?php
     $more = App\Setting::get('index_more', ['#', '#', '#']);
