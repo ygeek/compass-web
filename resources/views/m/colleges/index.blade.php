@@ -164,7 +164,7 @@
         <div class="yuanxiao_pm">
             <form action="" method="get">
                 <div class="yuanxiao_pm_l">
-                    <input name="start" class="paiming01 start" type="text"><span>~</span><input class="paiming01 end" name="end" type="text">
+                    <input name="start" class="paiming01 start" type="number"><span>~</span><input class="paiming01 end" name="end" type="number">
                 </div>
                 <div class="yuanxiao_pm_r">
                     <input type="button" class="paiming02" onclick="pmqueding2()" value="确定"></div>

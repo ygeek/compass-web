@@ -95,7 +95,8 @@ $(function() {
             $('.paiming').attr('rank_start','');
             $('.paiming').attr('rank_end','');
         }
-        $('.paiming').attr('paiminghtm',$(this).html());
+        var phtm = $(this).html();
+        $('.paiming').attr('paiminghtm',phtm);
     });
     //登录与注册
     $(".toLogin").click(function(){
@@ -240,8 +241,10 @@ function pmqueding2()
     assignValue('rank_start',$('.start').val());
     assignValue('rank_end',$('.end').val());
     htm = $('.start').val()+'-'+$('.end').val();
-    $('.paiminga').html(htm);
-   
+    if($('.start').val()&&$('.end').val())
+    {
+        $('.paiminga').html(htm);
+    }
     goBlack2('.shaixuan');
 }
 
