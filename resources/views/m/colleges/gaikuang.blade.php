@@ -59,10 +59,10 @@
         <ul class="swiper-wrapper">
             
             @foreach($hot_colleges as $college)
-            <a href="{{route('colleges.show', $college->key)}}" ><li class="swiper-slide">
-                <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}">
+            <li class="swiper-slide">
+                <a href="{{route('colleges.show', $college->key)}}" ><img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"></a>
                 <h1>{{$college->chinese_name}}<br><font>{{$college->english_name}}</font></h1>
-                </li></a>
+                </li>
             @endforeach
         </ul>
        
@@ -71,10 +71,10 @@
         <ul class="swiper-wrapper">
             
             @foreach($local_colleges as $college)
-            <a href="{{route('colleges.show', $college->key)}}" ><li class="swiper-slide">
-                <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}">
+           <li class="swiper-slide">
+                 <a href="{{route('colleges.show', $college->key)}}" ><img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"></a>
                 <h1>{{$college->chinese_name}}<br><font>{{$college->english_name}}</font></h1>
-                </li></a>
+                </li>
             @endforeach
         </ul>
       
