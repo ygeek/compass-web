@@ -55,7 +55,7 @@
         </div>
        
     </div>
-    <div  class="sc tabli2 swiper-container2" style="overflow: hidden;" >
+    <div  class="sc tabli2 swiper-container2" style="overflow: hidden; display: none;" >
         <div class="swiper-wrapper">
              @foreach($hot_colleges as $college)
             <div class="swiper-slide"><img src="{{app('qiniu_uploader')->pathOfKey($college->background_image_path)}}" ></div>
