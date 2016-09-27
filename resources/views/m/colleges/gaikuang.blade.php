@@ -41,26 +41,42 @@
     
   
 ?>
+<style>
+.grzy_wdsc_list{padding: 10px 0px; margin: 0px;  background-color: #0e2e61;}
+.grzy_wdsc_list li{width:100%; background:#fff; display:block; float:left; padding:2%; margin:0 0 2% 2%; font-size:1.2em; color:#0e2d60;}
+.grzy_wdsc_list li img{width:100%;}
+.grzy_wdsc_list li h1{font-weight:normal;color:#0e2d60; border-top:1px solid #ddd; padding:3% 0 2% 0;}
+.grzy_wdsc_list li h1 a{color:#0e2d60;}
+
+    </style>
 <div class="main05" >
     <div class="tab" >
         <div class="tabli" show="tabli1"><a  class=" act">热门院校</a></div>
         <div class="tabli"  show="tabli2"><a  class="">同城院校</a></div>
         <div class="clear"></div>
     </div>
-    <div  class="sc tabli1 swiper-container" >
-        <div class="swiper-wrapper">
+    <div  class=" tabli1 swiper-container grzy_wdsc_list" >
+        <ul class="swiper-wrapper">
+            
             @foreach($hot_colleges as $college)
-            <div class="swiper-slide"><img src="{{app('qiniu_uploader')->pathOfKey($college->background_image_path)}}" ></div>
+            <li class="swiper-slide">
+                <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}">
+                <h1>{{$college->chinese_name}}<br><font>{{$college->english_name}}</font></h1>
+            </li>
             @endforeach
-        </div>
+        </ul>
        
     </div>
-    <div  class="sc tabli2 swiper-container2" style="overflow: hidden; display: none;" >
-        <div class="swiper-wrapper">
-             @foreach($hot_colleges as $college)
-            <div class="swiper-slide"><img src="{{app('qiniu_uploader')->pathOfKey($college->background_image_path)}}" ></div>
+    <div  class=" tabli2 swiper-container2 grzy_wdsc_list" style="overflow: hidden; " >
+        <ul class="swiper-wrapper">
+            
+            @foreach($local_colleges as $college)
+            <li class="swiper-slide">
+                <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}">
+                <h1>{{$college->chinese_name}}<br><font>{{$college->english_name}}</font></h1>
+            </li>
             @endforeach
-        </div>
+        </ul>
       
     </div>
 </div>
@@ -69,7 +85,7 @@
         pagination: '.swiper-pagination',
        // nextButton: '.swiper-button-next',
        // prevButton: '.swiper-button-prev',
-        slidesPerView: 3,
+        slidesPerView: 2,
         paginationClickable: true,
         centeredSlides: true,
         spaceBetween: 30,
@@ -81,7 +97,7 @@
         pagination: '.swiper-pagination2',
        // nextButton: '.swiper-button-next',
        // prevButton: '.swiper-button-prev',
-        slidesPerView: 3,
+        slidesPerView: 2,
         paginationClickable: true,
         centeredSlides: true,
         spaceBetween: 30,
@@ -93,10 +109,11 @@ $(function() {
     //选择国家
     $(".tabli").click(function(){
         var tablinum = $(this).attr("show");
-        $(".sc").hide();
+        $(".grzy_wdsc_list").hide();
         $("."+tablinum).show();
         $(this).children("a").addClass("act");
         $(".tabli").not(this).children("a").removeClass("act");
     })
 })
+$(".tabli2").hide();
 </script>
