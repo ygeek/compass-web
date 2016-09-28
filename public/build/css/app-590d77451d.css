@@ -1834,12 +1834,13 @@ ul {
   background-position: center;
   height: 600px; }
   .college-page .college-page-header .college-name {
-    margin-top: 300px;
+    margin-top: 250px;
     margin-left: 90px; }
     .college-page .college-page-header .college-name h1 {
       font-size: 53px;
       color: #fff;
-      font-weight: bold; }
+      font-weight: bold;
+      line-height: 53px; }
     .college-page .college-page-header .college-name p {
       font-size: 15px;
       width: 300px;
