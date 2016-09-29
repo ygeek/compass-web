@@ -2,8 +2,8 @@
 <div class="clear"></div>
 <div class="main">
     <div class="login_resgister">
-        <form action="/estimate/stepSecondPost" id="stepSecondPost" method="post">
-            <input type="text" class="login_resgister_input" name="name" placeholder="姓名" value="">
+        <form action="/estimate/stepSecondPost" id="stepSecondPost" onsubmit="return checkSecond()" method="post">
+            <input type="text" class="login_resgister_input" ismust='1' name="name" placeholder="姓名" value="">
             @if($selected_degree->name == '硕士')
             <select id="recently_college_name" v-model="data.recently_college_name" name="recently_college_name" class="select01">
                 <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
@@ -38,7 +38,7 @@
                     <option value="{{ $speciality }}" @if($index++ == 0 and !$user_recently_speciality_name) selected @endif>{{$speciality}}</option>
                 @endforeach
             </select>
-            <input type="text" class="login_resgister_input" name="related_length_of_working" placeholder="工作年限" value="">
+            <input type="number" class="login_resgister_input" name="related_length_of_working" placeholder="工作年限" value="">
             @endif
             @if($selected_degree->name == '本科')
             <div class="select_text">
@@ -64,14 +64,14 @@
                         <option value="{{ $province }}" @if($index++ == 0 and !$user_gaokao_input) selected @endif>{{$province}}</option>
                     @endforeach
                 </select>
-                <input type="text" class="login_resgister_input01 gkwithout" name="examinations[高考][score_without_tag]" placeholder="高考成绩">
+                <input type="number" class="login_resgister_input01 gkwithout" ismust='1' name="examinations[高考][score_without_tag]" placeholder="高考成绩">
                 <input type="hidden" class="gkscore" name="examinations[高考][score]" placeholder="高考成绩">
             </div>
             @endif
             @if($selected_degree->name == '本科')
-                <input class="login_resgister_input" type="text" id="mean" name="examinations[高中平均成绩][score]" placeholder="0~100"/>
+                <input class="login_resgister_input" type="number" id="mean" ismust='1' name="examinations[高中平均成绩][score]" placeholder="0~100"/>
             @else
-                <input class="login_resgister_input" type="text" id="mean" name="examinations[大学平均成绩][score]" placeholder="0~100"/>
+                <input class="login_resgister_input" type="number" id="mean" ismust='1' name="examinations[大学平均成绩][score]" placeholder="0~100"/>
             @endif
             <?php
                     $groups = [
@@ -146,7 +146,7 @@
             <input type="hidden" name="selected_degree" value="{{$selected_degree['id']}}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="selected_speciality_name" value="{{$selected_speciality_name}}">
-            <input type="submit" name="makePlan" value="生成选校方案" class="select_button makePlan" >
+            <input type="submit" tijiao='1' name="makePlan" value="生成选校方案" class="select_button makePlan" >
             <input type="button" value="返回" onclick="history.go(-1)" class="select_button01">
         </form>
        
@@ -168,7 +168,7 @@ function choseInputs(v,key)
         dataType:'json',
         success:function(e){
            
-           console.log(e);
+           //console.log(e);
             $('.choseInputs'+key).html(e)
         }
     }); 
@@ -178,6 +178,34 @@ function choseInputs(v,key)
 <?php foreach($groups as $gkey=>$gval){ ?>
 choseInputs('0',{{$gkey}});
 <?php } ?>
+
+function checkSecond()
+{
+    $(".makePlan").attr('tijiao',"1");
+    console.log('123');
+    $("#stepSecondPost").find("input").each(function(i) {
+       
+        if($(this).attr("ismust")=="1")
+        {
+            if($(this).val()=="") 
+            {
+                $(".makePlan").attr('tijiao',"0");
+                alert('请填写完整...');
+                return false;
+                
+            }
+        };
+    });
+    if($(".makePlan").attr('tijiao')=="0")
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
    
+   
+}
             
 </script>

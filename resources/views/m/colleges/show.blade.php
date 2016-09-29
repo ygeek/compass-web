@@ -43,7 +43,7 @@
     @if($article_key == 'specialities')
     @include('m.colleges.zhuanye')
     @endif
-    
+  
     @if($article_key == 'tu-pian')
     @include('m.colleges.tupian')
     @endif
@@ -52,7 +52,7 @@
     @include('m.colleges.gonglue')
     @endif
     <div class="footer_top"></div>
-    <div class="footer01">
+    <div class="footer01" style="z-index:999">
         <ul>
             <li class="home01"><a href="{{ route('colleges.show', ['key' => $college->key]) }}#college-page-nav" @if($article_key == 'xue-xiao-gai-kuang') id="current" @endif  >学校概况</a></li>
             <li class="home02"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}#college-page-nav" @if($article_key == 'lu-qu-qing-kuang') id="current" @endif >录取情况</a></li>

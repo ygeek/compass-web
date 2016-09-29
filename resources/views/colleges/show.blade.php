@@ -127,13 +127,15 @@
             <div class="app-content">
                 <search-form></search-form>
                 <template id="search-form">
-                <form id="specialities_search_form">
+                <form>
                     <input type="hidden" name="article_type" value="specialities" />
                     <div class="search-area">
                         <input type="text" placeholder="输入要查询的专业" name="speciality_name" value="{{ app('request')->input('speciality_name') }}"/>
                         <button type="submit" class="search-button"></button>
                     </div>
-
+                </form>
+                    <form id="specialities_search_form">
+                        <input type="hidden" name="article_type" value="specialities"/>
                     <div class="tag-area">
                         <div class="tag-select">
                             <tag-select label-name="学位类型" :selects="degrees" :selected_id.sync="selected_degree_id"></tag-select>

@@ -1825,12 +1825,13 @@ ul{
     height: 600px;
 
     .college-name{
-      margin-top: 300px;
+      margin-top: 250px;
       margin-left: 90px;
       h1{
         font-size: 53px;
         color: #fff;
         font-weight: bold;
+        line-height: 53px;
       }
       p{
         font-size: 15px;
@@ -1856,7 +1857,7 @@ ul{
       .college-info{
         display: inline-block;
         margin-left: 40px;
-        min-width: 270px;
+        width: 300px;
         h1{
           color: #000;
           font-size: 22px;
