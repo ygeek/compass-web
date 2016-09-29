@@ -63,18 +63,22 @@
                                     <i class="fa fa-pencil"></i>
                                     </a>
 
-                                    <a href="{{ route('admin.examination_score_weights.edit', $weight->id) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="修改规则s">
+                                    <a href="{{ route('admin.examination_score_weights.edit', $weight->id) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="修改规则">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="Remove Client">
-                                        <i class="fa fa-times"></i>
-                                    </button>
+                                    
+                                    <form action="{{ URL::route('admin.examination_score_weights.destroy', $weight->id) }}" method="POST" onsubmit="return ConfirmDelete()">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button class="btn btn-danger btn-xs">删除规则</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                {{ $weights->render() }}
             </div>
         </div>
     </template>

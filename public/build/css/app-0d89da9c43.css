@@ -1825,6 +1825,10 @@ ul {
     text-align: center;
     line-height: 30px;
     margin-right: 10px; }
+    .pagination li a {
+      display: block;
+      width: 30px;
+      height: 30px; }
     .pagination li.active {
       color: #0e2d60;
       font-weight: bold; }

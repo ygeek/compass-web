@@ -7,6 +7,7 @@ use App\College;
 use App\Degree;
 use App\ExaminationScoreWeight;
 use Illuminate\Http\Request;
+use Laracasts\Flash\Flash;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -51,6 +52,18 @@ class ExaminationScoreWeightsController extends BaseController
         $weight->weights = $weights;
         $weight->save();
 
+        return redirect()->route('admin.examination_score_weights.index');
+    }
+
+    public function destroy($id)
+    {
+        $weight = ExaminationScoreWeight::find($id);
+        if($weight->colleges->count() == 0){
+            $weight->delete();
+            Flash::message('删除成功');
+        }else{
+            Flash::message('有院校与其关联 无法删除');
+        }
         return redirect()->route('admin.examination_score_weights.index');
     }
 

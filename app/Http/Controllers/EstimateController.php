@@ -101,6 +101,15 @@ class EstimateController extends Controller
             $estimate_checked = true;
         }
 
+        if($college_id){
+          $college = College::find($college_id);
+          $college_current_source_weight = $college->examinationScoreWeight()->where('college_degree.degree_id', $selected_degree->id)->first();
+          //未设置当前专业对应的得分比例表
+          if(is_null($college_current_source_weight)){
+            return "当前院校该专业无法进行评估，请选择其他专业";
+          }
+        }
+
         return $this->view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id', 'cpm', 'college_id'));
     }
 

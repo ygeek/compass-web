@@ -1806,6 +1806,11 @@ ul{
     text-align: center;
     line-height: 30px;
     margin-right: 10px;
+    a{
+      display: block;
+      width: 30px;
+      height: 30px;
+    }
     &.active{
       color: #0e2d60;
       font-weight: bold;

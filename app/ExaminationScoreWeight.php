@@ -21,4 +21,8 @@ class ExaminationScoreWeight extends Model
     public function degree(){
         return $this->belongsTo(Degree::class);
     }
+
+    public function colleges(){
+        return $this->belongsToMany(College::class, 'college_degree', 'examination_score_weight_id');
+    }
 }
