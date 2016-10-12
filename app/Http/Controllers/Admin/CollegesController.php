@@ -144,7 +144,7 @@ class CollegesController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $college = College::with('degrees')->find($id);
 
@@ -181,8 +181,8 @@ class CollegesController extends BaseController
     {
         $this->validate($request, [
             'administrative_area_id' => 'required',
-            'chinese_name' => 'required',
-            'english_name' => 'required',
+            'chinese_name' => 'required|unique:colleges,chinese_name,'.$id,
+            'english_name' => 'required|unique:colleges,english_name,'.$id,
             'degree_ids' => 'required'
         ]);
 
