@@ -84,7 +84,7 @@
     <div class="clear"></div>
     <div class="yx_chaxun">
         <form method="GET" action="{{ route('colleges.index') }}">
-            <input type="text" class="chax_input" name="college_name" placeholder="院校查询" >
+            <input type="text" class="chax_input" name="college_name" placeholder="输入院校名称" >
             <input type="submit" class="chax_so" value="">
         </form>
     </div>
@@ -106,7 +106,7 @@
     <div class="clear"></div>
     <div class="yuyanxx">
         <div class="yuyanxx_m">
-            <h1>语言学习</h1><em><a href="{{ $more[0] }}">更多></a></em>
+            <h1>语言学习</h1><em><a href="{{ $more[0] }}" style="color: #1ddab0;">更多></a></em>
             <div class="clear"></div>
             <?php
             $articles = App\Article::whereHas('category', function($q) {
@@ -117,14 +117,14 @@
             <p><a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a></p>
             @endforeach
 
-            <p><a href="{{ $more[0] }}">更多>></a></p>
+         
         </div>
     </div>
     <div class="clear"></div>
     <div class="h_ad"><img src="/static/images/liuxuegonglue.jpg"></div>
     <div class="yuyanxx">
         <div class="yuyanxx_m">
-            <h1>留学攻略</h1><em><a href="{{ $more[1] }}">更多></a></em>
+            <h1>留学攻略</h1><em><a href="{{ $more[1] }}" style="color: #1ddab0;">更多></a></em>
             <div class="clear"></div>
             <?php
             $articles = App\Article::whereHas('category', function($q) {
@@ -134,14 +134,14 @@
             @foreach($articles as $article)
             <p><a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a></p>
             @endforeach
-            <p><a href="{{ $more[1] }}">更多>></a></p>
+          
         </div>
     </div>
     <div class="clear"></div>
     <div class="h_ad"><img src="/static/images/img01.jpg"></div>
     <div class="yuyanxx">
         <div class="yuyanxx_m">
-            <h1>移民攻略</h1><em><a href="{{ $more[2] }}">更多></a></em>
+            <h1>移民攻略</h1><em><a href="{{ $more[2] }}" style="color: #1ddab0;">更多></a></em>
             <div class="clear"></div>
             <?php
             $articles = App\Article::whereHas('category', function($q) {
@@ -151,7 +151,6 @@
             @foreach($articles as $article)
             <p><a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a></p>
             @endforeach
-            <p><a href="{{ $more[2] }}">更多>></a></p>
         </div>
     </div>
     <div class="clear"></div>

@@ -3,8 +3,10 @@
 <div class="main">
     <div class="login_resgister">
         <form action="/estimate/stepSecondPost" id="stepSecondPost" onsubmit="return checkSecond()" method="post">
+            <label for="name">姓名<span style="color: red">*</span></label>
             <input type="text" class="login_resgister_input" ismust='1' name="name" placeholder="姓名" value="">
             @if($selected_degree->name == '硕士')
+            <label for="recently_college_name">最近就读院校<span style="color: red">*</span></label>
             <select id="recently_college_name" v-model="data.recently_college_name" name="recently_college_name" class="select01">
                 <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
                 <?php
@@ -22,6 +24,7 @@
                 @endforeach
               
             </select>
+            <label for="recently_speciality_name">最近就读专业</label>
             <select id="recently_speciality_name" v-model="data.recently_speciality_name" name="recently_speciality_name" class="select01">
                 <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
                 <?php
@@ -38,10 +41,13 @@
                     <option value="{{ $speciality }}" @if($index++ == 0 and !$user_recently_speciality_name) selected @endif>{{$speciality}}</option>
                 @endforeach
             </select>
+            <label for="related_length_of_working">相关工作年限</label>
             <input type="number" class="login_resgister_input" name="related_length_of_working" placeholder="工作年限" value="">
             @endif
             @if($selected_degree->name == '本科')
+            <label for="cee">高考<span style="color: red">*</span></label>
             <div class="select_text">
+                
                 <select name="examinations[高考][tag]" class="select02 gktag">
                     <?php
                     $provinces = collect(config('provinces'))->sortBy(function ($product, $key) {
@@ -68,6 +74,7 @@
                 <input type="hidden" class="gkscore" name="examinations[高考][score]" placeholder="高考成绩">
             </div>
             @endif
+            <label for="mean">平均成绩<span style="color: red">*</span></label>
             @if($selected_degree->name == '本科')
                 <input class="login_resgister_input" type="number" id="mean" ismust='1' name="examinations[高中平均成绩][score]" placeholder="0~100"/>
             @else
