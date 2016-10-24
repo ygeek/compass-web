@@ -13,7 +13,7 @@
 
     </div>
     <div class="chaxun01"><a href="javascript:shaixuan('.shaixuan')"><span>•</span>条件筛选</a></div>
-    <div class="chaxun02"><h1>您找到<span>{{ $colleges->total() }}</span>所相关学校</h1><h2><a href="#">排序</a></h2></div>
+    <div class="chaxun02"><h1>您找到<span>{{ $colleges->total() }}</span>所相关学校</h1></div>
     <div class="grzy_wdsc_list">
         <ul>
             @foreach($colleges as $college)

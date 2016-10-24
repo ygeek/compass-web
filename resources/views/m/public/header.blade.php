@@ -31,7 +31,7 @@
             <button id="dl-menu-button">Open Menu</button>
             <ul class="dl-menu">
                 <li><a href="/index.php">首页</a></li>
-                <li><a href="/estimate/step-1">留学评估</a></li>
+                <li><a href="/estimate/step-1">免费留学评估</a></li>
                 <li><a href="/colleges">院校查询</a></li>
                 @if(Auth::check())
                 <li class="headuser"><a href="{{route('home.index')}}"  >个人中心</a></li>
@@ -75,7 +75,7 @@
     <div class="main">
         <div class="login_resgister">
             <form action="" method="post" >
-                <input type="text" class="login_resgister_input" placeholder="手机号码" name="phone_number">
+                <input type="number" class="login_resgister_input" placeholder="手机号码" name="phone_number">
                 <input type="password" class="login_resgister_input" placeholder="密码" name='password'>
                 <div class="login_mima">
                     <a href="javascript:changeView('#region')">注册</a>
@@ -98,7 +98,7 @@
     <div class="main">
         <div class="login_resgister">
             <form action="" method="get">
-                <input type="text" class="login_resgister_input" placeholder="手机号码" v-model="phone_number" name="zcphone_number">
+                <input type="number" class="login_resgister_input" placeholder="手机号码" v-model="phone_number" name="zcphone_number">
                 <input type="password" class="login_resgister_input" placeholder="密码" v-model="password" name="zcpassword">
                 <!--
                 <div class="yanzhenma">
@@ -113,7 +113,7 @@
                     <em><a href="javascript:void(0)" class="getVerify">获取验证码</a></em>
                 </div>
                 <div class="clear"></div>
-                <div class="resgister_xy"><a href="#">注册即同意《指南针用户协议》</a></div>
+                <div class="resgister_xy"><a href="#" style="float: left;">注册即同意《指南针用户协议》</a><a href="javascript:changeView('#login')" style=" float: right;">登录</a></div>
                 <input type="button" value="注册" class="login_button toRegion">
             </form>
         </div>

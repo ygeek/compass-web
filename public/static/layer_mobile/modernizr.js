@@ -4,7 +4,9 @@ function changeView(newView) {
     $("#content").hide();
     
     $("#header").hide();
+    $("#region").hide();
     $("#login").hide();
+    
     $(newView).show();
 }
 
