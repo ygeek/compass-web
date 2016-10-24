@@ -18,8 +18,12 @@ class Article extends Model
     public function link(){
         preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $this->content, $match);
 
-        $links = $match[0];
-        return $links[0];
+        try {
+          $links = $match[0];
+          return $links[0];
+        } catch (\Exception $e) {
+          return '';
+        }
     }
 
     public function toGallery(){
