@@ -211,6 +211,8 @@ function queding(classStr,valStr)
         assignValue('selected_country_id',$('.didian').attr('selected_country_id'));
         assignValue('selected_state_id',$('.didian').attr('selected_state_id'));
         htm = $('.didian').attr('selected_country_id_name') +' '+ $('.didian').attr('selected_state_id_name');
+        $(".yuanxiao_sx .paimingchilds").hide();
+        $(".yuanxiao_sx .country"+$('.didian').attr('selected_country_id')).attr("style","display:block;");
     }
     else
     {
@@ -243,10 +245,14 @@ function pmqueding2()
     assignValue('rank_start',$('.start').val());
     assignValue('rank_end',$('.end').val());
     htm = $('.start').val()+'-'+$('.end').val();
-    if($('.start').val()&&$('.end').val())
+    if($('.start').val()||$('.end').val())
     {
         $('.paiminga').html(htm);
     }
+    $(".yuanxiao_sx a ").attr("id",'');
+    $('.paiming').attr('paiminghtm','不限');
+    $('.paiming').attr('rank_start','');
+    $('.paiming').attr('rank_end','');
     goBlack2('.shaixuan');
 }
 
