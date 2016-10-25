@@ -54,7 +54,7 @@ class AuthController extends Controller
         if(env('APP_DEBUG')){
             return $this->responseJson('ok', ['code' => $code]);
         }else{
-            Event::fire(new VerifyCodeSet($code, $phone_number));
+            event(new VerifyCodeSet($code, $phone_number));
             return $this->responseJson('ok');
         }
     }
