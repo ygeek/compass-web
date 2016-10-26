@@ -31,7 +31,18 @@
         </p>
         <p class='sms-container'>
           <input placeholder="短信验证" class="sms-input" v-model="verify_code"/>
-          <button class='grab-verify-code' @click="getVerifyCode">获取验证码</button>
+          <button
+            class='grab-verify-code'
+            @click="getVerifyCode"
+            v-bind:disabled="countDown"
+          >
+            <template v-if="countDown==null">
+              获取验证码
+            </template>
+            <template v-else>
+              @{{countDown}}s后重试
+            </template>
+          </button>
         </p>
         <p class="tips">
           注册既同意《指南针用户协议》
@@ -51,7 +62,9 @@
         panel: 'login',
         phone_number: '',
         password: '',
-        verify_code: ''
+        verify_code: '',
+        countDown: null,
+        countDownInterval: null,
       };
     },
     methods: {
@@ -71,6 +84,16 @@
           }else{
 
           }
+
+          var that = this;
+          that.countDown = 60;
+          that.countDownInterval = setInterval(function() {
+            that.countDown--;
+            if(that.countDown == 0) {
+              clearInterval(that.countDownInterval);
+              that.countDown = null;
+            }
+          }, 1000);
         });
       },
       sendRegisterRequest: function(){
@@ -80,6 +103,8 @@
           password: this.password
         }).then(function(response){
           alert('注册成功');
+        }, function(response) {
+          alert('注册用户失败');
         });
       },
       sendLoginRequest: function(){
