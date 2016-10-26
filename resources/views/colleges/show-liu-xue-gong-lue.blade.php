@@ -11,3 +11,5 @@
     </div>
     @endforeach
 </div>
+
+{{ $articles->appends(app('request')->except('page'))->render() }}
