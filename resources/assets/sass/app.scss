@@ -2188,6 +2188,7 @@ ul{
 
     .college-galleries{
       @include clearfix;
+      width: 840px;
       margin-right: -12px;
       .college-gallery{
         cursor: pointer;

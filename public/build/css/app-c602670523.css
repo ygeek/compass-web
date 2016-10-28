@@ -2140,6 +2140,7 @@ ul {
         margin-bottom: 20px;
         font-weight: bold; }
   .college-page .college-pages .college-galleries {
+    width: 840px;
     margin-right: -12px; }
     .college-page .college-pages .college-galleries:after {
       content: "";
