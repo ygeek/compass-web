@@ -4,7 +4,7 @@
 
 body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}
 body,button,input,select,textarea{font-size:14px; font-family:"微软雅黑";}
-body{color:#666; background:#000; max-width:800px; width:100%; margin:0 auto;}
+body{color:#666; background:#ebebeb;  max-width:800px; width:100%; margin:0 auto;}
 h1,h2,h3,h4,h5,h6{font-size:100%;}
 address,cite,dfn,em,var{font-style:normal;}
 code,kbd,pre,samp{font-family:courier new,courier,monospace;}
@@ -1365,11 +1365,14 @@ select::-ms-expand { display: none; }
 	     .chaxun10 h1 span{color:#1ddab0;}
 	 .chaxun10 h2{float:left; font-weight:normal;  padding:0 25px 0 0;}
 	 
-	.yuanxiao_gzy li{width:44%; float:left; background:#fff;  display:block; padding:0 0 0 0; margin:4% 0 0 4%;}
-        .yuanxiao_gzy li h1{font-size:1.2em; padding:10px 5%; height: 50px; line-height: 50px; overflow: hidden;}
-		.yuanxiao_gzy li p{font-size:1.0em; padding:5%; height: 70px; line-height: 20px; overflow: hidden;}
-		.yuanxiao_gzy li a{font-size:1.0em; padding:3% 0 3% 5%; background:url(../images/icon35.png) 92% no-repeat #0e2d60; display:block; background-size:15px; color:#fff; margin:5% 0 0 0;}
 	
+                .yuanxiao_gzy li{width:95%;  background:#fff;  display:block; padding:0 0 0 0; margin:4% auto 0 auto; position:relative;}
+        .yuanxiao_gzy li h1{font-size:1.2em; padding:2% 5%;}
+		.yuanxiao_gzy li p{font-size:1.0em; padding:2% 5%;}
+		.yuanxiao_gzy li a{font-size:1.0em; padding:2% 6%; background:url(../images/icon35.png) 92% no-repeat #0e2d60; display:block; background-size:15px; color:#fff; margin:12% 0 0 0; position:absolute; width:20%; top:0; right:2%; }
+	
+                
+                
 	.yuanxiao_pic{padding:0 0 5% 0;}	
    .yuanxiao_pic a{width:44%; float:left; display:block; background:#fff; text-align:center; font-size:1.5em; margin:4% 0 0 4%;}	
       .yuanxiao_pic a img{width:100%; height: 150px;}	
@@ -1381,9 +1384,9 @@ select::-ms-expand { display: none; }
       .yuanxiao_gl p span{display:block; float:right;}		
 		
 	.yuanxiao_pm6 li{padding:3% 4%; text-align:center; font-size:1.3em; display:block;}	
-	   .yuanxiao_pm6 li h1{width:5%; float:left; font-weight:normal;}
-	   .yuanxiao_pm6 li h2{width:40%; float:left; font-weight:normal;}
-	   .yuanxiao_pm6 li h3{width:45%; float:left; font-weight:normal;}
+	   .yuanxiao_pm6 li h1{width:10%; font-size: 0.9em; float:left; line-height: 30px; font-weight:normal;}
+	   .yuanxiao_pm6 li h2{width:60%; float:left; text-align: left; font-size: 0.7em; line-height: 15px; font-weight:normal;}
+	   .yuanxiao_pm6 li h3{width:15%;font-size: 0.9em; line-height: 30px; float:left; font-weight:normal;}
 	   .yuanxiao_pm6 li span{width:10%; float:left; display:block;}
 	      .yuanxiao_pm6 li span a{display:block; background:url(../images/icon12.png) no-repeat right; text-indent:-999999em;}
 		  .yuanxiao_white{background:#fff;}
@@ -1393,7 +1396,7 @@ select::-ms-expand { display: none; }
 	    .yuyanxiao_gxl a:hover{color:#0e2d60;}
 		   #yuyanxiao_gxl{color:#0e2d60;}
 	    .yuyanxiao_gxl a img{height:40px; margin:20px 0 0 0; display:block;}
-		.main06{background:#ebebeb; padding:95px 0 0 0;}
+		.main06{background:#ebebeb; padding:65px 0 0 0;}
 		
 		
 /***************************底部*********
@@ -1436,10 +1439,10 @@ margin: 2% 0 0 0;}
 
 
 .paiming50{padding:3% 4%; background:#1ddab0;  font-size:1.2em; color:#fff;}
-  .paiming50 h1{float:left; width:6%;}
-  .paiming50 h2{float:left; width:68%; margin:0 2%;}
-  .paiming50 h3{float:left; width:10%;}
+  .paiming50 h1{float:left; width:10%; font-size: 0.9em;}
+  .paiming50 h2{float:left; width:60%; margin:0 2%;font-size: 0.9em;}
+  .paiming50 h3{float:left; width:18%;font-size: 0.9em;}
   
   
-.mianfeipinggu a{padding:2% 0; max-width:800px; margin:0 auto;  background:#1ddab0; text-align:center; font-size:2em; color:#fff; display:block; position:fixed; bottom:0; left:0; right:0;}  
-.mianfeipinggu01 a{padding:2% 0; max-width:800px; margin:0 auto; background:#1ddab0; text-align:center; font-size:2em; color:#fff; display:block; position:fixed; bottom:17%; left:0; right:0;}  
+.mianfeipinggu a{padding:2% 0; max-width:800px; margin:0 auto;  background:#1ddab0; text-align:center; font-size:1.5em; color:#fff; display:block; position:fixed; bottom:0; left:0; right:0;}  
+.mianfeipinggu01 a{padding:2% 0; max-width:800px; margin:0 auto; background:#1ddab0; text-align:center; font-size:1.5em; color:#fff; display:block; position:fixed; bottom:17%; left:0; right:0;}  

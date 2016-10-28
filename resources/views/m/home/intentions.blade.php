@@ -1,17 +1,18 @@
 @include('m.public.header')
+<style>
+#header{ display: none;}    
+</style>
 <div class="clear"></div>
-<div class="main02">
-    @include('m.home.editUser')
-   <div class="grzy_wdxx_meun">
-        <span>
-            <a href="{{ route('home.index') }}">消息</a>
-            <a  href="{{ route('home.like_colleges') }}" >收藏</a>
-            <a id="grzy_wdxx_meun" href="{{ route('home.intentions') }}" >意向单</a>
-        </span>
+<div class="main02" style="background: #fff;">
+  
+    <div class="header">
+        <a href="/home"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
+        <div class="header_c">我的意向单</div>
     </div>
    
     @foreach($intentions['intentions'] as $intention)
     <div class="pinggu_xx" >
+        
         <div class="pinggu_xx_name">
             <img src="{{$intention['badge_path']}}">
             <h1>{{$intention['college']['chinese_name']}}<br>{{$intention['college']['english_name']}}</h1>

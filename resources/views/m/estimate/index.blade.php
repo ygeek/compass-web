@@ -12,21 +12,30 @@
 <div class="main01 {{$reduce_key}}">
     @foreach($colleges as $k=>$college)
     <div class="pinggu_xx" >
-        <div class="pinggu_xx_name">
-            <img src="{{app('qiniu_uploader')->pathOfKey($college['college']['badge_path'])}}">
-            <h1>{{$college['college']['chinese_name']}}<br>{{$college['college']['english_name']}}</h1>
-            <div class="clear"></div>
-        </div>
-        <div class="pinggu_pm">
-            <span>托福<br>{{ $college['toefl_requirement'] }}</span>
-            <span>雅思<br>{{ $college['ielts_requirement'] }}</span>
-            
-            <span>U.S.New排名<br>{{$college['college']['us_new_ranking']}}</span>
-            <span>Times排名<br>{{$college['college']['times_ranking']}}</span>
-            <span>QS排名<br>{{$college['college']['qs_ranking']}}</span>
-            <span>本国排名<br>{{$college['college']['domestic_ranking']}}</span>
-            <div class="clear"></div>
-        </div>
+        
+        <div class="pinggu_xx_name50">
+                <h2><img src="{{app('qiniu_uploader')->pathOfKey($college['college']['badge_path'])}}" width='80%'><br />
+                <span style="display:block; float:left;">{{$college['college']['chinese_name']}}</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px;">{{ ($college['college']['type']=="public")?'公立':'私立' }}</span>
+                <div class="clear"></div>
+                {{$college['college']['english_name']}}</h2>
+                <h1>本国排名：{{$college['college']['domestic_ranking']}}<br><span style="background:url(/static/images/icon21.jpg) left no-repeat; background-size:20px; padding:0 0 0 30px;">
+                 <?php
+                                                        $area = App\AdministrativeArea::where('id',$college['college']['administrative_area_id'])->get();
+                                                        echo ($area[0]->name);
+                                                        while ($area[0]->parent_id!=null){
+                                                            $area = App\AdministrativeArea::where('id',$area[0]->parent_id)->get();
+                                                            echo (" , " . $area[0]->name);
+                                                        }
+                                                    ?>                           </span>
+                    
+                       <br><br>
+                       <img src="/static/images/xin<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college['college']['id'])){echo 1;} else {echo 2;}}else{echo 2;} ?>.png" width="30" style=" cursor: pointer;" likeid='<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college['college']['id'])){echo 1;} else {echo 2;}}else{echo 3;} ?>' onclick="setLike('{{ $college['college']['id'] }}',$(this))" ><span id='shuzi{{ $college['college']['id'] }}'>{{ $college['college']['like_nums'] }}</span>
+                
+                </h1>
+                <div class="clear"></div>
+         </div>     
+        
+        
         <div class="pinggu_pp">
             <h1>{{$college['score']}}%<span>匹配概率</span></h1>
             <h2><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display = 'block';document.getElementById('fade{{$k}}').style.display = 'block'">查看匹配详情</a></h2>

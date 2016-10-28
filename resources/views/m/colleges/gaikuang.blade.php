@@ -1,8 +1,4 @@
-<div class="yuanxiao_pm01">
-    <h1>院校排名</h1>
-    <a href="javascript:showPm()"><img src="/static/images/yuanxi_paim.jpg"></a>
-    <div class="clear"></div>
-</div>
+
 
 @foreach($articles as $article)
 <div class="yuanxiao_jj">
