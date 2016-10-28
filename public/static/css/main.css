@@ -1279,8 +1279,8 @@ select::-ms-expand { display: none; }
 				.pinggu_xx_name01 h1{float:right; width:50%; text-align:right; font-weight:normal; font-size:1.4em; color:#0e2d60;}			
 	   .yuanxiao_xx{padding:2% 0 0 0; font-size:1.4em;}
 			.yuanxiao_xx p{height:40px; line-height:40px;}
-			   .yuanxiao_xx p img{display:block; float:left;}
-			   .yuanxiao_xx p span{display:block; float:right; text-align:right;}
+			   .yuanxiao_xx p img{display:block; float:left;margin: 10px 0 0 2%; height: 20px;}
+			   .yuanxiao_xx p span{display:block; float:left; text-align:left; font-size: 0.8em; margin-left: 4%;}
 			   
 		
    .yuanxiao_pm01{padding:2% 5%; background:#fff; border-bottom:1px solid #ebebeb;}			   
@@ -1414,4 +1414,32 @@ footer{background:#132a60; padding:5% 0 5% 0;}
 			   
 
 
+.shaixuan_icon{float:right; width:17%; height: 65px; margin-top: 2%;}
+ 
 
+.pinggu_xx_name50 h2{float:left; color:#2b426e; font-size:1.1em; width: 50%;}
+.pinggu_xx_name50 h1{float:right; text-align:right; font-size:1.0em; width: 50%;}
+.pinggu_xx50   .pinggu_xx_name50 h2 img { width: 80%;}
+.pinggu_xx50   .pinggu_xx_name50 h1 img { width: 15%;}
+.pinggu_xx50{
+padding: 5%;
+background: #fff;
+margin: 2% 0 0 0;}
+
+
+ .yuanxiao_pm50{background:#fff; padding:3% 0;}
+   .yuanxiao_pm50 li{width:22%; display:block; float:left; text-align:center; margin:0 0 0 3%;}
+      .yuanxiao_pm50 li h1{ height:50px; line-height:50px; width:50px; display:block;  font-size:1.0em; border-radius:100%; font-weight:normal; color:#fff; margin:0 auto;}
+	   .yuanxiao_pm50 li span{font-size:0.9em; line-height:2.7em;}
+    
+
+
+
+.paiming50{padding:3% 4%; background:#1ddab0;  font-size:1.2em; color:#fff;}
+  .paiming50 h1{float:left; width:6%;}
+  .paiming50 h2{float:left; width:68%; margin:0 2%;}
+  .paiming50 h3{float:left; width:10%;}
+  
+  
+.mianfeipinggu a{padding:2% 0; max-width:800px; margin:0 auto;  background:#1ddab0; text-align:center; font-size:2em; color:#fff; display:block; position:fixed; bottom:0; left:0; right:0;}  
+.mianfeipinggu01 a{padding:2% 0; max-width:800px; margin:0 auto; background:#1ddab0; text-align:center; font-size:2em; color:#fff; display:block; position:fixed; bottom:17%; left:0; right:0;}  

@@ -21,11 +21,34 @@
             <h1>{{$college->chinese_name}}<br>{{$college->english_name}}</h1>
             <div class="clear"></div>
         </div>
-        <div class="yuanxiao_xx">
-            <p><img src="/static/images/icon21.jpg"><span>{{$college->administrativeArea->name}} · since {{$college->founded_in}}</span></p>
-            <p><img src="/static/images/icon22.jpg"><span>{{$college->telephone_number}}</span></p>
-            <p><img src="/static/images/icon23.jpg"><span>{{$college->website}}</span></p>
+        <div class="yuanxiao_pm50">
+            <ul>
+                <li style=" margin-left: 2%;">
+                      <h1 class="color01">{{$college->qs_ranking}}</h1>
+                      <span>QS排名</span>
+                 </li>
+                  <li>
+                      <h1 class="color02">{{$college->us_new_ranking}}</h1>
+                      <span>US New排名</span>
+                 </li>
+                  <li>
+                      <h1 class="color03">{{$college->times_ranking}}</h1>
+                      <span>Times排名</span>
+                 </li>
+                  <li>
+                      <h1 class="color04">{{$college->domestic_ranking}}</h1>
+                      <span>国内排名</span>
+                 </li>
+                 <div class="clear"></div>
+            </ul>
         </div>
+        <div class="yuanxiao_xx">
+            <p style="float:left; width:60%"><img src="/static/images/icon21.jpg"><span>{{$college->administrativeArea->name}} · since {{$college->founded_in}}</span></p>
+            <p style="float:left; width:40%"><img src="/static/images/icon22.jpg"><span>{{$college->telephone_number}}</span></p>
+            <div class="clear"></div>
+            <p><img src="/static/images/icon23.jpg"><span style=" margin-left: 3%;">{{$college->website}}</span></p>
+       </div>
+       
         <div class="clear"></div>
     </div>
     <!--院校概况-->

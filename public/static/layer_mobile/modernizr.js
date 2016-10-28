@@ -338,3 +338,55 @@ function choseInput(v,n)
     $('.yt'+n+sval).show();
     console.log(n+sval);
 }
+
+
+//收藏与取消
+//第一步选择专业
+function setLike(college_id,obj)
+{
+    var likeid = obj.attr("likeid");
+    var shuzi = $("#shuzi"+college_id).html();
+    if(likeid=="3")
+    {
+        alert('请先登录!');
+    }
+    if(likeid=="2")
+    {
+        $.ajax({
+            type:'POST',
+            url:'/like_college',
+            data:'college_id='+college_id,
+            async:false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            dataType:'json',
+            success:function(e){
+                if(e.status=="ok")
+                {
+                    obj.attr("src","/static/images/xin1.png");
+                    obj.attr("likeid","1");
+                    $("#shuzi"+college_id).html(parseInt(shuzi)+1);
+                }
+            }
+        }); 
+    }
+    if(likeid=="1")
+    {
+        $.ajax({
+            type:'POST',
+            url:'/dislike_college',
+            data:'college_id='+college_id,
+            async:false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            dataType:'json',
+            success:function(e){
+                if(e.status=="ok")
+                {
+                    obj.attr("src","/static/images/xin2.png");
+                    obj.attr("likeid","2");
+                    $("#shuzi"+college_id).html(parseInt(shuzi)-1);
+                }
+            }
+        }); 
+    }
+    
+}
