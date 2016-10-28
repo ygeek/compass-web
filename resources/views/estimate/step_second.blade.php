@@ -21,22 +21,20 @@
                     @if($selected_degree->name == '硕士')
                         <div class="form-group">
                             <label for="recently_college_name">最近就读院校<span style="color: red">*</span></label>
-                            <select id="recently_college_name" v-model="data.recently_college_name" class="estimate-input">
-                                <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
-                                <?php
-                                  $index = 0;
-                                  $user = Auth::user();
-                                  if($user){
-                                    $user_recently_college_name = $user->getEstimateInput('recently_college_name');
-                                  }else{
-                                    $user_recently_college_name = false;
-                                  }
-                                ?>
+                            <college-select-pop :show.sync="showCollegeSelect"></college-select-pop>
+                            <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
+                            <?php
+                              $index = 0;
+                              $user = Auth::user();
+                              if($user){
+                                $user_recently_college_name = $user->getEstimateInput('recently_college_name');
+                              }else{
+                                $user_recently_college_name = false;
+                              }
+                            ?>
 
-                                @foreach($master_colleges as $college)
-                                    <option value="{{ $college }}" @if($index++ == 0 and !$user_recently_college_name) selected @endif>{{$college}}</option>
-                                @endforeach
-                            </select>
+                            <input @click="displayCollegeSelect" v-model="data.recently_college_name" class="estimate-input"/>
+
 
                             @if(isset($cpm) && $cpm)
                             </div>
@@ -44,21 +42,26 @@
                             @endif
 
                             <label for="recently_speciality_name">最近就读专业</label>
+                            <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
+                            <?php
+                              $index = 0;
+                              $user = Auth::user();
+                              if($user){
+                                $user_recently_speciality_name = $user->getEstimateInput('recently_speciality_name');
+                              }
+                              else{
+                                $user_recently_speciality_name = false;
+                              }
+                            ?>
+
                             <select id="recently_speciality_name" v-model="data.recently_speciality_name" class="estimate-input">
-                                <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
-                                <?php
-                                  $index = 0;
-                                  $user = Auth::user();
-                                  if($user){
-                                    $user_recently_speciality_name = $user->getEstimateInput('recently_speciality_name');
-                                  }
-                                  else{
-                                    $user_recently_speciality_name = false;
-                                  }
-                                ?>
-                                @foreach($master_speciality as $speciality)
-                                    <option value="{{ $speciality }}" @if($index++ == 0 and !$user_recently_speciality_name) selected @endif>{{$speciality}}</option>
-                                @endforeach
+                              <option
+                                v-for="major in majorsList"
+                                :value="major"
+                                track-by="$index"
+                              >
+                                @{{major}}
+                              </option>
                             </select>
                         </div>
 
@@ -200,6 +203,40 @@
 
             </template>
 
+            <template id="college-select-pop">
+              <div class="college-select-pop" v-show="show">
+                <div class="close" @click="closeButtonClick">
+                  X
+                </div>
+
+                <div class="search-bar">
+                  <span>搜索</span><input v-model="searchKeyWord"/>
+
+                  <ul class="search-result">
+                    <li v-for="college in showSearchResult">
+                      <span @click="selectCollege(college)">@{{college.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="provinces">
+                  <ul>
+                    <li v-for="province in provinces" :class="{ active: province == selectedProvince }">
+                      <span @click="selectProvince(province)">@{{province}}</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="colleges">
+                  <ul>
+                    <li v-for="college in showColleges">
+                      <span @click="selectCollege(college)">@{{college.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </template>
+
             <template id="group-examination">
                 <label for="group@{{ $index }}">@{{ group.title }}<span style="color: red">*</span></label>
                 <div class="estimate-short-select" style="position: relative; top: <?php if(!(isset($cpm) && $cpm)) echo "15px"; else echo "10px" ?>;">
@@ -251,6 +288,62 @@
         for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
         return obj3;
     }
+
+    Vue.component('college-select-pop', {
+      template: '#college-select-pop',
+      props: ['show'],
+      data: function() {
+        return {
+          colleges: [],
+          provinces: [],
+          loading: true,
+          selectedProvince: null,
+          searchKeyWord: null,
+        }
+      },
+      methods: {
+        closeButtonClick: function() {
+          this.$dispatch('close-college-select-pop');
+        },
+        selectProvince: function(province_name) {
+          this.selectedProvince = province_name;
+        },
+        selectCollege: function(college) {
+          this.$dispatch('close-college-select-pop');
+          this.$dispatch('select-college', college);
+        }
+      },
+      computed: {
+        showSearchResult: function() {
+          var that = this;
+          if(!this.searchKeyWord) {
+            return null;
+          }else {
+            return this.colleges.filter(function(college) {
+              return college.name.indexOf(that.searchKeyWord) !== -1;
+            });
+          }
+        },
+        showColleges: function() {
+          var that = this;
+          if(!that.selectedProvince) {
+            return []
+          }else {
+            return this.colleges.filter(function(college) {
+              return college.area == that.selectedProvince;
+            });
+          }
+        },
+      },
+      created: function() {
+        var that = this;
+        this.$http.get("{{ route('estimate.select_colleges') }}").then(function(response) {
+          that.loading = false;
+          that.colleges = response.data.data['colleges'];
+          that.provinces = response.data.data['areas'];
+        });
+      },
+    });
 
         Vue.component('group-examination', {
             template: "#group-examination",
@@ -306,7 +399,7 @@
                       高考: {
                           score: ''
                       }
-                  }
+                  },
                 };
 
                 <?php $user = Auth::user() ?>
@@ -341,6 +434,8 @@
                 @endif
 
                 return {
+                    showCollegeSelect: false,
+                    majorsList: [],
                     groups: {!! json_encode($groups) !!},
                     data: merge_options({
                         selected_degree: {{ $selected_degree->id }},
@@ -374,7 +469,25 @@
                     }
                 }
             },
+            events: {
+              'close-college-select-pop': function() {
+                this.showCollegeSelect = false;
+              },
+              'select-college': function(college) {
+                this.data.recently_college_name = college.name;
+
+                if(!college.major) {
+                  this.majorsList = ['其它'];
+                } else {
+                  this.majorsList = college.major.concat(["其它"]);
+                }
+              }
+            },
             methods: {
+                displayCollegeSelect: function() {
+                  this.showCollegeSelect = true;
+                },
+
                 checked: function (tmp, start, end, name) {
                     if (tmp==""){
                         alert(name+"未填写。");

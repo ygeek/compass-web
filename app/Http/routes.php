@@ -5,6 +5,7 @@ Route::get('/get_speciality', 'IndexController@getSpeciality')->name('index.get_
 
 //评估
 Route::get('/estimate/step-1', 'EstimateController@stepFirst')->name('estimate.step_first');
+Route::get('/estimate/select-colleges', 'EstimateController@getCollegesForSelect')->name('estimate.select_colleges');
 Route::get('/estimate/get_speciality', 'EstimateController@getSpeciality')->name('estimate.get_speciality');
 Route::get('/estimate/step-2', 'EstimateController@stepSecond')->name('estimate.step_second');
 Route::post('/estimate/stepSecondForm', 'EstimateController@stepSecondForm')->name('estimate.stepSecondFrom');

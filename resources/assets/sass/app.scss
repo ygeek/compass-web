@@ -603,6 +603,80 @@ ul{
   }
 }
 
+.college-select-pop {
+
+  .search-bar {
+    margin: 10px;
+    margin-top: 8px;
+    position: relative;
+    .search-result {
+      position: absolute;
+      width: 147px;
+      margin-left: 26px;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      z-index: 99999;
+      background: #fff;
+      max-height: 100px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      li {
+        cursor: pointer;
+      }
+    }
+  }
+  .close {
+    position: absolute;
+    cursor: pointer;
+    right: 8px;
+    top: 4px;
+  }
+
+  position: fixed;
+  border: 1px solid #9d99b9;
+  width: 500px;
+  height: 500px;
+  background: #fff;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+
+  .provinces {
+    height: 60px;
+    padding: 10px;
+    @include clearfix;
+    li {
+      display: block;
+      padding: 2px;
+      &.active {
+        background: #005eac;
+        color: #fff;
+      }
+      cursor: pointer;
+      float: left;
+      margin-right: 10px;
+    }
+  }
+
+  .colleges {
+    width: 90%;
+    margin: 0 auto;
+    height: 300px;
+    padding: 10px;
+    @include clearfix;
+    overflow-x: scroll;
+    border: 1px solid #ccc;
+    li {
+      float: left;
+      margin-top: 10px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+}
+
 .estimate-page{
   background-color: #e0e0e0;
   background-image: url("/images/estimate-bg.png");
@@ -643,8 +717,6 @@ ul{
       margin-bottom: 12px;
       padding-left: 2px;
     }
-
-
 
     .estimate-select{
       background: #fff url("/images/select_arrow.png") no-repeat 98%;

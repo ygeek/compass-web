@@ -15,11 +15,34 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Uuid;
+use File;
 
 use App\Http\Requests;
 
 class EstimateController extends Controller
 {
+    public function getCollegesForSelect() {
+      $path = storage_path() . '/colleges.json';
+      $content = File::get($path);
+      $colleges_data = json_decode($content, true)['colleges'];
+      $areas = [];
+      $colleges = [];
+
+      foreach ($colleges_data as $college_data) {
+        array_push($areas, $college_data['college_area']);
+        array_push($colleges, [
+          'name' => $college_data['college_name'],
+          'major' => $college_data['college_major'],
+          'area' => $college_data['college_area'],
+        ]);
+      }
+
+      return $this->responseJson('ok', [
+        'areas' => array_unique($areas),
+        'colleges' => $colleges
+      ]);
+    }
+
     public function stepFirst(Request $request){
         $cpm = (bool)($request->input('cpm', false));
         $selected_country_id = $request->input('selected_country_id', null);
@@ -127,12 +150,12 @@ class EstimateController extends Controller
         else{
             $data = $request->input('data');
         }
-      
+
         if(is_string($data)){
             $data = json_decode($data, true);
         }
-       
-        
+
+
         $selected_country = AdministrativeArea::find($data['selected_country']);
         $selected_degree = Degree::find($data['selected_degree']);
         $selected_speciality_name = $data['selected_speciality_name'];
@@ -274,29 +297,29 @@ class EstimateController extends Controller
                   ->where('specialities.name', $speciality_name);
         })->get();
     }
-    
+
     public function stepSecondPost()
     {
-        
-          
+
+
             $str = '<form action="/estimate" id="formid" method="post">';
             $str .= '<input type="hidden" name="data" value=\''.  json_encode($_POST).'\' ><input type="hidden" name="_token" value="'.  csrf_token().'" >' ;
             $str .= '</form><script>document.getElementById("formid").submit();</script>';
             echo $str;
-           
+
     }
-    
-    public function stepSecondForm() 
+
+    public function stepSecondForm()
     {
-        
-        
-        
+
+
+
         $value = $_POST['value'];
         $groups = $_POST['groups'];
         $key = $_POST['key'];
         $str = '';
         $groups = $this->object_to_array(json_decode($groups));
-       
+
         $val = $groups[$key];
         if(is_object($val)) $val = get_object_vars ($val);
         $leixing = $val['selects'][$value];
@@ -325,7 +348,7 @@ class EstimateController extends Controller
             if(!is_array($v)&&!is_object($v)) $leixingHidden .= '<input type="hidden"  name="examinations['.$leixing.']['.$k.']" value="'.$v.'"  >
                 ';
         }
-        $str .= 
+        $str .=
         '<div class="select_text">
 
             <select name="examinations['.$leixing.']" class="select02" onchange="choseInputs($(this).val(),'.$key.')" >
@@ -336,11 +359,11 @@ class EstimateController extends Controller
         <!--听说读写-->
         <div class="select_radio " >
             '.$leixingAddhtml.'
-        </div>  
+        </div>
 
         '.$leixingHidden;
-        
-        
+
+
         return json_encode($str);
     }
     function object_to_array($obj)
