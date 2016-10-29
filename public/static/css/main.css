@@ -1218,9 +1218,9 @@ select::-ms-expand { display: none; }
 			     .grzy_wdsc_list li h1{font-weight:normal;color:#0e2d60; border-top:1px solid #ddd; padding:3% 0 2% 0;}
                              .grzy_wdsc_list li h1 font { font-size: 0.8em;}
 		           .grzy_wdsc_list li h1 a{color:#0e2d60;}
-				   .pinggu_pm01{padding:3% 0; border-bottom:1px solid #ebebeb;}
-						.pinggu_pm01 span{display:block; text-align:center; float:left; width:6%; font-size:1em;}
-						.pinggu_pm01 em{display:block; text-align:center; float:left; width:10%; font-size:1em;}
+				   .pinggu_pm01{  width: 100px; float:left;margin-top: 0px;border-left:0.5px solid #ebebeb;}
+						.pinggu_pm01 span{display:block; text-align:center;  border:0.5px solid #ebebeb; border-left:none; border-top:none; height: 25px; line-height: 28px; float:left; width:100%; font-size:0.8em;}
+						.pinggu_pm01 em{display:block; text-align:center; border:0.5px solid #ebebeb; height: 25px; line-height: 28px; float:left; width:100%; font-size:0.8em;}
 				   .pinggu_pm02{padding:3% 0 3% 4%; border-bottom:1px solid #ebebeb; background:#f3f3f3;}
 						.pinggu_pm02 span{display:block; text-align:center; float:left; width:6%; font-size:0.8em;}
 						.pinggu_pm02 em{display:block; text-align:center; float:left; width:10%; font-size:1em;}
