@@ -306,7 +306,7 @@ function mmenuShow(conid)
 
         <!-- navbar info -->
         <div class="Hidden" style="display:none;">
-            <a class="Prev" href="/home"><</a>
+            <a class="Prev" href="/home"></a>
             <a class="Next" href="#remove">&times;</a>
         </div>
     </div>
