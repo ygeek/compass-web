@@ -60,7 +60,7 @@
         a.mm-prev:before,
         a.mm-next:after
         {
-            content: none !important;
+            
         }
         a.mm-prev
         {
@@ -169,6 +169,12 @@
       
         float: right;
     }
+    .mm-listview .mm-next.mm-fullsubopen {
+        width: 80%;
+    }
+    
+   
+    
 </style>
 <script>
     
@@ -229,7 +235,7 @@ function mmenuShow(conid)
         });
 
         $('#menu')
-            .find( '.mm-next' )
+            .find( '.mm-navbar .mm-next' )
             .on( 'click',
                 function( e )
                 {
@@ -252,8 +258,20 @@ function mmenuShow(conid)
                             display: "block",
                             opacity: 0
                         }).slideUp(function() {
+                            var _id = $(this).attr('vid');
+                            console.log(_id);
                             $(this).remove();
-                            alert('1');
+                            $.ajax({
+                                 type:'POST',
+                                 url:'/home/messages/'+_id,
+                                 data:'_token='+$('meta[name="_token"]').attr('content'),
+                                 async:false,
+                                 headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+                                 dataType:'json',
+                                 success:function(e){
+                                     console.log(e);
+                                 }
+                             }); 
                         });
                     });
                 }
@@ -269,23 +287,20 @@ function mmenuShow(conid)
     <div id="app" class="wrapper">
 
         <ul id="alarms">
-           
-            <li>
-                <span><a href="#" class="remove">&times;</a>这是一条测试消息都会忘记卡好的按计划打完款回到家网卡好的哇靠 07:45
-                </span>
+            @foreach($messages['data'] as $message)
+            <li vid="{{$message['id']}}">
+                <em class="Counter"  vid=''></em>
+                <span ><a href="#" class="remove" >&times;</a>{{$message['title']}} {{$message['created_at']}}</span>
+                <div id="content" class="Panelsss">
+                    {{$message['content']}}
+                    <div class="Hidden" style="display:none;">
+                        <a class="Prev" href="#app"></a>
+                        <a class="Title" >详细内容</a>
+                    </div>
+                </div>
+                
             </li>
-            <li>
-                <span><a href="#" class="remove">&times;</a>这是一条测试消息都会忘记卡好的按计划打完款回到家网卡好的哇靠 07:45
-                </span>
-            </li>
-            <li>
-                <span><a href="#" class="remove">&times;</a>这是一条测试消息都会忘记卡好的按计划打完款回到家网卡好的哇靠 07:45
-                </span>
-            </li>
-            <li>
-                <span><a href="#" class="remove">&times;</a>这是一条测试消息都会忘记卡好的按计划打完款回到家网卡好的哇靠 07:45
-                </span>
-            </li>
+            @endforeach
            
         </ul>
 
