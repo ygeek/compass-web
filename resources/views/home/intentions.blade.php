@@ -220,7 +220,7 @@ Array.prototype.contains = function(obj) {
                 var nums = 0;
                 var that = this;
                 this.intentions.intentions.forEach(function(college){
-                    nums += that.countArray(college.specialities);
+                    nums += college.specialities.length;
                 });
                 return nums;
             },
