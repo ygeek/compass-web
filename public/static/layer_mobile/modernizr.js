@@ -134,7 +134,7 @@ $(function() {
                 
                 if(e.status == 'error')
                 {
-                    alert('登录失败!');
+                    alert(e.data.message);
                 }
             }
         });
@@ -143,6 +143,7 @@ $(function() {
     $(".toRegion").click(function(){
         var phone_number = $("input[name='zcphone_number']").val();
         var password = $("input[name='zcpassword']").val();
+        var code = $("input[name='verify_code']").val();
         if(!checkSubmitMobil(phone_number)) return false;
         if(password=='')
         {
@@ -151,17 +152,24 @@ $(function() {
         $.ajax({
             type:'POST',
             url:'/auth/register',
-            data:'phone_number='+phone_number+'&password='+password,
+            data:'phone_number='+phone_number+'&password='+password+"&code="+code,
             async:false,
             headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
             dataType:'json',
+            error:function(e,b,c){
+                console.log(e);
+                console.log(b);
+                console.log(c);
+                alert('注册失败!');
+            },
             success:function(e){
+                console.log(e);
                 if(e.status == 'ok'){
                     location.href = location.href;
                 }
-                else
+                if(e.status == 'error')
                 {
-                    alert('登录失败!');
+                    alert(e.status.message);
                 }
             }
         });

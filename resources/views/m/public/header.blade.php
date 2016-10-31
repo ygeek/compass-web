@@ -98,7 +98,7 @@
     <div class="main">
         <div class="login_resgister">
             <form action="" method="get">
-                <input type="number" class="login_resgister_input" placeholder="手机号码" v-model="phone_number" name="zcphone_number">
+                <input type="number" class="login_resgister_input zcphone_number" placeholder="手机号码" v-model="phone_number" name="zcphone_number" >
                 <input type="password" class="login_resgister_input" placeholder="密码" v-model="password" name="zcpassword">
                 <!--
                 <div class="yanzhenma">
@@ -110,7 +110,7 @@
                 <div class="clear"></div>
                 <div class="yanzhenma01">
                     <input type="text" class="yzm01" placeholder="短信验证" v-model="verify_code" name="verify_code">
-                    <em><a href="javascript:void(0)" class="getVerify">获取验证码</a></em>
+                    <em><input type="button" style="border: none; background-color: #fff; color: #999; margin-top: -10px;"  class="getVerify" onclick="djs(this,$('.zcphone_number'))" value="获取验证码"></em>
                 </div>
                 <div class="clear"></div>
                 <div class="resgister_xy"><a href="#" style="float: left;">注册即同意《指南针用户协议》</a><a href="javascript:changeView('#login')" style=" float: right;">登录</a></div>
