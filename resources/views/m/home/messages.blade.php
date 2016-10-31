@@ -262,9 +262,9 @@ function mmenuShow(conid)
                             console.log(_id);
                             $(this).remove();
                             $.ajax({
-                                 type:'POST',
+                                 type:'PATCH',
                                  url:'/home/messages/'+_id,
-                                 data:'_token='+$('meta[name="_token"]').attr('content'),
+                                 data:'_token='+$('meta[name="_token"]').attr('content')+'&api=true',
                                  async:false,
                                  headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
                                  dataType:'json',

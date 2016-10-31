@@ -145,12 +145,53 @@ function editpwd()
     $.ajax({
             type:'POST',
             url:'/home/change_password',
-            data:'old_password='+old_password+'&password='+password+'&password_confirmation='+password_confirmation+'&_token='+_token,
+            data:'old_password='+old_password+'&password='+password+'&password_confirmation='+password_confirmation+'&_token='+_token+'&api=true',
+            async:false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            dataType:'json',
+            success:function(e){
+                if(e.status=='error')
+                {
+                    alert(e.data.message);
+                }
+                if(e.status=='ok')
+                {
+                    alert('修改成功!');
+                    location.reload() ;
+                }
+            }
+        }); 
+}
+function editmobile()
+{
+    var mobile = $(".editmobile").val();
+    var code = $(".editverify_code").val();
+    var _token = $("input[name=_token]").val();
+    
+    if(mobile==''||code=='')
+    {
+        alert('请填写完整!');
+        return false;
+    }
+    
+    $.ajax({
+            type:'POST',
+            url:'/home/change_phone',
+            data:'phone_number='+mobile+'&code='+code+'&_token='+_token+'&api=true',
             async:false,
             headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
             dataType:'json',
             success:function(e){
                 console.log(e);
+                if(e.status=='error')
+                {
+                    alert(e.data.message);
+                }
+                if(e.status=='ok')
+                {
+                    alert('修改成功!');
+                    location.reload() ;
+                }
             }
         }); 
 }
@@ -264,17 +305,17 @@ function editpwd()
                         
                                 <ul>
                                     <li >
-                                        <em class="Counter"  id="inp-edit"><input type="number" id="inp-name" value="" name="mobile" placeholder="手机号" /></em>
+                                        <em class="Counter"  id="inp-edit"><input type="number" id="inp-name" value="" class="editmobile" name="mobile" placeholder="手机号" /></em>
                                         <span>手机号</span>
                                     </li>
                                    
                                     
                                     <li >
-                                        <em class="Counter"  id="inp-edit" ><button type="text" id="inp-name" style="width:40%; padding: 0px; margin-left: 5px;">获取验证码</button> &nbsp;<input type="number" id="inp-name" value="" name="code" style="width:25%;" placeholder="" /></em>
+                                        <em class="Counter"  id="inp-edit" ><input type="button" id="inp-name" onclick="djs(this,$('.editmobile'))" style="width:40%; padding: 0px; margin-left: 5px;" value="获取验证码"/>&nbsp;<input type="number" id="inp-name" value="" class="editverify_code" name="verify_code" style="width:25%;" placeholder="" /></em>
                                         <span>验证码</span>
                                     </li>
                                     <li class="edit">
-                                        <em class="Counter" onclick="editpwd();" id="edit" vid=''>提交</em>
+                                        <em class="Counter" onclick="editmobile();" id="edit" vid=''>提交</em>
                                             <span>&nbsp;</span>
                                     </li>
                                 </ul>

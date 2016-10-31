@@ -25,6 +25,10 @@ class IntentionsController extends Controller
         $estimate_id = $request->input('estimate_id');
         $selected_speciality_ids = $request->input('selected_speciality_ids');
         $estimate_data = Setting::get('estimate-'.$estimate_id);
+        if(!is_array($selected_speciality_ids))
+        {
+            $selected_speciality_ids = json_decode($selected_speciality_ids);
+        }
 
         $intentions = $user->intentions;
         $intention_colleges = $intentions['intentions'];

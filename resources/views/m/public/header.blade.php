@@ -135,3 +135,45 @@
         return $obj;
     }
 ?>
+<script>
+var countdown=60; 
+function djs(obj,objmobile)
+{
+    var mobile = objmobile.val();
+  
+    if(validatemobile(mobile))
+    {
+        settime(obj);
+        $.ajax({
+            type:'POST',
+            url:'/auth/verify-codes',
+            data:'',
+            async:false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            dataType:'json',
+            success:function(e){
+                if(e.status == 'ok'){
+                    $("input[name='verify_code']").val(e.data.code);
+                }
+                
+            }
+        });
+    };
+    
+}
+function settime(obj) { 
+    
+    if (countdown == 0) { 
+        obj.removeAttribute("disabled");    
+        obj.value="获取验证码"; 
+        countdown = 60; 
+        return;
+    } else { 
+        obj.setAttribute("disabled", true); 
+        obj.value="重新发送(" + countdown + ")"; 
+        countdown--; 
+    } 
+    setTimeout(function() {  settime(obj) },1000) 
+}
+  
+</script>

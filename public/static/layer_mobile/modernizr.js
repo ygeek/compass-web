@@ -167,23 +167,7 @@ $(function() {
         });
     });
     //获取验证码
-    $(".getVerify").click(function(){
-        
-        $.ajax({
-            type:'POST',
-            url:'/auth/verify-codes',
-            data:'',
-            async:false,
-            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
-            dataType:'json',
-            success:function(e){
-                if(e.status == 'ok'){
-                    $("input[name='verify_code']").val(e.data.code);
-                }
-                
-            }
-        });
-    });
+    
     
     $(".makePlan").click(function(){
         var name = $("input[name='name']").val();
@@ -391,3 +375,23 @@ function setLike(college_id,obj)
     
 }
 
+function validatemobile(mobile) 
+   { 
+       if(mobile.length==0) 
+       { 
+          alert('请输入手机号码！'); 
+       
+          return false; 
+       }     
+       if(mobile.length!=11) 
+       { 
+           alert('请输入有效的手机号码！'); 
+          
+           return false; 
+       } 
+        if(!(/^1(3|4|5|7|8)\d{9}$/.test(mobile))){ 
+            alert("请输入有效的手机号码!");  
+            return false; 
+        } 
+      return true;
+   } 
