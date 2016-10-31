@@ -147,7 +147,7 @@ function djs(obj,objmobile)
         $.ajax({
             type:'POST',
             url:'/auth/verify-codes',
-            data:'mobile='+mobile,
+            data:'phone_number='+mobile,
             async:false,
             headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
             dataType:'json',
