@@ -1,16 +1,24 @@
 <div class="main04">
     <div class="yxpaiming01" style="margin:0 0 1px 0;"><a href="/estimate/step-1">测试录取率</a></div>
+    
     <div class="yuanxiao_cx_main">
-        <div class="yx_chaxun" style="margin:2% auto;">
-            <form action="" method="get">
+        <div class="yx_chaxun" style="margin:2% 2%;float:left; width:78%;border-radius: 5px;">
+            
+            <form action="" id="sear" method="get">
                 <input type="hidden" name="article_type" value="specialities" />
-                <input type="text" class="chax_input" name="speciality_name" placeholder="专业">
+                <input type="hidden" name="selected_degree_id" id='selected_degree_id' value="" />
+                <input type="hidden" name="selected_category_id" id='selected_category_id' value="" />
+                <input type="text" class="chax_input" name="speciality_name" placeholder="专业"  value="<?php if(isset($_GET['speciality_name'])){ echo $_GET['speciality_name']; } ?>">
                 <input type="submit" class="chax_so" value="">
             </form>
+            
         </div>
-
+        <div class="shaixuan_icon">
+            <img src="/static/images/shaixuan.png" height="65" onclick="mmenuShow('mmenu')" />
+        </div>
+        <div class="clear"></div>
     </div>
-    <div class="chaxun10"><!--<h2><a href="#">· 硕士 · 商科 ·</a></h2>--><h1>您找到<span>{{ $articles->total() }} </span>个相关专业</h1></div>
+    <div class="chaxun10"><h1>您找到<span> {{ $articles->total() }} </span>个相关专业</h1></div>
 
     <div class="yuanxiao_gzy">
         <ul>
@@ -40,3 +48,163 @@
     </div>
 </div>
 
+<link rel="stylesheet" href="/static/mmenu/demo.css?v=5.7.1" />
+<link rel="stylesheet" href="/static/mmenu/css/jquery.mmenu.all.css?v=5.7.1" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+		
+<style type="text/css">
+    #menu {
+        min-width: none;
+        max-width: none;
+        width: 100%;
+        height: 100%;
+        display: none;
+    }
+    .mm-menu.mm-theme-white .mm-btn::after{border:none; text-align: left;}
+    .mm-navbar .mm-btn:last-child { text-align: left; width: 60px;;}
+    .mm-navbar { height: 60px; line-height: 40px; font-size: 1.3em;}
+    .mm-hasnavbar-top-1 .mm-panels { top:60px;}
+    .mm-listview { line-height: 30px;}
+    .mm-navbar .mm-btn:first-child { height:60px;}
+</style>
+<script>
+    
+function mmenuShow(conid)
+{
+    $('#menu').show();
+    $("#header").hide();
+    $('body,html').animate({ scrollTop: 0 }, 1);
+}
+
+</script>
+<script type="text/javascript" src="/static/mmenu/js/jquery.mmenu.all.min.js?v=5.7.1"></script>
+<script type="text/javascript">
+$(function() {
+    $("#menu")
+        .mmenu({
+            offCanvas	: false,
+
+            extensions	: ["theme-white"],
+
+            navbar		: {
+                title	: "专业筛选"
+            },
+
+            navbars		: [{
+						content 	: [ "prev", "title", "next" ]
+					}],
+            
+
+            onClick		: {
+                setSelected	: false
+            }},{})
+        .on( 
+            'click',
+            'a[href^="#/"]',
+            function() {
+                alert( "Thank you for clicking, but that's a demo link." );
+                    return false;
+            }
+        );
+});
+function searSub()
+{
+    $("form:last").submit();
+}
+</script>
+<script type="text/javascript">
+    $(function() {
+        
+        var $settings = $("#settings");
+
+        var api = $("#menu").data( "mmenu" );
+
+        //	Choose location
+        var $set_location = $("#setting-location .mm-counter");
+        $("#locations").find( "li span" ).click(function() {
+            $set_location.text( $(this).text() );
+            $("#selected_degree_id").val($(this).attr('vid') );
+            api.openPanel( $settings );
+        });
+
+        //	Choose radius
+        var $set_radius = $("#setting-radius .mm-counter");
+        $("#radius").find( "li span" ).click(function() {
+            $set_radius.text( $(this).text() );
+            $("#selected_category_id").val($(this).attr('vid') );
+            api.openPanel( $settings );
+        });
+
+        //	Show/hide searchresults
+        var $results = $(".searchresult");
+        $("#locations input").keyup(function() {
+            $results[ ( $(this).val() == "" ) ? "hide" : "show" ]();
+        });
+
+        //	Choose pricerange
+        var $set_range = $("#setting-pricerange .mm-counter"),
+            $range_from = $("#price-from"),
+            $range_till = $("#price-till");
+
+        $("#pricerange").find( ".button" ).click(function() {
+            $set_range.text( $range_from.val() + " - " + $range_till.val() );
+        });
+    });
+</script>
+
+<nav id="menu">
+    
+    
+
+    <!-- subpanel -->
+    <div id="settings" class="Panel">
+        <ul>
+            
+            <li id="setting-location">
+                <em class="Counter" vid=''>不限</em>
+                <span>学位类型</span>
+
+                <!-- subpanel -->
+                <div id="locations" class="Panel">
+                    <ul>
+                       
+                        <li class="searchresult"><span vid=''>不限</span></li>
+                        <li class="searchresult"><span vid='2'>本科</span></li>
+                        <li class="searchresult"><span vid='3'>硕士</span></li>
+                        
+                    </ul>
+                </div>
+            </li>
+            <li id="setting-radius">
+                <em class="Counter" vid=''>不限</em>
+                <span>专业方向</span>
+
+                <!-- subpanel -->
+                <div id="radius" class="Panel">
+                    <ul>
+                        <li><span vid=''>不限</span></li>
+                        <li><span vid='1'>艺术与设计</span></li>
+                        <li><span vid='2'>经济与工商管理</span></li>
+                        <li><span vid='3'>工程与信息技术</span></li>
+                        <li><span vid='4'>人文社会科学</span></li>
+                        <li><span vid='5'>教育学</span></li>
+                        <li><span vid='6'>医学</span></li>
+                        <li><span vid='7'>农学</span></li>
+                        <li><span vid='8'>理学</span></li>
+                        <li><span vid='9'>法学</span></li>
+                       
+                    </ul>
+                </div>
+            </li>
+            <!-- navbar info -->
+            <div class="Hidden" style="display:none;">
+			
+                <a class="Next" href="javascript:searSub();" >确定</a>
+			</div>
+
+        </ul>
+
+
+    </div>
+            
+</nav>
