@@ -153,7 +153,7 @@ function djs(obj,objmobile)
             dataType:'json',
             success:function(e){
                 if(e.status == 'ok'){
-                    $("input[name='verify_code']").val(e.data.code);
+                    //$("input[name='verify_code']").val(e.data.code);
                 }
                 
             }
