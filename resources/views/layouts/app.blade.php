@@ -30,13 +30,50 @@
 
 
     <div id="app">
-      @unless(Auth::check())
-        @include('shared.login_panel')
-      @endunless
+      @include('shared.login_panel')
       <div>
         @yield('content')
       </div>
     </div>
-    <script src="/js/app.js"></script>
+
+    <script>
+    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#_token').getAttribute('value');
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        showLoginAndRegisterPanel: false,
+        showChangePhonePanel: false,
+        showEstimatePanel: false,
+        estimatePanelPath: null,
+        currentUser: @if(Auth::check())
+          <?php
+            $user = Auth::User();
+            $userInfo = $user->toArray();
+            $userInfo['avatarPath'] = $user->getAvatarPath();
+            echo json_encode($userInfo);
+           ?>
+        @else null @endif,
+      },
+      events: {
+        'changeLikeDispatch': function (collegeid,like) {
+          this.$broadcast('changeCollegeLike',collegeid,like)
+        },
+        'toShowLoginAndRegisterPanel': function () {
+          this.showLoginAndRegisterPanel = true;
+        },
+        'setCurrentUser': function(user) {
+          this.currentUser = user;
+        }
+      },
+      methods: {
+        'setEstimatePanel': function (path) {
+          this.showEstimatePanel = true;
+          this.estimatePanelPath = path;
+        }
+      }
+    });
+
+    </script>
   </body>
 </html>

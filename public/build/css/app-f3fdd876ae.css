@@ -757,7 +757,6 @@ ul {
   .top-nav-bar .hidden-box {
     width: 110px;
     position: absolute;
-    display: none;
     background: #fff url(/images/user-arrow.png) no-repeat top center;
     top: 54px;
     right: 15px;

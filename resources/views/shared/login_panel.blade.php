@@ -112,6 +112,13 @@
           phone_number: this.phone_number,
           password: this.password
         }).then(function(response){
+          if(window.parent == window) {
+
+          } else {
+            // in frame
+            // set login status to parent window
+            window.parent.app.$dispatch('setCurrentUser', response.data.data);
+          }
           window.location.reload();
         }, function(response){
           alert('登录失败');
