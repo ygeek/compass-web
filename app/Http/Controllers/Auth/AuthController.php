@@ -83,7 +83,11 @@ class AuthController extends Controller
         $password = $request->get('password');
 
         if(Auth::attempt(['phone_number' => $phone_number, 'password' => $password])){
-            return $this->okResponse();
+            $user = Auth::User();
+            $userInfo = $user->toArray();
+            $userInfo['avatarPath'] = $user->getAvatarPath();
+
+            return $this->okResponse($userInfo);
         }else{
             return $this->errorResponse('登录信息错误');
         }
