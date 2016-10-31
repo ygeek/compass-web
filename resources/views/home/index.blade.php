@@ -20,7 +20,17 @@
                         <label for="phone_number">验证码</label>
                         <div class="code">
                             <input placeholder="" v-model="verify_code"/>
-                            <button @click="getVerifyCode">获取验证码</button>
+                            <button
+                              @click="getVerifyCode"
+                              v-bind:disabled="countDown"
+                            >
+                            <template v-if="countDown==null">
+                              获取验证码
+                            </template>
+                            <template v-else>
+                              @{{countDown}}s后重试
+                            </template>
+                            </button>
                         </div>
                         <p id="code-warning" class="warning" v-show="code_warning == true">验证码错误</p>
                     </div>
@@ -43,7 +53,9 @@
                     phone_warning: false,
                     code_warning: false,
                     phone_number: '',
-                    verify_code: ''
+                    verify_code: '',
+                    countDown: null,
+                    countDownInterval: null,
                 };
             },
             methods: {
@@ -63,6 +75,17 @@
                         }else{
 
                         }
+
+                        var that = this;
+                        that.countDown = 60;
+                        that.countDownInterval = setInterval(function() {
+                          that.countDown--;
+                          if(that.countDown == 0) {
+                            clearInterval(that.countDownInterval);
+                            that.countDown = null;
+                          }
+                        }, 1000);
+
                     });
                 },
                 sendChangeRequest: function(){

@@ -206,6 +206,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $password = $request->input('password');
         $password_confirmation = $request->input('password_confirmation');
+        $is_api = $request->input('api', false);
 
         $check = app('auth')->attempt([
             'id' => $user->id,
@@ -214,15 +215,27 @@ class HomeController extends Controller
 
         if ($check) {
             if ($password != $password_confirmation) {
-                Flash::message('两次密码输入不一致');
-                return back();
+                if($is_api) {
+                  return $this->errorResponse('两次密码输入不一致');
+                } else {
+                  Flash::message('两次密码输入不一致');
+                  return back();
+                }
             }
 
             $user->password = bcrypt($password);
             $user->save();
-            Flash::message('密码修改成功');
+            if($is_api) {
+              return $this->okResponse();
+            }else {
+              Flash::message('密码修改成功');
+            }
         } else {
-            Flash::message('原密码输入错误');
+            if($is_api) {
+              return $this->errorResponse('原密码输入错误');
+            } else {
+              Flash::message('原密码输入错误');
+            }
         }
 
         return back();
@@ -230,6 +243,7 @@ class HomeController extends Controller
 
     public function changePhone(Request $request)
     {
+        $is_api = $request->input('api', false);
         $code = $request->get('code');
         $phone_number = $request->get('phone_number');
 
@@ -241,8 +255,12 @@ class HomeController extends Controller
         $phone_number = $request->input('phone_number');
         $user->phone_number = $phone_number;
         $user->save();
-        Flash::message('手机修改成功');
-        return back();
+        if($is_api) {
+          return $this->okResponse();
+        }else {
+          Flash::message('手机修改成功');
+          return back();
+        }
     }
 
     public function intentions()
