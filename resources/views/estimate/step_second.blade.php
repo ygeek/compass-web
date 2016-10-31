@@ -256,12 +256,11 @@
                     <input class="estimate-input" style="width: <?php if(!(isset($cpm) && $cpm)) echo "120px"; else echo "155px" ?>;" type="text" v-model="selected_examination.score" v-bind:placeholder="default_value">
 
                     @if(isset($cpm) && $cpm)
-                    <div class="form-group">
-                        <label >&nbsp;</label>
+                    <div class="form-group section-group">
                     @endif
                     <template v-for="section in selected_examination['sections']">
                         <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
-                        <input  class="estimate-input" style="width: 40px;" type="text" v-model="section.score">
+                        <input  class="estimate-input section-input" style="width: 40px;" type="text" v-model="section.score">
                     </template>
                     @if(isset($cpm) && $cpm)
                     </div>

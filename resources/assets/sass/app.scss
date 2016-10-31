@@ -766,6 +766,12 @@ ul{
 
 .cpm-estimate-page{
   background-color: #f3f3f3;
+  .section-group{
+    width: 860px !important;
+    .section-input {
+      margin-right: 34px;
+    }
+  }
   .estimate-form{
     width: 420px;
     height: 400px;
