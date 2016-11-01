@@ -38,15 +38,15 @@
         
         <div class="pinggu_pp">
             <h1>{{$college['score']}}%<span>匹配概率</span></h1>
-            <h2><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display = 'block';document.getElementById('fade{{$k}}').style.display = 'block'">查看匹配详情</a></h2>
+            <h2><a href = "javascript:void(0);" onclick = "document.getElementById('light{{$k}}').style.display = 'block';document.getElementById('fade{{$k}}').style.display = 'block'">查看匹配详情</a></h2>
         </div>
     </div>
     <div id="fade{{$k}}" class="black_overlay"></div>  
-        <div id="light" class="white_content">
+        <div id="light{{$k}}" class="white_content">
             <div class="tanchu_content">
                 <h1>{{$college['college']['chinese_name']}}的{{ $selected_speciality_name }}专业匹配如下：</h1> 
                 <div class="closed01">
-                    <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display = 'none';document.getElementById('fade{{$k}}').style.display = 'none'"><img src="/static/images/icon18.png" width="15"></a>
+                    <a href = "javascript:void(0);" onclick = "closefade('{{$k}}');"><img src="/static/images/icon18.png" width="15"></a>
                 </div>
                 <div class="clear"></div>
                 <div class="tanchu_list">
@@ -72,7 +72,8 @@
                       
                         <div class="clear"></div>
                     </div>
-                    <div class="pinggu_pm10">
+                     
+                    <div class="pinggu_pm10 chakangengduo"  @if(Auth::check()) style="display:block;" @else style="display:none;" @endif>
                         <em>{{ $selected_speciality_name }}</em>
                         @foreach($college['requirement_contrast'] as $key=>$contrast)
                         @if($key<9)
@@ -82,6 +83,15 @@
                        
                         <div class="clear"></div>
                     </div>
+                     
+                        <div class="pinggu_pm10 chakangengduo2"  @if(Auth::check()) style="display:none;" @else style="display:block;" @endif>
+                            <em style="width:100%;">您好，请 <a href="javascript:changeView2('#login')" style="color:#1ddab0;">登录</a> 以查看更多内容</em>
+                           
+
+                            <div class="clear"></div>
+                        </div>
+                      
+                    
                 </div> 
                 <div class="tanchu_text">
                     {{$college['requirement_contrast'][9]['require']}}
@@ -124,12 +134,19 @@ function addInten(n)
                 alert('请求失败!');
             @else
                 
-                alert('请先登录!');
+                //alert('请先登录!');
                 changeView('#login');
+                $("#login").attr('islocal','2');
             @endif
            
         }
     });
     
+}
+
+function closefade(num)
+{
+    $("#fade"+num).hide();
+    $("#light"+num).hide();
 }
 </script>

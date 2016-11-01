@@ -125,17 +125,20 @@
     
     <div class="yuanxiao_pic ">
         @foreach($galleries as $key=>$gallery)
-       <?php $gallery = objToArr($gallery);  ?>
+       <?php $gallery = objToArr($gallery); $i=0;  ?>
         <ul id="lightgallery{{$key}}" class="list-unstyled row">
-            @foreach($gallery['images'] as $k=>$val)
-            <li @if($k>0) style="display:none" @endif class="col-xs-6 col-sm-4 col-md-3"  data-src="{{$val}}" >
+            @foreach($galleries as $ke=>$galleryss)
+            @foreach($galleryss['images'] as $k=>$val)
+            <li @if($i!=$key) style="display:none" @endif class="col-xs-6 col-sm-4 col-md-3"  data-src="{{$val}}" data-sub-html="<h4>{{ $galleryss['name'] }}</h4>" >
                 <a href="">
                     <img class="img-responsive" src="{{$val}}" alt="Thumb-1">
                     <h1>{{ $gallery['name'] }}</h1>
                 </a>
             </li>
-	    @endforeach
-	</ul>
+            <?php $i++;?>
+            @endforeach
+            @endforeach
+        </ul>
       
         @endforeach
         <div class="clear"></div>

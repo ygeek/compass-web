@@ -65,7 +65,7 @@
 </script>
 
     
-<div id="login" class="pt-login" >
+<div id="login" islocal='1' class="pt-login" >
     <div class="header">
         <a href="javascript:goBlack('#login')"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
         <div class="header_c">登录</div>
@@ -88,7 +88,7 @@
     </div>
 </div>
 
-<div id="region" class="pt-region" >
+<div id="region" islocal='1' class="pt-region" >
     <div class="header">
         <a href="javascript:goBlack('#region')"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
         <div class="header_c" >注册</div>
