@@ -65,7 +65,8 @@
    
     <div class="clear"></div>
 </div>
-<div onclick="subshenhe()" style="position: fixed;bottom: 0px; width: 100%; line-height: 30px; font-size: 1em; text-align: center;color: #fff; background-color: #0e2d60;">提交审核 <span id="ched">0</span>/<?php echo count($intention['specialities']); ?></div>
+
+<div onclick="subshenhe()" class="shenhe" estimate_id="<?php print_r($intentions['estimate_id']); ?>" style="position: fixed;bottom: 0px; width: 100%; line-height: 30px; font-size: 1em; text-align: center;color: #fff; background-color: #0e2d60;">提交审核 <span id="ched">0</span>/<?php echo count($intention['specialities']); ?></div>
 <script>
 function deleteSpeciality(num)
 {
@@ -111,20 +112,36 @@ function countBox(obj)
 
 function subshenhe()
 {
-    var selected_speciality_ids = new Array();
+    var selected_speciality_ids = [];
     var i =0 ;
     $("input[type=checkbox]").each(function(){
         if($(this).attr("checked")=="checked")
         {
-            selected_speciality_ids[i] = $(this).val();
+            selected_speciality_ids[0] = $(this).val();
+            //selected_speciality_ids[i]($(this).val());
         }
         i++;
     });
-    var estimate_id = '';
+   
+   console.log(JSON.stringify(selected_speciality_ids));
+    var estimate_id = $(".shenhe").attr('estimate_id');
     if(selected_speciality_ids.length == 0){
         alert('未选择审核专业');
         return;
     }
-   
+    $.ajax({
+        type:'POST',
+        url:"/intentions/create",
+        data:'estimate_id='+estimate_id+'&selected_speciality_ids='+JSON.stringify(selected_speciality_ids),
+        async:false,
+        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+        dataType:'json',
+        success:function(e){
+            if(e.status=='ok'){
+                alert('提交成功!');
+                window.location.reload();
+            }
+        }
+    }); 
 }
 </script>

@@ -10,6 +10,20 @@ function changeView(newView) {
     $(newView).show();
 }
 
+//View切换
+function changeView2(newView) {
+    $("#content").hide();
+    
+    $("#header").hide();
+    $("#region").hide();
+    $("#login").hide();
+    
+    $(newView).show();
+    
+    $("#login").attr('ckgd','1');
+    $("#login").attr('islocal','2');
+}
+
 function goBlack(newView) {
     
     location.reload();
@@ -105,6 +119,8 @@ $(function() {
         var phone_number = $("input[name='phone_number']").val();
         var password = $("input[name='password']").val();
         if(!checkSubmitMobil(phone_number)) return false;
+        var islocal = $("#login").attr('islocal');
+        var ckgd = $("#login").attr('ckgd');
         if(password=='')
         {
             alert('请输入密码!');return false;
@@ -116,10 +132,28 @@ $(function() {
             async:false,
             headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
             dataType:'json',
+            error:function(e,b,c){
+                console.log(e);
+                console.log(b);
+                console.log(c);
+                alert('登录失败!');
+            },
             success:function(e){
                 if(e.status == 'ok'){
-                    //location.href = location.href;
-                    alert('登录成功!');
+                    if(islocal=="1")
+                    {
+                        location.reload();
+                    }
+                    else
+                    {
+                        if(ckgd=="1")
+                        {
+                            $(".chakangengduo").show();
+                            $(".chakangengduo2").hide();
+                        }
+                        alert('登录成功!');
+                    }
+                    
                     $("#content").show();
     
                     $("#header").show();
@@ -130,11 +164,12 @@ $(function() {
                     $("#dl-menu-button").removeClass("dl-active");
                     $(".dl-menu").removeClass("dl-menuopen");
                     $(".dl-menu").addClass("dl-menu-toggle");
+                    $("#login").attr('islocal','1');
                 }
                 
                 if(e.status == 'error')
                 {
-                    alert('登录失败!');
+                    alert(e.data.message);
                 }
             }
         });
@@ -143,6 +178,7 @@ $(function() {
     $(".toRegion").click(function(){
         var phone_number = $("input[name='zcphone_number']").val();
         var password = $("input[name='zcpassword']").val();
+        var code = $("input[name='verify_code']").val();
         if(!checkSubmitMobil(phone_number)) return false;
         if(password=='')
         {
@@ -151,39 +187,30 @@ $(function() {
         $.ajax({
             type:'POST',
             url:'/auth/register',
-            data:'phone_number='+phone_number+'&password='+password,
+            data:'phone_number='+phone_number+'&password='+password+"&code="+code,
             async:false,
             headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
             dataType:'json',
+            error:function(e,b,c){
+                console.log(e);
+                console.log(b);
+                console.log(c);
+                alert('注册失败!');
+            },
             success:function(e){
+                console.log(e);
                 if(e.status == 'ok'){
                     location.href = location.href;
                 }
-                else
+                if(e.status == 'error')
                 {
-                    alert('登录失败!');
+                    alert(e.status.message);
                 }
             }
         });
     });
     //获取验证码
-    $(".getVerify").click(function(){
-        
-        $.ajax({
-            type:'POST',
-            url:'/auth/verify-codes',
-            data:'',
-            async:false,
-            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
-            dataType:'json',
-            success:function(e){
-                if(e.status == 'ok'){
-                    $("input[name='verify_code']").val(e.data.code);
-                }
-                
-            }
-        });
-    });
+    
     
     $(".makePlan").click(function(){
         var name = $("input[name='name']").val();
@@ -308,11 +335,21 @@ function changeZy()
     var degree_id = $("select[name='selected_degree_id']").val();
     var category_id = $("select[name='speciality_category_id']").val();
     var num = parseInt(category_id) - 1 ;
+    var college_id = $("#colleged_id").attr('college_id');
+    var data = '';
+    if(college_id)
+    {
+        data = 'college_id='+college_id;
+    }
+    else
+    {
+        data = 'country_id='+country_id+'&degree_id='+degree_id+'&category_id='+category_id;
+    }
     $("select[name='speciality_name']").html('');
     $.ajax({
         type:'GET',
         url:'/estimate/get_speciality',
-        data:'country_id='+country_id+'&degree_id='+degree_id+'&category_id='+category_id,
+        data:data,
         async:false,
         headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
         dataType:'json',
@@ -348,7 +385,7 @@ function setLike(college_id,obj)
     var shuzi = $("#shuzi"+college_id).html();
     if(likeid=="3")
     {
-        alert('请先登录!');
+        changeView('#login');
     }
     if(likeid=="2")
     {
@@ -365,6 +402,7 @@ function setLike(college_id,obj)
                     obj.attr("src","/static/images/xin1.png");
                     obj.attr("likeid","1");
                     $("#shuzi"+college_id).html(parseInt(shuzi)+1);
+                     alert('收藏成功!');
                 }
             }
         }); 
@@ -384,6 +422,7 @@ function setLike(college_id,obj)
                     obj.attr("src","/static/images/xin2.png");
                     obj.attr("likeid","2");
                     $("#shuzi"+college_id).html(parseInt(shuzi)-1);
+                    alert('取消成功!');
                 }
             }
         }); 
@@ -391,3 +430,23 @@ function setLike(college_id,obj)
     
 }
 
+function validatemobile(mobile) 
+   { 
+       if(mobile.length==0) 
+       { 
+          alert('请输入手机号码！'); 
+       
+          return false; 
+       }     
+       if(mobile.length!=11) 
+       { 
+           alert('请输入有效的手机号码！'); 
+          
+           return false; 
+       } 
+        if(!(/^1(3|4|5|7|8)\d{9}$/.test(mobile))){ 
+            alert("请输入有效的手机号码!");  
+            return false; 
+        } 
+      return true;
+   } 

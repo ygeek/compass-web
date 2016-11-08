@@ -1,13 +1,14 @@
 @include('m.public.header')
+<?php $user = Auth::user();?>
 <div class="clear"></div>
 <div class="main">
     <div class="login_resgister">
         <form action="/estimate/stepSecondPost" id="stepSecondPost" onsubmit="return checkSecond()" method="post">
             <label for="name">姓名<span style="color: red">*</span></label>
-            <input type="text" class="login_resgister_input" ismust='1' name="name" placeholder="姓名" value="">
+            <input type="text" class="login_resgister_input" ismust='1' errormsg="姓名未填写!" name="name" placeholder="姓名"  @if(Auth::check())value="{{$user->getEstimateInput('name')}}"@endif>
             @if($selected_degree->name == '硕士')
             <label for="recently_college_name">最近就读院校<span style="color: red">*</span></label>
-            <select id="recently_college_name" v-model="data.recently_college_name" name="recently_college_name" class="select01">
+            <select id="recently_college_name" v-model="data.recently_college_name" name="recently_college_name" errormsg="就读院校未填写!" class="select01">
                 <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
                 <?php
                   $index = 0;
@@ -42,7 +43,7 @@
                 @endforeach
             </select>
             <label for="related_length_of_working">相关工作年限</label>
-            <input type="number" class="login_resgister_input" name="related_length_of_working" placeholder="工作年限" value="">
+            <input type="number" class="login_resgister_input" name="related_length_of_working" placeholder="工作年限" @if(Auth::check())value="<?php $nx = $user->getEstimateInput('related_length_of_working'); echo $nx; ?>"@endif>
             @endif
             @if($selected_degree->name == '本科')
             <label for="cee">高考<span style="color: red">*</span></label>
@@ -70,15 +71,15 @@
                         <option value="{{ $province }}" @if($index++ == 0 and !$user_gaokao_input) selected @endif>{{$province}}</option>
                     @endforeach
                 </select>
-                <input type="number" class="login_resgister_input01 gkwithout" ismust='1' name="examinations[高考][score_without_tag]" placeholder="高考成绩">
-                <input type="hidden" class="gkscore" name="examinations[高考][score]" placeholder="高考成绩">
+                <input type="number" class="login_resgister_input01 gkwithout" ismust='1' @if(Auth::check())value="<?php $gk = $user->getEstimateInput('examinations.高考') ; echo $gk['score_without_tag']; ?>"@endif errormsg="高考成绩未填写!" name="examinations[高考][score_without_tag]" placeholder="高考成绩">
+                <input type="hidden" class="gkscore" name="examinations[高考][score]" errormsg="高考成绩未填写!" placeholder="高考成绩">
             </div>
             @endif
             <label for="mean">平均成绩<span style="color: red">*</span></label>
             @if($selected_degree->name == '本科')
-                <input class="login_resgister_input" type="number" id="mean" ismust='1' name="examinations[高中平均成绩][score]" placeholder="0~100"/>
+                <input class="login_resgister_input" type="number" id="mean" ismust='1' errormsg="平均成绩未填写!" @if(Auth::check())value="<?php  $arr = $user->getEstimateInput('examinations.高中平均成绩'); echo $arr['score']; ?>"@endif name="examinations[高中平均成绩][score]" placeholder="0~100"/>
             @else
-                <input class="login_resgister_input" type="number" id="mean" ismust='1' name="examinations[大学平均成绩][score]" placeholder="0~100"/>
+                <input class="login_resgister_input" type="number" id="mean" ismust='1' errormsg="平均成绩未填写!" name="examinations[大学平均成绩][score]" @if(Auth::check())value="<?php  $arr = $user->getEstimateInput('examinations.大学平均成绩'); echo $arr['score']; ?>"@endif placeholder="0~100"/>
             @endif
             <?php
                     $groups = [
@@ -143,6 +144,7 @@
                                 'selects' => $selects
                         ];
                     });
+                   
                     $groups = objToArr($groups);
                     foreach($groups as $gkey=>$gval){
                     ?>
@@ -197,7 +199,7 @@ function checkSecond()
             if($(this).val()=="") 
             {
                 $(".makePlan").attr('tijiao',"0");
-                alert('请填写完整...');
+                alert($(this).attr('errormsg'));
                 return false;
                 
             }

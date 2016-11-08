@@ -319,8 +319,9 @@ class EstimateController extends Controller
         $key = $_POST['key'];
         $str = '';
         $groups = $this->object_to_array(json_decode($groups));
-
+        
         $val = $groups[$key];
+        
         if(is_object($val)) $val = get_object_vars ($val);
         $leixing = $val['selects'][$value];
         $leixingOption = '';
@@ -339,7 +340,7 @@ class EstimateController extends Controller
 
             if($k==3) $style = 'style="margin-right:0px;"';
             $leixingAddhtml .= '<input type="hidden"  name="examinations['.$leixing.'][sections]['.$k.'][name]" value="'.$v['name'].'"  >
-                <input type="number" class="login_resgister_input" name="examinations['.$leixing.'][sections]['.$k.'][score]" ismust="1" value="" placeholder="'.$v['name'].'"  '.$style.'  >
+                <input type="number" class="login_resgister_input" name="examinations['.$leixing.'][sections]['.$k.'][score]" ismust="1" value="'.$v['score'].'" placeholder="'.$v['name'].'"  '.$style.'  >
                 ';
         }
         $leixingHidden = '';
@@ -348,13 +349,27 @@ class EstimateController extends Controller
             if(!is_array($v)&&!is_object($v)) $leixingHidden .= '<input type="hidden"  name="examinations['.$leixing.']['.$k.']" value="'.$v.'"  >
                 ';
         }
+        $placed = '';
+        if($leixing=='雅思') $placed = '0~9';
+        if($leixing=='托福IBT') $placed = '0~120';
+        if($leixing=='ACT') $placed = '0~36';
+        if($leixing=='SAT') $placed = '0~2400';
+        if($leixing=='GRE') $placed = '260~340';
+        if($leixing=='GMAT') $placed = '200~800';
+        
+        $score = '';
+        if(isset($val['examinations'][$value]['score']))
+        {
+            $score = $val['examinations'][$value]['score'];
+        }
+        
         $str .=
         '<div class="select_text">
 
             <select name="examinations['.$leixing.']" class="select02" onchange="choseInputs($(this).val(),'.$key.')" >
                 '.$leixingOption.'
             </select>
-            <input name="examinations['.$leixing.'][score]" type="number" ismust="1" class="login_resgister_input01 " value=""  placeholder="">
+            <input name="examinations['.$leixing.'][score]" type="number" ismust="1" errormsg="'.$leixing.'成绩未填写!" class="login_resgister_input01 " value="'.$score.'"  placeholder="'.$placed.'">
         </div>
         <!--听说读写-->
         <div class="select_radio " >

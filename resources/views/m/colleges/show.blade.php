@@ -10,8 +10,9 @@
 
     <div class="clear"></div>
     <div class="n_banner">
-        <h1><a href="javascript:shoucang({{$college->id}})" @if($college->liked=='1') id="liked" @endif></a></h1>
+        <h1><a href="javascript:void(0)" @if($college->liked=='1') id="liked" @endif><img style="width:40px; height: 40px; margin: 15px auto;" height="40" src="/static/images/xin<?php if(app('auth')->user()){ if($college->liked=='1'){echo 1;} else {echo 2;}}else{echo 2;} ?>.png" width="30" style=" cursor: pointer;" likeid='<?php if(app('auth')->user()){ if($college->liked=='1'){echo 1;} else {echo 2;}}else{echo 3;} ?>' onclick="setLike('{{ $college->id }}',$(this))" ></a></h1>
         <img src="{{app('qiniu_uploader')->pathOfKey($college->background_image_path)}}">
+        
         <div class="clear"></div>
 
     </div>
@@ -158,7 +159,7 @@ function shoucang(num)
             @if(Auth::check())
                  alert('请求失败!');
             @else
-                 alert('请先登录!');
+                 //alert('请先登录!');
                  changeView('#login');
             @endif
         }

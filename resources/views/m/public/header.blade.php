@@ -65,7 +65,7 @@
 </script>
 
     
-<div id="login" class="pt-login" >
+<div id="login" islocal='1' class="pt-login" >
     <div class="header">
         <a href="javascript:goBlack('#login')"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
         <div class="header_c">登录</div>
@@ -88,7 +88,7 @@
     </div>
 </div>
 
-<div id="region" class="pt-region" >
+<div id="region" islocal='1' class="pt-region" >
     <div class="header">
         <a href="javascript:goBlack('#region')"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
         <div class="header_c" >注册</div>
@@ -98,7 +98,7 @@
     <div class="main">
         <div class="login_resgister">
             <form action="" method="get">
-                <input type="number" class="login_resgister_input" placeholder="手机号码" v-model="phone_number" name="zcphone_number">
+                <input type="number" class="login_resgister_input zcphone_number" placeholder="手机号码" v-model="phone_number" name="zcphone_number" >
                 <input type="password" class="login_resgister_input" placeholder="密码" v-model="password" name="zcpassword">
                 <!--
                 <div class="yanzhenma">
@@ -110,7 +110,7 @@
                 <div class="clear"></div>
                 <div class="yanzhenma01">
                     <input type="text" class="yzm01" placeholder="短信验证" v-model="verify_code" name="verify_code">
-                    <em><a href="javascript:void(0)" class="getVerify">获取验证码</a></em>
+                    <em><input type="button" style="border: none; background-color: #fff; color: #999; margin-top: -10px;"  class="getVerify" onclick="djs(this,$('.zcphone_number'))" value="获取验证码"></em>
                 </div>
                 <div class="clear"></div>
                 <div class="resgister_xy"><a href="#" style="float: left;">注册即同意《指南针用户协议》</a><a href="javascript:changeView('#login')" style=" float: right;">登录</a></div>
@@ -135,3 +135,45 @@
         return $obj;
     }
 ?>
+<script>
+var countdown=60; 
+function djs(obj,objmobile)
+{
+    var mobile = objmobile.val();
+  
+    if(validatemobile(mobile))
+    {
+        settime(obj);
+        $.ajax({
+            type:'POST',
+            url:'/auth/verify-codes',
+            data:'phone_number='+mobile,
+            async:false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            dataType:'json',
+            success:function(e){
+                if(e.status == 'ok'){
+                    //$("input[name='verify_code']").val(e.data.code);
+                }
+                
+            }
+        });
+    };
+    
+}
+function settime(obj) { 
+    
+    if (countdown == 0) { 
+        obj.removeAttribute("disabled");    
+        obj.value="获取验证码"; 
+        countdown = 60; 
+        return;
+    } else { 
+        obj.setAttribute("disabled", true); 
+        obj.value="重新发送(" + countdown + ")"; 
+        countdown--; 
+    } 
+    setTimeout(function() {  settime(obj) },1000) 
+}
+  
+</script>
