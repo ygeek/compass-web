@@ -41,7 +41,7 @@
                             <div class="form-group">
                             @endif
 
-                            <label for="recently_speciality_name">最近就读专业</label>
+                            <label for="recently_speciality_name" style="margin-left:2px;">最近就读专业</label>
                             <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
                             <?php
                               $index = 0;
@@ -205,9 +205,7 @@
 
             <template id="college-select-pop">
               <div class="college-select-pop" v-show="show">
-                <div class="close" @click="closeButtonClick">
-                  X
-                </div>
+                <div class="close" @click="closeButtonClick">X</div>
 
                 <div class="search-bar">
                   <span>搜索</span><input v-model="searchKeyWord"/>

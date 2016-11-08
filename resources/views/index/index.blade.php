@@ -13,35 +13,35 @@
           <h1>留学评估</h1>
           <ul class="select-item">
             <li class="estimate-val" v-bind:class="{'active': selecting=='countries'}" v-on:mouseenter="selecting='countries'">
-              <p style="font-weight: bold">
+              <p>
                 选择国家 <span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_countries.name }}</p>
               <input type="hidden" name="selected_country_id" v-model='selected_countries.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='degrees'}" v-on:mouseenter="selecting='degrees'">
-              <p style="font-weight: bold">
+              <p>
                 选择学历 <span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_degrees.name }}</p>
               <input type="hidden" name="selected_degree_id" v-model='selected_degrees.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='years'}" v-on:mouseenter="selecting='years'">
-              <p style="font-weight: bold">
+              <p>
                 计划留学时间<span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_years.name }}</p>
               <input type="hidden" name="selected_year" v-model='selected_years.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='speciality_categories'}" v-on:mouseenter="selecting='speciality_categories'">
-              <p style="font-weight: bold">
+              <p>
                 期望就读专业<span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_speciality_categories.name }}</p>
               <input type="hidden" name="speciality_category_id" v-model='selected_speciality_categories.id'>
             </li>
             <li class="estimate-val" v-bind:class="{'active': selecting=='speciality_name'}" v-on:mouseenter="selecting='speciality_name'">
-              <p style="font-weight: bold">
+              <p>
                 细分专业<span><img src="/images/right-arrow.png" /></span>
               </p>
               <p>@{{ selected_speciality_name.name }}</p>
@@ -221,10 +221,10 @@
     </div>
 
     <div class="middle">
-      <div class="mark" style="top: 418px;left: 528px;">
+      <!-- <div class="mark" style="top: 418px;left: 528px;">
         <label>悉尼分公司</label>
         <img src="/images/mark-arrow.png">
-      </div>
+      </div> -->
       <div class='app-content'>
         <div class='consult'>
           <img src="/images/msg_ic.png" alt="msg_ic" />
@@ -271,15 +271,42 @@
               </form>
             </div>
             <div class="subjects clear">
-              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p1.png');">商&nbsp;科</a>
-              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 3]) }}" style="background: url('/images/p2.png')">工&nbsp;科</a>
-              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 4]) }}" style="background: url('/images/p3.png')">人文艺术</a>
-              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p4.png')">经济金融</a>
-              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 6]) }}" style="background: url('/images/p5.png')">医&nbsp;学</a>
-              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}" style="background: url('/images/p6.png')">法&nbsp;学</a>
-              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 8]) }}" style="background: url('/images/p7.png')">理&nbsp;科</a>
-              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 1]) }}" style="background: url('/images/p8.png')">人文艺术</a>
-              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}" style="background: url('/images/p9.png')">经济金融</a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}">
+                <img src="/images/p1.png" />
+                <span>商&nbsp;科</span>
+              </a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 3]) }}">
+                <img src="/images/p2.png" />
+                <span>工&nbsp;科</span>
+              </a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 4]) }}">
+                <img src="/images/p3.png" />
+                <span>人文艺术</span>
+              </a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}">
+                <img src="/images/p4.png" />
+                <span>经济金融</span>
+              </a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 6]) }}">
+                <img src="/images/p5.png" />
+                <span>医&nbsp;学</span>
+              </a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 9]) }}">
+                <img src="/images/p6.png" />
+                <span>法&nbsp;学</span>
+              </a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 8]) }}">
+                <img src="/images/p7.png" />
+                <span>理&nbsp;科</span>
+              </a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 1]) }}">
+                <img src="/images/p8.png" />
+                <span>人文艺术</span>
+              </a>
+              <a target="_blank" href="{{ route('colleges.index', ['selected_speciality_cateogry_id' => 2]) }}">
+                <img src="/images/p9.png" />
+                <span>经济金融</span>
+              </a>
             </div>
           </div>
         </div>
@@ -333,11 +360,11 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="assess">
-      <h1>已有<span>{{\App\Setting::get('abroad_people_nums', 0)}}</span>人使用过指南针出国</h1>
-      <h1>有<span>{{\App\Setting::get('use_people_nums', 0)}}</span>人使用了指南针智能评估系统</h1>
-      <a style='color:#fff' href="{{route('estimate.step_first')}}"><button>开始免费评估</button></a>
+      <div class="assess">
+        <h1>已有<span>{{\App\Setting::get('abroad_people_nums', 0)}}</span>人使用过指南针出国</h1>
+        <h1>有<span>{{\App\Setting::get('use_people_nums', 0)}}</span>人使用了指南针智能评估系统</h1>
+        <a style='color:#fff' href="{{route('estimate.step_first')}}"><button>开始免费评估</button></a>
+      </div>
     </div>
     @include('shared.footer')
   </div>

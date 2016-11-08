@@ -83,6 +83,9 @@ ul{
           line-height: 40px;
           p{
             margin-left: 10px;
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
             span{
               float: right;
               margin-right: 10px;
@@ -177,7 +180,7 @@ ul{
     }
   }
   .middle {
-    height: 2560px;
+    height: 2620px;
     background: url('/images/bg.jpg') no-repeat scroll top;
     position: relative;
 
@@ -269,6 +272,9 @@ ul{
           text-overflow: ellipsis;
           text-decoration: none;
           color: #909090;
+          &:hover {
+            color: #696969;
+          }
           margin-bottom: 5px;
           &:nth-child(2n) {
             margin-right: 10px;
@@ -304,6 +310,7 @@ ul{
           a {
             display: inline-block;
             float: left;
+            position: relative;
             width: 273px;
             height: 120px;
             line-height: 120px;
@@ -311,6 +318,19 @@ ul{
             color: #fff;
             font-weight: bold;
             font-size:16px;
+            overflow: hidden;
+            img {
+              transition: 1s;
+              &:hover{
+                transform: scale(1.6);
+              }
+            }
+            span {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
           }
           .more{
             width: 546px;
@@ -346,6 +366,9 @@ ul{
           text-decoration: none;
           color: #909090;
           margin-bottom: 5px;
+          &:hover{
+            color: #696969;
+          }
         }
       }
       .lang-study {
@@ -393,8 +416,8 @@ ul{
   }
 }
 .assess{
-  position: relative;
-  margin-top: 50px;
+  position: absolute;
+  bottom: 0;
   height:245px;
   padding-top: 50px;
   width: 100%;
@@ -455,7 +478,11 @@ ul{
     margin-right: -55px;
     margin-top: 15px;
     a{
-      color: #7de6ca;
+      color: #ffffff;
+    }
+    span {
+      color: #ffffff;
+      cursor: pointer;
     }
     .title-nav-bar{
       list-style-type: none;
@@ -468,7 +495,7 @@ ul{
       margin-right: 50px;
       &.active{
         a{
-          color: #ffffff;
+          color: #7de6ca;
         }
       }
 
@@ -626,6 +653,7 @@ ul{
     }
   }
   .close {
+    display: block;
     position: absolute;
     cursor: pointer;
     right: 8px;
@@ -710,11 +738,11 @@ ul{
       @include clearfix;
     }
     .estimate-input{
-      width: 298px;
+      width: 280px;
       height: 40px;
       border: none;
       margin-bottom: 12px;
-      padding-left: 2px;
+      padding-left: 20px;
     }
 
     .estimate-select{
@@ -1773,7 +1801,7 @@ ul{
           height: 109px;
         }
         .college-info{
-          color: #6c6c6c;
+          color: #7d7d7d;
           position: absolute;
           height: 165px;
           top: 0;
@@ -1823,6 +1851,7 @@ ul{
           }
           .address-container{
             margin-top: 10px;
+            color: #7d7d7d;
           }
         }
         .cover{
@@ -1843,6 +1872,7 @@ ul{
           font-size: 14px;
           font-weight: bold;
           z-index: 999;
+          color: #071f47;
         }
         .like-button{
           position: absolute;
@@ -1875,6 +1905,7 @@ ul{
 
 .pagination{
   text-align: center;
+  margin-top: 20px;
   li{
     display: inline-block;
     width: 30px;
@@ -1887,6 +1918,7 @@ ul{
       display: block;
       width: 30px;
       height: 30px;
+      color: #757575;
     }
     &.active{
       color: #0e2d60;
@@ -1943,7 +1975,7 @@ ul{
           margin-top: 0;
         }
         h2{
-          color: #6c6c6c;
+          color: #7d7d7d;
           font-size: 15px;
           line-height: 24px;
           margin-bottom: 10px;
@@ -1954,12 +1986,18 @@ ul{
         }
         .info-content{
           float: left;
+          a{
+            color: #7d7d7d;
+            &:hover {
+              color: #696969;
+            }
+          }
         }
         .info{
           line-height: 24px;
           margin-bottom: 5px;
           font-size: 15px;
-          color: #6c6c6c;
+          color: #7d7d7d;
           @include clearfix;
         }
       }

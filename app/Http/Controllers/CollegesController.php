@@ -247,7 +247,7 @@ class CollegesController extends Controller
                 $specialities_query = $specialities_query->where('name', 'like', '%'.$speciality_name.'%');
             }
 
-            $articles = $specialities_query->paginate(10);
+            $articles = $specialities_query->paginate(1);
         }
 
         return $this->view('colleges.show', compact('college', 'article_key', 'articles'));
