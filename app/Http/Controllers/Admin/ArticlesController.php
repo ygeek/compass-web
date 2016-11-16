@@ -6,6 +6,7 @@ use App\Article;
 use App\ArticleCategory;
 use App\College;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 use App\Http\Requests;
 
@@ -15,10 +16,31 @@ class ArticlesController extends BaseController
         $image = $request->file('image');
         if($image){
             $result = app('qiniu_uploader')->upload_file($image);
-            return $this->okResponse($result);
+            if ($request->input('action')){
+              $res = [
+                'url' =>  $result['path'],
+                'name' => 'somename',
+                'state' => 'SUCCESS'
+              ];
+
+              return new JsonResponse($res);
+            } else {
+              return $this->okResponse($result);
+            }
+
         }else{
             return $this->errorResponse('没有上传图片');
         }
+    }
+
+    public function getPictureUpload() {
+      $config = [
+        "imageUrl" => route('picture_upload'),
+        "imageActionName" => 'upload',
+        "imageFieldName" => "image",
+        "imageUrlPrefix" => "",
+      ];
+      return new JsonResponse($config);
     }
 
     public function index(Request $request){
@@ -35,7 +57,7 @@ class ArticlesController extends BaseController
         }
 
         $articles = $articles_query->paginate(15);
-        
+
         return view('admin.articles.index', compact('article_categories', 'articles', 'college', 'college_id'));
     }
 

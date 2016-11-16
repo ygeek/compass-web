@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin'], function(){
         ->name('country_degree_examination_map');
 
     //Resources
+    Route::get('articles/picture-upload', 'Admin\ArticlesController@getPictureUpload');
     Route::resource('colleges', 'Admin\CollegesController');
     Route::resource('colleges.specialities', 'Admin\SpecialitiesController');
     Route::resource('colleges.examination_score_map', 'Admin\CollegeExaminationScoreMapController');

@@ -31,8 +31,7 @@
 <div class="form-group">
     <label class="col-xs-12" for="example-textarea-input">文章内容</label>
     <div class="col-xs-12">
-        <textarea id="summernote" name="content">{{$article->content}}</textarea>
-        {{--<textarea class="form-control" id="example-textarea-input" name="content" rows="6" placeholder="Content.."></textarea>--}}
+      <script id="ueditor" name="content" type="text/plain">{!! $article->content !!}</script>
     </div>
 </div>
 
@@ -43,39 +42,46 @@
     </div>
 </div>
 
-<script src="/summernote/dist/summernote.min.js"></script>
+<script src="/ueditor/ueditor.config.js"></script>
+<script src="/ueditor/ueditor.all.min.js"></script>
+<script src="/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script>
     $(document).ready(function() {
-        $.ajaxSetup({
-            headers: { 'X-CSRF-Token' :  "{{csrf_token()}}"    }
+        var ue = UE.getEditor('ueditor');
+        ue.ready(function() {
+           ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
         });
 
-        $('#summernote').summernote({
-            height: 350,
-            minHeight: null,
-            maxHeight: null,
-            callbacks: {
-                onImageUpload: function(files) {
-                    for (var i = files.length - 1; i >= 0; i--) {
-                        data = new FormData();
-                        data.append("image", files[i]);
-                        $.ajax({
-                            data: data,
-                            type: "POST",
-                            url: "{{route("picture_upload")}}",
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            success: function(filename) {
-                                $('#summernote').summernote("insertImage", filename.data.path);
-                            }
-                        });                        
-                    }
-                    
-                }
-            }
+        errorHandler = function(err) {
+          console.log(err);
+        };
 
-        });
+        // $('#summernote').summernote({
+        //     height: 350,
+        //     minHeight: null,
+        //     maxHeight: null,
+        //     callbacks: {
+        //         onImageUpload: function(files) {
+        //             for (var i = files.length - 1; i >= 0; i--) {
+        //                 data = new FormData();
+        //                 data.append("image", files[i]);
+        //                 $.ajax({
+        //                     data: data,
+        //                     type: "POST",
+        //                     url: "{{route("picture_upload")}}",
+        //                     cache: false,
+        //                     contentType: false,
+        //                     processData: false,
+        //                     success: function(filename) {
+        //                         $('#summernote').summernote("insertImage", filename.data.path);
+        //                     }
+        //                 });
+        //             }
+        //
+        //         }
+        //     }
+        //
+        // });
     });
 
 </script>
