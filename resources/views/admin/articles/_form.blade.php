@@ -47,7 +47,9 @@
 <script src="/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script>
     $(document).ready(function() {
-        var ue = UE.getEditor('ueditor');
+        var ue = UE.getEditor('ueditor', {
+          initialFrameHeight: 400
+        });
         ue.ready(function() {
            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
         });
