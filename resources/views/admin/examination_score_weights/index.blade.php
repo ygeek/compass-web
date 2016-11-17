@@ -2,6 +2,9 @@
 @section('content')
     <rules-index></rules-index>
     <template id="rule-index">
+        <div v-show="onloading" style="z-index: 9999; display: block; position: fixed; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.5); top: 0; left: 0">
+          <span style="left: 50%; top:50%;position: absolute; display: block; color: #fff;">加载中。。。</span>
+        </div>
         <div class="block">
             <div class="block-header">
                 <h3 class="block-title">规则列表</h3>
@@ -59,14 +62,14 @@
                             <td>{{$weight->degree->name}}</td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a @click="loadColleges({{$weight->id}})" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="修改院校">
-                                    <i class="fa fa-pencil"></i>
+                                    <a @click="loadColleges({{$weight->id}})" class="btn btn-xs btn-default">
+                                      修改院校
                                     </a>
 
-                                    <a href="{{ route('admin.examination_score_weights.edit', $weight->id) }}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="" data-original-title="修改规则">
-                                        <i class="fa fa-pencil"></i>
+                                    <a href="{{ route('admin.examination_score_weights.edit', $weight->id) }}" class="btn btn-xs btn-default">
+                                      修改规则
                                     </a>
-                                    
+
                                     <form action="{{ URL::route('admin.examination_score_weights.destroy', $weight->id) }}" method="POST" onsubmit="return ConfirmDelete()">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -92,12 +95,14 @@
                     showPop: false,
                     colleges: [],
                     rule_id: null,
+                    onloading: false,
                 };
             },
             methods:{
                 loadColleges: function(rule_id){
                     var url = '{{route('admin.examination_score_weights.colleges', ['weight_id' => 'weight_id'])}}';
                     url = url.replace('weight_id', rule_id);
+                    this.onloading = true;
                     this.$http.get(url).then(function (response) {
                         var data = response.data.data;
                         data.map(function(college){
@@ -111,6 +116,7 @@
                         this.colleges = data;
                         this.showPop = true;
                         this.rule_id = rule_id;
+                        this.onloading = false;
                     });
                 },
                 confirmChange: function(){
