@@ -1816,15 +1816,26 @@ ul {
       height: 180px;
       background: #fff;
       margin-bottom: 10px; }
-      .colleges-page .search-result .colleges .college .college-badge {
-        margin-left: 27px;
-        margin-top: 35px;
-        display: inline-block;
-        width: 334px;
-        height: 109px; }
+      .colleges-page .search-result .colleges .college .college-badge-container {
+        width: 334px; }
+        .colleges-page .search-result .colleges .college .college-badge-container .college-badge {
+          margin-left: 27px;
+          margin-top: 35px;
+          display: inline-block;
+          width: 334px;
+          height: 109px; }
+        .colleges-page .search-result .colleges .college .college-badge-container .badge-info {
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-pack: justify;
+          justify-content: space-between;
+          margin-top: 5px;
+          width: 334px;
+          margin-left: 27px; }
       .colleges-page .search-result .colleges .college .college-info {
         color: #7d7d7d;
         position: absolute;
+        left: 360px;
         height: 165px;
         top: 0;
         margin-top: 10px;

@@ -154,7 +154,14 @@
                             ?>
                             <a href="javascript:void(0)" class="calc-link" v-on:click="setEstimatePanel('{{$estimate_url}}')">测试录取几率 -></a>
                             <a href="{{route('colleges.show', $college->key)}}" target="_blank"><div class="cover"></div></a>
-                            <img class="college-badge" src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" />
+                            <div class="college-badge-container">
+                              <img class="college-badge" src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" />
+                              <div class="badge-info">
+                                <span>浏览热度：{{ $college->read_count }}</span>
+                                <span>平均热度：{{ $college->average_enrollment }}</span>
+                                <span>国际留学生比例：{{ $college->international_ratio }}</span>
+                              </div>
+                            </div>
                             <div class="college-info">
                                 <header>
                                     <h1><a href="{{route('colleges.show', $college->key)}}" target="_blank">{{$college->chinese_name}}</a><span class="property">{{ ($college->type=="public")?'公立':'私立' }}</span></h1>
