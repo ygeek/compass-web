@@ -56,7 +56,7 @@ class ArticlesController extends BaseController
             $articles_query = $articles_query->whereNull('college_id');
         }
 
-        $articles = $articles_query->paginate(15);
+        $articles = $articles_query->orderBy('category_id')->orderBy('order_weight', 'desc')->paginate(15);
 
         return view('admin.articles.index', compact('article_categories', 'articles', 'college', 'college_id'));
     }
