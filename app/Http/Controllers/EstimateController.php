@@ -32,7 +32,9 @@ class EstimateController extends Controller
         array_push($areas, $college_data['college_area']);
         array_push($colleges, [
           'name' => $college_data['college_name'],
-          'major' => $college_data['college_major'],
+          'major' => collect($college_data['college_major'])->reject(function ($name) {
+                          return empty($name);
+                      })->unique()->values()->all(),
           'area' => $college_data['college_area'],
         ]);
       }
@@ -319,9 +321,9 @@ class EstimateController extends Controller
         $key = $_POST['key'];
         $str = '';
         $groups = $this->object_to_array(json_decode($groups));
-        
+
         $val = $groups[$key];
-        
+
         if(is_object($val)) $val = get_object_vars ($val);
         $leixing = $val['selects'][$value];
         $leixingOption = '';
@@ -356,13 +358,13 @@ class EstimateController extends Controller
         if($leixing=='SAT') $placed = '0~2400';
         if($leixing=='GRE') $placed = '260~340';
         if($leixing=='GMAT') $placed = '200~800';
-        
+
         $score = '';
         if(isset($val['examinations'][$value]['score']))
         {
             $score = $val['examinations'][$value]['score'];
         }
-        
+
         $str .=
         '<div class="select_text">
 
