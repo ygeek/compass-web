@@ -17,11 +17,9 @@
                         <input class="estimate-input" type="text" id="name" v-model="data.name"/>
                     </div>
 
-
                     @if($selected_degree->name == '硕士')
                         <div class="form-group">
                             <label for="recently_college_name">最近就读院校<span style="color: red">*</span></label>
-                            <college-select-pop :show.sync="showCollegeSelect"></college-select-pop>
                             <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
                             <?php
                               $index = 0;
@@ -34,7 +32,13 @@
                             ?>
 
                             <input @click="displayCollegeSelect" v-model="data.recently_college_name" class="estimate-input"/>
-
+                            <college-select-pop
+                              :show.sync="showCollegeSelect"
+                              :default-college="data.recently_college_name"
+                              :default-speciality="data.recently_speciality_name"
+                              :major-list.sync="majorsList"
+                            >
+                            </college-select-pop>
 
                             @if(isset($cpm) && $cpm)
                             </div>
@@ -53,7 +57,6 @@
                                 $user_recently_speciality_name = false;
                               }
                             ?>
-
                             <select id="recently_speciality_name" v-model="data.recently_speciality_name" class="estimate-input">
                               <option
                                 v-for="major in majorsList"
@@ -288,7 +291,7 @@
 
     Vue.component('college-select-pop', {
       template: '#college-select-pop',
-      props: ['show'],
+      props: ['show', 'defaultCollege', 'defaultSpeciality', 'majorList'],
       data: function() {
         return {
           colleges: [],
@@ -338,7 +341,16 @@
           that.loading = false;
           that.colleges = response.data.data['colleges'];
           that.provinces = response.data.data['areas'];
+
+          if(that.defaultCollege && that.defaultSpeciality) {
+            var college = that.colleges.find((college) => {
+              return college.name == that.defaultCollege;
+            });
+            that.majorList = college.major.concat('其它');
+          }
         });
+
+
       },
     });
 
