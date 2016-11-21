@@ -198,8 +198,11 @@
                             <input type="hidden" name="cpm" value="{{ $cpm }}">
                         @endif
                     </form>
-                    @if(!$college_id)
-                    <a href="javascript:document.getElementById('return_form').submit();"><button class="estimate-button">返回上一步</button></a>
+
+                    @if(!$disable_pre_button)
+                    <a href="{{ URL::previous() }}">
+                      <button class="estimate-button">返回上一步</button>
+                    </a>
                     @endif
                     <button @click="submit" class="estimate-button">生成择校方案</button>
                 </div>

@@ -106,6 +106,7 @@ class EstimateController extends Controller
 
     public function stepSecond(Request $request){
         $cpm = (bool)($request->input('cpm', false));
+        $disable_pre_button = (bool)($request->input('disable_pre_button', false));
         $college_id = $request->input('college_id', false);
 
         if($college_id){
@@ -135,7 +136,7 @@ class EstimateController extends Controller
           }
         }
 
-        return $this->view('estimate.step_second', compact('selected_degree', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id', 'cpm', 'college_id'));
+        return $this->view('estimate.step_second', compact('selected_degree', 'disable_pre_button', 'selected_country', 'selected_speciality_name', 'estimate_checked', 'selected_year', 'selected_category_id', 'cpm', 'college_id'));
     }
 
     /*

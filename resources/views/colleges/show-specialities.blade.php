@@ -12,7 +12,7 @@
                     $tmp = $college->administrativeArea->parent->parent->id;
                 }
             }
-            $estimate_url = route('estimate.step_second', ['selected_country_id' => $tmp, 'selected_degree_id' => $speciality->degree->id, 'speciality_category_id' => $speciality->category->id, 'speciality_name' => $speciality->name, 'cpm' => true, 'college_id' => $college->id]);
+            $estimate_url = route('estimate.step_second', ['disable_pre_button' => true, 'selected_country_id' => $tmp, 'selected_degree_id' => $speciality->degree->id, 'speciality_category_id' => $speciality->category->id, 'speciality_name' => $speciality->name, 'cpm' => true, 'college_id' => $college->id]);
             ?>
             <a href="javascript:void(0)" v-on:click="setEstimatePanel('{{$estimate_url}}')"><button class="estimate-button">测试录取率 -></button></a>
         </div>
