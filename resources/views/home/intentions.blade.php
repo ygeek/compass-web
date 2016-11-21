@@ -193,7 +193,7 @@ Array.prototype.contains = function(obj) {
         },
         computed: {
             score_keys: function(){
-                var Order = ['雅思','托福','听','说','读','写','高中平均成绩','高考','ACT','ACT作文','SAT','SAT阅读','SAT写作','SAT数学','GRE','GMAT','语文','数学','写作','相关专业工作年限','备注信息'];
+                var Order = ['雅思','托福IBT','听','说','读','写','高中平均成绩', '大学平均成绩', '高考','ACT','作文','SAT', 'GRE', 'GMAT','阅读','数学','语文','写作','相关专业工作年限','备注信息'];
                 var keys = Object.keys(this.intentions.user_scores).sort(function(a,b) {
                     if (a.indexOf("高考") == 0)
                         a = '高考';
