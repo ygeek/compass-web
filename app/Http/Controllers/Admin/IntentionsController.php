@@ -51,6 +51,7 @@ class IntentionsController extends BaseController
     //导出Excel
     public function exportToExcel($intention_id){
         $intention = Intention::find($intention_id);
+
         Excel::create($intention->name . '意向单', function($excel) use ($intention){
             $excel->sheet('New sheet', function($sheet) use ($intention){
                 $sheet->loadView('admin.intentions.excel', ['intention' => $intention]);
