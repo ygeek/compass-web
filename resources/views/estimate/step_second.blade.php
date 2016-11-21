@@ -258,13 +258,19 @@
 
                     @if(isset($cpm) && $cpm)
                     <div class="form-group section-group" style="display: flex; width: 303px !important; margin-left: 102px;justify-content: space-between;">
-                    @endif
+                      <template v-for="section in selected_examination['sections']">
+                          <div>
+                            <label style="text-align: center; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
+                            <input  class="estimate-input section-input" style="width: 30px; margin-right: 0px;" type="text" v-model="section.score">
+                          </div>
+                      </template>
+                    @else
                     <template v-for="section in selected_examination['sections']">
-                        <div>
-                          <label style="text-align: center; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
-                          <input  class="estimate-input section-input" style="width: 30px; margin-right: 0px;" type="text" v-model="section.score">
-                        </div>
+                      <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
+                      <input  class="estimate-input section-input" style="width: 40px;" type="text" v-model="section.score">
                     </template>
+                    @endif
+
                     @if(isset($cpm) && $cpm)
                     </div>
                     @endif
