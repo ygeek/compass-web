@@ -36,7 +36,8 @@ class IndexController extends Controller
 
     public function getSpeciality(Request $request){
         $speciality_categories = collect(SpecialityCategory::with('specialities')->get())->map(function($item){
-            $item['name']=$item['chinese_name'];
+            $item['name'] = $item['chinese_name'];
+            $item['specialities'] = collect($item['specialities'])->unique()->values()->all();
             return $item;
         });
         return $speciality_categories;
