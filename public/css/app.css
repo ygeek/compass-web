@@ -436,6 +436,13 @@ ul {
     .index-page .header .evaluate-nav .select-item .estimate-val {
       line-height: 20px;
       margin-bottom: 10px; }
+      .index-page .header .evaluate-nav .select-item .estimate-val p {
+        height: 20px;
+        position: relative; }
+        .index-page .header .evaluate-nav .select-item .estimate-val p img {
+          position: absolute;
+          top: 5px;
+          right: 15px; }
       .index-page .header .evaluate-nav .select-item .estimate-val.active {
         background: #f0f0f0; }
     .index-page .header .evaluate-nav .select-area {
