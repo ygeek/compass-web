@@ -27,6 +27,10 @@ body, html {
   font-family: "Microsoft YaHei", "微软雅黑", Helvetica, Tahoma, Arial, STXihei, "华文细黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
+.modal-opened {
+  overflow: hidden;
+}
+
 a{
   text-decoration: none;
 }
