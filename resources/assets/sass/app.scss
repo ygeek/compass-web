@@ -55,8 +55,9 @@ ul{
 .index-page{
   .header{
     height: 542px;
-    background: url('/images/head_bg.jpg') no-repeat fixed top;
-    background-size: cover;
+    background-image: url('/images/head_bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
     form{
       width: 460px;
     }
