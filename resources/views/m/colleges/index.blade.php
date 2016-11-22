@@ -25,16 +25,16 @@
                         <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"><br />
                         <span style="display:block; float:left;">{{$college->chinese_name}}</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px;">{{ ($college->type=="public")?'公立':'私立' }}</span><br />
                         <div class="clear"></div>
-                    {{$college->english_name}}
+                        <span style="font-size:0.8em;">{{$college->english_name}}</span>
                         </h2></a>
-                        <h1>本国排名：{{$college->domestic_ranking}}<br><span style="background:url(/static/images/icon21.jpg) left no-repeat; background-size:20px; padding:0 0 0 20px;">{{$college->administrativeArea->name}}
+                        <h1>本国排名：{{$college->domestic_ranking}}<br><span style="background:url(/static/images/icon21.jpg) left no-repeat; background-size:20px; padding:0 0 0 20px; text-align: right;">{{$college->administrativeArea->name}}
                                             @if($college->administrativeArea->parent)
                                                 , {{$college->administrativeArea->parent->name}}
                                                 @if($college->administrativeArea->parent->parent)
                                                     , {{$college->administrativeArea->parent->parent->name}}
                                                 @endif
                                             @endif</span><br>
-                            <a href="/estimate/step-1?selected_country_id={{$college->country_id}}&college_id={{$college->id}}" style="font-size:1.2em; line-height: 40px;">测试录取率>></a><br>
+                            <a href="/estimate/step-1?selected_country_id={{$college->country_id}}&college_id={{$college->id}}" style="font-size:1.2em; line-height: 40px; color: #0000FF">测试录取率>></a><br>
                        
                             <img src="/static/images/xin<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 2;}}else{echo 2;} ?>.png" width="30" style=" cursor: pointer;" likeid='<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 2;}}else{echo 3;} ?>' onclick="setLike('{{ $college->id }}',$(this))" ><span id='shuzi{{ $college->id }}'>{{ $college->like_nums }}</span>
                        </h1>
@@ -138,7 +138,7 @@ function getAreaName($areas,$aid)
             @foreach($areas as $key=>$val)
             <span class='area{{ $val->id }} areachild'><a href="javascript:void(0)">{{ $val->name }}</a></span>
             <em class='area{{ $val->id }} areachild '>
-                <a href="javascript:void(0)" childarea_id='0' class="areachilds">全部</a>
+                <a href="javascript:void(0)" childarea_id='0' id='main03_r_menu' class="areachilds">不限</a>
                 @foreach($val->children as $v)
                 <a  href="javascript:void(0)" class="areachilds" childarea_id='{{ $v->id }}'>{{ $v->name }}</a>
                 @endforeach
