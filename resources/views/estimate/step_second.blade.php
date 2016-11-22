@@ -12,13 +12,13 @@
             <template id="step-second-form">
                 <div class="estimate-form" style="width: 860px;">
                     <h1>填写个人资料·2/2</h1>
-                    <div class="form-group">
+                    <div class="form-group estimate-group">
                         <label for="name">姓名<span style="color: red">*</span></label>
                         <input class="estimate-input" type="text" id="name" v-model="data.name"/>
                     </div>
 
                     @if($selected_degree->name == '硕士')
-                        <div class="form-group">
+                        <div class="form-group estimate-group">
                             <label for="recently_college_name">最近就读院校<span style="color: red">*</span></label>
                             <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
                             <?php
@@ -45,7 +45,7 @@
                             <div class="form-group">
                             @endif
 
-                            <label for="recently_speciality_name" style="margin-left:2px;">最近就读专业</label>
+                            <label for="recently_speciality_name" style="margin-left: 50px;">最近就读专业</label>
                             <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
                             <?php
                               $index = 0;
@@ -75,9 +75,9 @@
                     @endif
 
                     @if($selected_degree->name == '本科')
-                        <div class="form-group">
+                        <div class="form-group estimate-group">
                             <label for="cee">高考<span style="color: red">*</span></label>
-                            <div class="estimate-short-select" style="position: relative; top:<?php if(!(isset($cpm) && $cpm)) echo "15px"; else echo "10px" ?>">
+                            <div class="estimate-short-select">
                                 <select name="cee_province" v-model="data['examinations']['高考']['tag']">
                                     <?php
                                     $provinces = collect(config('provinces'))->sortBy(function ($product, $key) {
@@ -108,7 +108,7 @@
                             @endif
                         </div>
                     @endif
-                    <div class="form-group">
+                    <div class="form-group estimate-group">
                         <label for="mean">平均成绩<span style="color: red">*</span></label>
                         @if($selected_degree->name == '本科')
                             <input class="estimate-input" type="text" id="mean" v-model="data['examinations']['高中平均成绩']['score']" placeholder="0~100"/>
@@ -183,8 +183,8 @@
 
                     ?>
 
-                    <div class="form-group" style="margin-top: -12px;" v-for="group in groups">
-                        <group-examination :group.sync="group"></group-examination>
+                    <div class="form-group group-examination" v-for="group in groups">
+                        <group-examination :group.sync="group" :loop-index="$index"></group-examination>
                     </div>
 
                     <form action="{{ URL::route('estimate.step_first') }}" method="GET" style="display: none" id="return_form">
@@ -242,8 +242,8 @@
             </template>
 
             <template id="group-examination">
-                <label for="group@{{ $index }}">@{{ group.title }}<span style="color: red">*</span></label>
-                <div class="estimate-short-select" style="position: relative; top: <?php if(!(isset($cpm) && $cpm)) echo "15px"; else echo "10px" ?>;">
+                <label for="group@{{ loopIndex }}">@{{ group.title }}<span style="color: red">*</span></label>
+                <div class="estimate-short-select">
                     <select v-model="group['selected_group']">
                         <template v-for="option in group['selects']">
                             <option value="@{{ option }}" v-if="option == group['selects'][0]" selected>
@@ -257,7 +257,7 @@
                 </div>
 
                 <template v-if="selected_examination">
-                    <input class="estimate-input" style="width: <?php if(!(isset($cpm) && $cpm)) echo "120px"; else echo "155px" ?>;" type="text" v-model="selected_examination.score" v-bind:placeholder="default_value">
+                    <input class="estimate-input" style="width: <?php if(!(isset($cpm) && $cpm)) echo "120px; margin-right: 40px;"; else echo "155px" ?>;" type="text" v-model="selected_examination.score" v-bind:placeholder="default_value">
 
                     @if(isset($cpm) && $cpm)
                     <div class="form-group section-group" style="display: flex; width: 303px !important; margin-left: 102px;justify-content: space-between;">
@@ -269,7 +269,7 @@
                       </template>
                     @else
                     <template v-for="section in selected_examination['sections']">
-                      <label style="text-align: right; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
+                      <label style="text-align: center; width: 30px;" for='section@{{ $index }}'>@{{ section.name }}</label>
                       <input  class="estimate-input section-input" style="width: 40px;" type="text" v-model="section.score">
                     </template>
                     @endif
@@ -367,7 +367,7 @@
 
         Vue.component('group-examination', {
             template: "#group-examination",
-            props: ['group'],
+            props: ['group', 'loopIndex'],
             data: function(){
                 return  {
                     degree_id: {{ $selected_degree->id }}
