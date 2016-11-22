@@ -558,6 +558,9 @@ ul{
   position: fixed;
   z-index: 999;
 
+  button:disabled {
+    background-color: #ccc !important;
+  }
 
   .panel{
     .close{

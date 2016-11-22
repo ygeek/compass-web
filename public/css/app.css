@@ -810,6 +810,8 @@ ul {
   height: 100vh;
   position: fixed;
   z-index: 999; }
+  #login-panel button:disabled {
+    background-color: #ccc !important; }
   #login-panel .panel {
     width: 345px;
     background: #f3f3f3 url("/images/login-logo.png") no-repeat;
