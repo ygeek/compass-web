@@ -9,7 +9,7 @@
     <script src="/js/vue.js"></script>
     <script src="/js/vue-resource.min.js"></script>
   </head>
-  <body id="go-top">
+  <body id="app" v-bind:class="{ 'modal-opened': showLoginAndRegisterPanel }">
   @if(!(isset($cpm) && $cpm))
   <a href="#go-top"><img src="/images/top.gif" class="top" alt="top"/></a>
   @endif
@@ -29,7 +29,7 @@
     @endif
 
 
-    <div id="app">
+    <div id="go-top">
       @include('shared.login_panel')
       <div>
         @yield('content')

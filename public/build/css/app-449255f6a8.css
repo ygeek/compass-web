@@ -380,6 +380,9 @@ body, html {
   min-height: 100vh;
   font-family: "Microsoft YaHei", "微软雅黑", Helvetica, Tahoma, Arial, STXihei, "华文细黑", SimSun, "宋体", Heiti, "黑体", sans-serif; }
 
+.modal-opened {
+  overflow: hidden; }
+
 a {
   text-decoration: none; }
 
@@ -402,8 +405,9 @@ ul {
 
 .index-page .header {
   height: 542px;
-  background: url("/images/head_bg.jpg") no-repeat fixed top;
-  background-size: cover; }
+  background-image: url("/images/head_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center; }
   .index-page .header form {
     width: 460px; }
   .index-page .header .evaluate-nav {
@@ -806,6 +810,8 @@ ul {
   height: 100vh;
   position: fixed;
   z-index: 999; }
+  #login-panel button:disabled {
+    background-color: #ccc !important; }
   #login-panel .panel {
     width: 345px;
     background: #f3f3f3 url("/images/login-logo.png") no-repeat;
@@ -966,7 +972,8 @@ ul {
       color: #a1a1a1;
       line-height: 40px;
       width: 100px;
-      display: inline-block; }
+      display: block;
+      float: left; }
     .estimate-page .estimate-form h1 {
       font-size: 15px;
       color: #0e2d60;
@@ -974,7 +981,9 @@ ul {
       margin-bottom: 30px; }
     .estimate-page .estimate-form .form-group {
       display: block;
-      width: 100%; }
+      width: 100%;
+      height: 40px;
+      margin-bottom: 20px; }
       .estimate-page .estimate-form .form-group:after {
         content: "";
         display: table;
@@ -983,8 +992,13 @@ ul {
       width: 280px;
       height: 40px;
       border: none;
+      float: left;
       margin-bottom: 12px;
       padding-left: 20px; }
+    .estimate-page .estimate-form .group-examination label {
+      float: left; }
+    .estimate-page .estimate-form .group-examination input {
+      float: left; }
     .estimate-page .estimate-form .estimate-select {
       background: #fff url("/images/select_arrow.png") no-repeat 98%;
       height: 40px;
@@ -1003,14 +1017,14 @@ ul {
         .estimate-page .estimate-form .estimate-select select:focus {
           outline: none; }
     .estimate-page .estimate-form .estimate-short-select {
-      background: #fff url("/images/select_arrow.png") no-repeat 98%;
+      background: #fff url("/images/select_arrow.png") no-repeat 92%;
       height: 40px;
       border: none;
       overflow: hidden;
       padding-left: 20px;
-      width: 120px;
-      float: none;
-      display: inline-block; }
+      width: 105px;
+      float: left;
+      display: block; }
       .estimate-page .estimate-form .estimate-short-select select {
         -moz-appearance: window;
         text-indent: 0.01px;
@@ -1038,7 +1052,8 @@ ul {
       color: #a1a1a1;
       line-height: 30px;
       width: 100px;
-      display: inline-block; }
+      float: left;
+      display: block; }
     .cpm-estimate-page .estimate-form h1 {
       font-size: 15px;
       color: #000;
@@ -1058,7 +1073,7 @@ ul {
       margin-bottom: 12px;
       padding-left: 2px; }
     .cpm-estimate-page .estimate-form .estimate-select {
-      background: #fff url("/images/select_arrow.png") no-repeat 98%;
+      background: #fff url("/images/select_arrow.png") no-repeat 92%;
       height: 30px;
       width: 280px;
       border: none;
@@ -1075,14 +1090,14 @@ ul {
         .cpm-estimate-page .estimate-form .estimate-select select:focus {
           outline: none; }
     .cpm-estimate-page .estimate-form .estimate-short-select {
-      background: #fff url("/images/select_arrow.png") no-repeat 98%;
+      background: #fff url("/images/select_arrow.png") no-repeat 92%;
       height: 30px;
       border: none;
       overflow: hidden;
       padding-left: 20px;
       width: 120px;
-      float: none;
-      display: inline-block; }
+      float: left;
+      display: block; }
       .cpm-estimate-page .estimate-form .estimate-short-select select {
         -moz-appearance: window;
         text-indent: 0.01px;

@@ -19,7 +19,7 @@
       <div class="login-form form" v-show="panel == 'login'">
         <input placeholder="手机号码" v-model="phone_number"/>
         <input placeholder="密码" type="password" v-model='password'/>
-        <button class="button" @click="sendLoginRequest">登录</button>
+        <button class="button" @click="sendLoginRequest" v-bind:disabled="!canLogin">登录</button>
       </div>
 
       <div class="register-form form" v-show="panel == 'register'">
@@ -47,7 +47,7 @@
         <p class="tips">
           注册既同意《指南针用户协议》
         </p>
-        <button class="button" @click="sendRegisterRequest">注册</button>
+        <button class="button" @click="sendRegisterRequest" v-bind:disabled="!canRegist">注册</button>
       </div>
     </div>
   </div>
@@ -66,6 +66,23 @@
         countDown: null,
         countDownInterval: null,
       };
+    },
+    computed: {
+      validatePhoneNumber: function() {
+        return this.phone_number.length == 11;
+      },
+      validatePassword: function() {
+        return this.password.length > 5;
+      },
+      validateVerifyCode: function() {
+        return this.verify_code.length == 4;
+      },
+      canRegist: function() {
+        return this.validatePhoneNumber && this.validatePassword && this.validateVerifyCode;
+      },
+      canLogin: function() {
+        return this.validatePhoneNumber && this.validatePassword;
+      },
     },
     methods: {
       close: function(e){
