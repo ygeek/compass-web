@@ -77,7 +77,7 @@
             <form action="" method="post" >
                 <input type="number" class="login_resgister_input" placeholder="手机号码" name="phone_number">
                 <input type="password" class="login_resgister_input" placeholder="密码" name='password'>
-                <div class="login_mima">
+                <div class="login_mima resgister_xy">
                     <a href="javascript:changeView('#region')">注册</a>
                     <a href="#" style="float:right;">忘记密码？</a>
                 </div>
@@ -96,7 +96,7 @@
     </div>Ï
     <div class="clear"></div>
     <div class="main">
-        <div class="login_resgister">
+        <div class="login_resgister" style="padding-top: 15px;">
             <form action="" method="get">
                 <input type="number" class="login_resgister_input zcphone_number" placeholder="手机号码" v-model="phone_number" name="zcphone_number" >
                 <input type="password" class="login_resgister_input" placeholder="密码" v-model="password" name="zcpassword">
