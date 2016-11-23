@@ -1013,7 +1013,8 @@ ul {
         border: none;
         height: 40px;
         width: 298px;
-        -webkit-appearance: none; }
+        -webkit-appearance: none;
+        -moz-appearance: none; }
         .estimate-page .estimate-form .estimate-select select:focus {
           outline: none; }
     .estimate-page .estimate-form .estimate-short-select {
@@ -1033,7 +1034,8 @@ ul {
         border: none;
         height: 40px;
         width: 118px;
-        -webkit-appearance: none; }
+        -webkit-appearance: none;
+        -moz-appearance: none; }
         .estimate-page .estimate-form .estimate-short-select select:focus {
           outline: none; }
 
