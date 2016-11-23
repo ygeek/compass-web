@@ -72,7 +72,7 @@
         return this.phone_number.length == 11;
       },
       validatePassword: function() {
-        return this.password.length > 5;
+        return this.password.length > 0;
       },
       validateVerifyCode: function() {
         return this.verify_code.length == 4;
