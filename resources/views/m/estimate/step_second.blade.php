@@ -1,46 +1,79 @@
 @include('m.public.header')
 <?php $user = Auth::user();?>
 <div class="clear"></div>
-<div class="main">
+<div class="main" id="estimate-app">
     <div class="login_resgister">
         <form action="/estimate/stepSecondPost" id="stepSecondPost" onsubmit="return checkSecond()" method="post">
             <label for="name">姓名<span style="color: red">*</span></label>
             <input type="text" class="login_resgister_input" ismust='1' errormsg="姓名未填写!" name="name" placeholder="姓名"  @if(Auth::check())value="{{$user->getEstimateInput('name')}}"@endif>
             @if($selected_degree->name == '硕士')
+
+            <template id="college-select-pop">
+              <div class="college-select-pop" v-show="show">
+                <div class="close" @click="closeButtonClick">X</div>
+
+                <div class="search-bar">
+                  <span>搜索</span><input v-model="searchKeyWord"/>
+                </div>
+
+                <template v-if="showSearchResult.length > 0">
+                  <div class="search-result">
+                    <ul>
+                      <li v-for="college in showSearchResult">
+                        <span @click="selectCollege(college)">@{{college.name}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </template>
+
+
+
+                <div class="provinces">
+                  <ul>
+                    <li v-for="province in provinces" :class="{ active: province == selectedProvince }">
+                      <span @click="selectProvince(province)">@{{province}}</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="colleges">
+                  <ul>
+                    <li v-for="college in showColleges">
+                      <span @click="selectCollege(college)">@{{college.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </template>
+
+            <college-select-pop
+              :show.sync="showCollegeSelect"
+            >
+            </college-select-pop>
+
             <label for="recently_college_name">最近就读院校<span style="color: red">*</span></label>
-            <select id="recently_college_name" v-model="data.recently_college_name" name="recently_college_name" errormsg="就读院校未填写!" class="select01">
-                <?php $master_colleges = App\Setting::get('master_colleges', []) ?>
-                <?php
-                  $index = 0;
-                  $user = Auth::user();
-                  if($user){
-                    $user_recently_college_name = $user->getEstimateInput('recently_college_name');
-                  }else{
-                    $user_recently_college_name = false;
-                  }
-                ?>
-               
-               @foreach($master_colleges as $college)
-                    <option value="{{ $college }}" @if($index++ == 0 and !$user_recently_college_name) selected @endif>{{$college}}</option>
-                @endforeach
-              
-            </select>
+            <input type="text" @click="displayCollegeSelect" v-model="data.recently_college_name" class="login_resgister_input" ismust='1' errormsg="就读院校未填写!" name="name" placeholder="最近就读院校" >
+
+            <?php
+              $index = 0;
+              $user = Auth::user();
+              if($user){
+                $user_recently_college_name = $user->getEstimateInput('recently_college_name');
+              }else{
+                $user_recently_college_name = false;
+              }
+            ?>
+
+
             <label for="recently_speciality_name">最近就读专业</label>
             <select id="recently_speciality_name" v-model="data.recently_speciality_name" name="recently_speciality_name" class="select01">
-                <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
-                <?php
-                  $index = 0;
-                  $user = Auth::user();
-                  if($user){
-                    $user_recently_speciality_name = $user->getEstimateInput('recently_speciality_name');
-                  }
-                  else{
-                    $user_recently_speciality_name = false;
-                  }
-                ?>
-                @foreach($master_speciality as $speciality)
-                    <option value="{{ $speciality }}" @if($index++ == 0 and !$user_recently_speciality_name) selected @endif>{{$speciality}}</option>
-                @endforeach
+              <option
+                v-for="major in majorList"
+                :value="major"
+                track-by="$index"
+              >
+                @{{major}}
+              </option>
             </select>
             <label for="related_length_of_working">相关工作年限</label>
             <input type="number" class="login_resgister_input" name="related_length_of_working" placeholder="工作年限" @if(Auth::check())value="<?php $nx = $user->getEstimateInput('related_length_of_working'); echo $nx; ?>"@endif>
@@ -48,7 +81,7 @@
             @if($selected_degree->name == '本科')
             <label for="cee">高考<span style="color: red">*</span></label>
             <div class="select_text">
-                
+
                 <select name="examinations[高考][tag]" class="select02 gktag">
                     <?php
                     $provinces = collect(config('provinces'))->sortBy(function ($product, $key) {
@@ -95,7 +128,7 @@
                             $groups[] = ['ACT', 'SAT'];
                         }
                     }
-                    
+
                     $groups = collect($groups)->map(function($items) use ($selected_degree, $user){
                         $examinations = collect($items)->map(function($item) use ($selected_degree, $user){
                             $examination = \App\Examination::where('name', $item)->select(['id', 'name', 'sections', 'multiple_degree'])->first();
@@ -144,12 +177,12 @@
                                 'selects' => $selects
                         ];
                     });
-                   
+
                     $groups = objToArr($groups);
                     foreach($groups as $gkey=>$gval){
                     ?>
             <div class="choseInputs{{$gkey}}" ></div>
-            
+
                     <?php } ?>
             <input type="hidden" name="selected_country" value="{{$selected_country['id']}}">
             <input type="hidden" name="selected_degree" value="{{$selected_degree['id']}}">
@@ -158,16 +191,123 @@
             <input type="submit" tijiao='1' name="makePlan" value="生成选校方案" class="select_button makePlan" >
             <input type="button" value="返回" onclick="history.go(-1)" class="select_button01">
         </form>
-       
+
     </div>
     <div class="clear"></div>
 </div>
+
+
 <script>
+Vue.component('college-select-pop', {
+  template: '#college-select-pop',
+  props: ['show', 'defaultCollege', 'defaultSpeciality', 'majorList'],
+  data: function() {
+    return {
+      colleges: [],
+      provinces: [],
+      loading: true,
+      selectedProvince: null,
+      searchKeyWord: null,
+    }
+  },
+  methods: {
+    closeButtonClick: function() {
+      this.$dispatch('close-college-select-pop');
+    },
+    selectProvince: function(province_name) {
+      this.selectedProvince = province_name;
+    },
+    selectCollege: function(college) {
+      this.$dispatch('close-college-select-pop');
+      this.$dispatch('select-college', college);
+    }
+  },
+  computed: {
+    showSearchResult: function() {
+      var that = this;
+      if(!this.searchKeyWord) {
+        return null;
+      }else {
+        return this.colleges.filter(function(college) {
+          return college.name.indexOf(that.searchKeyWord) !== -1;
+        });
+      }
+    },
+    showColleges: function() {
+      var that = this;
+      if(!that.selectedProvince) {
+        return []
+      }else {
+        return this.colleges.filter(function(college) {
+          return college.area == that.selectedProvince;
+        });
+      }
+    },
+  },
+  created: function() {
+    var that = this;
+    this.$http.get("{{ route('estimate.select_colleges') }}").then(function(response) {
+      that.loading = false;
+      that.colleges = response.data.data['colleges'];
+      that.provinces = response.data.data['areas'];
+
+      if(that.defaultCollege && that.defaultSpeciality) {
+        var college = that.colleges.find((college) => {
+          return college.name == that.defaultCollege;
+        });
+        that.majorList = college.major.concat('其它');
+      }
+    });
+
+
+  },
+});
+
+var app = new Vue({
+  el: '#estimate-app',
+  data: function(){
+    var data = {};
+    <?php $user = Auth::user(); ?>
+    @if($user)
+      @if($user->getEstimateInput('recently_college_name'))
+        data['recently_college_name'] =  {!! json_encode($user->getEstimateInput('recently_college_name')) !!};
+      @endif
+      @if($user->getEstimateInput('recently_speciality_name'))
+        data['recently_speciality_name'] =  {!! json_encode($user->getEstimateInput('recently_speciality_name')) !!};
+      @endif
+    @endif
+
+    return {
+      data: data,
+      majorList: [],
+      showCollegeSelect: false,
+    }
+  },
+  methods: {
+    displayCollegeSelect: function() {
+      this.showCollegeSelect = true;
+    }
+  },
+  events: {
+    'close-college-select-pop': function() {
+      this.showCollegeSelect = false;
+    },
+    'select-college': function(college) {
+      this.data.recently_college_name = college.name;
+
+      if(!college.major) {
+        this.majorList = ['其它'];
+      } else {
+        this.majorList = college.major.concat(["其它"]);
+      }
+    }
+  },
+});
 
 function choseInputs(v,key)
 {
     var groups = '<?php echo json_encode($groups); ?>';
-    
+
     $.ajax({
         type:'POST',
         url:'/estimate/stepSecondForm',
@@ -176,13 +316,13 @@ function choseInputs(v,key)
         headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
         dataType:'json',
         success:function(e){
-           
+
            //console.log(e);
             $('.choseInputs'+key).html(e)
         }
-    }); 
-  
-    
+    });
+
+
 }
 <?php foreach($groups as $gkey=>$gval){ ?>
 choseInputs('0',{{$gkey}});
@@ -193,15 +333,15 @@ function checkSecond()
     $(".makePlan").attr('tijiao',"1");
     console.log('123');
     $("#stepSecondPost").find("input").each(function(i) {
-       
+
         if($(this).attr("ismust")=="1")
         {
-            if($(this).val()=="") 
+            if($(this).val()=="")
             {
                 $(".makePlan").attr('tijiao',"0");
                 alert($(this).attr('errormsg'));
                 return false;
-                
+
             }
         };
     });
@@ -213,8 +353,8 @@ function checkSecond()
     {
         return true;
     }
-   
-   
+
+
 }
-            
+
 </script>

@@ -17,8 +17,9 @@
         <script type="text/javascript" src="/static/js/jquery-1.8.0.min.js"></script>
         <script type="text/javascript" src="/static/js/modernizr.custom.js"></script>
         <script type="text/javascript" src="/static/js/jquery.dlmenu.js"></script>
-        
-       
+        <script src="/js/vue.js"></script>
+        <script src="/js/vue-resource.min.js"></script>
+
         <script type="text/javascript" src="/static/layer_mobile/modernizr.js"></script>
          <link type="text/css" href="/static/css/common.css" rel="stylesheet" />
     </head>
@@ -40,7 +41,7 @@
                  <li class="headlogin"><a href="javascript:changeView('#login')"  >登录</a></li>
                 <li  class="headlogin"><a href="javascript:changeView('#region')">注册</a></li>
                 @endif
-               
+
                 <!--
                 <li>
                     <a href="Line">自由行</a>
@@ -60,11 +61,11 @@
 <script type="text/javascript">
     $(function () {
         $('#dl-menu').dlmenu();
-        
+
     });
 </script>
 
-    
+
 <div id="login" islocal='1' class="pt-login" >
     <div class="header">
         <a href="javascript:goBlack('#login')"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
@@ -125,22 +126,22 @@
 <?php
     function objToArr($obj)
     {
-        if(!is_array($obj)&&!is_object($obj)) return $obj; 
+        if(!is_array($obj)&&!is_object($obj)) return $obj;
         if(is_object($obj)) $obj = $obj->toArray();
         foreach ($obj as $key=>$val)
         {
             $obj[$key] = objToArr($val);
-           
+
         }
         return $obj;
     }
 ?>
 <script>
-var countdown=60; 
+var countdown=60;
 function djs(obj,objmobile)
 {
     var mobile = objmobile.val();
-  
+
     if(validatemobile(mobile))
     {
         settime(obj);
@@ -155,25 +156,25 @@ function djs(obj,objmobile)
                 if(e.status == 'ok'){
                     //$("input[name='verify_code']").val(e.data.code);
                 }
-                
+
             }
         });
     };
-    
+
 }
-function settime(obj) { 
-    
-    if (countdown == 0) { 
-        obj.removeAttribute("disabled");    
-        obj.value="获取验证码"; 
-        countdown = 60; 
+function settime(obj) {
+
+    if (countdown == 0) {
+        obj.removeAttribute("disabled");
+        obj.value="获取验证码";
+        countdown = 60;
         return;
-    } else { 
-        obj.setAttribute("disabled", true); 
-        obj.value="重新发送(" + countdown + ")"; 
-        countdown--; 
-    } 
-    setTimeout(function() {  settime(obj) },1000) 
+    } else {
+        obj.setAttribute("disabled", true);
+        obj.value="重新发送(" + countdown + ")";
+        countdown--;
+    }
+    setTimeout(function() {  settime(obj) },1000)
 }
-  
+
 </script>
