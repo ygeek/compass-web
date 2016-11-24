@@ -1,5 +1,14 @@
 @extends('layouts.admin')
 @section('content')
+    <?php
+      if($type == 'App\College') {
+        $college = App\College::find($id);
+      }
+    ?>
+
+    @if($college)
+      <h5>{{$college->chinese_name}}申请要求设置</h5>
+    @endif
     <requirement></requirement>
     <template id="tag-setting">
         <button class="btn btn-primary" @click="showPop=true">设置</button>

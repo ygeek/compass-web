@@ -3,6 +3,7 @@
     <examination-score-map></examination-score-map>
 
     <template id="examination-score-map">
+        <h3>{{$college->chinese_name}}分数映射表</h5>
         <a class="btn btn-primary" href="javascript:window.history.back()">返回</a>
         <div class="js-wizard-simple block">
             <!-- Step Tabs -->
@@ -53,7 +54,7 @@
                                             <input type="text" v-model="score_section[degree.id + ':score']" placeholder="@{{examination.name}} @{{score_section['section']}} @{{degree.name}}" />
                                         </td>
                                     </template>
-                                    
+
                                     <td>
                                         <button @click="deleteScoreSection(score_section._id, examination._id)">删除</button>
                                     </td>
@@ -86,7 +87,7 @@
                             var examinations_template = {!! json_encode($examination_template) !!};
                             var degrees = {!! json_encode($degrees) !!};
                             var examinations = {};
-                            
+
                             examinations_template.forEach(function(examination_template){
                                 var examination = {
                                     _id: guid()
@@ -127,7 +128,7 @@
                         @else
                             var examinations = {!! json_encode($map->map) !!};
                         @endif
-                        
+
                         return examinations;
                     }()
                 };
