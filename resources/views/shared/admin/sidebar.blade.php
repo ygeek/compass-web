@@ -34,7 +34,7 @@
             </a>
           </li>
 
-          <li>
+          <li class="open">
             <a class="nav-submenu" data-toggle="nav-submenu" href="#">
               <i class="si si-badge"></i><span class="sidebar-mini-hide">首页设置</span></a>
             <ul>
@@ -57,7 +57,7 @@
           </li>
 
 
-          <li>
+          <li class="open">
             <a class="nav-submenu" data-toggle="nav-submenu" href="#">
               <i class="si si-badge"></i><span class="sidebar-mini-hide">用户设置</span></a>
             <ul>
@@ -70,11 +70,11 @@
             </ul>
           </li>
 
-          <li>
+          <li class="open">
             <a class="nav-submenu" data-toggle="nav-submenu" href="#">
               <i class="si si-badge"></i><span class="sidebar-mini-hide">院校信息设置</span></a>
             <ul>
-                <li>
+                <li class="open">
                   <a class="nav-submenu" data-toggle="nav-submenu" href="#">
                     <i class="si si-badge"></i><span class="sidebar-mini-hide">院校管理</span></a>
                   <ul>
@@ -128,3 +128,16 @@
   <!-- END Sidebar Scroll Container -->
 </nav>
 <!-- END Sidebar -->
+
+
+<script>
+  $(function() {
+    $(".open .nav-submenu").unbind('click');
+    $(".open .nav-submenu").click(function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      return false;
+    });
+  });
+
+</script>
