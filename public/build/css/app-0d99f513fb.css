@@ -521,25 +521,37 @@ ul {
   height: 2620px;
   background: url("/images/bg.jpg") no-repeat scroll top;
   position: relative; }
-  .index-page .middle .mark {
+  .index-page .middle .sub-company {
     position: absolute; }
-    .index-page .middle .mark label {
-      display: inline-block;
-      box-shadow: 0 0 5px #888888;
-      width: 110px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
-      font-size: 14px;
-      background-color: #fff; }
-    .index-page .middle .mark img {
+    .index-page .middle .sub-company .mark {
       position: absolute;
-      left: calc(50% - 7px);
-      bottom: -9px; }
+      z-index: 9999;
+      top: -45px;
+      left: -45px; }
+      .index-page .middle .sub-company .mark label {
+        display: inline-block;
+        box-shadow: 0 0 5px #888888;
+        width: 110px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 14px;
+        background-color: #fff; }
+      .index-page .middle .sub-company .mark img {
+        position: absolute;
+        left: calc(50% - 7px);
+        bottom: -9px; }
+    .index-page .middle .sub-company .sub-company-icon {
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-image: url("/images/sub-company.png"); }
+      .index-page .middle .sub-company .sub-company-icon:hover {
+        background-image: url("/images/sub-company-hover.png"); }
   .index-page .middle .consult {
     margin: 0 auto;
     position: relative;
-    top: 250px; }
+    top: 390px; }
     .index-page .middle .consult button {
       width: 550px;
       height: 40px;
@@ -576,7 +588,7 @@ ul {
   .index-page .middle .consult-academy {
     margin: 0 auto;
     position: relative;
-    top: 550px; }
+    top: 690px; }
     .index-page .middle .consult-academy .location {
       float: left;
       width: 230px;
@@ -650,7 +662,7 @@ ul {
   .index-page .middle .link {
     padding: 20px;
     position: relative;
-    top: 670px; }
+    top: 800px; }
     .index-page .middle .link .text-box {
       border-left: solid #fcb600 1px;
       padding-left: 20px;

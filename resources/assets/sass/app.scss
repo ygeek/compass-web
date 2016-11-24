@@ -198,30 +198,48 @@ ul{
     background: url('/images/bg.jpg') no-repeat scroll top;
     position: relative;
 
-    .mark {
+    .sub-company {
       position: absolute;
-      label {
-        display: inline-block;
-        -moz-box-shadow: 0 0 5px #888888;
-        box-shadow: 0 0 5px #888888;
-        width: 110px;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        font-size: 14px;
-        background-color: #fff;
-      }
-      img {
+
+      .mark {
         position: absolute;
-        left: calc(50% - 7px);
-        bottom: -9px;
+        z-index: 9999;
+        top: -45px;
+        left: -45px;
+        label {
+          display: inline-block;
+          -moz-box-shadow: 0 0 5px #888888;
+          box-shadow: 0 0 5px #888888;
+          width: 110px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          font-size: 14px;
+          background-color: #fff;
+        }
+        img {
+          position: absolute;
+          left: calc(50% - 7px);
+          bottom: -9px;
+        }
+      }
+
+      .sub-company-icon {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-image: url('/images/sub-company.png');
+        &:hover{
+          background-image: url('/images/sub-company-hover.png');
+        }
       }
     }
+
 
     .consult {
       margin: 0 auto;
       position: relative;
-      top: 250px;
+      top: 390px;
       button {
         width: 550px;
         height: 40px;
@@ -262,7 +280,7 @@ ul{
     .consult-academy {
       margin: 0 auto;
       position: relative;
-      top: 550px;
+      top: 690px;
       .location {
         float: left;
         width: 230px;
@@ -356,7 +374,7 @@ ul{
     .link {
       padding: 20px;
       position: relative;
-      top: 670px;
+      top: 800px;
       .text-box{
         border-left: solid #fcb600 1px;
         padding-left: 20px;

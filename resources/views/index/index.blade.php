@@ -220,12 +220,52 @@
       </ul>
     </div>
 
+    <template id="sub-company">
+      <div class="sub-company" v-bind:style="{top: y + 'px', left: x + 'px'}">
+        <div class="mark" v-show="showTips">
+          <label>@{{tips}}</label>
+          <img src="/images/mark-arrow.png">
+        </div>
+
+        <div
+          class="sub-company-icon"
+          v-on:mouseleave="hideTips"
+          v-on:mouseenter="displayTips"
+        ></div>
+      </div>
+
+    </template>
+    <script>
+      Vue.component('sub-company', {
+        template: '#sub-company',
+        props: ['x', 'y', 'tips'],
+        data: function() {
+          return {
+            showTips: false,
+          }
+        },
+        methods: {
+          displayTips: function() {
+            this.showTips = true;
+          },
+          hideTips: function() {
+            this.showTips = false;
+          }
+        }
+      });
+    </script>
+
     <div class="middle">
-      <!-- <div class="mark" style="top: 418px;left: 528px;">
-        <label>悉尼分公司</label>
-        <img src="/images/mark-arrow.png">
-      </div> -->
       <div class='app-content'>
+        <sub-company x="665" y="225" tips="北京公司"></sub-company>
+        <sub-company x="641" y="252" tips="太原公司"></sub-company>
+        <sub-company x="845" y="686" tips="悉尼公司"></sub-company>
+        <sub-company x="963" y="702" tips="奥克兰公司"></sub-company>
+        <sub-company x="826" y="714" tips="墨尔本公司"></sub-company>
+        <sub-company x="786" y="694" tips="阿德莱德公司"></sub-company>
+        <sub-company x="845" y="633" tips="布里斯班公司"></sub-company>
+        <sub-company x="834" y="699" tips="堪培拉公司"></sub-company>
+
         <div class='consult'>
           <img src="/images/msg_ic.png" alt="msg_ic" />
           <button onclick='easemobim.bind({tenantId: 21250})'>我要咨询</button>
