@@ -38,7 +38,7 @@ class IntentionsController extends Controller
             ];
 
             $specialities = collect($college['specialities'])->filter(function($speciality) use ($selected_speciality_ids){
-                return in_array($speciality['_id'], $selected_speciality_ids);  
+                return in_array($speciality['_id'], $selected_speciality_ids);
             })->toArray();
 
             $res['specialities'] = $specialities;
@@ -77,34 +77,14 @@ class IntentionsController extends Controller
         //该专业和考生分数的对照数据
         $requirement_contrast = Estimate::grabContrastFromRequirement($speciality_require['requirement'], $estimate_data);
 
-
         $user = Auth::user();
+        $intentions = $user->intentions;
 
-        if($user->intentions){
-            //重新评估
-            if($user->intentions['estimate_id'] != $estimate_id){
-                $user->intentions = null;
-                $user->save();
-            }
+        //构造用户分数
+        $user_scores = [];
+        foreach ($requirement_contrast as $contrast) {
+            $user_scores[$contrast['name']] = $contrast['user_score'];
         }
-
-        if(!$user->intentions){
-            //还没有意向
-            $user_scores = [];
-            foreach ($requirement_contrast as $contrast) {
-                $user_scores[$contrast['name']] = $contrast['user_score'];
-            }
-
-            $intentions = [
-                "estimate_id" => $estimate_id,
-                "user_scores" => $user_scores,
-                "degree_id" => $degree->id,
-                "intentions" => []
-            ];
-        }else{
-            $intentions = $user->intentions;
-        }
-
 
         //构建意向专业数据结构
         $speciality_intention_require = [];
@@ -112,46 +92,21 @@ class IntentionsController extends Controller
             $speciality_intention_require[$contrast['name']] = $contrast['require'];
         }
 
-        $speciality_intention = [
+        $student_scores = Estimate::grabStudentScoreFromEstimateData($estimate_data);
+
+        $intention = [
+            "estimate_id" => $estimate_id,
+            "user_scores" => $user_scores,
+            'college_id' => $college_id,
+            "degree_id" => $degree->id,
             'speciality_name' => $speciality_name,
             'require' => $speciality_intention_require,
-            '_id' => Uuid::generate(4)->string
+            '_id' => Uuid::generate(4)->string,
+            'score' => $college->calculateWeightScore($student_scores, $degree),
+            'requirement_contrast' => $requirement_contrast,
         ];
-        
-        //判断该院校有没有存在意向中
-        $college_intention_index = null;
 
-        for ($i=0; $i < count($intentions['intentions']); $i++) { 
-           if($intentions['intentions'][$i]['college_id'] == $college_id){
-                $college_intention_index = $i;
-            }
-        }
-
-        if(!is_null($college_intention_index)){
-            //判断专业是否存在意向中
-            $speciality_index = null;
-            $keys = array_keys($intentions['intentions'][$college_intention_index]['specialities']);
-            foreach ($keys as $key) {
-                if($intentions['intentions'][$college_intention_index]['specialities'][$key]['speciality_name'] == $speciality_name){
-                        $speciality_index = $i;
-                    }
-            }
-
-            if(is_null($speciality_index)){
-                //将专业添加到意向单
-                $intentions['intentions'][$college_intention_index]['specialities'][] = $speciality_intention;
-            }else{
-                //专业已经添加到了意向单
-            }
-        }else{
-            $intentions['intentions'][] = [
-                'college_id' => $college_id,
-                'specialities' => [
-                    $speciality_intention
-                ]
-            ];
-        }
-
+        $intentions[] = $intention;
 
         $user->intentions = $intentions;
         $user->save();

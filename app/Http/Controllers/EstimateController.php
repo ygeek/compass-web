@@ -185,26 +185,7 @@ class EstimateController extends Controller
             return !!$item['score'];
         });
 
-        $student_scores = [];
-        foreach ($examinations as $examination_name => $value) {
-            //前端没有提交分数 Continue
-            if(!$value['score'] || $value['score'] == ''){
-                continue;
-            }
-
-            $examination = Examination::where('name', $examination_name)->first();
-            $item = [
-                'examination_id' => $examination->id
-            ];
-
-            if($examination->multiple_degree){
-                $item[$value['degree'].':score'] = $value['score'];
-            }else{
-                $item['score'] = $value['score'];
-            }
-
-            $student_scores[] = $item;
-        }
+        $student_scores = Estimate::grabStudentScoreFromEstimateData($data);
 
         if($college_id){
           $college = College::find($college_id);

@@ -2,6 +2,32 @@
 namespace App;
 
 class Estimate{
+    public static function grabStudentScoreFromEstimateData($estimate_data) {
+      $examinations = $estimate_data['examinations'];
+      $student_scores = [];
+      foreach ($examinations as $examination_name => $value) {
+          //前端没有提交分数 Continue
+          if(!$value['score'] || $value['score'] == ''){
+              continue;
+          }
+
+          $examination = Examination::where('name', $examination_name)->first();
+          $item = [
+              'examination_id' => $examination->id
+          ];
+
+          if($examination->multiple_degree){
+              $item[$value['degree'].':score'] = $value['score'];
+          }else{
+              $item['score'] = $value['score'];
+          }
+
+          $student_scores[] = $item;
+      }
+
+      return $student_scores;
+    }
+
     //将遍历院校生成的分数结果 按照冲刺概率归类
     public static function reduceScoreResult($result, $core_range_setting){
         $core_count = $core_range_setting['core']['count'];

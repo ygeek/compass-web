@@ -266,18 +266,22 @@ class HomeController extends Controller
     public function intentions()
     {
         $intentions = $this->user->intentions;
-        if (is_null($intentions)) {
-            $intentions = [];
-        } else {
-            $intentions['degree'] = \App\Degree::find($intentions['degree_id']);
+        $intention_colleges = [];
 
-            $intentions['intentions'] = collect($intentions['intentions'])->map(function ($intention) use ($intentions) {
-                $college = College::withTrashed()->with(['specialities' => function ($q) use ($intentions) {
-                    $q->where('specialities.degree_id', $intentions['degree']->id);
+        if (is_null($intentions)) {
+            $intentions = collect([]);
+        } else {
+            $intentions = collect($intentions)->map(function ($intention) use ($intentions, &$intention_colleges) {
+                $intention['degree'] = \App\Degree::find($intention['degree_id']);
+                $college = College::withTrashed()->with(['specialities' => function ($q) use ($intention) {
+                    $q->where('specialities.degree_id', $intention['degree']->id);
                 }])->where('id', $intention['college_id'])->get()->first();
+
+                $intention_colleges[$college->id] = $college;
+
                 $intention['college'] = $college->toArray();
-                $intention['college']['toefl_requirement'] = $college->toeflRequirement($intentions['degree']->name);
-                $intention['college']['ielts_requirement'] = $college->ieltsRequirement($intentions['degree']->name);
+                $intention['college']['toefl_requirement'] = $college->toeflRequirement($intention['degree']->name);
+                $intention['college']['ielts_requirement'] = $college->ieltsRequirement($intention['degree']->name);
                 $intention['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
                 $intention['redirect_url'] = route('colleges.show', ['key' => $college->key]);
 
@@ -296,11 +300,12 @@ class HomeController extends Controller
                 $intention['college']['area'] = $area_string;
 
                 return $intention;
-            });
+            })->groupBy('college_id');
         }
 
         $speciality_categories = \App\SpecialityCategory::all()->toArray();
-        return $this->view('home.intentions', compact('intentions', 'speciality_categories'));
+
+        return $this->view('home.intentions', compact('intentions', 'intention_colleges', 'speciality_categories'));
     }
 
     private function validateVerifyCode($phone_number, $code)

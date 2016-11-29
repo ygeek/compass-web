@@ -32,6 +32,7 @@ class User extends Model implements AuthenticatableContract
         'intentions' => 'array',
         'estimate_input' => 'array'
     ];
+    
     public function likedCollegeIds(){
         $key = User::likeKey($this->id);
         $value = Setting::get($key);
