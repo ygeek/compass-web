@@ -114,6 +114,10 @@
                           <table>
                               <tr v-for="intention in intentions[intentionCollege.id]">
                                 <td>
+                                  <input type="checkbox" v-model="intention.checked" />
+                                </td>
+
+                                <td style="text-align: left;">
                                   @{{ intention.speciality_name }}
                                 </td>
 
@@ -124,6 +128,9 @@
                                 <td @click="displayIntentionDetail(intention)">
                                   查看详情
                                 </td>
+
+                                <td style="padding-right: 10px; cursor: pointer; color:#6d6d6d" @click="deleteSpeciality(intention)">x</td>
+
                               </tr>
                           </table>
 
