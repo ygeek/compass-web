@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Mail;
 use App\College;
+use App\Setting;
 use App\AdministrativeArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -265,8 +266,10 @@ class HomeController extends Controller
 
     public function intentions()
     {
+        $user = Auth::user();
         $intentions = $this->user->intentions;
         $intention_colleges = [];
+        $commited_intention_ids = Setting::get('user-commited-intention-ids-'.$user->id, []);
 
         if (is_null($intentions)) {
             $intentions = collect([]);
@@ -305,7 +308,7 @@ class HomeController extends Controller
 
         $speciality_categories = \App\SpecialityCategory::all()->toArray();
 
-        return $this->view('home.intentions', compact('intentions', 'intention_colleges', 'speciality_categories'));
+        return $this->view('home.intentions', compact('intentions', 'intention_colleges', 'speciality_categories', 'commited_intention_ids'));
     }
 
     private function validateVerifyCode($phone_number, $code)

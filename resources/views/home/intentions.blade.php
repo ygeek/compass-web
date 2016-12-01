@@ -11,7 +11,8 @@
                 <intentions
                   :intentions='{!! json_encode($intentions) !!}'
                   :categories='{!! json_encode($speciality_categories) !!}'
-                  :intention-colleges='{!! json_encode($intention_colleges) !!}'>
+                  :intention-colleges='{!! json_encode($intention_colleges) !!}'
+                  :commited-intention-ids='{!! json_encode($commited_intention_ids) !!}'>
                 </intentions>
                 <template id="intentions">
 
@@ -49,7 +50,7 @@
                       </div>
                   </div>
 
-                <div class="title">我的意向单 <button class="estimate-button" @click="commit">提交审核 @{{ selected_specialities_count }}/@{{ specialities_count }}</button></div>
+                <div class="title">我的意向单 <button class="estimate-button" @click="commit">提交审核 @{{ selected_specialities_count }}/@{{ raw_intentions.length - commitedIntentionIds.length }}</button></div>
 
                 <div class="content">
                     <div class="intention" v-for="intentionCollege in intentionColleges">
@@ -59,7 +60,7 @@
                             <img class="college-badge" v-bind:src="intentionCollege.badge_path" />
                             <div class="college-info">
                                 <header>
-                                    <a v-bind:href="intention.redirect_url" target="_blank">
+                                    <a v-bind:href="intentionCollege.redirect_url" target="_blank">
                                       <h1>@{{intentionCollege.chinese_name}}<span class="property">@{{ (intentionCollege.type=="public")?'公立':'私立' }}</span></h1>
                                     </a>
 
@@ -114,7 +115,11 @@
                           <table>
                               <tr v-for="intention in intentions[intentionCollege.id]">
                                 <td>
-                                  <input type="checkbox" v-model="intention.checked" />
+                                  <input
+                                    type="checkbox"
+                                    v-model="intention.checked"
+                                    v-bind:disabled="commitedIntentionIds.indexOf(intention._id) != -1"
+                                  />
                                 </td>
 
                                 <td style="text-align: left;">
@@ -125,11 +130,17 @@
                                   @{{ intention.degree.name }}
                                 </td>
 
-                                <td @click="displayIntentionDetail(intention)">
+                                <td @click="displayIntentionDetail(intention)" style="cursor: pointer;">
                                   查看详情
                                 </td>
 
-                                <td style="padding-right: 10px; cursor: pointer; color:#6d6d6d" @click="deleteSpeciality(intention)">x</td>
+                                <td
+                                  style="padding-right: 10px; cursor: pointer;"
+                                  @click="deleteSpeciality(intention)"
+                                  v-bind:class="{disabled: commitedIntentionIds.indexOf(intention._id) != -1}"
+                                >
+                                  x
+                                </td>
 
                               </tr>
                           </table>
@@ -234,7 +245,7 @@
     }
     Vue.component("intentions", {
         template: "#intentions",
-        props: ['intentions', 'categories', 'intentionColleges'],
+        props: ['intentions', 'categories', 'intentionColleges', 'commitedIntentionIds'],
         data: function(){
             return {
                 show_pop: false,
@@ -249,36 +260,40 @@
             }
         },
         computed: {
-            select_specialities: function(){
-                var self = this;
+            raw_intentions: function() {
+              var raw_intentions = [];
+              var that = this;
+              var keys = Object.keys(this.intentions);
 
-                var data = this.show_data.specialities.filter(function(item){
-                    return item.category_id == self.selected_category_id;
-                }).sort(function (a, b) {
-                    return a.name.localeCompare(b.name);
+              keys.forEach(function(key) {
+                var college_intentions = that.intentions[key];
+                college_intentions.forEach(function(college_intention) {
+                  if(that.commitedIntentionIds.indexOf(college_intention._id) != -1) {
+                    college_intention.commited = true;
+                  }
+
+                  raw_intentions.push(college_intention);
                 });
+              });
 
-                return data;
+              return raw_intentions;
             },
-            specialities_count: function(){
-                var nums = 0;
-                var that = this;
-                this.intentions.intentions.forEach(function(college){
-                    nums += college.specialities.length;
-                });
-                return nums;
+            select_specialities: function(){
+                // var self = this;
+                //
+                // var data = this.show_data.specialities.filter(function(item){
+                //     return item.category_id == self.selected_category_id;
+                // }).sort(function (a, b) {
+                //     return a.name.localeCompare(b.name);
+                // });
+                //
+                // return data;
+                return 0;
             },
             selected_specialities: function(){
-                var res = [];
-                this.intentions.intentions.forEach(function(college){
-                    var keys = Object(college.specialities);
-                    for(var key in keys){
-                        if(college.specialities[key].checked){
-                            res.push(college.specialities[key])
-                        }
-                    }
+                return this.raw_intentions.filter(function(intention) {
+                  return intention.checked;
                 });
-                return res;
             },
             selected_specialities_count: function(){
                 return this.selected_specialities.length;
@@ -336,6 +351,10 @@
                 })
             },
             deleteSpeciality: function(speciality){
+                if(this.commitedIntentionIds.indexOf(speciality._id) != -1) {
+                  return;
+                }
+
                 var id = speciality._id;
                 if(!confirm('确定删除专业？(若当前专业为院校最后一个专业、院校也会被删除)')){
                     return false;
@@ -347,12 +366,14 @@
                 });
             },
             commit: function(){
+
                 //提交审核
-                var estimate_id = this.intentions.estimate_id;
+                // var estimate_id = this.intentions.estimate_id;
                 var selected_speciality_ids = this.selected_specialities.map(function(speciality){
                     return speciality._id;
                 });
 
+                //
                 if(selected_speciality_ids.length == 0){
                     alert('未选择审核专业');
                     return;
@@ -360,7 +381,6 @@
 
                 var url = "{{ route('intentions.create') }}";
                 this.$http.post(url, {
-                    estimate_id: estimate_id,
                     selected_speciality_ids: selected_speciality_ids
                 }, function(response){
                     alert('提交审核成功');

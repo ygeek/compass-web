@@ -22,46 +22,37 @@ class IntentionsController extends Controller
     //用户提交审核 创建Intention对象
     public function create(Request $request){
         $user = Auth::user();
-        $estimate_id = $request->input('estimate_id');
         $selected_speciality_ids = $request->input('selected_speciality_ids');
-        $estimate_data = Setting::get('estimate-'.$estimate_id);
+        $commited_intention_ids = Setting::get('user-commited-intention-ids-'.$user->id, []);
+
+        $user_last_estimate_id = $user->estimate;
+
+        $estimate_data = Setting::get($user_last_estimate_id);
+
         if(!is_array($selected_speciality_ids))
         {
-            $selected_speciality_ids = json_decode($selected_speciality_ids);
+          $selected_speciality_ids = json_decode($selected_speciality_ids);
         }
 
-        $intentions = $user->intentions;
-        $intention_colleges = $intentions['intentions'];
-        $new_intention_colleges = collect($intention_colleges)->map(function($college) use ($selected_speciality_ids){
-            $res = [
-                'college_id' => $college['college_id']
-            ];
+        $user_intentions = $user->intentions;
 
-            $specialities = collect($college['specialities'])->filter(function($speciality) use ($selected_speciality_ids){
-                return in_array($speciality['_id'], $selected_speciality_ids);
-            })->toArray();
-
-            $res['specialities'] = $specialities;
-            return $res;
-        })->filter(function($college){
-            return count($college['specialities']) > 0;
+        $intentions = collect($user_intentions)->filter(function($intention) use ($selected_speciality_ids){
+          return in_array($intention['_id'], $selected_speciality_ids);
         });
-        $intentions['intentions'] = $new_intention_colleges;
-
-        $intentions['country_id'] = $estimate_data['selected_country'];
 
         $intention = new Intention();
         $intention->name = $estimate_data['name'];
         $intention->email = $user->email;
         $intention->phone_number = $user->phone_number;
-        $intention->data = $intentions;
+        $intention->data = $intentions->toArray();
         $intention->save();
 
+        Setting::set('user-commited-intention-ids-'.$user->id, array_merge($commited_intention_ids, $selected_speciality_ids));
         return $this->okResponse();
     }
 
     public function store(Request $request){
-
+        $user = Auth::user();
         $estimate_id = $request->input('estimate_id');
         $estimate_data = Setting::get('estimate-'.$estimate_id);
 

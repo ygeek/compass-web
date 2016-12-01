@@ -1227,6 +1227,8 @@ ul{
         width: 100%;
         input{
           width: 30px;
+          display: block;
+          margin-left: 10px;
         }
         tr:nth-child(odd){
           background: #f3f3f3;
@@ -1234,6 +1236,10 @@ ul{
         tr{
           line-height: 50px;
           text-align: center;
+        }
+
+        .disabled {
+          color: #ccc;
         }
       }
     }
