@@ -51,6 +51,7 @@ class Estimate{
         return $college_results->filter(function($college_result) use ($range){
             $score = $college_result['score'];
             $mather = new ScoreMapSection($range);
+
             //分数在该区间内 是匹配院校
             return $mather->matching($score);
         })->sortByDesc('score')->take($count);

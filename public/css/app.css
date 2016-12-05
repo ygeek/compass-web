@@ -1358,22 +1358,31 @@ ul {
   .home-page.intentions .title .estimate-button {
     line-height: 30px;
     margin-left: 590px; }
-  .home-page.intentions .college-intentions {
-    margin-top: 40px; }
-    .home-page.intentions .college-intentions table {
-      border-spacing: 0;
-      width: 100%; }
-      .home-page.intentions .college-intentions table input {
-        width: 30px;
-        display: block;
-        margin-left: 10px; }
-      .home-page.intentions .college-intentions table tr:nth-child(odd) {
-        background: #f3f3f3; }
-      .home-page.intentions .college-intentions table tr {
-        line-height: 50px;
-        text-align: center; }
-      .home-page.intentions .college-intentions table .disabled {
-        color: #ccc; }
+  .home-page.intentions .intention {
+    width: 876px;
+    background: #fff;
+    margin-bottom: 60px; }
+    .home-page.intentions .intention .estimate-button-container {
+      margin-top: 34px; }
+      .home-page.intentions .intention .estimate-button-container .estimate-button {
+        float: right;
+        margin-right: 10px; }
+    .home-page.intentions .intention .college-intentions {
+      margin-top: 40px; }
+      .home-page.intentions .intention .college-intentions table {
+        border-spacing: 0;
+        width: 100%; }
+        .home-page.intentions .intention .college-intentions table input {
+          width: 30px;
+          display: block;
+          margin-left: 10px; }
+        .home-page.intentions .intention .college-intentions table tr:nth-child(odd) {
+          background: #f3f3f3; }
+        .home-page.intentions .intention .college-intentions table tr {
+          line-height: 50px;
+          text-align: center; }
+        .home-page.intentions .intention .college-intentions table .disabled {
+          color: #ccc; }
   .home-page.intentions .college {
     position: relative;
     width: 100%;

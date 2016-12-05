@@ -3,11 +3,13 @@
     <?php
       if($type == 'App\College') {
         $college = App\College::find($id);
+      } else if($type == 'App\Speciality') {
+        $speciality = App\Speciality::find($id);
+        $college = $speciality->college;
       }
     ?>
-
-    @if($college)
-      <h5>{{$college->chinese_name}}申请要求设置</h5>
+      @if(isset($college))
+      <h5>{{$college->chinese_name}} @if(isset($speciality)) {{$speciality->name}} @endif 申请要求设置</h5>
     @endif
     <requirement></requirement>
     <template id="tag-setting">

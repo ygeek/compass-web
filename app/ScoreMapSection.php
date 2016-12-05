@@ -29,6 +29,9 @@ class ScoreMapSection
 
     public function __construct($section)
     {
+        if(is_null($section)) {
+          throw new \Exception('Section cant empty');
+        }
         $this->preset_section = [
             '<=' => function($score){
                 return $score <= $this->score;

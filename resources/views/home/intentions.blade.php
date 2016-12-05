@@ -52,11 +52,9 @@
 
                 <div class="title">我的意向单 <button class="estimate-button" @click="commit">提交审核 @{{ selected_specialities_count }}/@{{ raw_intentions.length - commitedIntentionIds.length }}</button></div>
 
-                <div class="content">
+                <div class="content" style="background:none; padding:0;">
                     <div class="intention" v-for="intentionCollege in intentionColleges">
                         <div class="college">
-                            <button class="estimate-button" @click="addSpeciality(intention)">添加专业</button>
-
                             <img class="college-badge" v-bind:src="intentionCollege.badge_path" />
                             <div class="college-info">
                                 <header>
@@ -108,6 +106,9 @@
                                         </tr>
                                     </table>
                                 </div>
+                            </div>
+                            <div class="estimate-button-container">
+                              <button class="estimate-button add-speciality-button" @click="addSpeciality(intention)">添加专业</button>
                             </div>
                         </div>
 

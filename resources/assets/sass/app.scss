@@ -1220,29 +1220,43 @@ ul{
         margin-left: 590px;
       }
     }
-    .college-intentions{
-      margin-top: 40px;
-      table{
-        border-spacing: 0;
-        width: 100%;
-        input{
-          width: 30px;
-          display: block;
-          margin-left: 10px;
+    .intention {
+      .estimate-button-container {
+        margin-top: 34px;
+        .estimate-button {
+          float: right;
+          margin-right: 10px;
         }
-        tr:nth-child(odd){
-          background: #f3f3f3;
-        }
-        tr{
-          line-height: 50px;
-          text-align: center;
-        }
+      }
 
-        .disabled {
-          color: #ccc;
+      width: 876px;
+      background: #fff;
+      margin-bottom: 60px;
+      .college-intentions{
+        margin-top: 40px;
+        table{
+          border-spacing: 0;
+          width: 100%;
+          input{
+            width: 30px;
+            display: block;
+            margin-left: 10px;
+          }
+          tr:nth-child(odd){
+            background: #f3f3f3;
+          }
+          tr{
+            line-height: 50px;
+            text-align: center;
+          }
+
+          .disabled {
+            color: #ccc;
+          }
         }
       }
     }
+
 
     .college{
       .estimate-button{
