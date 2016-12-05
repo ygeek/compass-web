@@ -50,11 +50,19 @@ class IntentionsController extends BaseController
 
     //导出Excel
     public function exportToExcel($intention_id){
-        $intention = Intention::find($intention_id);
+        $user_intention = Intention::find($intention_id);
+        $intentions = collect($user_intention['data'])->map(function($intention) {
+          $college = \App\College::find($intention['college_id']);
+          $country_id = $college->country_id;
 
-        Excel::create($intention->name . '意向单', function($excel) use ($intention){
-            $excel->sheet('New sheet', function($sheet) use ($intention){
-                $sheet->loadView('admin.intentions.excel', ['intention' => $intention]);
+          $intention['country_id'] = $country_id;
+          return $intention;
+        });
+
+        // return view('admin.intentions.excel', ['intention' => $user_intention, 'intentions' => $intentions]);
+        Excel::create($user_intention->name . '意向单', function($excel) use ($user_intention, $intentions){
+            $excel->sheet('New sheet', function($sheet) use ($user_intention, $intentions){
+                $sheet->loadView('admin.intentions.excel', ['intention' => $user_intention, 'intentions' => $intentions]);
             });
         })->download();
     }
