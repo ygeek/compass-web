@@ -12,6 +12,8 @@ use App\Estimate;
 use App\Degree;
 use Uuid;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class IntentionsController extends Controller
 {
@@ -109,24 +111,15 @@ class IntentionsController extends Controller
     public function destroy($id){
         $user = Auth::user();
         $intentions = $user->intentions;
-        $intention_colleges = $intentions['intentions'];
-        $new_intention_colleges = collect($intention_colleges)->map(function($college) use ($id){
-            $res = [
-                'college_id' => $college['college_id']
-            ];
+        $new_intentions = [];
 
-            $specialities = collect($college['specialities'])->filter(function($speciality) use ($id){
-                return $speciality['_id'] != $id;
-            })->toArray();
+        foreach($intentions as $intention) {
+          if($intention['_id'] != $id) {
+            $new_intentions[] = $intention;
+          }
+        }
 
-            $res['specialities'] = $specialities;
-            return $res;
-        })->filter(function($college){
-            return count($college['specialities']) > 0;
-        });
-        $intentions['intentions'] = $new_intention_colleges;
-
-        $user->intentions = $intentions;
+        $user->intentions = $new_intentions;
         $user->save();
 
         return $this->okResponse();
