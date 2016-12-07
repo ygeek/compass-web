@@ -21,7 +21,7 @@
     <div class="chaxun10"><h1>您找到<span> {{ $articles->total() }} </span>个相关专业</h1></div>
 
     <div class="yuanxiao_gzy">
-        <ul>
+        <ul class="zhuanyemore">
             @foreach($articles as $speciality)
                 <?php
                 $tmp = $college->administrativeArea->id;
@@ -43,6 +43,12 @@
         </ul>
     </div>
     <div class="clear"></div>
+    <div class="more page" onclick="getMore()" style="height:30px; line-height: 30px; width: 30%; margin: 0 auto;">
+        加载更多...
+    </div>
+    <div class="moregif page" style="height:30px; line-height: 30px; ">
+        <img src="/static/images/more.gif" width="30" height="30" style="display:inline;" />
+    </div>
     <div class="page">
         {{ $articles->appends(app('request')->except('page'))->render() }}
     </div>
@@ -75,7 +81,38 @@ function mmenuShow(conid)
     $("#header").hide();
     $('body,html').animate({ scrollTop: 0 }, 1);
 }
+function getMore()
+{
+    var page = $(".more").attr("page");
+    $.ajax({
+        type:'POST',
+        url:'/Colleges/getMoreSpecialities?page='+page,
+        data:data,
+        async:false,
+        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+        dataType:'json',
+        beforeSend:function(r){
+            $(".more").hide();
+            $(".moregif").show();
+        },
+        success:function(e){
+            var htm = '';
+            if(e.status)
+            {
+                console.log(e);
+                for(var i=0;i<e[num].specialities.length;i++){
 
+                   // htm += '<option value="'+e[num].specialities[i]['name']+'" >'+e[num].specialities[i]['name']+'</option>';
+                } 
+
+                console.log(htm);
+                $(".zhuanyemore").append(htm);
+                $(".more").show();
+                $(".moregif").hide();
+            }
+        }
+    }); 
+}
 </script>
 <script type="text/javascript" src="/static/mmenu/js/jquery.mmenu.all.min.js?v=5.7.1"></script>
 <script type="text/javascript">

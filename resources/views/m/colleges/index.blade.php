@@ -55,7 +55,14 @@
         </ul>-->
     </div>
     <div class="clear"></div>
+    <div class="more page" onclick="getMore()" style="height:30px; line-height: 30px; width: 30%; margin: 0 auto;">
+        加载更多...
+    </div>
+    <div class="moregif page" style="height:30px; line-height: 30px; ">
+        <img src="/static/images/more.gif" width="30" height="30" style="display:inline;" />
+    </div>
     <div class='page'>
+       
     {{ $colleges->appends(app('request')->except('page'))->render() }}
     </div>
 </div>
@@ -71,7 +78,43 @@ function getAreaName($areas,$aid)
     }
     return $arr[$aid]['name'];
 }
+
+
 ?>
+<script>
+function getMore()
+{
+    var page = $(".more").attr("page");
+    $.ajax({
+        type:'POST',
+        url:'/Colleges/getMore?page='+page,
+        data:data,
+        async:false,
+        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+        dataType:'json',
+        beforeSend:function(r){
+            $(".more").hide();
+            $(".moregif").show();
+        },
+        success:function(e){
+            var htm = '';
+            if(e.status)
+            {
+                console.log(e);
+                for(var i=0;i<e[num].specialities.length;i++){
+
+                   // htm += '<option value="'+e[num].specialities[i]['name']+'" >'+e[num].specialities[i]['name']+'</option>';
+                } 
+
+                console.log(htm);
+                $(".grzy_wdsc_list").append(htm);
+                $(".more").show();
+                $(".moregif").hide();
+            }
+        }
+    }); 
+}
+</script>
 <!--隐藏内容-->
 <div class="shaixuan tiaojian">
     <div class="header">
