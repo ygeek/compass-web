@@ -166,7 +166,9 @@ class CollegesController extends Controller
 
         $selected_country_id = $selected_country_id==-1?1:$selected_country_id;
 
-        return $this->view('colleges.index', compact('areas',
+        $res = compact(
+            'areas',
+            'currentPage',
             'speciality_categories',
             'colleges',
             'selected_speciality_cateogry_id',
@@ -179,7 +181,14 @@ class CollegesController extends Controller
             'rank_start',
             'rank_end',
             'selected_order'
-        ));
+        );
+
+        if($request->input('ajax', false)) {
+          return $this->responseJson('ok', $res);
+        }else {
+          return $this->view('colleges.index', $res);
+        }
+
     }
 
     public function show($key, Request $request){
@@ -250,7 +259,13 @@ class CollegesController extends Controller
             $articles = $specialities_query->paginate(10);
         }
 
-        return $this->view('colleges.show', compact('college', 'article_key', 'articles'));
+        $res = compact('college', 'article_key', 'articles');
+
+        if($request->input('ajax', false)) {
+          return $this->responseJson('ok', $res);
+        }else {
+          return $this->view('colleges.show', $res);
+        }
     }
 
     //院校排名
@@ -331,14 +346,20 @@ class CollegesController extends Controller
                 'path' => route('colleges.rank')
             ]);
 
-        return $this->view('colleges.rank', [
+        $res = [
           'colleges' => $paginated_rank_items,
           'rank' => $rank,
           'ranking_categories' => $ranking_categories,
           'selected_category_id' => $selected_category_id,
           'selected_ranking_id' => $selected_ranking_id,
           'rankings_for_show' => $rankings_for_show
-        ]);
+        ];
+
+        if($request->input('ajax', false)) {
+          return $this->responseJson('ok', $res);
+        }else {
+          return $this->view('colleges.rank', $res);
+        }
     }
 
     public function getRandomHotColleges(Request $request){
