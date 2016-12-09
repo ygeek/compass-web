@@ -153,7 +153,7 @@
                                   <h1>@{{ showIntentionDetail.college.chinese_name }}</h1>
                                   <span @click="showIntentionDetail=false" class="close">×</span>
 
-                                  <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showIntentionDetail.score }}%</span>，@{{ selected_speciality_name }}专业匹配如下：</p>
+                                  <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showIntentionDetail.score }}%</span>，@{{ showIntentionDetail.speciality_name }}专业匹配如下：</p>
                                   <table>
                                       <tr>
                                           <th style="padding-left: 30px;">

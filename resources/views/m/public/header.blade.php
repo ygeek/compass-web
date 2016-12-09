@@ -80,7 +80,6 @@
                 <input type="password" class="login_resgister_input" placeholder="密码" name='password'>
                 <div class="login_mima resgister_xy">
                     <a href="javascript:changeView('#region')">注册</a>
-                    <a href="#" style="float:right;">忘记密码？</a>
                 </div>
                 <input type="button"  value="登录" class="login_button toLogin">
             </form>

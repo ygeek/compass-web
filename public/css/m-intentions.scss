@@ -1,0 +1,142 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+#estimate-detail-pop {
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100vh;
+  z-index: 8888;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  .estimate-detail {
+    position: absolute;
+    padding: 1em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 84%;
+    height: 60vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: #fff;
+
+    .title {
+      width: 80%;
+      margin-bottom: 1em;
+    }
+
+    table {
+      th {
+        color: #6c6c6c;
+      }
+      td, th {
+        text-align: center;
+        line-height: 30px;
+      }
+      td:first-child {
+
+      }
+
+      tr{
+        &:nth-child(even){
+          background: #f3f3f3;
+          td{
+            color: #1e1e1e;
+          }
+        }
+        &:nth-child(odd){
+          background: #fff;
+        }
+      }
+    }
+    .close{
+      display: block;
+      position: absolute;
+      right: .4em;
+      top: 0.1em;
+      font-size: 2em;
+      cursor: pointer;
+    }
+  }
+}
+
+.main02 {
+  .intention {
+    margin-top: 20px;
+    background: #fff;
+  }
+  .college-info {
+    padding: 1em;
+
+    .line {
+      display: block;
+      margin-bottom: 5px;
+
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: right;
+      }
+
+      @include clearfix;
+    }
+
+    .college-badge {
+      width: 46%;
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .college-name {
+      width: 44%;
+      text-align: right;
+      color: #0e2d60;
+      a {
+        color: #0e2d60;
+      }
+    }
+
+    .address-container {
+      .location {
+        display: inline-block;
+      }
+
+      .address {
+        display: inline-block;
+      }
+      @include clearfix;
+    }
+  }
+
+  .estimate-button {
+    border: none;
+    background: #0e2d60;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .college-intentions {
+    table {
+      width: 100%;
+      tr{
+        &:nth-child(even){
+          background: #f3f3f3;
+        }
+        &:nth-child(odd){
+          background: #fff;
+        }
+      }
+    }
+  }
+}

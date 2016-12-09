@@ -32,48 +32,13 @@ class HomeController extends Controller
         $agent = new Agent();
         if ($agent->isMobile()) {
             $user = $this->user;
-            $message_client = new Mail();
-            $messages = $message_client->getUnreadMessage(Auth::user()->id);
             $college_ids = $this->user->likedCollegeIds();
             $colleges = College::whereIn('id', $college_ids)->get();
-
-            $intentions = $this->user->intentions;
-            if (is_null($intentions)) {
-                $intentions = [];
-            } else {
-                $intentions['degree'] = \App\Degree::find($intentions['degree_id']);
-                $intentions['intentions'] = collect($intentions['intentions'])->map(function ($intention) use ($intentions) {
-                    $college = College::with(['specialities' => function ($q) use ($intentions) {
-                        $q->where('specialities.degree_id', $intentions['degree']->id);
-                    }])->where('id', $intention['college_id'])->get()->first();
-                    $intention['college'] = $college->toArray();
-                    $intention['college']['toefl_requirement'] = $college->toeflRequirement($intentions['degree']->name);
-                    $intention['college']['ielts_requirement'] = $college->ieltsRequirement($intentions['degree']->name);
-                    $intention['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
-                    $intention['redirect_url'] = route('colleges.show', ['key' => $college->key]);
-                    $intention['college']['liked'] = 0;
-                    if (app('auth')->user()) {
-                        if (app('auth')->user()->isLikeCollege($intention['college']['id']))
-                            $intention['college']['liked'] = 1;
-                    }
-                    $area = AdministrativeArea::where('id', $intention['college']['administrative_area_id'])->get();
-                    $area_string = $area[0]->name;
-                    while ($area[0]->parent_id != null) {
-                        $area = AdministrativeArea::where('id', $area[0]->parent_id)->get();
-                        $area_string .= " , " . $area[0]->name;
-                    }
-                    $intention['college']['area'] = $area_string;
-                    return $intention;
-                });
-            }
-
 
             $data = [
                 'username' => $user['name'],
                 'userAvatar' => $user['avatar_path'],
-                'messages' => $messages,
-                'collections' => $colleges,
-                'willings' => $intentions
+                'collections' => $colleges
             ];
             return $this->view('home.index', compact('data'));
         } else {
@@ -280,9 +245,11 @@ class HomeController extends Controller
                     $q->where('specialities.degree_id', $intention['degree']->id);
                 }])->where('id', $intention['college_id'])->get()->first();
 
-                $intention_colleges[$college->id] = $college;
+                $intention_college = $college->toArray();
+                $intention_college['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
+                $intention_colleges[$college->id] = $intention_college;
 
-                $intention['college'] = $college->toArray();
+                $intention['college'] = $intention_college;
                 $intention['college']['toefl_requirement'] = $college->toeflRequirement($intention['degree']->name);
                 $intention['college']['ielts_requirement'] = $college->ieltsRequirement($intention['degree']->name);
                 $intention['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
@@ -300,6 +267,7 @@ class HomeController extends Controller
                     $area = AdministrativeArea::where('id', $area[0]->parent_id)->get();
                     $area_string .= " , " . $area[0]->name;
                 }
+
                 $intention['college']['area'] = $area_string;
 
                 return $intention;

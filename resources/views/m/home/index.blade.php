@@ -1,34 +1,32 @@
 @include('m.public.header')
 <style>
-#header{ display: none;}    
+#header{ display: none;}
 </style>
 <div class="main02html">
     <div class="main02" style=" background: #fff;">
    @include('m.home.editUser')
-    
+
     <div class="clear"></div>
 </div>
 <div class="clear"></div>
 </div>
 
-<link rel="stylesheet" href="/static/mmenu/demo.css?v=5.7.1" />
 <link rel="stylesheet" href="/static/mmenu/css/jquery.mmenu.all.css?v=5.7.1" />
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
-		
+
 <style type="text/css">
     #menu {
         min-width: none;
         max-width: none;
         width: 100%;
         height: 100%;
-       
+
     }
     #inp-name{
         box-sizing: border-box;
         border-radius: 5px;
         text-transform: none;
         text-indent: 0;
-       
+
         vertical-align: middle;
         line-height: 20px;
         display: block;
@@ -58,28 +56,28 @@
     .mm-listview > li:not(.mm-divider)::after { left: 0px;}
     .mm-listview .mm-next::before { border: none;}
     #edit { line-height: 30px;width: 30%;background-color: #0e2d60;color: #fff;text-align: center;padding-top: 0px;top: 40%; cursor: pointer;}
-    #locations .edit::after { border: none;} 
-    #editbase .edit::after { border: none;} 
+    #locations .edit::after { border: none;}
+    #editbase .edit::after { border: none;}
     #editpwd .edit::after { border: none;}
-    #editmobile .edit::after { border: none;} 
-    #upload { 
-       
+    #editmobile .edit::after { border: none;}
+    #upload {
+
         border-radius: 5px;
         text-transform: none;
         text-indent: 0;
-       
+
         vertical-align: middle;
         line-height: 20px;
         display: block;
         height: 40px;
         width: 60%;
         padding: 10px;
-      
+
         float: right;
     }
 </style>
 <script>
-    
+
 function mmenuShow(conid)
 {
     $('#menu').show();
@@ -108,12 +106,12 @@ $(function() {
 						content 	: headhtml,
 						height 		: 3
 					}],
-            
+
 
             onClick		: {
                 setSelected	: false
             }},{})
-        .on( 
+        .on(
             'click',
             'a[href^="#/"]',
             function() {
@@ -160,20 +158,20 @@ function editpwd()
                     location.reload() ;
                 }
             }
-        }); 
+        });
 }
 function editmobile()
 {
     var mobile = $(".editmobile").val();
     var code = $(".editverify_code").val();
     var _token = $("input[name=_token]").val();
-    
+
     if(mobile==''||code=='')
     {
         alert('请填写完整!');
         return false;
     }
-    
+
     $.ajax({
             type:'POST',
             url:'/home/change_phone',
@@ -193,12 +191,12 @@ function editmobile()
                     location.reload() ;
                 }
             }
-        }); 
+        });
 }
 </script>
 <script type="text/javascript">
     $(function() {
-        
+
         var $settings = $("#settings");
 
         var api = $("#menu").data( "mmenu" );
@@ -237,22 +235,22 @@ function editmobile()
 </script>
 
 <nav id="menu">
-    
-    
-    
+
+
+
     <!-- subpanel -->
     <div id="settings" class="Panel">
         <ul>
-            
+
             <li id="setting-location">
                 <em class="Counter" vid=''></em>
                 <span>我的资料</span>
 
                 <!-- subpanel -->
                 <div id="locations" class="Panel">
-                    
+
                     <ul>
-                      
+
                         <li id="">
                             <em class="Counter" vid=''>{{ app('auth')->user()->username }}</em>
                             <span>用户名</span>
@@ -261,20 +259,20 @@ function editmobile()
                             <em class="Counter" vid=''>{{ app('auth')->user()->email }}</em>
                             <span>邮箱</span>
                         </li>
-                        
+
                         <li class="edit">
                             <em class="Counter"  vid=''>修改资料</em>
                             <span>&nbsp;</span>
                             <div id="editbase" class="Panel">
                                 <form method="POST" id="formbase" action="/home" accept-charset="UTF-8" enctype="multipart/form-data">
                                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                        
+
                                 <ul>
                                     <li >
                                         <em class="Counter"  id="inp-edit"><input type="text" id="inp-name" value="{{ app('auth')->user()->username }}" name="username" placeholder="username" /></em>
                                         <span>用户名</span>
                                     </li>
-                                   
+
                                     <li >
                                         <em class="Counter"  id="inp-edit"><input type="text" id="inp-name" value="{{ app('auth')->user()->email }}" name="email" placeholder="email" /></em>
                                         <span>邮箱</span>
@@ -291,25 +289,25 @@ function editmobile()
                                 </form>
                             </div>
                         </li>
-                       
+
                         <br>
                         <li class="">
                             <em class="Counter" vid=''>18601991350</em>
                             <span>手机号</span>
-                            
+
                         </li>
                         <li class="edit">
                             <em class="Counter"  vid=''>修改手机号</em>
                             <span>&nbsp;</span>
                             <div id="editmobile" class="Panel">
-                        
+
                                 <ul>
                                     <li >
                                         <em class="Counter"  id="inp-edit"><input type="number" id="inp-name" value="" class="editmobile" name="mobile" placeholder="手机号" /></em>
                                         <span>手机号</span>
                                     </li>
-                                   
-                                    
+
+
                                     <li >
                                         <em class="Counter"  id="inp-edit" ><input type="button" id="inp-name" onclick="djs(this,$('.editmobile'))" style="width:40%; padding: 0px; margin-left: 5px;" value="获取验证码"/>&nbsp;<input type="number" id="inp-name" value="" class="editverify_code" name="verify_code" style="width:25%;" placeholder="" /></em>
                                         <span>验证码</span>
@@ -322,18 +320,18 @@ function editmobile()
                             </div>
                         </li>
                         <br>
-                       
+
                         <li class="">
                             <em class="Counter" >修改</em>
                             <span>密码</span>
                             <div id="editpwd" class="Panel">
-                        
+
                                 <ul>
                                     <li >
                                         <em class="Counter"  id="inp-edit"><input type="password" id="inp-name" value="" name="userold_password" placeholder="当前密码" /></em>
                                         <span>当前密码</span>
                                     </li>
-                                   
+
                                     <li >
                                         <em class="Counter"  id="inp-edit"><input type="password" id="inp-name" value="" name="userpassword" placeholder="新密码" /></em>
                                         <span>新密码</span>
@@ -349,8 +347,8 @@ function editmobile()
                                 </ul>
                             </div>
                         </li>
-                      
-                        
+
+
                     </ul>
                 </div>
             </li>
@@ -360,14 +358,14 @@ function editmobile()
 
                 <!-- subpanel -->
                 <div id="radius" class="Panel">
-                    
+
                 </div>
             </li>
             <li id="setting-shoucang">
                 <a href="{{ route('home.like_colleges') }}"><em class="Counter" vid=''></em>
                 <span>我的收藏</span></a>
                 <div id="radius" class="Panel"></div>
-                
+
             </li>
             @if(app('auth')->user()->estimate!=null)
             <li id="setting-jieguo">
@@ -384,19 +382,19 @@ function editmobile()
                 <a href="/home/intentions"><em class="Counter" vid=''></em>
                     <span>我的意向单</span></a>
                     <div id="radius" class="Panel">
-                    
+
                 </div>
-                
+
             </li>
             <li id="setting-tuichu">
                 <a href="/auth/logout"><em class="Counter" vid=''></em>
                     <span>退出</span></a>
                 <div id="radius" class="Panel"></div>
-                
+
             </li>
-            <!-- navbar info 
+            <!-- navbar info
             <div class="Hidden" style="display:none;">
-			
+
                 <a class="Next" href="javascript:searSub();" >确定</a>
 			</div>-->
 
@@ -404,6 +402,5 @@ function editmobile()
 
 
     </div>
-            
-</nav>
 
+</nav>
