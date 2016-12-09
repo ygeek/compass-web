@@ -4,7 +4,7 @@
 #header{ display: none;}    
 </style>
 <div class="header">
-        <a href="javascript:gobackCel();"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
+        <a href="javascript:history.go(-1);"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
         <div class="header_c">Us News</div>
         <div class="header_r"><img src="/static/images/shaixuan_bai.png" style="margin-top:15px;" height="30" onclick="mmenuShow('mmenu')" /></div>
 </div>
