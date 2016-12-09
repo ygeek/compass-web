@@ -43,15 +43,15 @@
         </ul>
     </div>
     <div class="clear"></div>
-    <div class="more page" onclick="getMore()" style="height:30px; line-height: 30px; width: 30%; margin: 0 auto;">
+    <?php if($articles->lastPage()>1){ ?>
+    <div class="more page" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 30%; margin: 0 auto;">
         加载更多...
     </div>
-    <div class="moregif page" style="height:30px; line-height: 30px; ">
+    
+    <div class="moregif page" style="height:30px; line-height: 30px; display: none; ">
         <img src="/static/images/more.gif" width="30" height="30" style="display:inline;" />
     </div>
-    <div class="page">
-        {{ $articles->appends(app('request')->except('page'))->render() }}
-    </div>
+    <?php } ?>
 </div>
 
 <link rel="stylesheet" href="/static/mmenu/demo.css?v=5.7.1" />
@@ -84,10 +84,12 @@ function mmenuShow(conid)
 function getMore()
 {
     var page = $(".more").attr("page");
+    var pagenum = Number(page)+1;
+    var params = $("#sear").serialize();
     $.ajax({
-        type:'POST',
-        url:'/Colleges/getMoreSpecialities?page='+page,
-        data:data,
+        type:'GET',
+        url:'/colleges/northwestern-university?article_type=specialities&ajax=true&page='+pagenum+"&"+params+"#college-page-nav",
+        data:'',
         async:false,
         headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
         dataType:'json',
@@ -97,17 +99,21 @@ function getMore()
         },
         success:function(e){
             var htm = '';
-            if(e.status)
+           
+            if(e.status=="ok")
             {
                 console.log(e);
-                for(var i=0;i<e[num].specialities.length;i++){
-
-                   // htm += '<option value="'+e[num].specialities[i]['name']+'" >'+e[num].specialities[i]['name']+'</option>';
-                } 
+                htm = e.data;
 
                 console.log(htm);
                 $(".zhuanyemore").append(htm);
                 $(".more").show();
+                $(".more").attr("page",pagenum);
+                $(".moregif").hide();
+            }
+            else
+            {
+                $(".more").attr("page",pagenum);
                 $(".moregif").hide();
             }
         }

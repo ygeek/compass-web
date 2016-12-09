@@ -182,9 +182,51 @@ class CollegesController extends Controller
             'rank_end',
             'selected_order'
         );
-
+       
         if($request->input('ajax', false)) {
-          return $this->responseJson('ok', $res);
+            $str = '';
+            
+            foreach($colleges as $k=>$college){
+                $num1 = '';$num2 = '';   
+                if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){$num1 = 1;} else {$num1 = 2;}}else{$num1= 2;}
+                if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){$num2= 1;} else {$num2= 2;}}else{$num2= 3;}
+                $pub = ($college->type=="public")?'公立':'私立';
+                if($college->administrativeArea->parent)
+                {
+                    $name = $college->administrativeArea->parent->name;
+
+                    if($college->administrativeArea->parent->parent){
+                        $name = $college->administrativeArea->parent->parent->name;
+                    }
+                }
+
+                $str .= '<div class="pinggu_xx50" >
+                            <div class="pinggu_xx_name50">
+                                <a href="'.route('colleges.show', $college->key).'" ><h2>
+                                    <img src="'.app('qiniu_uploader')->pathOfKey($college->badge_path).'"><br />
+                                    <span style="display:block; float:left;">'.$college->chinese_name.'</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px;">'. $pub .'</span><br />
+                                    <div class="clear"></div>
+                                    <span style="font-size:0.8em;">'.$college->english_name.'</span>
+                                    </h2></a>
+                                    <h1>本国排名：'.$college->domestic_ranking.'<br><span style="background:url(/static/images/icon21.jpg) left no-repeat; background-size:20px; padding:0 0 0 20px; text-align: right;">'.$college->administrativeArea->name.$name.'
+                                                        </span><br>
+                                        <a href="/estimate/step-1?selected_country_id='.$college->country_id.'&college_id='.$college->id.'" style="font-size:1.2em; line-height: 40px; color: #0000FF">测试录取率>></a><br>
+
+                                        <img src="/static/images/xin'.$num1.'.png" width="30" style=" cursor: pointer;" likeid="'.$num2.'" onclick="setLike(\''.$college->id.'\',$(this))" ><span id="shuzi'. $college->id .'">'. $college->like_nums .'"</span>
+                                   </h1>
+                                   <div class="clear"></div>
+                            </div>     
+                        </div>';
+
+            }
+            if($str){
+                return $this->responseJson('ok', $str);
+            }
+            else
+            {
+                return $this->responseJson('error', '');
+            }
+          
         }else {
           return $this->view('colleges.index', $res);
         }
@@ -262,7 +304,34 @@ class CollegesController extends Controller
         $res = compact('college', 'article_key', 'articles');
 
         if($request->input('ajax', false)) {
-          return $this->responseJson('ok', $res);
+            $str = '';
+            
+            foreach($articles as $speciality){
+                $tmp = $college->administrativeArea->id;
+                if ($college->administrativeArea->parent){
+                    $tmp = $college->administrativeArea->parent->id;
+                    if ($college->administrativeArea->parent->parent){
+                        $tmp = $college->administrativeArea->parent->parent->id;
+                    }
+                }
+                $estimate_url = route('estimate.step_second', ['selected_country_id' => $tmp, 'selected_degree_id' => $speciality->degree->id, 'speciality_category_id' => $speciality->category->id, 'speciality_name' => $speciality->name, 'cpm' => true, 'college_id' => $college->id]);
+                
+              
+
+                $str .= '<li>
+                            <h1>'. $speciality->name .'</h1>
+                            <p>学术类型：'. $speciality->degree->name .'<br>专业方向：'. $speciality->category->chinese_name .'</p>
+                            <a href="'.$estimate_url.'">测试录取率</a>
+                        </li>';
+
+            }
+            if($str){
+                return $this->responseJson('ok', $str);
+            }
+            else
+            {
+                return $this->responseJson('error', '');
+            }
         }else {
           return $this->view('colleges.show', $res);
         }
@@ -354,9 +423,23 @@ class CollegesController extends Controller
           'selected_ranking_id' => $selected_ranking_id,
           'rankings_for_show' => $rankings_for_show
         ];
-
+       
         if($request->input('ajax', false)) {
-          return $this->responseJson('ok', $res);
+            $str = '';
+            
+            foreach($paginated_rank_items as $key=>$college){
+                $class='';
+                if($key%2==1){ $class = 'class="yuanxiao_white"'; }
+                $str .= '<li '.$class.'><h1>'. $college['rank'] .'</h1><h2>'. $college['chinese_name'] .'<br/>'. $college['english_name'] .'</h2><h3>&nbsp;</h3><span><a href="'.route('colleges.show', ['key' => \App\College::generateKey($college['key']) ]).'">排名</a></span><div class="clear"></div></li>';
+
+            }
+            if($str){
+                return $this->responseJson('ok', $str);
+            }
+            else
+            {
+                return $this->responseJson('error', '');
+            }
         }else {
           return $this->view('colleges.rank', $res);
         }
