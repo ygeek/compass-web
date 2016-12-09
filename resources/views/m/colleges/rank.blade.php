@@ -14,17 +14,27 @@
     <div class="paiming50">
           <h1>排名</h1>
           <h2>院校名称</h2>
-          <h3>国内排名</h3>
+          <h3>&nbsp;</h3>
           <div class="clear"></div>
     </div>
     <div class="yuanxiao_pm6">
-        <ul>
+        <ul class="zhuanyemore">
             @foreach($colleges as $key=>$college)
-            <li @if($key%2==1)class="yuanxiao_white"@endif><h1>{{ $college['rank'] }}</h1><h2>{{ $college['chinese_name'] }}<br/>{{ $college['english_name'] }}</h2><h3>2</h3><span><a href="{{route('colleges.show', ['key' => \App\College::generateKey($college['key']) ])}}">排名</a></span><div class="clear"></div></li>
+            <li @if($key%2==1)class="yuanxiao_white"@endif><h1>{{ $college['rank'] }}</h1><h2>{{ $college['chinese_name'] }}<br/>{{ $college['english_name'] }}</h2><h3>&nbsp;</h3><span><a href="{{route('colleges.show', ['key' => \App\College::generateKey($college['key']) ])}}">排名</a></span><div class="clear"></div></li>
             @endforeach
         </ul>
-       
+        <?php if($colleges->lastPage()>1){ ?>
+        <div class="more page" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 30%; margin: 0 auto; margin-bottom: 80px;">
+            加载更多...
+        </div>
+
+        <div class="moregif page" style="height:30px; line-height: 30px; display: none;  margin-bottom: 80px;">
+            <img src="/static/images/more.gif" width="30" height="30" style="display:inline;" />
+        </div>
+        <?php } ?>
     </div>
+    
+    
 </div>
 <div class="mianfeipinggu"><a href="/estimate/step-1">开启免费评估</a></div>
 
@@ -63,7 +73,44 @@ function mmenuShow(conid)
     $(".header").hide();
     $('body,html').animate({ scrollTop: 0 }, 1);
 }
+function getMore()
+{
+    var page = $(".more").attr("page");
+    var pagenum = Number(page)+1;
+    //var params = $("#search").serialize();
+    $.ajax({
+        type:'GET',
+        url:'/colleges_rank?category_id={{$selected_category_id}}&ajax=true&page='+pagenum,
+        data:'',
+        async:false,
+        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+        dataType:'json',
+        beforeSend:function(r){
+            $(".more").hide();
+            $(".moregif").show();
+        },
+        success:function(e){
+            var htm = '';
+           
+            if(e.status=="ok")
+            {
+                console.log(e);
+                htm = e.data;
 
+                console.log(htm);
+                $(".zhuanyemore").append(htm);
+                $(".more").show();
+                $(".more").attr("page",pagenum);
+                $(".moregif").hide();
+            }
+            else
+            {
+                $(".more").attr("page",pagenum);
+                $(".moregif").hide();
+            }
+        }
+    }); 
+}
 </script>
 <script type="text/javascript" src="/static/mmenu/js/jquery.mmenu.all.min.js?v=5.7.1"></script>
 <script type="text/javascript">
