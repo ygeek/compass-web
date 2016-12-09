@@ -45,7 +45,7 @@
                             <div class="form-group">
                             @endif
 
-                            <label for="recently_speciality_name" style="margin-left: 50px;">最近就读专业</label>
+                            <label for="recently_speciality_name" @if(!(isset($cpm) && $cpm)) style="margin-left: 50px;" @endif>最近就读专业</label>
                             <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
                             <?php
                               $index = 0;

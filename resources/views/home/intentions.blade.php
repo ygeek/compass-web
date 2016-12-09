@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="/js/lodash.js"></script>
 <div class="home-page intentions">
     <div class="app-content">
         @include('shared.top_bar')
@@ -14,33 +15,38 @@
                   :intention-colleges='{!! json_encode($intention_colleges) !!}'
                   :commited-intention-ids='{!! json_encode($commited_intention_ids) !!}'>
                 </intentions>
-                <template id="intentions">
 
-                  <div class="mask" v-if="show_pop">
+                <template id="add-speciality-pop">
+                  <div class="mask">
                     <div class="add-speciality-pop">
-                        <div class="close" @click="show_pop=false">×</div>
+                        <div class="close" @click="closeClick">×</div>
                         <div class="form">
+                          <div class="form-group">
+                              <label>专业层次</label>
+                              <select v-model="selected_degree_id" style="width: 250px;">
+                                <template v-for="degree in degrees">
+                                  <option v-bind:value="degree.id" v-if="selectedAbleDegreeId.indexOf(degree.id.toString()) != -1">
+                                    @{{ degree.name }}
+                                  </option>
+                                </template>
+                              </select>
+                          </div>
                           <div class="form-group">
                               <label>专业方向</label>
                               <select v-model="selected_category_id" style="width: 250px;">
-                                  <template  v-for="category in show_data.categories">
-                                      <option v-bind:value="category.id" v-if="category == show_data.categories[0]" selected>
+                                  <template  v-for="category in degreeCategories">
+                                      <option v-bind:value="category.id">
                                           @{{ category.chinese_name }}
                                       </option>
-                                      <option v-bind:value="category.id" v-else>
-                                          @{{ category.chinese_name }}
-                                      </option>
+
                                   </template>
                               </select>
                           </div>
                           <div class="form-group">
                               <label>专业</label>
                               <select v-model="selected_speciality_name" style="width: 250px;">
-                                  <template v-for="speciality in select_specialities">
-                                      <option v-bind:value="speciality.name" v-if="speciality == select_specialities[0]" selected>
-                                          @{{ speciality.name }}
-                                      </option>
-                                      <option v-bind:value="speciality.name" v-else>
+                                  <template v-for="speciality in degreeCategorySpecialities">
+                                      <option v-bind:value="speciality.name" >
                                           @{{ speciality.name }}
                                       </option>
                                   </template>
@@ -49,7 +55,15 @@
                         </div>
                       </div>
                   </div>
+                </template>
 
+                <template id="intentions">
+                  <add-speciality-pop
+                    v-if="show_pop"
+                    :specialities.sync="show_data_specialities"
+                    :intentions-group-by-degree.sync="show_data_intentionsGroupByDegree"
+                  >
+                  </add-speciality-pop>
                 <div class="title">我的意向单 <button class="estimate-button" @click="commit">提交审核 @{{ selected_specialities_count }}/@{{ raw_intentions.length - commitedIntentionIds.length }}</button></div>
 
                 <div class="content" style="background:none; padding:0;">
@@ -108,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="estimate-button-container">
-                              <button class="estimate-button add-speciality-button" @click="addSpeciality(intention)">添加专业</button>
+                              <button class="estimate-button add-speciality-button" @click="addSpeciality(intentionCollege)">添加专业</button>
                             </div>
                         </div>
 
@@ -244,6 +258,73 @@
         }
         return false;
     }
+
+    Vue.component("add-speciality-pop", {
+      template: '#add-speciality-pop',
+      props: ['specialities', 'intentionsGroupByDegree'],
+      data: function() {
+        return {
+          degrees: {!! json_encode(\App\Degree::estimatable()->get()) !!},
+          categories: {!! json_encode(\App\SpecialityCategory::all()) !!},
+          selected_degree_id: null,
+          selected_speciality_name: null,
+          selected_category_id: null,
+        }
+      },
+      computed: {
+        selectedAbleDegreeId: function() {
+          return Object.keys(this.intentionsGroupByDegree);
+        },
+        degreeSpecialities: function() {
+          var selected_degree_id = this.selected_degree_id;
+          if(!selected_degree_id) {
+            return [];
+          }else {
+            var degreeSpecialities = this.specialities.filter(function(speciality) {
+              return speciality.degree_id == selected_degree_id;
+            });
+
+            return degreeSpecialities;
+          }
+        },
+        degreeCategories: function() {
+          var degreeSpecialities = this.degreeSpecialities;
+
+          var categorie_ids = degreeSpecialities.map(function(item){
+              return item.category_id;
+          }).unique();
+
+          var degreeCategories = this.categories.filter(function(item){
+              return categorie_ids.contains(item.id);
+          });
+
+          if(degreeCategories.length > 0){
+            this.selected_category_id = degreeCategories[0].id;
+          }
+          return degreeCategories;
+        },
+        degreeCategorySpecialities: function() {
+          var self = this;
+
+          var degreeCategorySpecialities = this.specialities.filter(function(item){
+              return (item.category_id == self.selected_category_id && item.degree_id == self.selected_degree_id);
+          }).sort(function (a, b) {
+              return a.name.localeCompare(b.name);
+          });
+
+          if(degreeCategorySpecialities.length > 0) {
+            this.selected_speciality_name = degreeCategorySpecialities[0].name;
+          }
+          return degreeCategorySpecialities;
+        }
+      },
+      methods: {
+        closeClick: function() {
+          this.$dispatch('add-speciality-pop-close');
+        }
+      },
+    });
+
     Vue.component("intentions", {
         template: "#intentions",
         props: ['intentions', 'categories', 'intentionColleges', 'commitedIntentionIds'],
@@ -251,14 +332,16 @@
             return {
                 show_pop: false,
                 showIntentionDetail: null,
-                show_data: {
-                    categories: [],
-                    specialities: [],
-                    intention: null
-                },
+                show_data_specialities: [],
+                show_data_intentionsGroupByDegree: {},
                 selected_category_id: null,
                 selected_speciality_name: null
             }
+        },
+        events: {
+          'add-speciality-pop-close': function() {
+            this.show_pop = false;
+          },
         },
         computed: {
             raw_intentions: function() {
@@ -304,20 +387,24 @@
             displayIntentionDetail: function(intentionDetail) {
               this.showIntentionDetail = intentionDetail;
             },
-            addSpeciality: function(intention){
-                this.show_data.intention = intention;
-                var specialities = intention['college']['specialities'];
-                var categorie_ids = specialities.map(function(item){
-                    return item.category_id;
-                }).unique();
+            addSpeciality: function(intentionCollege){
+              var intentionsOfColleges = this.intentions[intentionCollege['id']];
+              console.log(intentionsOfColleges);
+                // this.show_data.intention = intention;
+              var specialities = intentionCollege['specialities'];
+              this.show_data_specialities = specialities;
+              // var degree_ids = specialities.map(function(item){
+              //     return item.category_id;
+              // }).unique();
+              //
+              // //院校所拥有专业的层次
+              // this.show_data.degree_ids = degree_ids;
 
-                var categories = this.categories.filter(function(item){
-                    return categorie_ids.contains(item.id);
-                });
+              // this.show_data.categories = categories;
+              var intentionsGroupByDegree = _.groupBy(intentionsOfColleges, 'degree_id');
+              this.show_data_intentionsGroupByDegree = intentionsGroupByDegree;
 
-                this.show_data.categories = categories;
-                this.show_data.specialities = specialities;
-                this.show_pop = true;
+              this.show_pop = true;
             },
             postSpeciality: function(){
                 var college_id = this.show_data.intention.college.id;

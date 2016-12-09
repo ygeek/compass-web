@@ -241,9 +241,7 @@ class HomeController extends Controller
         } else {
             $intentions = collect($intentions)->map(function ($intention) use ($intentions, &$intention_colleges) {
                 $intention['degree'] = \App\Degree::find($intention['degree_id']);
-                $college = College::withTrashed()->with(['specialities' => function ($q) use ($intention) {
-                    $q->where('specialities.degree_id', $intention['degree']->id);
-                }])->where('id', $intention['college_id'])->get()->first();
+                $college = College::withTrashed()->with('specialities')->where('id', $intention['college_id'])->get()->first();
 
                 $intention_college = $college->toArray();
                 $intention_college['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);

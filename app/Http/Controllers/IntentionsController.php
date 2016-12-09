@@ -55,13 +55,16 @@ class IntentionsController extends Controller
 
     public function store(Request $request){
         $user = Auth::user();
+        //评估ID
         $estimate_id = $request->input('estimate_id');
-        $estimate_data = Setting::get('estimate-'.$estimate_id);
-
+        //院校ID
         $college_id = $request->input('college_id');
+        //专业名称
         $speciality_name = $request->input('speciality_name');
+        //层次ID
         $degree_id = $request->input('degree_id');
 
+        $estimate_data = Setting::get('estimate-'.$estimate_id);
         $college = College::find($college_id);
         $degree = Degree::find($degree_id);
 
