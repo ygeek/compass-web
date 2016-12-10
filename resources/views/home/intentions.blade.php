@@ -363,7 +363,7 @@
                   alert('请先登录')
               };
           });
-          
+
         }
       },
     });
@@ -515,6 +515,7 @@
                     selected_speciality_ids: selected_speciality_ids
                 }, function(response){
                     alert('提交审核成功');
+                    window.location.reload();
                 });
             },
             countArray: function count(o){
