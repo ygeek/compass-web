@@ -13,6 +13,7 @@
   z-index: 8888;
   min-height: 100vh;
   background: #fff;
+  background: #ebebeb;
   .title {
     @include clearfix;
   }
@@ -23,6 +24,7 @@
   .content {
     margin-top: 60px;
     padding-top: 60px;
+    background: #fff;
     .select-list {
       li {
         height: 60px;
@@ -33,6 +35,16 @@
           color: #979797;
           padding-left: 1em;
         }
+
+        .selected-item {
+          float: right;
+          color: #2d313a;
+          margin-right: .5em;
+          img {
+            margin-left: 1em;
+          }
+        }
+
       }
     }
   }

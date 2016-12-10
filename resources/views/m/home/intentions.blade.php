@@ -21,8 +21,8 @@
         <div class="content">
           <ul class="select-list">
             <li v-for="option in options" @click="selectOption(option)">
-              <span>@{{option.name}}</span>
-              <span v-if="option.id == selectedId">●</span>
+              <span class="list-item" style="color: #2d313a">@{{option.name}}</span>
+              <span class="selected-item" v-if="option.id == selectedId">●</span>
             </li>
           </ul>
         </div>
@@ -58,7 +58,7 @@
               })"
             >
               <span class="list-item">学位</span>
-              <span>@{{selectedDegree.name}}</span>
+              <span class="selected-item">@{{selectedDegree.name}} <img src="/images/right-arrow.png"></span>
             </li>
             <li
               @click="select({
@@ -66,7 +66,7 @@
               })"
             >
               <span class="list-item">专业方向</span>
-              <span>@{{selectedCategory.chinese_name}}</span>
+              <span class="selected-item">@{{selectedCategory.chinese_name}} <img src="/images/right-arrow.png"></span>
             </li>
             <li
               @click="select({
@@ -74,7 +74,7 @@
               })"
             >
               <span class="list-item">专业</span>
-              <span>@{{selectedSpeciality}}</span>
+              <span class="selected-item">@{{selectedSpeciality}} <img src="/images/right-arrow.png"></span>
             </li>
           </ul>
         </div>

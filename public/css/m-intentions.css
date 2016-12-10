@@ -5,7 +5,8 @@
   width: 100%;
   z-index: 8888;
   min-height: 100vh;
-  background: #fff; }
+  background: #fff;
+  background: #ebebeb; }
   .add-speciality-pop .title:after {
     content: "";
     display: table;
@@ -15,7 +16,8 @@
     line-height: 60px; }
   .add-speciality-pop .content {
     margin-top: 60px;
-    padding-top: 60px; }
+    padding-top: 60px;
+    background: #fff; }
     .add-speciality-pop .content .select-list li {
       height: 60px;
       line-height: 60px;
@@ -24,6 +26,12 @@
       .add-speciality-pop .content .select-list li .list-item {
         color: #979797;
         padding-left: 1em; }
+      .add-speciality-pop .content .select-list li .selected-item {
+        float: right;
+        color: #2d313a;
+        margin-right: .5em; }
+        .add-speciality-pop .content .select-list li .selected-item img {
+          margin-left: 1em; }
 
 #estimate-detail-pop {
   background: rgba(0, 0, 0, 0.2);
