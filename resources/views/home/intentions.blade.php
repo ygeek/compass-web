@@ -53,6 +53,7 @@
                               </select>
                           </div>
                         </div>
+                        <button @click="commitAddSpeciality" class="estimate-button" style="display: block; margin: 0 auto; margin-top: 10px; ">提交</button>
                       </div>
                   </div>
                 </template>
@@ -321,6 +322,48 @@
       methods: {
         closeClick: function() {
           this.$dispatch('add-speciality-pop-close');
+        },
+        commitAddSpeciality: function() {
+          var selected_degree_id = this.selected_degree_id;
+          if(!selected_degree_id) {
+            alert('未选择专业层次');
+            return;
+          }
+
+          var selected_category_id = this.selected_category_id;
+          if(!selected_category_id) {
+            alert('未选择专业方向');
+            return;
+          }
+
+          var selected_speciality_name = this.selected_speciality_name;
+          if(!selected_speciality_name) {
+            alert('未选择专业');
+            return;
+          }
+
+          var intentionsOfDegree = this.intentionsGroupByDegree[parseInt(selected_degree_id)];
+          var needIntention = _.last(intentionsOfDegree);
+
+          var estimate_id = needIntention.estimate_id;
+          var college_id = needIntention.college_id;
+          var speciality_name = selected_speciality_name;
+          var degree_id = selected_degree_id;
+
+          this.$http.post("{{ route('intentions.store') }}", {
+              college_id: college_id,
+              degree_id: degree_id,
+              estimate_id: estimate_id,
+              speciality_name: speciality_name
+          }).then(function(response){
+              alert('加入意向单成功');
+              window.location.reload();
+          }, function(response){
+              if(response.status == 401){
+                  alert('请先登录')
+              };
+          });
+          
         }
       },
     });
