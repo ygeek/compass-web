@@ -1,3 +1,30 @@
+.add-speciality-pop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 8888;
+  min-height: 100vh;
+  background: #fff; }
+  .add-speciality-pop .title:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .add-speciality-pop .header_r {
+    color: #fff;
+    line-height: 60px; }
+  .add-speciality-pop .content {
+    margin-top: 60px;
+    padding-top: 60px; }
+    .add-speciality-pop .content .select-list li {
+      height: 60px;
+      line-height: 60px;
+      border-top: 1px #f6f6f6 solid;
+      background: #fff; }
+      .add-speciality-pop .content .select-list li .list-item {
+        color: #979797;
+        padding-left: 1em; }
+
 #estimate-detail-pop {
   background: rgba(0, 0, 0, 0.2);
   width: 100%;
@@ -86,5 +113,7 @@
     background: #f3f3f3; }
   .main02 .college-intentions table tr:nth-child(odd) {
     background: #fff; }
+  .main02 .college-intentions table tr .disabled {
+    color: #999; }
 
 /*# sourceMappingURL=m-intentions.css.map */

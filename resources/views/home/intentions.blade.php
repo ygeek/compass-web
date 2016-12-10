@@ -432,7 +432,6 @@
             },
             addSpeciality: function(intentionCollege){
               var intentionsOfColleges = this.intentions[intentionCollege['id']];
-              console.log(intentionsOfColleges);
                 // this.show_data.intention = intention;
               var specialities = intentionCollege['specialities'];
               this.show_data_specialities = specialities;
