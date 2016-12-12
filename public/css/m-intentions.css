@@ -1,3 +1,74 @@
+.alert-success {
+  font-weight: bold;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 80px;
+  height: 40px;
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  line-height: 40px;
+  padding: 0 30px;
+  text-align: center;
+  display: none;
+  z-index: 9999; }
+
+.heart {
+  background-color: red;
+  display: inline-block;
+  height: 12px;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: 12px; }
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  height: 12px;
+  position: absolute;
+  width: 12px; }
+
+.heart:before {
+  top: -6px;
+  left: 0; }
+
+.heart:after {
+  left: 6px;
+  top: 0; }
+
+.gray-heart {
+  background-color: gray;
+  display: inline-block;
+  height: 12px;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: 12px; }
+
+.gray-heart:before,
+.gray-heart:after {
+  content: "";
+  background-color: gray;
+  border-radius: 50%;
+  height: 12px;
+  position: absolute;
+  width: 12px; }
+
+.gray-heart:before {
+  top: -6px;
+  left: 0; }
+
+.gray-heart:after {
+  left: 6px;
+  top: 0; }
+
 .add-speciality-pop {
   position: fixed;
   top: 0;

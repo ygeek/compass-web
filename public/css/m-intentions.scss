@@ -1,3 +1,85 @@
+.alert-success {
+  font-weight: bold;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 80px;
+  height: 40px;
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  line-height: 40px;
+  padding: 0 30px;
+  text-align: center;
+  display: none;
+  z-index: 9999;
+}
+
+$heart_size: 12px;
+
+.heart {
+  background-color: red;
+  display: inline-block;
+  height: $heart_size;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: $heart_size;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  height: $heart_size;
+  position: absolute;
+  width: $heart_size;
+}
+
+.heart:before {
+  top: -($heart_size / 2);
+  left: 0;
+}
+
+.heart:after {
+  left: ($heart-size / 2);
+  top: 0;
+}
+
+.gray-heart {
+  background-color: gray;
+  display: inline-block;
+  height: $heart_size;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: $heart_size;
+}
+
+.gray-heart:before,
+.gray-heart:after {
+  content: "";
+  background-color: gray;
+  border-radius: 50%;
+  height: $heart_size;
+  position: absolute;
+  width: $heart_size;
+}
+
+.gray-heart:before {
+  top: -($heart_size / 2);
+  left: 0;
+}
+
+.gray-heart:after {
+  left: ($heart-size / 2);
+  top: 0;
+}
+
 @mixin clearfix {
   &:after {
     content: "";

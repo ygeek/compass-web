@@ -109,6 +109,12 @@
                       <div class="college-ranking left">
                         本国排名： @{{intentionCollege.domestic_ranking}}
                       </div>
+
+                      <like-college
+                        :college_id="intentionCollege.id"
+                        :liked="intentionCollege.liked"
+                        :like_nums="intentionCollege.like_nums"
+                      ></like-college>
                     </div>
 
                     <div class="line">
@@ -119,7 +125,7 @@
                           </div>
 
                           <div class="address">
-                              @{{intentionCollege.address}}
+                            @{{intentionCollege.location}}, @{{intentionCollege.parent_location}}
                           </div>
                       </div>
 
@@ -207,6 +213,25 @@
       </div>
     </div>
   </script>
+
+  <script type="text/x-template" id="like-college">
+      <span
+        v-if="liked == 0"
+        class="right"
+        style="margin-left: 20px;cursor: pointer;"
+        @click="likeCollege">
+          <span class="gray-heart"></span>
+          @{{like_nums}}
+      </span>
+      <span
+        v-if="liked == 1"
+        class="right"
+        style="margin-left: 20px;cursor: pointer;"
+        @click="dislikeCollege">
+          <span class="heart"></span>@{{like_nums}}
+      </span>
+  </script>
+  @include('shared.like_college', ['template_name' => 'like-college'])
 
     <div class="header">
         <a href="/home"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
