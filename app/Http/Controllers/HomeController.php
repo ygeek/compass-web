@@ -245,11 +245,12 @@ class HomeController extends Controller
 
                 $intention_college = $college->toArray();
                 $intention_college['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
+                $intention_college['toefl_requirement'] = $college->toeflRequirement($intention['degree']->name);
+                $intention_college['ielts_requirement'] = $college->ieltsRequirement($intention['degree']->name);
                 $intention_colleges[$college->id] = $intention_college;
 
                 $intention['college'] = $intention_college;
-                $intention['college']['toefl_requirement'] = $college->toeflRequirement($intention['degree']->name);
-                $intention['college']['ielts_requirement'] = $college->ieltsRequirement($intention['degree']->name);
+
                 $intention['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
                 $intention['redirect_url'] = route('colleges.show', ['key' => $college->key]);
 
