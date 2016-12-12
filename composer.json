@@ -7,7 +7,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/chareice/SUBMAIL_PHP_SDK"
+            "url": "https://github.com/dev-submail/SUBMAIL_PHP_SDK"
         },
         {
             "type": "composer",
