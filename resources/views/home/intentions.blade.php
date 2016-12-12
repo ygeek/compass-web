@@ -267,7 +267,7 @@
         return {
           degrees: {!! json_encode(\App\Degree::estimatable()->get()) !!},
           categories: {!! json_encode(\App\SpecialityCategory::all()) !!},
-          selected_degree_id: null,
+          selected_degree_id: Object.keys(this.intentionsGroupByDegree)[0],
           selected_speciality_name: null,
           selected_category_id: null,
         }
