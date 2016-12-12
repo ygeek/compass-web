@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{ elixir('css/app.css')}}" />
     <meta id="_token" value="{{ csrf_token() }}">
     <script src="/js/vue.js"></script>
+    <script src="/js/jquery-3.0.0.min.js"></script>
     <script src="/js/vue-resource.min.js"></script>
   </head>
   <body id="app" v-bind:class="{ 'modal-opened': showLoginAndRegisterPanel }">

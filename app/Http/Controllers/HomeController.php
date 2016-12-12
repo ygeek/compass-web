@@ -249,6 +249,13 @@ class HomeController extends Controller
                 $intention_college['ielts_requirement'] = $college->ieltsRequirement($intention['degree']->name);
                 $intention_college['parent_location'] = $college->administrativeArea->parent->name;
                 $intention_college['location'] = $college->administrativeArea->name;
+                $intention_college['liked'] = 0;
+                if(app('auth')->user()){
+                    if(app('auth')->user()->isLikeCollege($intention_college['id'])){
+                      $intention_college['liked'] = 1;
+                    }
+                }
+
                 if($college->administrativeArea->parent->parent) {
                   $intention_college['parent_location'] = $college->administrativeArea->parent->parent->name;
                 }
