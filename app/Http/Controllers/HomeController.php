@@ -247,6 +247,12 @@ class HomeController extends Controller
                 $intention_college['badge_path'] = app('qiniu_uploader')->pathOfKey($college->badge_path);
                 $intention_college['toefl_requirement'] = $college->toeflRequirement($intention['degree']->name);
                 $intention_college['ielts_requirement'] = $college->ieltsRequirement($intention['degree']->name);
+                $intention_college['parent_location'] = $college->administrativeArea->parent->name;
+                $intention_college['location'] = $college->administrativeArea->name;
+                if($college->administrativeArea->parent->parent) {
+                  $intention_college['parent_location'] = $college->administrativeArea->parent->parent->name;
+                }
+
                 $intention_colleges[$college->id] = $intention_college;
 
                 $intention['college'] = $intention_college;

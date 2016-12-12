@@ -90,13 +90,13 @@
                                     </div>
 
                                     <div class="address-container">
-                                        <div class="location">
+                                        <div class="location" style="display: inline-block;">
                                             <img src="/images/location-identity.png" alt="location-identity" />
                                             @{{intentionCollege.area}}
                                         </div>
 
-                                        <div class="address">
-                                            @{{intentionCollege.address}}
+                                        <div class="address" style="display: inline-block;">
+                                            @{{intentionCollege.location}}, @{{intentionCollege.parent_location}}
                                         </div>
                                     </div>
                                 </header>
