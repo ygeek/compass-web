@@ -49,12 +49,13 @@ class AuthController extends Controller
 
     public function createVerifyCodes(Request $request){
         $phone_number = $request->input('phone_number');
+        $phone_country = $request->input('phone_country', 'china');
         $code = $this->verify_code_service->setVerifyCodeForPhoneNumber($phone_number);
 
         if(env('APP_DEBUG')){
             return $this->responseJson('ok', ['code' => $code]);
         }else{
-            event(new VerifyCodeSet($code, $phone_number));
+            event(new VerifyCodeSet($code, $phone_number, $phone_country));
             return $this->responseJson('ok');
         }
     }

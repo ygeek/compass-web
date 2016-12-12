@@ -13,10 +13,11 @@ class VerifyCodeSet extends Event
     public $code;
     public $phone_number;
 
-    public function __construct(string $code, string $phone_number)
+    public function __construct(string $code, string $phone_number, string $phone_country)
     {
         $this->code = $code;
         $this->phone_number = $phone_number;
+        $this->phone_country = $phone_country;
     }
 
     /**

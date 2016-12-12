@@ -24,7 +24,12 @@
 
       <div class="register-form form" v-show="panel == 'register'">
         <p>
-          <input placeholder="手机号码" v-model="phone_number"/>
+          <select v-model="phone_country" style="width: 20%;float: left;height: 44px;border: none;background: #fff;margin-left: 22px;">
+            <option value="china">中国</option>
+            <option value="aus">澳洲</option>
+            <option value="nzl">新西兰</option>
+          </select>
+          <input style="float: left; width: 58%;" placeholder="手机号码" v-model="phone_number"/>
         </p>
         <p>
           <input placeholder="密码" type="password" v-model="password"/>
@@ -65,11 +70,12 @@
         verify_code: '',
         countDown: null,
         countDownInterval: null,
+        phone_country: 'china',
       };
     },
     computed: {
       validatePhoneNumber: function() {
-        return this.phone_number.length == 11;
+        return this.phone_number.length > 5;
       },
       validatePassword: function() {
         return this.password.length > 0;
@@ -93,7 +99,8 @@
       },
       getVerifyCode: function(){
         this.$http.post("{{route('auth.verifyCode.store')}}", {
-          phone_number: this.phone_number
+          phone_number: this.phone_number,
+          phone_country: this.phone_country,
         }).then(function(response){
           if(response.data.data.code){
             console.log('验证码为：' + response.data.data.code);
