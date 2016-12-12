@@ -126,12 +126,6 @@
                   alert('专业加载中，请稍等。');
                   event.preventDefault();
                 }
-                @if($estimate_checked==true)
-                 if (confirm("您之前的留学评估将会被清空，是否继续？")==false){
-                  event.preventDefault();
-                  return false;
-                }
-                @endif
                 if (this.selected_countries.id==null||this.selected_degrees.id==null||this.selected_years.id==null||this.selected_speciality_categories.id==null||this.selected_speciality_name==null){
                   alert('有选项未选择。');
                   event.preventDefault();

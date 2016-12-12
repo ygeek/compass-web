@@ -246,9 +246,6 @@
                     this.$dispatch('toShowLoginAndRegisterPanel');
                 },
                 returnStepFirst: function (event) {
-                    if (confirm("您之前的留学评估将会被清空，是否继续？")==false){
-                        event.preventDefault();
-                    }
                 }
             }
         });
