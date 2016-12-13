@@ -42,7 +42,12 @@
             v-bind:disabled="countDown"
           >
             <template v-if="countDown==null">
-              获取验证码
+              <template v-if="onRequest">
+                获取中
+              </template>
+              <template v-else>
+                获取验证码
+              </template>
             </template>
             <template v-else>
               @{{countDown}}s后重试
@@ -71,6 +76,7 @@
         countDown: null,
         countDownInterval: null,
         phone_country: 'china',
+        onRequest: false,
       };
     },
     computed: {
@@ -98,10 +104,16 @@
         this.panel = panel;
       },
       getVerifyCode: function(){
+        if(this.onRequest) {
+          return;
+        }
+
+        this.onRequest = true;
         this.$http.post("{{route('auth.verifyCode.store')}}", {
           phone_number: this.phone_number,
           phone_country: this.phone_country,
         }).then(function(response){
+          this.onRequest = false;
           if(response.data.data.code){
             console.log('验证码为：' + response.data.data.code);
             this.verify_code = response.data.data.code;
