@@ -252,7 +252,7 @@ Vue.component('college-select-pop', {
       that.provinces = response.data.data['areas'];
 
       if(that.defaultCollege && that.defaultSpeciality) {
-        var college = that.colleges.find((college) => {
+        var college = that.colleges.find(function(college) {
           return college.name == that.defaultCollege;
         });
         that.majorList = college.major.concat('其它');
