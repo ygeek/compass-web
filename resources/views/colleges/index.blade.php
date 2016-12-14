@@ -158,8 +158,8 @@
                               <img class="college-badge" src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" />
                               <div class="badge-info">
                                 <span>浏览热度：{{ $college->read_count }}</span>
-                                <span>平均热度：{{ $college->average_enrollment }}</span>
-                                <span>国际留学生比例：{{ $college->international_ratio }}</span>
+                                <span>平均录取率：{{ $college->average_enrollment * 100 }}% </span>
+                                <span>国际留学生比例：{{ $college->international_ratio * 100 }}% </span>
                               </div>
                             </div>
                             <div class="college-info">
