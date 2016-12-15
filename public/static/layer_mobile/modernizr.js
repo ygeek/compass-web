@@ -177,6 +177,7 @@ $(function() {
     //注册
     $(".toRegion").click(function(){
         var phone_number = $("input[name='zcphone_number']").val();
+        var phone_country = $("select[name=phone_country]").val();
         var password = $("input[name='zcpassword']").val();
         var code = $("input[name='verify_code']").val();
         if(!checkSubmitMobil(phone_number)) return false;
@@ -187,12 +188,12 @@ $(function() {
         $.ajax({
             type:'POST',
             url:'/auth/register',
-            data:'phone_number='+phone_number+'&password='+password+"&code="+code,
+            data:'phone_number='+phone_number+'&password='+password+"&code="+code+"&phone_country="+phone_country,
             async:false,
             headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
             dataType:'json',
-            error:function(e,b,c){
-                console.log(e);
+            error:function(a,b,c){
+                console.log(a);
                 console.log(b);
                 console.log(c);
                 alert('注册失败!');

@@ -98,11 +98,11 @@
     <div class="main">
         <div class="login_resgister" style="padding-top: 15px;">
             <form action="" method="get">
-                <div class="yanzhenma" style=" background: none;">
-                <select v-model="phone_country" name="phone_country" style="width: 27%;float: left; height: 50px; line-height: 50px; background-color: #fff; border: none;">
-                    <option value="china">中国</option>
-                    <option value="aus">澳洲</option>
-                    <option value="nzl">新西兰</option>
+                <div class="yanzhenma" style=" background: none; margin-bottom: 0px;">
+                <select v-model="phone_country" name="phone_country" style="width: 27%;float: left; height: 50px; line-height: 50px; background-color: #fff; border: none; font-size: 12px;">
+                    <option value="china">中国(+86)</option>
+                    <option value="aus">澳洲(+61)</option>
+                    <option value="nzl">新西兰(+64)</option>
                 </select>
                     <input type="number" class="login_resgister_input zcphone_number" placeholder="手机号码" v-model="phone_number" name="zcphone_number" style="width: 70%; float: right;" >
                 </div>
@@ -158,14 +158,14 @@ var countdown=60;
 function djs(obj,objmobile)
 {
     var mobile = objmobile.val();
-
+    var phone_country = $("select[name=phone_country]").val();
     if(validatemobile(mobile))
     {
         settime(obj);
         $.ajax({
             type:'POST',
             url:'/auth/verify-codes',
-            data:'phone_number='+mobile,
+            data:'phone_number='+mobile+"&phone_country="+phone_country,
             async:false,
             headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
             dataType:'json',
