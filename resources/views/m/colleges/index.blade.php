@@ -1,11 +1,12 @@
 @include('m.public.header')
 <div class="clear"></div>
-<form action="" method="get" id="search">
+
 <div class="main02" id="main02">
+    <form action="" method="get" id="search1" name="search1">
     <div class="yuanxiao_cx_main">
         <div class="yx_chaxun" style="margin:2% 2%;float:left; width:78%;border-radius: 5px;">
             
-                <input type="text" class="chax_input" name="college_name" value="{{$college_name}}" placeholder="院校查询">
+                <input type="text" class="chax_input" name="college_name" value="{{$college_name}}" placeholder="请输入院校查询">
                 <input type="hidden" name="selected_country_id" value="-1"/>
                 <input type="submit" class="chax_so" value="">
             
@@ -15,6 +16,7 @@
         </div>
         <div class="clear"></div>
     </div>
+    </form>
     <!--<div class="chaxun01"><a href="javascript:shaixuan('.shaixuan')"><span>•</span>条件筛选</a></div>-->
     <div class="chaxun02"><h1>您找到<span>{{ $colleges->total() }}</span>所相关学校</h1></div>
     <div class="grzy_wdsc_list">
@@ -119,6 +121,7 @@ function getMore()
     }); 
 }
 </script>
+<form action="" name="search2" method="get" id="search">
 <!--隐藏内容-->
 <div class="shaixuan tiaojian">
     <div class="header">

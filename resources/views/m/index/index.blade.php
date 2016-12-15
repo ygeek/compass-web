@@ -83,8 +83,9 @@
     </div>
     <div class="clear"></div>
     <div class="yx_chaxun">
-        <form method="GET" action="{{ route('colleges.index') }}">
+        <form method="GET" target="_blank" action="{{ route('colleges.index') }}">
             <input type="text" class="chax_input" name="college_name" placeholder="输入院校名称" >
+            <input type="hidden" class="chax_input" name="selected_country_id" value="-1" >
             <input type="submit" class="chax_so" value="">
         </form>
     </div>
@@ -106,7 +107,7 @@
     <div class="clear"></div>
     <div class="yuyanxx">
         <div class="yuyanxx_m">
-            <h1>语言学习</h1><em><a href="{{ $more[0] }}" style="color: #1ddab0;">更多></a></em>
+            <h1>语言学习</h1><em><a href="{{ $more[0] }}"  target="_blank" style="color: #1ddab0;">更多></a></em>
             <div class="clear"></div>
             <?php
             $articles = App\Article::whereHas('category', function($q) {
@@ -124,7 +125,7 @@
     <div class="h_ad"><img src="/static/images/liuxuegonglue.jpg"></div>
     <div class="yuyanxx">
         <div class="yuyanxx_m">
-            <h1>留学攻略</h1><em><a href="{{ $more[1] }}" style="color: #1ddab0;">更多></a></em>
+            <h1>留学攻略</h1><em><a href="{{ $more[1] }}"  target="_blank" style="color: #1ddab0;">更多></a></em>
             <div class="clear"></div>
             <?php
             $articles = App\Article::whereHas('category', function($q) {
@@ -141,7 +142,7 @@
     <div class="h_ad"><img src="/static/images/img01.jpg"></div>
     <div class="yuyanxx">
         <div class="yuyanxx_m">
-            <h1>移民攻略</h1><em><a href="{{ $more[2] }}" style="color: #1ddab0;">更多></a></em>
+            <h1>移民攻略</h1><em><a href="{{ $more[2] }}"  target="_blank" style="color: #1ddab0;">更多></a></em>
             <div class="clear"></div>
             <?php
             $articles = App\Article::whereHas('category', function($q) {
