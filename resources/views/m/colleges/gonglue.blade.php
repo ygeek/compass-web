@@ -3,7 +3,7 @@
 
     <div class="yuanxiao_gl">
         @foreach($articles as $article)
-        <p><a href="{{ $article->link() }}">{{ $article->title }}</a><span>{{ $article->created_at->format('Y-m-d') }}</span></p>
+        <p><a href="{{ $article->link() }}" target="_blank">{{ $article->title }}</a><span>{{ $article->created_at->format('Y-m-d') }}</span></p>
        @endforeach
 
     </div>

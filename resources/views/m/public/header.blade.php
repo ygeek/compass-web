@@ -98,7 +98,14 @@
     <div class="main">
         <div class="login_resgister" style="padding-top: 15px;">
             <form action="" method="get">
-                <input type="number" class="login_resgister_input zcphone_number" placeholder="手机号码" v-model="phone_number" name="zcphone_number" >
+                <div class="yanzhenma" style=" background: none;">
+                <select v-model="phone_country" name="phone_country" style="width: 27%;float: left; height: 50px; line-height: 50px; background-color: #fff; border: none;">
+                    <option value="china">中国</option>
+                    <option value="aus">澳洲</option>
+                    <option value="nzl">新西兰</option>
+                </select>
+                    <input type="number" class="login_resgister_input zcphone_number" placeholder="手机号码" v-model="phone_number" name="zcphone_number" style="width: 70%; float: right;" >
+                </div>
                 <input type="password" class="login_resgister_input" placeholder="密码" v-model="password" name="zcpassword">
                 <!--
                 <div class="yanzhenma">
@@ -113,14 +120,25 @@
                     <em><input type="button" style="border: none; background-color: #fff; color: #999; margin-top: -10px;"  class="getVerify" onclick="djs(this,$('.zcphone_number'))" value="获取验证码"></em>
                 </div>
                 <div class="clear"></div>
-                <div class="resgister_xy"><a href="#" style="float: left;">注册即同意《指南针用户协议》</a><a href="javascript:changeView('#login')" style=" float: right;">登录</a></div>
+                <div class="resgister_xy"><a href="javascript:changeView('#xieyi')" style="float: left; ">注册即同意<font style="color: #005eac;" >《指南针用户协议》</font></a><a href="javascript:changeView('#login')" style=" float: right;">登录</a></div>
                 <input type="button" value="注册" class="login_button toRegion">
             </form>
         </div>
         <div class="clear"></div>
     </div>
 </div>
-
+<div id="xieyi" islocal='1' class="pt-xieyi" style="display: none;" >
+    <div class="header">
+        <div class="header_l">&nbsp;</div>
+        <div class="header_c" >指南针用户协议</div>
+        <div class="header_r" style="margin: 20px 0 0 0; cursor: pointer;" onclick='showxieyi("#xieyi")'><img src="/static/images/guanbi.png" height="20" /></div>
+    </div>Ï
+    <div class="clear"></div>
+    <div class="main">
+        @include('layouts.agreement')
+        
+    </div>
+</div>
 <div id="content" >
 <?php
     function objToArr($obj)
@@ -160,6 +178,15 @@ function djs(obj,objmobile)
         });
     };
 
+}
+function showxieyi(newView) {
+    $("#content").hide();
+    
+    $("#header").hide();
+    $("#region").show();
+    $("#login").hide();
+    
+    $(newView).hide();
 }
 function settime(obj) {
 
