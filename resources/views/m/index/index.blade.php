@@ -83,7 +83,7 @@
     </div>
     <div class="clear"></div>
     <div class="yx_chaxun">
-        <form method="GET" target="_blank" action="{{ route('colleges.index') }}">
+        <form method="GET"  action="{{ route('colleges.index') }}">
             <input type="text" class="chax_input" name="college_name" placeholder="输入院校名称" >
             <input type="hidden" class="chax_input" name="selected_country_id" value="-1" >
             <input type="submit" class="chax_so" value="">
