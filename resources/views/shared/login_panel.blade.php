@@ -139,6 +139,7 @@
           password: this.password
         }).then(function(response){
           alert('注册成功');
+          window.location.reload();
         }, function(response) {
           alert('注册用户失败');
         });
