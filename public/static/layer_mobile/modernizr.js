@@ -76,6 +76,7 @@ $(function() {
            
             $('.didian').attr('selected_state_id_name','');
         }
+        queding('didian','selected_country_id');
     });
     $(".zhuanyechilds").click(function(){
         var areaid = $(this).attr('cateid');
@@ -85,7 +86,7 @@ $(function() {
         $(this).attr('id','yuanxiao_sx');
         $('.zhuanye').attr('selected_speciality_cateogry_id',areaid);
         $('.zhuanye').attr('selected_speciality_cateogry_id_name',$(this).html());
-        
+        queding('zhuanye','selected_speciality_cateogry_id');
     });
     $(".leixingchilds").click(function(){
         var areaid = $(this).attr('leiid');
@@ -95,7 +96,7 @@ $(function() {
         $(this).attr('id','yuanxiao_sx');
         $('.leixing').attr('selected_property',areaid);
         $('.leixing').attr('selected_property_name',$(this).html());
-        
+        queding('leixing','selected_property');
     });
     
     $(".paimingchilds").click(function(){
@@ -113,6 +114,7 @@ $(function() {
         }
         var phtm = $(this).html();
         $('.paiming').attr('paiminghtm',phtm);
+        pmqueding();
     });
     //登录与注册
     $(".toLogin").click(function(){
@@ -263,7 +265,8 @@ function pmqueding()
     assignValue('rank_end',$('.paiming').attr('rank_end'));
     htm = $('.paiming').attr('paiminghtm');
     $('.paiminga').html(htm);
-   
+    $(".start").val($('.paiming').attr('rank_start'));
+    $(".end").val($('.paiming').attr('rank_end'));
     goBlack2('.shaixuan');
 }
 

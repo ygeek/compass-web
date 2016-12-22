@@ -1,5 +1,6 @@
+<div id="college-page-nav" style="margin-bottom: 60px;"></div>
 <div class="main04">
-    <div class="yxpaiming01"><a href="/estimate/step-1">测试录取率</a></div>
+    
      <?php $index = 0; ?>
         @foreach($articles as $article)
         
@@ -13,3 +14,4 @@
    
     <div class="clear"></div>
 </div>
+@include('m.colleges.yuanxiao')
