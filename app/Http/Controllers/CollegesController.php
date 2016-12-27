@@ -206,16 +206,25 @@ class CollegesController extends Controller
                                     <img src="'.app('qiniu_uploader')->pathOfKey($college->badge_path).'"><br />
                                     <span style="display:block; float:left;">'.$college->chinese_name.'</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px;">'. $pub .'</span><br />
                                     <div class="clear"></div>
-                                    <span style="font-size:0.8em;">'.$college->english_name.'</span>
+                                    
                                     </h2></a>
-                                    <h1>本国排名：'.$college->domestic_ranking.'<br><span style="background:url(/static/images/icon21.jpg) left no-repeat; background-size:20px; padding:0 0 0 20px; text-align: right;">'.$college->administrativeArea->name.$name.'
+                                    <h1>本国排名：'.$college->domestic_ranking.'<br><span style="background:url(/static/images/icon21.jpg) left no-repeat; background-size:20px; padding:0 0 0 20px;  font-size: 0.8em; text-align: right;">'.$college->administrativeArea->name.$name.'
                                                         </span><br>
                                         <a href="/estimate/step-1?selected_country_id='.$college->country_id.'&college_id='.$college->id.'" style="font-size:1.2em; line-height: 40px; color: #0000FF">测试录取率>></a><br>
 
-                                        <img src="/static/images/xin'.$num1.'.png" width="30" style=" cursor: pointer;" likeid="'.$num2.'" onclick="setLike(\''.$college->id.'\',$(this))" ><span id="shuzi'. $college->id .'">'. $college->like_nums .'"</span>
+                                        
                                    </h1>
                                    <div class="clear"></div>
-                            </div>     
+                            </div> 
+                            <div class="bot">
+                                <div class="left" style=" float: left; width: 80%; height: 34px; line-height: 30px; color: #2b426e; text-align: left;">
+                                    <span style="font-size:1.0em;width: 80%; text-align: left;">'.$college->english_name.'</span>
+                                </div>
+                                <div class="right" style=" float: right; width: 20%; text-align: right; margin-top: -7px;">
+                                    <img src="/static/images/xin'.$num1.'.png" width="30" style=" cursor: pointer;" likeid="'.$num2.'" onclick="setLike(\''.$college->id.'\',$(this))" ><span id="shuzi'. $college->id .'">'. $college->like_nums .'"</span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
                         </div>';
 
             }

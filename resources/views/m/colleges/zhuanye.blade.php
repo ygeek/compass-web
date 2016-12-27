@@ -1,7 +1,8 @@
+<div id="college-page-nav" style="margin-bottom: 60px;"></div>
 <div class="main04">
-    <div class="yxpaiming01" style="margin:0 0 1px 0;"><a href="/estimate/step-1">测试录取率</a></div>
+   
     
-    <div class="yuanxiao_cx_main">
+    <div class="yuanxiao_cx_main" style="padding: 0px;">
         <div class="yx_chaxun" style="margin:2% 2%;float:left; width:78%;border-radius: 5px;">
             
             <form action="" id="sear" method="get">
@@ -13,12 +14,12 @@
             </form>
             
         </div>
-        <div class="shaixuan_icon">
-            <img src="/static/images/shaixuan.png" height="65" onclick="mmenuShow('mmenu')" />
+        <div class="shaixuan_icon" style="height:50px; margin-top: 3%;">
+            <img src="/static/images/shaixuan.png" height="50" onclick="mmenuShow('mmenu')" />
         </div>
         <div class="clear"></div>
     </div>
-    <div class="chaxun10"><h1>您找到<span> {{ $articles->total() }} </span>个相关专业</h1></div>
+    <div class="chaxun10" style="height:40px; line-height: 40px; font-size: 1.2em;"><h1>您找到<span> {{ $articles->total() }} </span>个相关专业</h1></div>
 
     <div class="yuanxiao_gzy">
         <ul class="zhuanyemore">
@@ -44,10 +45,12 @@
     </div>
     <div class="clear"></div>
     <?php if($articles->lastPage()>1){ ?>
-    <div class="more page" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 30%; margin: 0 auto;">
+    <div class="more page" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 100%; margin: 0 auto;">
         加载更多...
     </div>
-    
+    <div class="over page"  style="height:30px; line-height: 30px; width: 100%; display: none; margin: 0 auto;">
+        加载完成
+    </div>
     <div class="moregif page" style="height:30px; line-height: 30px; display: none; ">
         <img src="/static/images/more.gif" width="30" height="30" style="display:inline;" />
     </div>
@@ -72,6 +75,23 @@
     .mm-hasnavbar-top-1 .mm-panels { top:60px;}
     .mm-listview { line-height: 30px;}
     .mm-navbar .mm-btn:first-child { height:60px;}
+    .mm-navbar.mm-hasbtns {
+        padding: 0 40px; background-color: #1ddab0;
+    }
+    .mm-menu.mm-theme-white .mm-navbar a, .mm-menu.mm-theme-white .mm-navbar > *, .mm-menu.mm-theme-white em.mm-counter {
+    color: #fff;
+    }
+    .mm-listview em.mm-counter + .mm-next.mm-fullsubopen + a, .mm-listview em.mm-counter + .mm-next.mm-fullsubopen + span, em.mm-counter + a.mm-fullsubopen + a, em.mm-counter + a.mm-fullsubopen + span {
+        padding-right: 90px;
+        font-size: 1.3em;
+        color: #666;
+    }
+    .mm-listview > li > a, .mm-listview > li > span {
+        color: #666;
+        display: block;
+        padding: 10px 10px 10px 20px;
+        margin: 0;font-size: 1.3em;
+    }
 </style>
 <script>
     
@@ -80,6 +100,7 @@ function mmenuShow(conid)
     $('#menu').show();
     $("#header").hide();
     $('body,html').animate({ scrollTop: 0 }, 1);
+    $('.footer01').hide();
 }
 function getMore()
 {
@@ -115,6 +136,7 @@ function getMore()
             {
                 $(".more").attr("page",pagenum);
                 $(".moregif").hide();
+                 $(".over").show();
             }
         }
     }); 

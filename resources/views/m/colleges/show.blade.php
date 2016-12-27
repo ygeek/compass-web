@@ -1,7 +1,7 @@
 @include('m.public.header')
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/scroll.js"></script>
-<script type="text/javascript" src="js/scrollload.js"></script>
+<script type="text/javascript" src="/statics/js/index.js"></script>
+<script type="text/javascript" src="/statics/js/scroll.js"></script>
+<script type="text/javascript" src="/statics/js/scrollload.js"></script>
 
 <style>
     #liked { background: url(/static/images/icon24_1.jpg) center no-repeat;}
@@ -43,12 +43,12 @@
                  <div class="clear"></div>
             </ul>
         </div>
-        <div class="yuanxiao_pm50" style="width:90%; margin: 0 auto; text-align: right; padding: 0;"><a href="/colleges_rank">更多排名>></a></div>
+       
         <div class="yuanxiao_xx">
             <p style="float:left; width:60%"><img src="/static/images/icon21.jpg"><span>{{$college->administrativeArea->name}} · since {{$college->founded_in}}</span></p>
             <p style="float:left; width:40%"><img src="/static/images/icon22.jpg"><span>{{$college->telephone_number}}</span></p>
             <div class="clear"></div>
-            <p><img src="/static/images/icon23.jpg"><span style=" margin-left: 3%;">{{$college->website}}</span></p>
+            <p><img src="/static/images/icon23.jpg"><a href="{{$college->website}}"><span style=" margin-left: 3%;">{{$college->website}}</span></a></p>
        </div>
        
         <div class="clear"></div>
@@ -77,7 +77,7 @@
     @include('m.colleges.gonglue')
     @endif
     <div class="footer_top"></div>
-    <div class="footer01" style="z-index:999">
+    <div class="footer01" style="z-index:999; height: 120px;">
         <ul>
             <li class="home01"><a href="{{ route('colleges.show', ['key' => $college->key]) }}#college-page-nav" @if($article_key == 'xue-xiao-gai-kuang') id="current" @endif  >学校概况</a></li>
             <li class="home02"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'lu-qu-qing-kuang']) }}#college-page-nav" @if($article_key == 'lu-qu-qing-kuang') id="current" @endif >录取情况</a></li>
@@ -85,6 +85,7 @@
             <li class="home04"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'tu-pian']) }}#college-page-nav" @if($article_key == 'tu-pian')id="current"@endif >图片</a></li>
             <li class="home05"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue', 'desc' => '1']) }}#college-page-nav" @if($article_key == 'liu-xue-gong-lue')id="current"@endif>留学攻略</a></li>
         </ul>
+        <a href="/estimate/step-1"><div style=" height: 40px; line-height: 40px; color: #fff; background-color: #1ddab0; text-align: center; position: fixed; bottom: 0px; left: 0px; right: 0px; max-width: 800px; margin: 0 auto;">开启免费评估</div></a>
     </div>
 
 </div>
