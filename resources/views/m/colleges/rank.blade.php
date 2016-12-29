@@ -21,7 +21,9 @@
 <div class="header paimingheader">
         <a href="/index.php"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
         @foreach($rankings_for_show as $ranking)
+        <?php if($ranking['_id']==$selected_ranking_id){ ?>
         <div class="header_c"> {{$flatten_categories[$ranking['category_id']]}} {{$ranking['name']}}</div>
+        <?php } ?>
         @endforeach
         <div class="header_r"><img src="/static/images/shaixuan_bai.png" style="margin-top:15px;" height="30" onclick="mmenuShow('mmenu')" /></div>
 </div>
