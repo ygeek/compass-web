@@ -44,7 +44,7 @@
             @endforeach
         </ul>
         <?php if($colleges->lastPage()>1){ ?>
-        <div class="more page" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 30%; margin: 0 auto; margin-bottom: 80px;">
+        <div class="more page" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 100%; margin: 0 auto; margin-bottom: 80px;">
             加载更多...
         </div>
         <div class="moreover page"  page="1" style="height:30px; display: none; line-height: 30px; width: 30%; margin: 0 auto; margin-bottom: 80px;">

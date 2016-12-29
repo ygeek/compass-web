@@ -1154,33 +1154,32 @@ select::-ms-expand { display: none; }
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: black;
+            background-color: #fff;
             z-index:1001;
-            -moz-opacity: 0.8;
-            opacity:.80;
-            filter: alpha(opacity=88);
+           
         }
         .white_content {
             display: none;
             position: fixed;
-			max-width:800px;
+			min-height: 100%;
             width:100%;
-			top:20%;
+			top:0px;
+                        bottom:0px;
             z-index:1002;
 			overflow:auto;
-			height:80%;
+			height:100%;
         }
 
 
-	.tanchu_content{width:90%; padding:3% 0; margin:0 auto; background-color: white; }
+	.tanchu_content{width:100%; padding:3% 0; margin:0 auto; background-color: white; }
 		.tanchu_content h1{float:left; padding:0 0 3% 3%;}
 		.closed01{float:right;  margin:0 3% 0 0;}
 		   .pinggu_pm10{padding:1% 0; border-bottom:1px solid #ebebeb; background:#f3f3f3;}
-						.pinggu_pm10 span{display:block; text-align:center; float:left; width:9.5%; font-size:0.8em;}
-						.pinggu_pm10 em{display:block; text-align:center; float:left; width:13%; font-size:1em;}
+						.pinggu_pm10 span{display:block; text-align:center; float:left; width:30%; font-size:0.8em;}
+						.pinggu_pm10 em{display:block; text-align:center; float:left; width:30%; font-size:1em;}
 					.pinggu_pm11{padding:1% 0; border-bottom:1px solid #ebebeb; background:#fff;}
-						.pinggu_pm11 span{display:block; text-align:center; float:left; width:9.5%; font-size:0.8em;}
-						.pinggu_pm11 em{display:block; text-align:center; float:left; width:13%; font-size:1em;}
+						.pinggu_pm11 span{display:block; text-align:center; float:left; width:30%; font-size:0.8em;}
+						.pinggu_pm11 em{display:block; text-align:center; float:left; width:30%; font-size:1em;}
 					.tanchu_text{padding:3%; line-height:35x; font-size:0.8em;}
 
 					.tanchu_join{height:50px; line-height:50px; background:#1ddab0; color:#fff; font-size:1.2em; text-align:center;width:75%; margin:0 auto;}
