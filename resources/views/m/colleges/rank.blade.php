@@ -1,12 +1,27 @@
 
 @include('m.public.header')
 <style>
-#header{ display: none;}    
+#header{ display: none;}
 </style>
+<?php
+  function flatten_categories($categories) {
+    $res = [];
+    foreach($categories as $category){
+      $res[$category['_id']] = $category['name'];
+      if(count($category['children']) > 0) {
+        $res = array_merge(flatten_categories($category['children']), $res);
+      }
+    }
+
+    return $res;
+  };
+
+  $flatten_categories = flatten_categories($ranking_categories);
+?>
 <div class="header paimingheader">
         <a href="/index.php"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
         @foreach($rankings_for_show as $ranking)
-        <div class="header_c"> {{$ranking['name']}}</div>
+        <div class="header_c"> {{$flatten_categories[$ranking['category_id']]}} {{$ranking['name']}}</div>
         @endforeach
         <div class="header_r"><img src="/static/images/shaixuan_bai.png" style="margin-top:15px;" height="30" onclick="mmenuShow('mmenu')" /></div>
 </div>
@@ -35,8 +50,8 @@
         </div>
         <?php } ?>
     </div>
-    
-    
+
+
 </div>
 <div class="mianfeipinggu"><a href="/estimate/step-1">开启免费评估</a></div>
 
@@ -45,7 +60,7 @@
 <link rel="stylesheet" href="/static/mmenu/demo.css?v=5.7.1" />
 <link rel="stylesheet" href="/static/mmenu/css/jquery.mmenu.all.css?v=5.7.1" />
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
-		
+
 <style type="text/css">
     #menu {
         min-width: none;
@@ -68,7 +83,7 @@
 }
 </style>
 <script>
-    
+
 function mmenuShow(conid)
 {
     $('#menu').show();
@@ -80,7 +95,7 @@ function mmenuClose()
 {
     $('#menu').hide();
     $(".paimingheader").show();
-   
+
 }
 
 function getMore()
@@ -101,7 +116,7 @@ function getMore()
         },
         success:function(e){
             var htm = '';
-           
+
             if(e.status=="ok")
             {
                 console.log(e);
@@ -119,7 +134,7 @@ function getMore()
                 $(".moregif").hide();
             }
         }
-    }); 
+    });
 }
 </script>
 <script type="text/javascript" src="/static/mmenu/js/jquery.mmenu.all.min.js?v=5.7.1"></script>
@@ -138,12 +153,12 @@ $(function() {
             navbars		: [{
 						content 	: [ "prev", "title", "next" ]
 					}],
-            
+
 
             onClick		: {
                 setSelected	: false
             }},{})
-        .on( 
+        .on(
             'click',
             'a[href^="#/"]',
             function() {
@@ -159,7 +174,7 @@ function searSub()
 </script>
 <script type="text/javascript">
     $(function() {
-        
+
         var $settings = $("#settings");
 
         var api = $("#menu").data( "mmenu" );
@@ -198,8 +213,8 @@ function searSub()
 </script>
 
 <nav id="menu">
-    
-    
+
+
 
     <!-- subpanel -->
     <div id="settings" class="Panel">
@@ -212,26 +227,26 @@ function searSub()
                 <!-- subpanel -->
                 <div  class="Panel">
                     <ul>
-                        
+
                        @foreach($category['children'] as $val)
                        <li class="searchresult" >
-                           
-                           
+
+
                             <em class="Counter" vid=''>不限</em>
                             <span>{{ $val['name'] }}</span>
 
                             <!-- subpanel -->
                             <div  class="Panel2">
-                                <ul>   
-                                    <?php 
+                                <ul>
+                                    <?php
                                         $rankings_for_show2 = [];
                                         foreach ($rankings['rankings'] as $ranking) {
-                                            if($ranking['category_id'] == $val['_id']){   
+                                            if($ranking['category_id'] == $val['_id']){
                                                 $rankings_for_show2[] = $ranking;
-                                             } 
-                                             
-                                        } 
-                                        
+                                             }
+
+                                        }
+
                                         foreach ($rankings_for_show2 as $ranking) {
                                             if($ranking['name']){
                                      ?>
@@ -241,16 +256,16 @@ function searSub()
                                     <?php } }?>
                                 </ul>
                             </div>
-                            
+
                        </li>
                         @endforeach
-                      
-                        
+
+
                     </ul>
                 </div>
             </li>
             @endforeach
-            
+
             <!-- navbar info -->
             <div class="Hidden" style="display:none;">
                 <a class="Prev" href="javascript:mmenuClose();"></a>
@@ -261,6 +276,5 @@ function searSub()
 
 
     </div>
-            
-</nav>
 
+</nav>
