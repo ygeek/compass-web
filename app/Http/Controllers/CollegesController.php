@@ -439,8 +439,10 @@ class CollegesController extends Controller
             
             foreach($paginated_rank_items as $key=>$college){
                 $class='';
+                $sjpm = '';
+                if(isset($college['world_ranking'])&&$college['world_ranking']) { $sjpm = $college['world_ranking']; } else{ $sjpm='-'; };
                 if($key%2==1){ $class = 'class="yuanxiao_white"'; }
-                $str .= '<li '.$class.'><h1>'. $college['rank'] .'</h1><h2>'. $college['chinese_name'] .'<br/>'. $college['english_name'] .'</h2><h3>&nbsp;</h3><span><a href="'.route('colleges.show', ['key' => \App\College::generateKey($college['key']) ]).'">排名</a></span><div class="clear"></div></li>';
+                $str .= '<li '.$class.'><h1>'. $college['rank'] .'</h1><h2>'. $college['chinese_name'] .'<br/>'. $college['english_name'] .'</h2><h3>'.$sjpm.'</h3><span><a href="'.route('colleges.show', ['key' => \App\College::generateKey($college['key']) ]).'">排名</a></span><div class="clear"></div></li>';
 
             }
             if($str){
