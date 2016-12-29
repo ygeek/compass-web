@@ -427,6 +427,7 @@ class CollegesController extends Controller
         $res = [
           'colleges' => $paginated_rank_items,
           'rank' => $rank,
+            'rankings' => $rankings,
           'ranking_categories' => $ranking_categories,
           'selected_category_id' => $selected_category_id,
           'selected_ranking_id' => $selected_ranking_id,

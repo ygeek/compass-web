@@ -3,9 +3,11 @@
 <style>
 #header{ display: none;}    
 </style>
-<div class="header">
-        <a href="javascript:history.go(-1);"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
-        <div class="header_c">Us News</div>
+<div class="header paimingheader">
+        <a href="/index.php"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
+        @foreach($rankings_for_show as $ranking)
+        <div class="header_c"> {{$ranking['name']}}</div>
+        @endforeach
         <div class="header_r"><img src="/static/images/shaixuan_bai.png" style="margin-top:15px;" height="30" onclick="mmenuShow('mmenu')" /></div>
 </div>
 <div class="clear"></div>
@@ -73,6 +75,14 @@ function mmenuShow(conid)
     $(".header").hide();
     $('body,html').animate({ scrollTop: 0 }, 1);
 }
+
+function mmenuClose()
+{
+    $('#menu').hide();
+    $(".paimingheader").show();
+   
+}
+
 function getMore()
 {
     var page = $(".more").attr("page");
@@ -195,15 +205,44 @@ function searSub()
     <div id="settings" class="Panel">
         <ul>
             @foreach($ranking_categories as $category)
-            <li id="setting-location">
+            <li >
                 <em class="Counter" vid=''>不限</em>
                 <span>{{ $category['name'] }}</span>
 
                 <!-- subpanel -->
-                <div id="locations" class="Panel">
+                <div  class="Panel">
                     <ul>
+                        
                        @foreach($category['children'] as $val)
-                       <li class="searchresult"><a href="{{route('colleges.rank', ['category_id' => $val['_id']])}}">{{ $val['name'] }}</a></li>
+                       <li class="searchresult" >
+                           
+                           
+                            <em class="Counter" vid=''>不限</em>
+                            <span>{{ $val['name'] }}</span>
+
+                            <!-- subpanel -->
+                            <div  class="Panel2">
+                                <ul>   
+                                    <?php 
+                                        $rankings_for_show2 = [];
+                                        foreach ($rankings['rankings'] as $ranking) {
+                                            if($ranking['category_id'] == $val['_id']){   
+                                                $rankings_for_show2[] = $ranking;
+                                             } 
+                                             
+                                        } 
+                                        
+                                        foreach ($rankings_for_show2 as $ranking) {
+                                            if($ranking['name']){
+                                     ?>
+                                     <li class="searchresult"><a href="{{ route('colleges.rank', ['category_id' => $val['_id'], 'ranking_id' => $ranking['_id']]) }}">{{ $ranking['name'] }}</a></li>
+                                    <?php }else{  ?>
+                                     <li class="searchresult"><a href="{{route('colleges.rank', ['category_id' => $val['_id']])}}">{{ $val['name'] }}</a></li>
+                                    <?php } }?>
+                                </ul>
+                            </div>
+                            
+                       </li>
                         @endforeach
                       
                         
@@ -214,7 +253,7 @@ function searSub()
             
             <!-- navbar info -->
             <div class="Hidden" style="display:none;">
-			
+                <a class="Prev" href="javascript:mmenuClose();"></a>
                 <a class="Next" href="javascript:searSub();" >确定</a>
 			</div>
 

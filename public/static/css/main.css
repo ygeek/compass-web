@@ -43,7 +43,7 @@ input[type="submit"], input[type="reset"], input[type="button"],input[type="text
         .header_l img{margin:20px 0 0 0;}
    .header_logo{float:left; width:30%; height:60px;}
        .header_logo img{margin:17px 0 0 20%; height: 30px;}
-   .header_c{float:left; line-height:60px; width:67%;  font-size:1.5em; color:#fff;}
+   .header_c{float:left; line-height:60px; width:67%;  font-size:1.3em; color:#fff;}
    .header_r{float:right; width:15%; height:60px; margin:0 3% 0 0; }
       .header_r a{font-size:1.5em; color:#fff; line-height:60px;}
 

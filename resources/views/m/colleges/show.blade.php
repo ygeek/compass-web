@@ -43,7 +43,7 @@
                  <div class="clear"></div>
             </ul>
         </div>
-       
+        <div class="yuanxiao_pm50" style="width:90%; margin: 0 auto; text-align: right; padding: 0;"><a href="/colleges_rank?category_id=602c0037-6649-5ea0-894b-bddc4144fc15">更多排名>></a></div>
         <div class="yuanxiao_xx">
             <p style="float:left; width:60%"><img src="/static/images/icon21.jpg"><span>{{$college->administrativeArea->name}} · since {{$college->founded_in}}</span></p>
             <p style="float:left; width:40%"><img src="/static/images/icon22.jpg"><span>{{$college->telephone_number}}</span></p>
