@@ -27,7 +27,6 @@
                     <a href="{{route('colleges.show', $college->key)}}" >
                         <h2>
                         <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"><br /><br />
-                        <span style="display:block; float:left;">{{$college->chinese_name}}</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px;">{{ ($college->type=="public")?'公立':'私立' }}</span><br />
                         
                         <div class="clear"></div>
                         
@@ -49,10 +48,12 @@
                     <div class="clear"></div>
                 </div>
                 <div class="bot">
-                    <div class="left" style=" float: left; width: 80%; height: 34px; line-height: 30px; color: #2b426e; text-align: left;">
-                        <span style="font-size:1.0em; width: 80%; text-align: left;">{{$college->english_name}}</span>
+                    <div class="left" style=" float: left; width: 85%; height: 14px; line-height: 14px; color: #2b426e; text-align: left;">
+                        <span style="display:block; float:left;">{{$college->chinese_name}}</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px; line-height: 10px; ">{{ ($college->type=="public")?'公立':'私立' }}</span><br /><br />
+                        
+                        <span style="font-size:1.0em; width: 100%; text-align: left; height: 14px; line-height: 10px;">{{$college->english_name}}</span>
                     </div>
-                    <div class="right" style=" float: right; width: 20%; text-align: right; margin-top: -7px;">
+                    <div class="right" style=" float: right; width: 15%; text-align: right; margin-top: -7px;">
                         <img src="/static/images/xin<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 2;}}else{echo 2;} ?>.png" width="30" style=" cursor: pointer;" likeid='<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college->id)){echo 1;} else {echo 2;}}else{echo 3;} ?>' onclick="setLike('{{ $college->id }}',$(this))" ><span id='shuzi{{ $college->id }}'>{{ $college->like_nums }}</span>
                     </div>
                     <div class="clear"></div>
@@ -184,7 +185,7 @@ function getMore()
     </div>
 </div>
 </form>
-<div class='didian tiaojian' selected_country_id='0' selected_country_id_name='不限' selected_state_id_name='' selected_state_id='0' >
+<div class='didian tiaojian' selected_country_id='1' selected_country_id_name='澳洲' selected_state_id_name='' selected_state_id='0' >
     <div class="header">
         <a href="javascript:goBlack2('.shaixuan')"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
         <div class="header_c">国家地区</div>
@@ -193,9 +194,8 @@ function getMore()
     <div class="clear"></div>
     <div class="main03"><!--id="main03_l_menu"-->
         <div class="main03_l">
-            <!--<a href="javascript:void(0)" class="childpar" area_id='0' >不限</a>-->
             @foreach($areas as $key=>$val)
-            <a  href="javascript:void(0)" class="childpar" area_id='{{ $val->id }}'>{{ $val->name }}</a>
+            <a  href="javascript:void(0)" class="childpar" <?php if($key=="0"){ echo 'id="main03_l_menu"';} ?> area_id='{{ $val->id }}'>{{ $val->name }}</a>
             @endforeach
            
         </div>
