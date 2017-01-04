@@ -324,7 +324,7 @@ class EstimateController extends Controller
 
             if($k==3) $style = 'style="margin-right:0px;"';
             $leixingAddhtml .= '<input type="hidden"  name="examinations['.$leixing.'][sections]['.$k.'][name]" value="'.$v['name'].'"  >
-                <input type="number" class="login_resgister_input" name="examinations['.$leixing.'][sections]['.$k.'][score]" ismust="1" value="'.$v['score'].'" placeholder="'.$v['name'].'"  '.$style.'  >
+                <input type="number" class="login_resgister_input" name="examinations['.$leixing.'][sections]['.$k.'][score]"  value="'.$v['score'].'" placeholder="'.$v['name'].'"  '.$style.'  >
                 ';
         }
         $leixingHidden = '';

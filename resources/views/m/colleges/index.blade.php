@@ -74,7 +74,7 @@
     </div>
     <div class="clear"></div>
     <?php if($colleges->lastPage()>1){ ?>
-    <div class="more page" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 100%; margin: 0 auto;">
+    <div class="more page" onclick="getMore()" page="1" lastpage="<?php echo $colleges->lastPage(); ?>" style="height:30px; line-height: 30px; width: 100%; margin: 0 auto;">
         加载更多...
     </div>
     <div class="over page"  style="height:30px; line-height: 30px; width: 100%; display: none; margin: 0 auto;">
@@ -104,6 +104,7 @@ function getAreaName($areas,$aid)
 function getMore()
 {
     var page = $(".more").attr("page");
+    var lastpage = $(".more").attr("lastpage");
     var pagenum = Number(page)+1;
     var params = $("#search").serialize();
     $.ajax({
@@ -127,9 +128,16 @@ function getMore()
 
                 console.log(htm);
                 $(".grzy_wdsc_list").append(htm);
-                $(".more").show();
-                $(".more").attr("page",pagenum);
-                $(".moregif").hide();
+                if(lastpage==pagenum)
+                {
+                    $(".more").attr("page",pagenum);
+                    $(".moregif").hide();
+                    $(".over").show();
+                }else{
+                    $(".more").show();
+                    $(".more").attr("page",pagenum);
+                    $(".moregif").hide();
+                }
             }
             else
             {

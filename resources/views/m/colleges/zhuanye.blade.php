@@ -37,7 +37,7 @@
             <li>
                 <h1>{{ $speciality->name }}</h1>
                 <p>学术类型：{{ $speciality->degree->name }}<br>专业方向：{{ $speciality->category->chinese_name }}</p>
-                <a href="{{$estimate_url}}">测试录取率</a>
+                <a href="{{$estimate_url}}" style="top:60%; margin-top: 0px;">测试录取率</a>
             </li>
             @endforeach
            
@@ -45,7 +45,7 @@
     </div>
     <div class="clear"></div>
     <?php if($articles->lastPage()>1){ ?>
-    <div class="more page" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 100%; margin: 0 auto;">
+    <div class="more page" lastpage="<?php echo $articles->lastPage(); ?>" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 100%; margin: 0 auto;">
         加载更多...
     </div>
     <div class="over page"  style="height:30px; line-height: 30px; width: 100%; display: none; margin: 0 auto;">
@@ -107,6 +107,7 @@ function getMore()
     var page = $(".more").attr("page");
     var pagenum = Number(page)+1;
     var params = $("#sear").serialize();
+    var lastpage = $(".more").attr("lastpage");
     $.ajax({
         type:'GET',
         url:'/colleges/northwestern-university?article_type=specialities&ajax=true&page='+pagenum+"&"+params+"#college-page-nav",
@@ -128,9 +129,18 @@ function getMore()
 
                 console.log(htm);
                 $(".zhuanyemore").append(htm);
-                $(".more").show();
-                $(".more").attr("page",pagenum);
-                $(".moregif").hide();
+              
+              
+                if(lastpage==pagenum)
+                {
+                    $(".more").attr("page",pagenum);
+                    $(".moregif").hide();
+                    $(".over").show();
+                }else{
+                    $(".more").show();
+                    $(".more").attr("page",pagenum);
+                    $(".moregif").hide();
+                }
             }
             else
             {

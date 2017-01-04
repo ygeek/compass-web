@@ -331,7 +331,7 @@ class CollegesController extends Controller
                 $str .= '<li>
                             <h1>'. $speciality->name .'</h1>
                             <p>学术类型：'. $speciality->degree->name .'<br>专业方向：'. $speciality->category->chinese_name .'</p>
-                            <a href="'.$estimate_url.'">测试录取率</a>
+                            <a href="'.$estimate_url.'" style="top:60%; margin-top: 0px;">测试录取率</a>
                         </li>';
 
             }
