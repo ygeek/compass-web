@@ -18,7 +18,7 @@
     </div>
     </form>
     <!--<div class="chaxun01"><a href="javascript:shaixuan('.shaixuan')"><span>•</span>条件筛选</a></div>-->
-    <div class="chaxun02" style="height:40px; line-height: 40px; font-size: 1.2em;"><h1>您找到<span>{{ $colleges->total() }}</span>所相关学校</h1></div>
+    <div class="chaxun02" style="height:40px; line-height: 40px; font-size: 1.2em;"><h1>为您找到<span>{{ $colleges->total() }}</span>所相关学校</h1></div>
     <div class="grzy_wdsc_list" style=" margin-top: 0px;">
          @foreach($colleges as $college)
             <div class="pinggu_xx50" >

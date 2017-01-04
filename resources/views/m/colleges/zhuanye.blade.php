@@ -19,7 +19,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div class="chaxun10" style="height:40px; line-height: 40px; font-size: 1.2em;"><h1>您找到<span> {{ $articles->total() }} </span>个相关专业</h1></div>
+    <div class="chaxun10" style="height:40px; line-height: 40px; font-size: 1.2em;"><h1>为您找到<span> {{ $articles->total() }} </span>个相关专业</h1></div>
 
     <div class="yuanxiao_gzy">
         <ul class="zhuanyemore">
