@@ -204,7 +204,7 @@ class CollegesController extends Controller
                             <div class="pinggu_xx_name50">
                                 <a href="'.route('colleges.show', $college->key).'" ><h2>
                                     <img src="'.app('qiniu_uploader')->pathOfKey($college->badge_path).'"><br />
-                                    <span style="display:block; float:left;">'.$college->chinese_name.'</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px;">'. $pub .'</span><br />
+                                    
                                     <div class="clear"></div>
                                     
                                     </h2></a>
@@ -217,10 +217,11 @@ class CollegesController extends Controller
                                    <div class="clear"></div>
                             </div> 
                             <div class="bot">
-                                <div class="left" style=" float: left; width: 80%; height: 34px; line-height: 30px; color: #2b426e; text-align: left;">
-                                    <span style="font-size:1.0em;width: 80%; text-align: left;">'.$college->english_name.'</span>
+                                <div class="left" style=" float: left; width: 85%; height: 14px; line-height: 14px; color: #2b426e; text-align: left;">
+                                    <span style="display:block; float:left;">'.$college->chinese_name.'</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px;line-height: 10px;">'. $pub .'</span><br /><br />
+                                    <span style="font-size:1.0em;width: 100%; text-align: left;">'.$college->english_name.'</span>
                                 </div>
-                                <div class="right" style=" float: right; width: 20%; text-align: right; margin-top: -7px;">
+                                <div class="right" style=" float: right; width: 15%; text-align: right; margin-top: -7px;">
                                     <img src="/static/images/xin'.$num1.'.png" width="30" style=" cursor: pointer;" likeid="'.$num2.'" onclick="setLike(\''.$college->id.'\',$(this))" ><span id="shuzi'. $college->id .'">'. $college->like_nums .'"</span>
                                 </div>
                                 <div class="clear"></div>
