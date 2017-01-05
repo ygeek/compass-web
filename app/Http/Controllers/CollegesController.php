@@ -222,7 +222,7 @@ class CollegesController extends Controller
                                     <span style="font-size:1.0em;width: 100%; text-align: left;">'.$college->english_name.'</span>
                                 </div>
                                 <div class="right" style=" float: right; width: 15%; text-align: right; margin-top: -7px;">
-                                    <img src="/static/images/xin'.$num1.'.png" width="30" style=" cursor: pointer;" likeid="'.$num2.'" onclick="setLike(\''.$college->id.'\',$(this))" ><span id="shuzi'. $college->id .'">'. $college->like_nums .'"</span>
+                                    <img src="/static/images/xin'.$num1.'.png" width="30" style=" cursor: pointer;" likeid="'.$num2.'" onclick="setLike(\''.$college->id.'\',$(this))" ><span id="shuzi'. $college->id .'">'. $college->like_nums .'</span>
                                 </div>
                                 <div class="clear"></div>
                             </div>
