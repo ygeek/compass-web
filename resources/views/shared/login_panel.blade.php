@@ -20,6 +20,12 @@
         <input placeholder="手机号码" v-model="phone_number"/>
         <input placeholder="密码" type="password" v-model='password'/>
         <button class="button" @click="sendLoginRequest" v-bind:disabled="!canLogin">登录</button>
+
+          <a href="{{route('auth.reset_passwrod')}}">
+            <p class="tips" style="text-align:right; padding-right: 20px; cursor: pointer;">
+              忘记密码？找回密码
+            </p>
+          </a>
       </div>
 
       <div class="register-form form" v-show="panel == 'register'">
@@ -104,6 +110,9 @@
         this.panel = panel;
       },
       getVerifyCode: function(){
+        if(!this.validatePhoneNumber) {
+          return alert('请填写正确的手机号码');
+        }
         if(this.onRequest) {
           return;
         }

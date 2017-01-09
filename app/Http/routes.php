@@ -40,6 +40,8 @@ Route::group(['prefix' => 'auth'], function (){
     Route::post('register', 'Auth\AuthController@register')->name('auth.users.store');
     Route::get('logout', 'Auth\AuthController@logoutUser')->name('auth.logout_user');
     Route::post('login', 'Auth\AuthController@login')->name('auth.login');
+    Route::get('reset-password', 'Auth\AuthController@resetPassword')->name('auth.reset_passwrod');
+    Route::post('reset-password', 'Auth\AuthController@resetPassword')->name('auth.reset_passwrod');
 });
 
 

@@ -99,6 +99,31 @@ class AuthController extends Controller
       return redirect()->route('index');
     }
 
+    public function resetPassword(Request $request) {
+      $method = $request->method();
+
+      if($request->isMethod('post')) {
+        $code = $request->get('code');
+        $phone_number = $request->get('phone_number');
+        $password = $request->get('password');
+
+        if(!$this->validateVerifyCode($phone_number, $code)){
+          return $this->errorResponse('验证码验证失败');
+        }else {
+          $user = User::where('phone_number', $phone_number)->first();
+          if(!$user) {
+            return $this->errorResponse('用户不存在');
+          }else {
+            $user->password = bcrypt($password);
+            $user->save();
+            return $this->okResponse();
+          }
+        }
+      }else {
+        return $this->view('auth.reset_password');
+      }
+    }
+
     private function validateVerifyCode($phone_number, $code){
         return $this->verify_code_service->testingVerifyCodeWithPhoneNumber($phone_number, $code);
     }

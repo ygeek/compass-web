@@ -817,6 +817,49 @@ ul {
         .top-nav-bar .hidden-box ul li a {
           color: #404040 !important; }
 
+.reset-password-page {
+  height: 100vh;
+  background-color: #e0e0e0;
+  background-image: url(/images/estimate-bg.png);
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.reset-form {
+  width: 340px;
+  margin: 0 auto;
+  margin-top: 100px; }
+  .reset-form .button {
+    width: 300px;
+    height: 40px;
+    background: #1ddab0;
+    border: none;
+    color: #fff;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px; }
+  .reset-form input {
+    display: block;
+    width: 290px;
+    height: 40px;
+    border: none;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-left: 22px; }
+  .reset-form .sms-container:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .reset-form .sms-container .sms-input {
+    width: 200px;
+    float: left; }
+  .reset-form .sms-container .grab-verify-code {
+    border: none;
+    font-size: 12px;
+    line-height: 40px;
+    float: right;
+    margin-right: 19px;
+    padding: 0 10px; }
+
 #login-panel {
   width: 100%;
   height: 100vh;
@@ -878,6 +921,8 @@ ul {
         display: block;
         padding-left: 30px;
         margin-bottom: 10px; }
+        #login-panel .panel .form .tips a {
+          color: #c6c6c6; }
   #login-panel input {
     display: block;
     width: 290px;
@@ -1884,6 +1929,8 @@ ul {
           width: 350px;
           margin-left: 27px;
           color: #7d7d7d; }
+          .colleges-page .search-result .colleges .college .college-badge-container .badge-info span {
+            display: block; }
       .colleges-page .search-result .colleges .college .college-info {
         color: #7d7d7d;
         position: absolute;
