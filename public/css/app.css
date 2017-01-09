@@ -365,6 +365,9 @@ textarea {
   font: inherit;
   /* 2 */ }
 
+.calc-link {
+  color: #354869; }
+
 * {
   margin: 0;
   padding: 0; }

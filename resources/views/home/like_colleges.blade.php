@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@include('shared.estimate')
+
     <div class="home-page">
         <div class="app-content">
             @include('shared.top_bar')
@@ -60,8 +62,17 @@
                                                <td>{{$college->domestic_ranking}}</td>
                                            </tr>
                                        </table>
-
-                                       <a href="{{route('estimate.step_first')}}">测试录取几率-></a>
+                                       <?php
+                                         $tmp = $college->administrativeArea->id;
+                                         if ($college->administrativeArea->parent){
+                                             $tmp = $college->administrativeArea->parent->id;
+                                             if ($college->administrativeArea->parent->parent){
+                                                 $tmp = $college->administrativeArea->parent->parent->id;
+                                             }
+                                         }
+                                         $estimate_url = route('estimate.step_first', ['selected_country_id' => $tmp, 'cpm' => true, 'college_id' => $college->id]);
+                                       ?>
+                                       <a href="javascript:void(0)" class="calc-link" v-on:click="setEstimatePanel('{{$estimate_url}}')">测试录取几率-></a>
                                    </div>
 
                                </div>
