@@ -1,12 +1,12 @@
 <script type="text/x-template" id="reset-password-form-template">
   <div class="reset-form form">
     <p>
-      <select v-model="phone_country" style="width: 20%;float: left;height: 44px;border: none;background: #fff;margin-left: 22px;">
+      <select class="country-select" v-model="phone_country">
         <option value="china">中国</option>
         <option value="aus">澳洲</option>
         <option value="nzl">新西兰</option>
       </select>
-      <input style="float: left; width: 58%;" placeholder="手机号码" v-model="phone_number"/>
+      <input class="phone-input" placeholder="手机号码" v-model="phone_number"/>
     </p>
 
     <p class='sms-container'>

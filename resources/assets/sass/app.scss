@@ -31,6 +31,14 @@ body, html {
   overflow: hidden;
 }
 
+.country-select {
+  width: 20%;float: left;height: 44px;border: none;background: #fff;margin-left: 22px;
+}
+
+.phone-input {
+  float: left; width: 58% !important;
+}
+
 a{
   text-decoration: none;
 }
