@@ -59,15 +59,6 @@
                 </template>
 
                 <template id="intentions">
-                  <add-speciality-pop
-                    v-if="show_pop"
-                    :specialities.sync="show_data_specialities"
-                    :intentions-group-by-degree.sync="show_data_intentionsGroupByDegree"
-                  >
-                  </add-speciality-pop>
-                <div class="title">我的意向单 <button class="estimate-button" @click="commit">提交审核 @{{ selected_specialities_count }}/@{{ raw_intentions.length - commitedIntentionIds.length }}</button></div>
-
-                <div class="content" style="background:none; padding:0;">
                   <div id="estimate-detail-pop" class="mask" v-if="showIntentionDetail">
                       <div class="estimate-detail">
                           <p class="match-title">匹配结果</p>
@@ -118,6 +109,17 @@
                           </table>
                       </div>
                   </div>
+
+                  <add-speciality-pop
+                    v-if="show_pop"
+                    :specialities.sync="show_data_specialities"
+                    :intentions-group-by-degree.sync="show_data_intentionsGroupByDegree"
+                  >
+                  </add-speciality-pop>
+
+                <div class="title">我的意向单 <button class="estimate-button" @click="commit">提交审核 @{{ selected_specialities_count }}/@{{ raw_intentions.length - commitedIntentionIds.length }}</button></div>
+
+                <div class="content" style="background:none; padding:0;">
                     <div class="intention" v-for="intentionCollege in intentionColleges">
                         <div class="college">
                             <img class="college-badge" v-bind:src="intentionCollege.badge_path" />
@@ -338,6 +340,15 @@
           if(!selected_speciality_name) {
             alert('未选择专业');
             return;
+          }
+
+          var exists_degree_speciality = _.get(this.intentionsGroupByDegree, selected_degree_id);
+          var exist = _.find(exists_degree_speciality, function(speciality) {
+            return speciality.speciality_name == selected_speciality_name;
+          });
+          if(exist) {
+            alert('已经添加过该专业了');
+            return ;
           }
 
           var intentionsOfDegree = this.intentionsGroupByDegree[parseInt(selected_degree_id)];

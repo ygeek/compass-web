@@ -173,8 +173,13 @@ class College extends Model
         }
 
         $requirement = [];
+        $iteral = $obj->requirement;
 
-        foreach ($obj->requirement as $require){
+        if(is_null($iteral)) {
+          $iteral = [];
+        }
+
+        foreach ($iteral as $require){
             if($require['id'] == $degree->id){
                 $requirement = $require['examinations'];
             }
