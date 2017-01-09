@@ -406,7 +406,7 @@ function setLike(college_id,obj)
                     obj.attr("src","/static/images/xin1.png");
                     obj.attr("likeid","1");
                     $("#shuzi"+college_id).html(parseInt(shuzi)+1);
-                     alert('收藏成功!');
+                     //alert('收藏成功!');
                 }
             }
         }); 
@@ -426,7 +426,7 @@ function setLike(college_id,obj)
                     obj.attr("src","/static/images/xin2.png");
                     obj.attr("likeid","2");
                     $("#shuzi"+college_id).html(parseInt(shuzi)-1);
-                    alert('取消成功!');
+                    //alert('取消成功!');
                 }
             }
         }); 

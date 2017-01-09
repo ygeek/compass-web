@@ -152,7 +152,7 @@ function shoucang(num)
         dataType:'json',
         success:function(e){
             if(e.status == 'ok'){
-                alert('收藏成功!');
+                //alert('收藏成功!');
             }
 
         },

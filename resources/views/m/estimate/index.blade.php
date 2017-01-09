@@ -1,6 +1,30 @@
 @include('m.public.header')
 <style>
     .core { display: none;}
+
+.pingguo_meun {
+    height: 40px;
+    line-height: 40px;
+    background: #fff;
+    margin: 60px 0 0 0;
+    font-size: 1.0em;
+    text-align: center;
+}
+.main01 {
+    background: #ebebeb;
+    padding: 0 0 5% 0;
+}
+.pinggu_xx {
+    padding: 5%;
+    background: #fff;
+    margin: 1% 0 0 0;
+}
+.pinggu_pp h1 {
+    float: left;
+    width: 40%;
+    font-size: 1.7em;
+    overflow-x: hidden;display: block;
+}
 </style>
 <div class="clear"></div>
 <div class="pingguo_meun">
@@ -53,36 +77,28 @@
 
                     <div class="pinggu_pm10">
                         <em>专业</em>
-                        @foreach($college['requirement_contrast'] as $key=>$contrast)
-                        @if($key<9)
-                        <span>{{$contrast['name']}}</span>
-                        @endif
-                        @endforeach
+                        <span>您的成绩</span>
+                        <span>{{ $selected_speciality_name }}</span>
+                        
                        
                         <div class="clear"></div>
                     </div>
-                    <div class="pinggu_pm11">
-                        <em>你的成绩</em>
-                        @foreach($college['requirement_contrast'] as $key=>$contrast)
+                    @foreach($college['requirement_contrast'] as $key=>$contrast)
                         @if($key<9)
-                        <span>{{$contrast['user_score']}}</span>
-                        @endif
-                        @endforeach
-                       
+                        <div class="pinggu_pm11 chakangengduo" @if(Auth::check()) style="display:block;" @else style="display:none;" @endif>
+                            <em>{{$contrast['name']}}</em>
+                            <span>{{$contrast['user_score']}}</span>
+                            <span>@if($contrast['require']=='') &nbsp; @else {{$contrast['require']}} @endif</span>
+
+
+                            <div class="clear"></div>
+                        </div>
                       
-                        <div class="clear"></div>
-                    </div>
-                     
-                    <div class="pinggu_pm10 chakangengduo"  @if(Auth::check()) style="display:block;" @else style="display:none;" @endif>
-                        <em>{{ $selected_speciality_name }}</em>
-                        @foreach($college['requirement_contrast'] as $key=>$contrast)
-                        @if($key<9)
-                        <span>@if($contrast['require']=='') &nbsp; @else {{$contrast['require']}} @endif</span>
                         @endif
-                        @endforeach
-                       
-                        <div class="clear"></div>
-                    </div>
+                    @endforeach
+                   
+                     
+                   
                      
                         <div class="pinggu_pm10 chakangengduo2"  @if(Auth::check()) style="display:none;" @else style="display:block;" @endif>
                             <em style="width:100%;">您好，请 <a href="javascript:changeView2('#login')" style="color:#1ddab0;">登录</a> 以查看更多内容</em>

@@ -21,7 +21,9 @@
 <div class="header paimingheader">
         <a href="/index.php"><div class="header_l"><img src="/static/images/back.png" height="20" /></div></a>
         @foreach($rankings_for_show as $ranking)
-        <div class="header_c"> {{$flatten_categories[$ranking['category_id']]}} {{$ranking['name']}}</div>
+        <?php if($ranking['_id']==$selected_ranking_id){ ?>
+        <div class="header_c" style=" overflow: hidden; display: block; height: 60px; font-size: 1.0em;"> {{$flatten_categories[$ranking['category_id']]}} {{$ranking['name']}}</div>
+        <?php } ?>
         @endforeach
         <div class="header_r"><img src="/static/images/shaixuan_bai.png" style="margin-top:15px;" height="30" onclick="mmenuShow('mmenu')" /></div>
 </div>
@@ -31,20 +33,23 @@
     <div class="paiming50">
           <h1>排名</h1>
           <h2>院校名称</h2>
-          <h3>&nbsp;</h3>
+          <?php $pm = array('965544ed-9b74-5c8e-d94d-361f39eb8b5b','c97282a8-8917-d572-0bce-5dcec0b0abf7'); ?>
+          <h3><?php if(in_array($selected_category_id,$pm)){ ?>世界排名<?php }else{ ?> &nbsp; <?php } ?></h3>
           <div class="clear"></div>
     </div>
     <div class="yuanxiao_pm6">
         <ul class="zhuanyemore">
             @foreach($colleges as $key=>$college)
-            <li @if($key%2==1)class="yuanxiao_white"@endif><h1>{{ $college['rank'] }}</h1><h2>{{ $college['chinese_name'] }}<br/>{{ $college['english_name'] }}</h2><h3>&nbsp;</h3><span><a href="{{route('colleges.show', ['key' => \App\College::generateKey($college['key']) ])}}">排名</a></span><div class="clear"></div></li>
+            <li @if($key%2==1)class="yuanxiao_white"@endif><h1>{{ $college['rank'] }}</h1><h2>{{ $college['chinese_name'] }}<br/>{{ $college['english_name'] }}</h2><h3>@if(isset($college['world_ranking'])&&$college['world_ranking']) {{$college['world_ranking']}}&nbsp; @else - @endif</h3><span><a href="{{route('colleges.show', ['key' => \App\College::generateKey($college['key']) ])}}">排名</a></span><div class="clear"></div></li>
             @endforeach
         </ul>
         <?php if($colleges->lastPage()>1){ ?>
-        <div class="more page" onclick="getMore()" page="1" style="height:30px; line-height: 30px; width: 30%; margin: 0 auto; margin-bottom: 80px;">
+        <div class="more page" onclick="getMore()" page="1" lastpage="<?php echo $colleges->lastPage(); ?>" style="height:30px; line-height: 30px; width: 100%; margin: 0 auto; margin-bottom: 80px;">
             加载更多...
         </div>
-
+        <div class="moreover page"  page="1" style="height:30px; display: none; line-height: 30px; width: 30%; margin: 0 auto; margin-bottom: 80px;">
+            加载完成
+        </div>
         <div class="moregif page" style="height:30px; line-height: 30px; display: none;  margin-bottom: 80px;">
             <img src="/static/images/more.gif" width="30" height="30" style="display:inline;" />
         </div>
@@ -102,6 +107,7 @@ function getMore()
 {
     var page = $(".more").attr("page");
     var pagenum = Number(page)+1;
+    var lastpage = $(".more").attr("lastpage");
     //var params = $("#search").serialize();
     $.ajax({
         type:'GET',
@@ -124,14 +130,23 @@ function getMore()
 
                 console.log(htm);
                 $(".zhuanyemore").append(htm);
-                $(".more").show();
-                $(".more").attr("page",pagenum);
-                $(".moregif").hide();
+              
+                if(lastpage==pagenum)
+                {
+                    $(".more").attr("page",pagenum);
+                    $(".moregif").hide();
+                    $(".moreover").show();
+                }else{
+                    $(".more").show();
+                    $(".more").attr("page",pagenum);
+                    $(".moregif").hide();
+                }
             }
             else
             {
                 $(".more").attr("page",pagenum);
                 $(".moregif").hide();
+                $(".moreover").show();
             }
         }
     });

@@ -290,7 +290,7 @@ function mmenuShow(conid)
             @foreach($messages['data'] as $message)
             <li vid="{{$message['id']}}">
                 <em class="Counter"  vid=''></em>
-                <span ><a href="#" class="remove" >&times;</a>{{$message['title']}} {{$message['created_at']}}</span>
+                <span ><a href="#" class="remove" >&times;</a>{{$message['title']}} <br> <font style=" float: right; margin-right: 30px;">{{$message['created_at']}}</font></span>
                 <div id="content" class="Panelsss">
                     {{$message['content']}}
                     <div class="Hidden" style="display:none;">

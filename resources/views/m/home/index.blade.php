@@ -37,9 +37,9 @@
         float: right;
     }
     #inp-edit{
-        top:30%;
+        top:30%; 
     }
-    #content { min-height: 600px;}
+    #content { min-height: 800px;}
     .mm-menu.mm-theme-white .mm-btn::after{border:none; text-align: left;}
     .mm-navbar .mm-btn:last-child { text-align: left; width: 60px;;}
     .mm-navbar { height: 60px; line-height: 40px; font-size: 1.3em;}
@@ -52,7 +52,7 @@
     .mm-menu.mm-theme-white .mm-btn::after, .mm-menu.mm-theme-white .mm-btn::before {
     border-color: rgba(255,255,255,1);
 }
-.mm-hasnavbar-top-4 .mm-panels { top:300px;}
+.mm-hasnavbar-top-4 .mm-panels { top:300px; margin-top: -30px;}
     .mm-listview > li:not(.mm-divider)::after { left: 0px;}
     .mm-listview .mm-next::before { border: none;}
     #edit { line-height: 30px;width: 30%;background-color: #0e2d60;color: #fff;text-align: center;padding-top: 0px;top: 40%; cursor: pointer;}
@@ -290,7 +290,7 @@ function editmobile()
                             </div>
                         </li>
 
-                        <br>
+                       
                         <li class="">
                             <em class="Counter" vid=''>18601991350</em>
                             <span>手机号</span>
@@ -316,10 +316,12 @@ function editmobile()
                                         <em class="Counter" onclick="editmobile();" id="edit" vid=''>提交</em>
                                             <span>&nbsp;</span>
                                     </li>
+                                    
                                 </ul>
                             </div>
+                            
                         </li>
-                        <br>
+                       
 
                         <li class="">
                             <em class="Counter" >修改</em>
@@ -392,11 +394,11 @@ function editmobile()
                 <div id="radius" class="Panel"></div>
 
             </li>
-            <!-- navbar info
+            
             <div class="Hidden" style="display:none;">
-
-                <a class="Next" href="javascript:searSub();" >确定</a>
-			</div>-->
+                <a class="Prev" href="/index.php" ></a>
+                <a class="Center" href="#" >个人中心</a>
+			</div>
 
         </ul>
 
