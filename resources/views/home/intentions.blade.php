@@ -68,6 +68,56 @@
                 <div class="title">我的意向单 <button class="estimate-button" @click="commit">提交审核 @{{ selected_specialities_count }}/@{{ raw_intentions.length - commitedIntentionIds.length }}</button></div>
 
                 <div class="content" style="background:none; padding:0;">
+                  <div id="estimate-detail-pop" class="mask" v-if="showIntentionDetail">
+                      <div class="estimate-detail">
+                          <p class="match-title">匹配结果</p>
+                          <h1>@{{ showIntentionDetail.college.chinese_name }}</h1>
+                          <span @click="showIntentionDetail=false" class="close">×</span>
+
+                          <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showIntentionDetail.score }}%</span>，@{{ showIntentionDetail.speciality_name }}专业匹配如下：</p>
+                          <table>
+                              <tr>
+                                  <th style="padding-left: 30px;">
+                                      专业
+                                  </th>
+                                  <th v-for="contrast in showIntentionDetail.requirement_contrast" v-if="contrast['name']  != '备注'">
+                                      @{{ contrast['name'] }}
+                                  </th>
+                              </tr>
+                              <tr style="background: #fff">
+                                  <td style="text-align: left;padding-left: 30px;">
+                                      您的成绩
+                                  </td>
+                                  <td v-for="contrast in showIntentionDetail.requirement_contrast" v-if="contrast['name']  != '备注'">
+                                      @{{ contrast['user_score'] }}
+                                  </td>
+                              </tr>
+
+                              <tr>
+                                  <td style="text-align: left;padding-left: 30px;">
+                                      @{{ selected_speciality_name }}专业要求
+                                  </td>
+                                  <td v-for="contrast in showIntentionDetail.requirement_contrast" v-if="contrast['name']  != '备注'">
+                                      @{{ contrast['require'] }}
+                                  </td>
+                              </tr>
+
+                              <tr class="comment">
+                                  <td
+                                    style="text-align: left;line-height: 26px;padding-left: 30px;background: #fff;"
+                                    v-bind:colspan="showIntentionDetail.requirement_contrast.length"
+                                    v-for="contrast in showIntentionDetail.requirement_contrast"
+                                    v-if="contrast['name']  == '备注'"
+                                  >
+                                    <div style="height: 115px;overflow: hidden">
+                                        @{{{ changeLine(contrast['require']) }}}
+                                    </div>
+                                  </td>
+                              </tr>
+
+                          </table>
+                      </div>
+                  </div>
                     <div class="intention" v-for="intentionCollege in intentionColleges">
                         <div class="college">
                             <img class="college-badge" v-bind:src="intentionCollege.badge_path" />
@@ -160,58 +210,6 @@
 
                               </tr>
                           </table>
-
-
-                          <div id="estimate-detail-pop" class="mask" v-if="showIntentionDetail">
-                              <div class="estimate-detail">
-                                  <p class="match-title">匹配结果</p>
-                                  <h1>@{{ showIntentionDetail.college.chinese_name }}</h1>
-                                  <span @click="showIntentionDetail=false" class="close">×</span>
-
-                                  <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showIntentionDetail.score }}%</span>，@{{ showIntentionDetail.speciality_name }}专业匹配如下：</p>
-                                  <table>
-                                      <tr>
-                                          <th style="padding-left: 30px;">
-                                              专业
-                                          </th>
-                                          <th v-for="contrast in showIntentionDetail.requirement_contrast" v-if="contrast['name']  != '备注'">
-                                              @{{ contrast['name'] }}
-                                          </th>
-                                      </tr>
-                                      <tr style="background: #fff">
-                                          <td style="text-align: left;padding-left: 30px;">
-                                              您的成绩
-                                          </td>
-                                          <td v-for="contrast in showIntentionDetail.requirement_contrast" v-if="contrast['name']  != '备注'">
-                                              @{{ contrast['user_score'] }}
-                                          </td>
-                                      </tr>
-
-                                      <tr>
-                                          <td style="text-align: left;padding-left: 30px;">
-                                              @{{ selected_speciality_name }}专业要求
-                                          </td>
-                                          <td v-for="contrast in showIntentionDetail.requirement_contrast" v-if="contrast['name']  != '备注'">
-                                              @{{ contrast['require'] }}
-                                          </td>
-                                      </tr>
-
-                                      <tr class="comment">
-                                          <td
-                                            style="text-align: left;line-height: 26px;padding-left: 30px;background: #fff;"
-                                            v-bind:colspan="showIntentionDetail.requirement_contrast.length"
-                                            v-for="contrast in showIntentionDetail.requirement_contrast"
-                                            v-if="contrast['name']  == '备注'"
-                                          >
-                                            <div style="height: 115px;overflow: hidden">
-                                                @{{{ changeLine(contrast['require']) }}}
-                                            </div>
-                                          </td>
-                                      </tr>
-
-                                  </table>
-                              </div>
-                          </div>
 
                         </div>
                     </div>
