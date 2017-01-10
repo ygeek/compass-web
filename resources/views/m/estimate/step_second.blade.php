@@ -108,6 +108,8 @@
                 <input type="hidden" class="gkscore" name="examinations[高考][score]" errormsg="高考成绩未填写!" placeholder="高考成绩">
             </div>
             @endif
+
+
             <label for="mean">平均成绩<span style="color: red">*</span></label>
             @if($selected_degree->name == '本科')
                 <input class="login_resgister_input" type="number" id="mean" ismust='1' errormsg="平均成绩未填写!" @if(Auth::check())value="<?php  $arr = $user->getEstimateInput('examinations.高中平均成绩'); echo $arr['score']; ?>"@endif name="examinations[高中平均成绩][score]" placeholder="0~100"/>
@@ -188,6 +190,13 @@
             <input type="hidden" name="selected_degree" value="{{$selected_degree['id']}}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="selected_speciality_name" value="{{$selected_speciality_name}}">
+            @if($college_id)
+              <input type="hidden" name="college_id" value="{{ $college_id }}">
+            @endif
+            @if($cpm)
+              <input type="hidden" name="cpm" value="{{ $cpm }}">
+            @endif
+
             <input type="submit" tijiao='1' name="makePlan" value="生成选校方案" class="select_button makePlan" >
             <input type="button" value="返回" onclick="history.go(-1)" class="select_button01">
         </form>
@@ -331,7 +340,6 @@ choseInputs('0',{{$gkey}});
 function checkSecond()
 {
     $(".makePlan").attr('tijiao',"1");
-    console.log('123');
     $("#stepSecondPost").find("input").each(function(i) {
 
         if($(this).attr("ismust")=="1")
@@ -349,6 +357,8 @@ function checkSecond()
     {
         return false;
     }
+
+    
     else
     {
         return true;

@@ -118,10 +118,13 @@
                     var tmp = this.children;
                 });
                     @if($college_id)
-                    parent.window.document.getElementById("estimate_iframe").width='500px';
-                    parent.window.document.getElementById("estimate_iframe").height='500px';
-                    parent.window.document.getElementById("position_div").style.top='calc(50% - 250px)';
-                    parent.window.document.getElementById("position_div").style.right='calc(50% - 250px)';
+                    if(parent.window.document.getElementById("estimate_iframe")) {
+                      parent.window.document.getElementById("estimate_iframe").width='500px';
+                      parent.window.document.getElementById("estimate_iframe").height='500px';
+                      parent.window.document.getElementById("position_div").style.top='calc(50% - 250px)';
+                      parent.window.document.getElementById("position_div").style.right='calc(50% - 250px)';
+                    }
+
                     @endif
             },
             computed: {

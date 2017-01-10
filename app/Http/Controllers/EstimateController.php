@@ -285,11 +285,22 @@ class EstimateController extends Controller
     public function stepSecondPost()
     {
 
+        $data = $_POST;
+        $fields = '';
 
-            $str = '<form action="/estimate" id="formid" method="post">';
-            $str .= '<input type="hidden" name="data" value=\''.  json_encode($_POST).'\' ><input type="hidden" name="_token" value="'.  csrf_token().'" >' ;
-            $str .= '</form><script>document.getElementById("formid").submit();</script>';
-            echo $str;
+        if($data['college_id']) {
+          $fields .=  '<input type="hidden" name="college_id" value="'. $data['college_id'] .'">';
+        }
+
+        if($data['cpm']) {
+          $fields .=  '<input type="hidden" name="cpm" value="'. $data['cpm'] .'">';
+        }
+
+        $str = '<form action="/estimate" id="formid" method="post">';
+        $str .= '<input type="hidden" name="data" value=\''.  json_encode($_POST).'\' ><input type="hidden" name="_token" value="'.  csrf_token().'" >' ;
+        $str .= $fields;
+        $str .= '</form><script>document.getElementById("formid").submit();</script>';
+        echo $str;
 
     }
 

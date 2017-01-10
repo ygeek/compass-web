@@ -1,19 +1,31 @@
 @include('m.public.header')
+
+<?php
+  if(Request::input('redirect_back')) {
+    ?>
+    <script>
+    localStorage.setItem('redirect_back', '{!! Request::input('redirect_back') !!}');
+    </script>
+    <?php
+  }
+?>
+
+
 <div class="clear"></div>
 <div class="main">
     <div class="login_resgister">
         <form action="{{route('estimate.step_second')}}" method="get" onsubmit="return checkFirst()">
-            
+
             <div @if($college_id) style="display: none" @endif>
             <label for="country">选择目标国家</label>
                 <select name="selected_country_id" class="select01" id="colleged_id" college_id ="{{$college_id}}" onchange="changeZy();">
                 @foreach($countries as $country)
                     <option value="{{$country->id}}" @if($country->id == $selected_country_id) selected @endif>{{$country->name}}</option>
                 @endforeach
-               
+
             </select>
             </div>
-            
+
             <label for="degree">将要攻读学历</label>
             <select name="selected_degree_id" class="select01"   onchange="changeZy();">
                 @foreach($degrees as $degree)
@@ -31,13 +43,13 @@
                 @foreach($speciality_categories as $speciality_category)
                     <option value="{{ $speciality_category->id }}" @if($speciality_category->id == $selected_category_id) selected @endif >{{ $speciality_category->chinese_name }}</option>
                 @endforeach
-                
+
             </select>
-            
+
             <select name="speciality_name" class="select01" val="{{$selected_speciality_name}}" v-model="selected_speciality_name">
-              
-                
-               
+
+
+
             </select>
             @if(isset($cpm))
             <input type="hidden" name="cpm" value="{{ $cpm }}">
@@ -66,6 +78,6 @@
         {
             return true;
         }
-        
+
     }
 </script>

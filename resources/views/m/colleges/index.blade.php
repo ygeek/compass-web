@@ -5,11 +5,11 @@
     <form action="" method="get" id="search1" name="search1">
         <div class="yuanxiao_cx_main" style="padding: 0px;">
         <div class="yx_chaxun" style="margin:2% 2%;float:left; width:78%;border-radius: 5px;">
-            
+
                 <input type="text" class="chax_input" name="college_name" value="{{$college_name}}" placeholder="请输入院校查询">
                 <input type="hidden" name="selected_country_id" value="-1"/>
                 <input type="submit" class="chax_so" value="">
-            
+
         </div>
             <div class="shaixuan_icon" style="height:50px; margin-top: 3%;">
             <img src="/static/images/shaixuan.png" height="50" onclick="shaixuan('.shaixuan')" />
@@ -23,16 +23,16 @@
          @foreach($colleges as $college)
             <div class="pinggu_xx50" >
                 <div class="pinggu_xx_name50">
-                    
+
                     <a href="{{route('colleges.show', $college->key)}}" >
                         <h2>
                         <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}"><br /><br />
-                        
+
                         <div class="clear"></div>
-                        
+
                         </h2>
                     </a>
-                    
+
                     <h1>本国排名：{{$college->domestic_ranking}}<br><span style="background:url(/static/images/icon21.jpg) left no-repeat; background-size:20px; padding:0 0 0 20px; font-size: 0.8em; text-align: right;">{{$college->administrativeArea->name}}
                                         @if($college->administrativeArea->parent)
                                             , {{$college->administrativeArea->parent->name}}
@@ -40,17 +40,35 @@
                                                 , {{$college->administrativeArea->parent->parent->name}}
                                             @endif
                                         @endif</span><br>
-                        <a href="/estimate/step-1?selected_country_id={{$college->country_id}}&college_id={{$college->id}}" style="font-size:1.2em; line-height: 40px; color: #0000FF">测试录取率>></a><br>
 
-                        
+                        <?php
+                            $college = \App\College::where('key', \App\College::generateKey($college['key']))->first();
+                            $tmp = "";
+                            if ($college!=null){
+                                $tmp = $college->administrativeArea->id;
+                                if ($college->administrativeArea->parent){
+                                    $tmp = $college->administrativeArea->parent->id;
+                                    if ($college->administrativeArea->parent->parent){
+                                        $tmp = $college->administrativeArea->parent->parent->id;
+                                    }
+                                }
+                            }
+                        ?>
+
+                        <a href="{{route('estimate.step_first', ['redirect_back' => "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]", 'selected_country_id' => $tmp, 'cpm' => true, 'college_id' => $college['id']])}}" style="font-size:1.2em; line-height: 40px; color: #0000FF">
+                          测试录取率>>
+                        </a>
+                        <br>
+
+
                    </h1>
-                    
+
                     <div class="clear"></div>
                 </div>
                 <div class="bot">
                     <div class="left" style=" float: left; width: 85%; height: 14px; line-height: 14px; color: #2b426e; text-align: left;">
                         <span style="display:block; float:left;">{{$college->chinese_name}}</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px; line-height: 10px; ">{{ ($college->type=="public")?'公立':'私立' }}</span><br /><br />
-                        
+
                         <span style="font-size:1.0em; width: 100%; text-align: left; height: 14px; line-height: 10px;">{{$college->english_name}}</span>
                     </div>
                     <div class="right" style=" float: right; width: 15%; text-align: right; margin-top: -7px;">
@@ -62,7 +80,7 @@
         @endforeach
         <!--
         <ul>
-           
+
             @foreach($colleges as $college)
             <a href="{{route('colleges.show', $college->key)}}" ><li>
                     <img src="{{app('qiniu_uploader')->pathOfKey($college->badge_path)}}" style="display: block; margin: 0 auto;">
@@ -85,15 +103,15 @@
     </div>
     <?php } ?>
 </div>
-<?php 
+<?php
 
 function getAreaName($areas,$aid)
 {
     if($aid=="0") return '不限';
     foreach(objToArr($areas) as $k=>$v)
     {
-        $arr[$v['id']] = $v; 
-       
+        $arr[$v['id']] = $v;
+
     }
     return $arr[$aid]['name'];
 }
@@ -120,7 +138,7 @@ function getMore()
         },
         success:function(e){
             var htm = '';
-           
+
             if(e.status=="ok")
             {
                 console.log(e);
@@ -146,9 +164,10 @@ function getMore()
                 $(".over").show();
             }
         }
-    }); 
+    });
 }
 </script>
+
 <form action="" name="search2" method="get" id="search">
 <!--隐藏内容-->
 <div class="shaixuan tiaojian">
@@ -181,9 +200,9 @@ function getMore()
                 <li class="grzy_wdzl01"  onclick="javascript:shaixuan('.paiming')">
                     <span>国内排名</span>
                     <em><input type="hidden" v-model="rank_start" class="search-input" name="rank_start" value="{{$rank_start}}"/>
-                                
+
                         <input type="hidden" v-model="rank_end" class="search-input" name="rank_end" value="{{$rank_end}}"/>
-                        
+
                         <a href="javascript:void(0)" class="paiminga"><?php if(!$rank_start&&!$rank_end){ ?>不限<?php }else{ ?>{{$rank_start}}-{{$rank_end}}<?php } ?></a></em>
                     <div class="clear"></div>
                 </li>
@@ -205,7 +224,7 @@ function getMore()
             @foreach($areas as $key=>$val)
             <a  href="javascript:void(0)" class="childpar" <?php if($key=="0"){ echo 'id="main03_l_menu"';} ?> area_id='{{ $val->id }}'>{{ $val->name }}</a>
             @endforeach
-           
+
         </div>
         <div class="main03_r">
            <!--<span><a href="javascript:void(0)">全部</a></span>
@@ -219,7 +238,7 @@ function getMore()
                 @foreach($val->children as $v)
                 <a  href="javascript:void(0)" class="areachilds" childarea_id='{{ $v->id }}'>{{ $v->name }}</a>
                 @endforeach
-                
+
             </em>
             @endforeach
         </div>
@@ -258,7 +277,7 @@ function getMore()
             <a class="leixingchilds" leiid='0' href="javascript:void(0)">不限</a>
             <a class="leixingchilds" leiid='1' href="javascript:void(0)">公立</a>
             <a class="leixingchilds" leiid='2' href="javascript:void(0)">私立</a>
-            
+
         </div>
         <div class="clear"></div>
     </div>
@@ -279,21 +298,21 @@ function getMore()
                 .yuanxiao_sx .country<?php echo $selected_country_id; ?> { display: block;}
             </style>
             <a href="javascript:void(0)" class="paimingchilds country1"  rank_start='0' rank_end='0'>不限</a>
-            
+
             <a  href="javascript:void(0)" class="paimingchilds country1" rank_start='1'  rank_end='8'>1-8</a>
             <a href="javascript:void(0)" class="paimingchilds country1" rank_start='9'  rank_end='20'>9-20</a>
             <a href="javascript:void(0)" class="paimingchilds country1" rank_start='21'  rank_end='50'>21-50</a>
-           
+
             <a href="javascript:void(0)" class="paimingchilds country31" rank_start='0' rank_end='0'>不限</a>
             <a  href="javascript:void(0)" class="paimingchilds country31" rank_start='1'  rank_end='20'>1-20</a>
             <a href="javascript:void(0)" class="paimingchilds country31" rank_start='21'  rank_end='30'>21-30</a>
             <a href="javascript:void(0)" class="paimingchilds country31" rank_start='31'  rank_end='60'>31-60</a>
-            
+
             <a href="javascript:void(0)" class="paimingchilds country71" rank_start='0' rank_end='0'>不限</a>
             <a  href="javascript:void(0)" class="paimingchilds country71" rank_start='1'  rank_end='10'>1-10</a>
             <a href="javascript:void(0)" class="paimingchilds country71" rank_start='11'  rank_end='20'>11-20</a>
             <a href="javascript:void(0)" class="paimingchilds country71" rank_start='21'  rank_end='50'>21-50</a>
-            
+
             <a href="javascript:void(0)" class="paimingchilds country146" rank_start='0' rank_end='0'>不限</a>
             <a  href="javascript:void(0)" class="paimingchilds country146" rank_start='1'  rank_end='10'>1-10</a>
             <a href="javascript:void(0)" class="paimingchilds country146" rank_start='11'  rank_end='20'>11-20</a>
