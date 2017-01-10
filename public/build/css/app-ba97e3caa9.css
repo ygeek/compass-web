@@ -963,31 +963,44 @@ ul {
 .college-select-pop {
   position: fixed;
   border: 1px solid #9d99b9;
-  width: 500px;
+  width: 800px;
   height: 500px;
   background: #fff;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 99999; }
+  .college-select-pop h1 {
+    text-align: left;
+    margin-left: 0 !important;
+    padding-left: 28px;
+    margin-bottom: 10px !important; }
   .college-select-pop .search-bar {
     margin: 10px;
     margin-top: 8px;
+    margin-left: 28px;
     position: relative; }
+    .college-select-pop .search-bar input {
+      width: 300px;
+      height: 30px;
+      line-height: 30px;
+      padding-left: 10px; }
     .college-select-pop .search-bar .search-result {
       position: absolute;
-      width: 147px;
-      margin-left: 26px;
+      width: 311px;
       border-left: 1px solid #ccc;
       border-right: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
       z-index: 99999;
       background: #fff;
-      max-height: 100px;
+      max-height: 200px;
       overflow-x: hidden;
       overflow-y: scroll; }
+      .college-select-pop .search-bar .search-result ul {
+        overflow: auto; }
       .college-select-pop .search-bar .search-result li {
-        cursor: pointer; }
+        cursor: pointer;
+        height: 20px; }
   .college-select-pop .close {
     display: block;
     position: absolute;
@@ -995,25 +1008,28 @@ ul {
     right: 8px;
     top: 4px; }
   .college-select-pop .provinces {
-    height: 60px;
-    padding: 10px; }
+    padding: 10px;
+    padding-left: 28px; }
     .college-select-pop .provinces:after {
       content: "";
       display: table;
       clear: both; }
     .college-select-pop .provinces li {
+      width: 58px;
       display: block;
-      padding: 2px;
       cursor: pointer;
-      float: left;
-      margin-right: 10px; }
-      .college-select-pop .provinces li.active {
+      float: left; }
+      .college-select-pop .provinces li.active span {
         background: #005eac;
         color: #fff; }
+      .college-select-pop .provinces li span {
+        display: block;
+        padding: 2px;
+        width: 40px; }
   .college-select-pop .colleges {
     width: 90%;
     margin: 0 auto;
-    height: 300px;
+    height: 250px;
     padding: 10px;
     overflow-x: scroll;
     border: 1px solid #ccc; }
@@ -1024,6 +1040,8 @@ ul {
     .college-select-pop .colleges li {
       float: left;
       margin-top: 10px;
+      width: 207px;
+      overflow: hidden;
       cursor: pointer;
       margin-right: 10px; }
 

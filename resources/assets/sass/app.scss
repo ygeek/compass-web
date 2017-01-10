@@ -726,25 +726,40 @@ ul{
 }
 
 .college-select-pop {
-
+  h1 {
+    text-align: left;
+    margin-left: 0 !important;
+    padding-left: 28px;
+    margin-bottom: 10px !important;
+  }
   .search-bar {
     margin: 10px;
     margin-top: 8px;
+    margin-left: 28px;
     position: relative;
+    input {
+      width: 300px;
+      height: 30px;
+      line-height: 30px;
+      padding-left: 10px;
+    }
     .search-result {
       position: absolute;
-      width: 147px;
-      margin-left: 26px;
+      width: 311px;
       border-left: 1px solid #ccc;
       border-right: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
       z-index: 99999;
       background: #fff;
-      max-height: 100px;
+      max-height: 200px;
       overflow-x: hidden;
       overflow-y: scroll;
+      ul {
+        overflow: auto;
+      }
       li {
         cursor: pointer;
+        height: 20px;
       }
     }
   }
@@ -758,7 +773,7 @@ ul{
 
   position: fixed;
   border: 1px solid #9d99b9;
-  width: 500px;
+  width: 800px;
   height: 500px;
   background: #fff;
   left: 50%;
@@ -767,26 +782,32 @@ ul{
   z-index: 99999;
 
   .provinces {
-    height: 60px;
     padding: 10px;
+    padding-left: 28px;
     @include clearfix;
     li {
+      width: 58px;
       display: block;
-      padding: 2px;
       &.active {
-        background: #005eac;
-        color: #fff;
+        span {
+          background: #005eac;
+          color: #fff;
+        }
       }
       cursor: pointer;
       float: left;
-      margin-right: 10px;
+      span {
+        display: block;
+        padding: 2px;
+        width: 40px;
+      }
     }
   }
 
   .colleges {
     width: 90%;
     margin: 0 auto;
-    height: 300px;
+    height: 250px;
     padding: 10px;
     @include clearfix;
     overflow-x: scroll;
@@ -794,6 +815,8 @@ ul{
     li {
       float: left;
       margin-top: 10px;
+      width: 207px;
+      overflow: hidden;
       cursor: pointer;
       margin-right: 10px;
     }

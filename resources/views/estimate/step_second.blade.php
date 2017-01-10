@@ -209,37 +209,6 @@
 
             </template>
 
-            <template id="college-select-pop">
-              <div class="college-select-pop" v-show="show">
-                <div class="close" @click="closeButtonClick">X</div>
-
-                <div class="search-bar">
-                  <span>搜索</span><input v-model="searchKeyWord"/>
-
-                  <ul class="search-result">
-                    <li v-for="college in showSearchResult">
-                      <span @click="selectCollege(college)">@{{college.name}}</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="provinces">
-                  <ul>
-                    <li v-for="province in provinces" :class="{ active: province == selectedProvince }">
-                      <span @click="selectProvince(province)">@{{province}}</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="colleges">
-                  <ul>
-                    <li v-for="college in showColleges">
-                      <span @click="selectCollege(college)">@{{college.name}}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </template>
 
             <template id="group-examination">
                 <label for="group@{{ loopIndex }}">@{{ group.title }}<span style="color: red">*</span></label>
@@ -291,6 +260,42 @@
                 <input type="hidden" name="cpm" value="{{ $cpm }}">
             @endif
     {!! Form::close() !!}
+
+    <script type="text/x-template" id="college-select-pop">
+
+      <div class="college-select-pop" v-show="show">
+        <h1>选择院校</h1>
+        <div class="close" @click="closeButtonClick">X</div>
+
+        <div class="search-bar">
+          <input v-model="searchKeyWord" placeholder="输入院校名称"/>
+
+          <ul class="search-result" v-show="showSearchResult">
+            <li v-for="college in showSearchResult">
+              <span @click="selectCollege(college)">@{{college.name}}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="provinces">
+          <ul>
+            <li v-for="province in provinces" :class="{ active: province == selectedProvince }">
+              <span @click="selectProvince(province)">@{{province}}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="colleges">
+          <ul>
+            <li v-for="college in showColleges">
+              <span @click="selectCollege(college)">@{{college.name}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </script>
+
+
     <script type="text/javascript">
 
     function merge_options(obj1,obj2){
@@ -314,12 +319,16 @@
       },
       methods: {
         closeButtonClick: function() {
+          this.searchKeyWord = null;
+          this.selectedProvince = null;
           this.$dispatch('close-college-select-pop');
         },
         selectProvince: function(province_name) {
           this.selectedProvince = province_name;
         },
         selectCollege: function(college) {
+          this.searchKeyWord = null;
+          this.selectedProvince = null;
           this.$dispatch('close-college-select-pop');
           this.$dispatch('select-college', college);
         }
