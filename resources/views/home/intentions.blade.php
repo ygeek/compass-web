@@ -9,12 +9,7 @@
         <div class="page-content">
             @include('home.slider', ['active' => 'intention'])
             <div class="home-content">
-                <intentions
-                  :intentions='{!! json_encode($intentions) !!}'
-                  :categories='{!! json_encode($speciality_categories) !!}'
-                  :intention-colleges='{!! json_encode($intention_colleges) !!}'
-                  :commited-intention-ids='{!! json_encode($commited_intention_ids) !!}'>
-                </intentions>
+                <intentions></intentions>
 
                 <template id="add-speciality-pop">
                   <div class="mask">
@@ -379,7 +374,6 @@
 
     Vue.component("intentions", {
         template: "#intentions",
-        props: ['intentions', 'categories', 'intentionColleges', 'commitedIntentionIds'],
         data: function(){
             return {
                 show_pop: false,
@@ -387,7 +381,11 @@
                 show_data_specialities: [],
                 show_data_intentionsGroupByDegree: {},
                 selected_category_id: null,
-                selected_speciality_name: null
+                selected_speciality_name: null,
+                intentions: {!! json_encode($intentions) !!},
+                categories: {!! json_encode($speciality_categories) !!},
+                intention-colleges: {!! json_encode($intention_colleges) !!},
+                commited-intention-ids: {!! json_encode($commited_intention_ids) !!},
             }
         },
         events: {
