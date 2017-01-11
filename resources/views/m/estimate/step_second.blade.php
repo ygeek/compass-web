@@ -219,9 +219,7 @@ Vue.component('college-select-pop', {
       searchKeyWord: null,
     }
   },
-  created: function() {
-    this.$refs.search.focus();
-  },
+
   methods: {
     closeButtonClick: function() {
       this.$dispatch('close-college-select-pop');
@@ -298,10 +296,12 @@ var app = new Vue({
   methods: {
     displayCollegeSelect: function() {
       this.showCollegeSelect = true;
+      $('body').addClass('modal-opend');
     }
   },
   events: {
     'close-college-select-pop': function() {
+      $('body').removeClass('modal-opend');
       this.showCollegeSelect = false;
     },
     'select-college': function(college) {

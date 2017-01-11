@@ -106,6 +106,9 @@ input[type="submit"], input[type="reset"], input[type="button"],input[type="text
 	background: #1ddab0;
 }
 
+.modal-opend {
+  overflow: hidden;
+}
 /*
 .dl-menuwrapper button:after {
 	content: '';
@@ -1495,7 +1498,7 @@ margin: 2% 0 0 0;}
 
 .college-select-pop .provinces ul {
   overflow: auto;
-  padding: .5em;
+  padding-left: .5em;
   margin-right: -0.5em;
 }
 
@@ -1503,12 +1506,10 @@ margin: 2% 0 0 0;}
   display: inline-block;
   width: 3em;
   height: 30px;
-  border: 1px #ccc solid;
   border-radius: 2px;
   line-height: 30px;
   margin-bottom: 10px;
   text-align: center;
-  margin-right: 1em;
 }
 
 .college-select-pop .provinces li.active {
