@@ -88,7 +88,7 @@
               selectes: function(){
                 if(this.selecting=="speciality_name"){
                   var values = this.children;
-                  return values;
+                  return _.uniqBy(values, function(e) {return e.name});
                 } else if(this.selecting){
                   var values = this[this.selecting];
                   return values;

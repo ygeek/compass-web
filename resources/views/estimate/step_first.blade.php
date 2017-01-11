@@ -67,8 +67,8 @@
                         <div class="estimate-select">
                             <select name="speciality_name" v-model="selected_speciality_name">
                                 <template v-for="speciality in children">
-                                    <option v-bind:value="speciality.name" v-if="speciality.name == selected_speciality_name" selected>@{{ speciality.name }}</option>
-                                    <option v-bind:value="speciality.name" v-else>@{{ speciality.name }}</option>
+                                    <option v-bind:value="speciality" v-if="speciality == selected_speciality_name" selected>@{{ speciality }}</option>
+                                    <option v-bind:value="speciality" v-else>@{{ speciality }}</option>
                                 </template>
                             </select>
                         </div>
@@ -95,6 +95,29 @@
     @endif
 
     <script>
+
+
+    function compareFunc(param1,param2){
+         //如果两个参数均为字符串类型
+         if(typeof param1 == "string" && typeof param2 == "string"){
+             return param2.localeCompare(param1);
+         }
+         //如果参数1为数字，参数2为字符串
+         if(typeof param1 == "number" && typeof param2 == "string"){
+             return -1;
+         }
+         //如果参数1为字符串，参数2为数字
+         if(typeof param1 == "string" && typeof param2 == "number"){
+             return 1;
+         }
+         //如果两个参数均为数字
+         if(typeof param1 == "number" && typeof param2 == "number"){
+             if(param1 > param2) return 1;
+             if(param1 == param2) return 0;
+             if(param1 < param2) return -1;
+         }
+     }
+
         Vue.component('union-select', {
             template: '#union-select',
             data: function () {
@@ -162,6 +185,10 @@
                                 that.selected_speciality_name = "";
                             else
                                 that.selected_speciality_name = res[0].name;
+
+                            res = _.map(res, function(s) {
+                              return s.name;
+                            }).sort(compareFunc);
                             return res;
                         }
                     }

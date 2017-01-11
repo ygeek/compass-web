@@ -104,9 +104,10 @@ class EstimateController extends Controller
             $query = $query->where('specialities.country_id', $country_id);
           }
 
-          return $query;
         }]);
+
         return $speciality_categories_query->get();
+
     }
 
     public function stepSecond(Request $request){
