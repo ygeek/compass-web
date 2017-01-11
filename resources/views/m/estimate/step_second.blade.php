@@ -304,12 +304,12 @@ var app = new Vue({
   methods: {
     displayCollegeSelect: function() {
       this.showCollegeSelect = true;
-      $('body').css({overflow: 'hidden'});
+      $('body').css({overflow: 'hidden', height: '100vh'});
     }
   },
   events: {
     'close-college-select-pop': function() {
-      $('body').css({overflow: 'auto'});
+      $('body').css({overflow: 'auto', height: 'auto'});
       this.showCollegeSelect = false;
     },
     'select-college': function(college) {
