@@ -293,7 +293,6 @@
 
     Vue.component("add-speciality-pop", {
       template: '#add-speciality-pop',
-      props: ['specialities', 'intentionsGroupByDegree'],
       data: function() {
         var degrees = {!! json_encode(\App\Degree::estimatable()->get()) !!};
         return {
