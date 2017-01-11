@@ -2,8 +2,14 @@
 <?php $user = Auth::user();?>
 <div class="clear"></div>
 <div class="main" id="estimate-app">
-    <div class="login_resgister">
-        <form action="/estimate/stepSecondPost" id="stepSecondPost" onsubmit="return checkSecond()" method="post">
+
+
+    <div class="login_resgister" >
+      <college-select-pop
+        :show.sync="showCollegeSelect"
+      >
+      </college-select-pop>
+        <form v-show="!showCollegeSelect" action="/estimate/stepSecondPost" id="stepSecondPost" onsubmit="return checkSecond()" method="post">
             <label for="name">姓名<span style="color: red">*</span></label>
             <input type="text" class="login_resgister_input" ismust='1' errormsg="姓名未填写!" name="name" placeholder="姓名"  @if(Auth::check())value="{{$user->getEstimateInput('name')}}"@endif>
             @if($selected_degree->name == '硕士')
@@ -45,11 +51,6 @@
                 </div>
               </div>
             </template>
-
-            <college-select-pop
-              :show.sync="showCollegeSelect"
-            >
-            </college-select-pop>
 
             <label for="recently_college_name">最近就读院校<span style="color: red">*</span></label>
             <input type="text" @click="displayCollegeSelect" v-model="data.recently_college_name" class="login_resgister_input" ismust='1' errormsg="就读院校未填写!" name="name" placeholder="最近就读院校" >
@@ -304,12 +305,12 @@ var app = new Vue({
   methods: {
     displayCollegeSelect: function() {
       this.showCollegeSelect = true;
-      $('body').css({overflow: 'hidden', height: '100vh'});
+      $('#content').css({overflow: 'hidden', height: '100vh'});
     }
   },
   events: {
     'close-college-select-pop': function() {
-      $('body').css({overflow: 'auto', height: 'auto'});
+      $('#content').css({overflow: 'auto', height: 'auto'});
       this.showCollegeSelect = false;
     },
     'select-college': function(college) {
