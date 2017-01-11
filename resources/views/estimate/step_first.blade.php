@@ -66,9 +66,9 @@
 
                         <div class="estimate-select">
                             <select name="speciality_name" v-model="selected_speciality_name">
-                                <template v-for="speciality in children">
-                                    <option v-bind:value="speciality" v-if="speciality == selected_speciality_name" selected>@{{ speciality }}</option>
-                                    <option v-bind:value="speciality" v-else>@{{ speciality }}</option>
+                                <template v-for="speciality in orderdChildren">
+                                  <option v-bind:value="speciality" v-if="speciality == selected_speciality_name" selected>@{{ speciality }}</option>
+                                  <option v-bind:value="speciality" v-else>@{{ speciality }}</option>
                                 </template>
                             </select>
                         </div>
@@ -151,6 +151,12 @@
                     @endif
             },
             computed: {
+                orderdChildren: function() {
+                  res = _.map(this.children, function(s) {
+                    return s.name;
+                  }).sort(function(a,b){return a.localeCompare(b, 'zh')});
+                  return res;
+                },
                 children: function () {
                     var that = this;
                     for(var i=0; i<this.speciality_categories.length; i++){
@@ -186,9 +192,6 @@
                             else
                                 that.selected_speciality_name = res[0].name;
 
-                            res = _.map(res, function(s) {
-                              return s.name;
-                            }).sort(compareFunc);
                             return res;
                         }
                     }
