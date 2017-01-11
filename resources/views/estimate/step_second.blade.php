@@ -361,7 +361,6 @@
           that.loading = false;
           that.colleges = response.data.data['colleges'];
           that.provinces = response.data.data['areas'];
-
           if(that.defaultCollege && that.defaultSpeciality) {
             var college = that.colleges.find(function(college) {
               return college.name == that.defaultCollege;

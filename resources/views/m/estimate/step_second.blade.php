@@ -16,7 +16,7 @@
 
             <template id="college-select-pop">
               <div class="college-select-pop" v-show="show">
-                <div class="close" @click="closeButtonClick">×</div>
+                <div class="close" @click="closeButtonClick" style="font-size: 2em;">×</div>
 
                 <div class="search-bar">
                   <input id="search-input" v-model="searchKeyWord" placeholder="输入院校名称"/>

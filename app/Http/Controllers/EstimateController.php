@@ -38,9 +38,14 @@ class EstimateController extends Controller
           'area' => $college_data['college_area'],
         ]);
       }
+      $areas = collect(array_unique($areas))->sortBy(function ($product, $key) {
+          if ($product==="重庆")
+              return iconv('UTF-8', 'GBK//IGNORE', "崇庆");
+          return iconv('UTF-8', 'GBK//IGNORE', $product);
+      });
 
       return $this->responseJson('ok', [
-        'areas' => array_unique($areas),
+        'areas' => array_values($areas->toArray()),
         'colleges' => $colleges
       ]);
     }
