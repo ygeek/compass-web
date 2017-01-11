@@ -238,12 +238,7 @@
         <div class="header_c">我的意向单</div>
     </div>
 
-    <intentions
-      :intentions='{!! json_encode($intentions) !!}'
-      :categories='{!! json_encode($speciality_categories) !!}'
-      :intentioncolleges='{!! json_encode($intention_colleges) !!}'
-      :commited-intention-ids='{!! json_encode($commited_intention_ids) !!}'>
-    </intentions>
+    <intentions></intentions>
 
 
 </div>
@@ -311,6 +306,10 @@
           optionsSelected: null,
           options: null,
           optionsType: null,
+          intentions: {!! json_encode($intentions) !!},
+          categories: {!! json_encode($speciality_categories) !!},
+          intentionColleges: {!! json_encode($intention_colleges) !!},
+          commitedIntentionIds: {!! json_encode($commited_intention_ids) !!},
         }
       },
       events: {
