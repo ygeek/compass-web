@@ -384,8 +384,8 @@
                 selected_speciality_name: null,
                 intentions: {!! json_encode($intentions) !!},
                 categories: {!! json_encode($speciality_categories) !!},
-                intention-colleges: {!! json_encode($intention_colleges) !!},
-                commited-intention-ids: {!! json_encode($commited_intention_ids) !!},
+                intentionColleges: {!! json_encode($intention_colleges) !!},
+                commitedIntentionIds: {!! json_encode($commited_intention_ids) !!},
             }
         },
         events: {
