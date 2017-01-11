@@ -13,7 +13,7 @@
                 <div class="close" @click="closeButtonClick">×</div>
 
                 <div class="search-bar">
-                  <input ref="search" v-model="searchKeyWord" placeholder="输入院校名称"/>
+                  <input id="search-input" v-model="searchKeyWord" placeholder="输入院校名称"/>
                 </div>
 
                 <template v-if="showSearchResult.length > 0">
@@ -219,7 +219,6 @@ Vue.component('college-select-pop', {
       searchKeyWord: null,
     }
   },
-
   methods: {
     closeButtonClick: function() {
       this.$dispatch('close-college-select-pop');
@@ -230,6 +229,15 @@ Vue.component('college-select-pop', {
     selectCollege: function(college) {
       this.$dispatch('close-college-select-pop');
       this.$dispatch('select-college', college);
+    }
+  },
+  watch: {
+    'show': {
+      handler: function(newVal) {
+        if(newVal) {
+          $('#search-input').focus();
+        }
+      }
     }
   },
   computed: {
