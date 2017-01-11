@@ -510,9 +510,6 @@
           },
         },
         computed: {
-            intentionColleges: function() {
-              return _.values(this.intentioncolleges);
-            },
             raw_intentions: function() {
               var raw_intentions = [];
               var that = this;
