@@ -10,10 +10,10 @@
 
             <template id="college-select-pop">
               <div class="college-select-pop" v-show="show">
-                <div class="close" @click="closeButtonClick">X</div>
+                <div class="close" @click="closeButtonClick">×</div>
 
                 <div class="search-bar">
-                  <span>搜索</span><input v-model="searchKeyWord"/>
+                  <input ref="search" v-model="searchKeyWord" placeholder="输入院校名称"/>
                 </div>
 
                 <template v-if="showSearchResult.length > 0">
@@ -219,6 +219,9 @@ Vue.component('college-select-pop', {
       searchKeyWord: null,
     }
   },
+  created: function() {
+    this.$refs.search.focus();
+  },
   methods: {
     closeButtonClick: function() {
       this.$dispatch('close-college-select-pop');
@@ -235,7 +238,7 @@ Vue.component('college-select-pop', {
     showSearchResult: function() {
       var that = this;
       if(!this.searchKeyWord) {
-        return null;
+        return [];
       }else {
         return this.colleges.filter(function(college) {
           return college.name.indexOf(that.searchKeyWord) !== -1;
@@ -358,7 +361,7 @@ function checkSecond()
         return false;
     }
 
-    
+
     else
     {
         return true;

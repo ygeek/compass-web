@@ -1156,7 +1156,7 @@ select::-ms-expand { display: none; }
             height: 100%;
             background-color: #fff;
             z-index:1001;
-           
+
         }
         .white_content {
             display: none;
@@ -1463,13 +1463,19 @@ margin: 2% 0 0 0;}
   top: 1%;
 }
 
+.college-select-pop .search-bar input {
+  height: 40px;
+  margin-top: 20px;
+  padding-left: 20px;
+}
 .college-select-pop .search-bar {
   width: 80%;
   margin-left: .5em;
+  padding-left: 1em;
 }
 
 .college-select-pop .search-result{
-  padding-left: .5em;
+  padding-left: 1.5em;
   width: 100%;
   overflow: scroll;
   height: 95vh;
@@ -1490,10 +1496,19 @@ margin: 2% 0 0 0;}
 .college-select-pop .provinces ul {
   overflow: auto;
   padding: .5em;
+  margin-right: -0.5em;
 }
+
 .college-select-pop .provinces li {
-  float: left;
-  margin-right: 0.5em;
+  display: inline-block;
+  width: 3em;
+  height: 30px;
+  border: 1px #ccc solid;
+  border-radius: 2px;
+  line-height: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-right: 1em;
 }
 
 .college-select-pop .provinces li.active {
