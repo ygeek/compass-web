@@ -197,8 +197,7 @@ function getMore()
                           $category = $speciality_categories->search(function($category) {
                             return $category->id == Request::input('selected_speciality_cateogry_id');
                           });
-
-                          if(is_null($category)) {
+                          if($category == false) {
                             echo '不限';
                           }else {
                             echo $speciality_categories->toArray()[$category]['chinese_name'];
