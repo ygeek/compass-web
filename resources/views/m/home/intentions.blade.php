@@ -102,16 +102,19 @@
                         <img v-bind:src="intentionCollege.badge_path" />
                       </div>
                       <header class="right college-name">
-                        <h1><a v-bind:href="intentionCollege.redirect_url" target="_blank">@{{intentionCollege.chinese_name}}</a></h1>
-                        <h2>@{{intentionCollege.english_name}}</h2>
+                        <div class="college-ranking">
+                          本国排名： @{{intentionCollege.domestic_ranking}}
+                        </div>
+
+                        <div class="address">
+                          <img src="/images/location-identity.png" alt="location-identity" />
+                          @{{intentionCollege.location}}, @{{intentionCollege.parent_location}}
+                        </div>
+
                       </header>
                     </div>
 
                     <div class="line">
-                      <div class="college-ranking left">
-                        本国排名： @{{intentionCollege.domestic_ranking}}
-                      </div>
-
                       <like-college
                         :college_id="intentionCollege.id"
                         :liked="intentionCollege.liked"
@@ -121,14 +124,8 @@
 
                     <div class="line">
                       <div class="address-container left">
-                          <div class="location">
-                              <img src="/images/location-identity.png" alt="location-identity" />
-                              @{{intentionCollege.area}}
-                          </div>
-
-                          <div class="address">
-                            @{{intentionCollege.location}}, @{{intentionCollege.parent_location}}
-                          </div>
+                          <h1><a v-bind:href="intentionCollege.redirect_url" target="_blank">@{{intentionCollege.chinese_name}}</a></h1>
+                          <h2>@{{intentionCollege.english_name}}</h2>
                       </div>
 
                       <div class="estimate-button-container right">
