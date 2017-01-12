@@ -208,6 +208,8 @@
 
 
 <script>
+@if($selected_degree->name == '硕士')
+
 Vue.component('college-select-pop', {
   template: '#college-select-pop',
   props: ['show', 'defaultCollege', 'defaultSpeciality', 'majorList'],
@@ -281,7 +283,6 @@ Vue.component('college-select-pop', {
 
   },
 });
-
 var app = new Vue({
   el: '#estimate-app',
   data: function(){
@@ -324,11 +325,11 @@ var app = new Vue({
     }
   },
 });
+@endif
 
 function choseInputs(v,key)
 {
     var groups = '<?php echo json_encode($groups); ?>';
-
     $.ajax({
         type:'POST',
         url:'/estimate/stepSecondForm',
