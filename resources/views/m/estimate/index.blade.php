@@ -41,9 +41,6 @@
 
         <div class="pinggu_xx_name50">
                 <h2><img src="{{app('qiniu_uploader')->pathOfKey($college['college']['badge_path'])}}" width='80%'><br />
-                <span style="display:block; float:left;">{{$college['college']['chinese_name']}}</span><span style="background:#23e6bb;display:block; float:left; color:#fff; border-radius:3px; padding:1% 2%; font-size:0.8em; margin:0 0 0 5px;">{{ ($college['college']['type']=="public")?'公立':'私立' }}</span>
-                <div class="clear"></div>
-                {{$college['college']['english_name']}}</h2>
                 <h1>本国排名：{{$college['college']['domestic_ranking']}}<br><span style="background:url(/static/images/icon21.jpg) left no-repeat; background-size:20px; padding:0 0 0 30px;">
                  <?php
                                                         $area = App\AdministrativeArea::where('id',$college['college']['administrative_area_id'])->get();
@@ -58,11 +55,19 @@
                        <img src="/static/images/xin<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college['college']['id'])){echo 1;} else {echo 2;}}else{echo 2;} ?>.png" width="30" style=" cursor: pointer;" likeid='<?php if(app('auth')->user()){ if(app('auth')->user()->isLikeCollege($college['college']['id'])){echo 1;} else {echo 2;}}else{echo 3;} ?>' onclick="setLike('{{ $college['college']['id'] }}',$(this))" ><span id='shuzi{{ $college['college']['id'] }}'>{{ $college['college']['like_nums'] }}</span>
 
                 </h1>
+
+                <div class="bot">
+                  <div class="left" style=" float: left; width: 85%; height: 14px; line-height: 14px; color: #2b426e; text-align: left;">
+                      <p style="display:block;">{{$college['college']['chinese_name']}}</p>
+                      <p style="font-size:1.0em; width: 100%; margin-bottom: 1em;text-align: left; height: 14px; line-height: 10px;">{{$college['college']['english_name']}}</p>
+                  </div>
+                    <div class="clear"></div>
+                </div>
                 <div class="clear"></div>
          </div>
 
 
-        <div class="pinggu_pp">
+        <div class="pinggu_pp" style="margin-top: 7%;">
             <h1>{{$college['score']}}%<span>匹配概率</span></h1>
             <h2><a href = "javascript:void(0);" onclick = "document.getElementById('light{{$k}}').style.display = 'block';document.getElementById('fade{{$k}}').style.display = 'block'">查看匹配详情</a></h2>
         </div>
