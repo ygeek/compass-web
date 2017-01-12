@@ -294,11 +294,11 @@ class EstimateController extends Controller
         $data = $_POST;
         $fields = '';
 
-        if($data['college_id']) {
+        if(isset($data['college_id'])) {
           $fields .=  '<input type="hidden" name="college_id" value="'. $data['college_id'] .'">';
         }
 
-        if($data['cpm']) {
+        if(isset($data['cpm'])) {
           $fields .=  '<input type="hidden" name="cpm" value="'. $data['cpm'] .'">';
         }
 
