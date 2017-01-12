@@ -195,6 +195,20 @@
     content: "";
     display: table;
     clear: both; }
+.main02 .intentions-container {
+  padding-bottom: 40px; }
+.main02 .commit-button {
+  border: none;
+  width: 90%;
+  margin: 0 auto;
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  text-align: center;
+  transform: translateX(-50%);
+  height: 40px;
+  background: #1ddab0;
+  color: #fff; }
 .main02 .estimate-button {
   border: none;
   background: #0e2d60;

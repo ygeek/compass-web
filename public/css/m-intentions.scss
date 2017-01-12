@@ -259,6 +259,23 @@ $heart_size: 12px;
     }
   }
 
+  .intentions-container {
+    padding-bottom: 40px;
+  }
+  .commit-button {
+    border: none;
+    width: 90%;
+    margin: 0 auto;
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    text-align: center;
+    transform: translateX(-50%);
+    height: 40px;
+    background: #1ddab0;
+    color: #fff;
+  }
+
   .estimate-button {
     border: none;
     background: #0e2d60;

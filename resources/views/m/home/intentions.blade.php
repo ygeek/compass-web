@@ -83,13 +83,15 @@
 
 
   <script type="text/x-template" id="intentions">
-    <div>
+    <div class="intentions-container">
     <add-speciality-pop
       v-if="show_pop"
       :specialities.sync="show_data_specialities"
       :intentions-group-by-degree.sync="show_data_intentionsGroupByDegree"
     >
     </add-speciality-pop>
+    <button class="commit-button" @click="commit">提交审核 @{{ selected_specialities_count }}/@{{ raw_intentions.length - commitedIntentionIds.length }}</button>
+
 
       <div class="content" style="background:none; padding:0;">
         <div class="intention" v-for="intentionCollege in intentionColleges">
@@ -141,6 +143,13 @@
             <div class="college-intentions">
               <table>
                   <tr v-for="intention in intentions[intentionCollege.id]">
+                    <td>
+                      <input
+                        type="checkbox"
+                        v-model="intention.checked"
+                        v-bind:disabled="commitedIntentionIds.indexOf(intention._id) != -1"
+                      />
+                    </td>
 
                     <td style="text-align: left; padding-left: 10px;">
                       @{{ intention.speciality_name }}
@@ -618,8 +627,9 @@
                 var url = "{{ route('intentions.create') }}";
                 this.$http.post(url, {
                     selected_speciality_ids: selected_speciality_ids
-                }, function(response){
-                    alert('提交审核成功');
+                }).then(function() {
+                  alert('提交审核成功');
+                  window.location.reload();
                 });
             },
             countArray: function count(o){
