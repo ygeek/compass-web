@@ -7,7 +7,11 @@
     <div class="login_resgister" >
       <college-select-pop
         :show.sync="showCollegeSelect"
+        :default-college="data.recently_college_name"
+        :default-speciality="data.recently_speciality_name"
+        :major-list.sync="majorsList"
       >
+
       </college-select-pop>
         <form v-show="!showCollegeSelect" action="/estimate/stepSecondPost" id="stepSecondPost" onsubmit="return checkSecond()" method="post">
             <label for="name">姓名<span style="color: red">*</span></label>
@@ -67,9 +71,21 @@
 
 
             <label for="recently_speciality_name">最近就读专业</label>
+            <?php $master_speciality = App\Setting::get('master_speciality', []) ?>
+            <?php
+              $index = 0;
+              $user = Auth::user();
+              if($user){
+                $user_recently_speciality_name = $user->getEstimateInput('recently_speciality_name');
+              }
+              else{
+                $user_recently_speciality_name = false;
+              }
+            ?>
+
             <select id="recently_speciality_name" v-model="data.recently_speciality_name" name="recently_speciality_name" class="select01">
               <option
-                v-for="major in majorList"
+                v-for="major in majorsList"
                 :value="major"
                 track-by="$index"
               >
@@ -279,8 +295,6 @@ Vue.component('college-select-pop', {
         that.majorList = college.major.concat('其它');
       }
     });
-
-
   },
 });
 var app = new Vue({
@@ -299,7 +313,7 @@ var app = new Vue({
 
     return {
       data: data,
-      majorList: [],
+      majorsList: [],
       showCollegeSelect: false,
     }
   },
@@ -318,9 +332,9 @@ var app = new Vue({
       this.data.recently_college_name = college.name;
 
       if(!college.major) {
-        this.majorList = ['其它'];
+        this.majorsList = ['其它'];
       } else {
-        this.majorList = college.major.concat(["其它"]);
+        this.majorsList = college.major.concat(["其它"]);
       }
     }
   },
