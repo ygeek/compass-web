@@ -21,8 +21,8 @@
         <div class="content">
           <ul class="select-list">
             <li v-for="option in options" @click="selectOption(option)">
-              <span class="list-item" style="color: #2d313a">@{{option.name}}</span>
-              <span class="selected-item" v-if="option.id == selectedId">●</span>
+              <span class="list-item speciality" style="color: #2d313a">@{{option.name}}</span>
+              <span class="selected-item dot" v-if="option.id == selectedId">●</span>
             </li>
           </ul>
         </div>

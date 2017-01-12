@@ -109,6 +109,7 @@ $heart_size: 12px;
     background: #fff;
     .select-list {
       li {
+        overflow: hidden;
         height: 60px;
         line-height: 60px;
         border-top: 1px #f6f6f6 solid;
@@ -116,12 +117,28 @@ $heart_size: 12px;
         .list-item {
           color: #979797;
           padding-left: 1em;
+          display: block;
+          float: left;
+          width: 18%;
+          &.speciality {
+            width: 80%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
         }
 
         .selected-item {
+          &.dot {
+            width: 10%;
+          }
+          width: 72%;
           float: right;
           color: #2d313a;
+          text-align: right;
           margin-right: .5em;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           img {
             margin-left: 1em;
           }
