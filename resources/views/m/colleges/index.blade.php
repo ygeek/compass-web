@@ -169,6 +169,7 @@ function getMore()
 </script>
 
 <form action="" name="search2" method="get" id="search">
+
 <!--隐藏内容-->
 <div class="shaixuan tiaojian">
     <div class="header">
@@ -189,12 +190,41 @@ function getMore()
                 </li>
                 <li class="grzy_wdzl01"  onclick="javascript:shaixuan('.zhuanye')">
                     <span>专业方向</span>
-                    <em><input type="hidden" v-model="selected_speciality_cateogry_id"  number name="selected_speciality_cateogry_id" value="{{$selected_speciality_cateogry_id}}"/><a href="javascript:void(0)" class="zhuanyea">不限</a></em>
+                    <em>
+                      <input type="hidden" v-model="selected_speciality_cateogry_id"  number name="selected_speciality_cateogry_id" value="{{$selected_speciality_cateogry_id}}"/>
+                      <a href="javascript:void(0)" class="zhuanyea">
+                        <?php
+                          $category = $speciality_categories->search(function($category) {
+                            return $category->id == Request::input('selected_speciality_cateogry_id');
+                          });
+
+                          if(is_null($category)) {
+                            echo '不限';
+                          }else {
+                            echo $speciality_categories->toArray()[$category]['chinese_name'];
+                          }
+                        ?>
+                      </a>
+                    </em>
                     <div class="clear"></div>
                 </li>
                 <li class="grzy_wdzl01"  onclick="javascript:shaixuan('.leixing')">
                     <span>学校性质</span>
-                    <em><input type="hidden" v-model="selected_property" name="selected_property" value="{{$selected_property}}" number/><a href="javascript:void(0)" class="leixinga">不限</a></em>
+                    <em>
+                      <input type="hidden" v-model="selected_property" name="selected_property" value="{{$selected_property}}" number/>
+                      <a href="javascript:void(0)" class="leixinga">
+                        <?php
+                          $selected_property = Request::input('selected_property');
+                          if(!$selected_property) {
+                            echo '不限';
+                          }elseif ($selected_property == 1) {
+                            echo '公立';
+                          }else {
+                            echo '私立';
+                          }
+                        ?>
+                      </a>
+                    </em>
                     <div class="clear"></div>
                 </li>
                 <li class="grzy_wdzl01"  onclick="javascript:shaixuan('.paiming')">

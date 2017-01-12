@@ -2,43 +2,43 @@
 //View切换
 function changeView(newView) {
     $("#content").hide();
-    
+
     $("#header").hide();
     $("#region").hide();
     $("#login").hide();
-    
+
     $(newView).show();
 }
 
 //View切换
 function changeView2(newView) {
     $("#content").hide();
-    
+
     $("#header").hide();
     $("#region").hide();
     $("#login").hide();
-    
+
     $(newView).show();
-    
+
     $("#login").attr('ckgd','1');
     $("#login").attr('islocal','2');
 }
 
 function goBlack(newView) {
-    
+
     location.reload();
 }
 
 function shaixuan(newView) {
     $("#main02").hide();
-    
+
     $("#header").hide();
     $(".tiaojian").hide();
     $(newView).show();
 }
 //返回到条件筛选
 function goBlack2(newView) {
-    
+
     shaixuan(newView);
 }
 $(function() {
@@ -48,7 +48,7 @@ $(function() {
         if(areaid=='0')
         {
             $('.areachild').show();
-            
+
         }
         else
         {
@@ -61,27 +61,27 @@ $(function() {
         $(this).attr('id','main03_l_menu');
         $('.didian').attr('selected_country_id',areaid);
         $('.didian').attr('selected_country_id_name',$(this).html());
-        
+
     });
     $(".areachilds").click(function(){
         var areaid = $(this).attr('childarea_id');
-        
-        
+
+
         $('.areachilds').attr('id','');
         $(this).attr('id','main03_r_menu');
         $('.didian').attr('selected_state_id',areaid);
         $('.didian').attr('selected_state_id_name',$(this).html());
         if(areaid=='0')
         {
-           
+
             $('.didian').attr('selected_state_id_name','');
         }
         queding('didian','selected_country_id');
     });
     $(".zhuanyechilds").click(function(){
         var areaid = $(this).attr('cateid');
-        
-        
+
+
         $('.zhuanyechilds').attr('id','');
         $(this).attr('id','yuanxiao_sx');
         $('.zhuanye').attr('selected_speciality_cateogry_id',areaid);
@@ -90,19 +90,19 @@ $(function() {
     });
     $(".leixingchilds").click(function(){
         var areaid = $(this).attr('leiid');
-        
-        
+
+
         $('.leixingchilds').attr('id','');
         $(this).attr('id','yuanxiao_sx');
         $('.leixing').attr('selected_property',areaid);
         $('.leixing').attr('selected_property_name',$(this).html());
         queding('leixing','selected_property');
     });
-    
+
     $(".paimingchilds").click(function(){
         var start = $(this).attr('rank_start');
         var end = $(this).attr('rank_end');
-        
+
         $('.paimingchilds').attr('id','');
         $(this).attr('id','yuanxiao_sx');
         $('.paiming').attr('rank_start',start);
@@ -155,9 +155,9 @@ $(function() {
                         }
                         alert('登录成功!');
                     }
-                    
+
                     $("#content").show();
-    
+
                     $("#header").show();
                     $("#login").hide();
                     $(".dl-menu").append('<li class="headuser"><a href="/home"  >个人中心</a></li><li class="headuser"><a href="/auth/logout"  >退出</a></li>');
@@ -168,7 +168,7 @@ $(function() {
                     $(".dl-menu").addClass("dl-menu-toggle");
                     $("#login").attr('islocal','1');
                 }
-                
+
                 if(e.status == 'error')
                 {
                     alert(e.data.message);
@@ -213,16 +213,16 @@ $(function() {
         });
     });
     //获取验证码
-    
-    
+
+
     $(".makePlan").click(function(){
         var name = $("input[name='name']").val();
-        
+
         $('.gkscore').val($('.gktag').val()+':'+$('.gkwithout').val());
-        
+
        // $('#stepSecondPost').submit();
     });
-    
+
     $(".pingguo_meun_hover").click(function(){
         $(".pingguo_meun_hover").not(this).attr("id",'');
         $(this).attr("id",'pingguo_meun_hover');
@@ -249,6 +249,7 @@ function queding(classStr,valStr)
         assignValue(valStr,$('.'+classStr).attr(valStr));
         htm = $('.'+classStr).attr(valStr+'_name')
     }
+
     $('.'+classStr+'a').html(htm);
     goBlack2('.shaixuan');
 }
@@ -307,7 +308,7 @@ function gobackCel()
 
 function checkSubmitEmail(str) {
     if (str == "") {
-        alert("邮箱不能为空!") 
+        alert("邮箱不能为空!")
         return false;
     }
     if (!str.match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
@@ -317,7 +318,7 @@ function checkSubmitEmail(str) {
     return true;
 }
 
-//jquery验证手机号码 
+//jquery验证手机号码
 function checkSubmitMobil(str) {
     if (str == "") {
         alert("手机号码不能为空！");
@@ -329,7 +330,7 @@ function checkSubmitMobil(str) {
         return false;
     }
     return true;
-} 
+}
 
 
 //第一步选择专业
@@ -361,20 +362,20 @@ function changeZy()
             var htm = '';
             console.log(e);
             for(var i=0;i<e[num].specialities.length;i++){
-               
+
                 htm += '<option value="'+e[num].specialities[i]['name']+'" >'+e[num].specialities[i]['name']+'</option>';
-            } 
-           
+            }
+
             console.log(htm);
             $("select[name='speciality_name']").html(htm);
         }
-    }); 
+    });
 }
 
 function choseInput(v,n)
 {
     var sval = v.val();
-  
+
     $('.st'+n).hide();
     $('.yt'+n+sval).show();
     console.log(n+sval);
@@ -409,7 +410,7 @@ function setLike(college_id,obj)
                      //alert('收藏成功!');
                 }
             }
-        }); 
+        });
     }
     if(likeid=="1")
     {
@@ -429,28 +430,28 @@ function setLike(college_id,obj)
                     //alert('取消成功!');
                 }
             }
-        }); 
+        });
     }
-    
+
 }
 
-function validatemobile(mobile) 
-   { 
-       if(mobile.length==0) 
-       { 
-          alert('请输入手机号码！'); 
-       
-          return false; 
-       }     
-       if(mobile.length!=11) 
-       { 
-           alert('请输入有效的手机号码！'); 
-          
-           return false; 
-       } 
-        if(!(/^1(3|4|5|7|8)\d{9}$/.test(mobile))){ 
-            alert("请输入有效的手机号码!");  
-            return false; 
-        } 
+function validatemobile(mobile)
+   {
+       if(mobile.length==0)
+       {
+          alert('请输入手机号码！');
+
+          return false;
+       }
+       if(mobile.length!=11)
+       {
+           alert('请输入有效的手机号码！');
+
+           return false;
+       }
+        if(!(/^1(3|4|5|7|8)\d{9}$/.test(mobile))){
+            alert("请输入有效的手机号码!");
+            return false;
+        }
       return true;
-   } 
+   }
