@@ -136,7 +136,7 @@ class Estimate{
             //判断需求客户是否提交了 如果没提交就不需要进行对比 is_requirement的除外
             if(isset($examination['form_key'])){
                 $key = $examination['form_key'];
-                $current_item = $data[$key];
+                $current_item = isset($data[$key]) ? $data[$key] : '';
                 $user_score = $current_item;
             }else{
                 $key = $require['examination_name'];
