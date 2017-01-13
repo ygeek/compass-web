@@ -152,9 +152,9 @@
             },
             computed: {
                 orderdChildren: function() {
-                  res = _.map(this.children, function(s) {
-                    return s.name;
-                  }).sort(function(a,b){return a.localeCompare(b, 'zh')});
+                  res = _.uniqBy(_.map(this.children, function(s) {
+                    return _.trim(s.name);
+                  })).sort(function(a,b){return a.localeCompare(b, 'zh')});
                   return res;
                 },
                 children: function () {

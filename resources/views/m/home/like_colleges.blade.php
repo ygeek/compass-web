@@ -70,9 +70,6 @@
             </div>
         @endforeach
 
-
-
-
         </ul>
     </div>
     <div class="clear"></div>
