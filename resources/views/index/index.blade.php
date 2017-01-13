@@ -88,7 +88,17 @@
               selectes: function(){
                 if(this.selecting=="speciality_name"){
                   var values = this.children;
-                  return _.uniqBy(values, function(e) {return e.name});
+                  var res = _.uniqBy(_.map(values, function(s) {
+                    return _.trim(s.name);
+                  })).sort(function(a,b){return a.localeCompare(b, 'zh')});
+                  // var res = _.uniqBy(_.map(values, function(s) {
+                  //   return _.trim(s.name);
+                  // })).sort(function(a,b){return a.localeCompare(b, 'zh')});
+                  return _.map(res, function(s) {
+                    return {
+                      name: s
+                    }
+                  });
                 } else if(this.selecting){
                   var values = this[this.selecting];
                   return values;
