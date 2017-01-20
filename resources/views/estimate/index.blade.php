@@ -220,7 +220,7 @@
                     var degree_id = this.selected_degree_id;
                     var estimate_id = this.estimate_id;
                     var speciality_name = this.selected_speciality_name;
-
+                    var that = this;
                     this.$http.post("{{ route('intentions.store') }}", {
                         college_id: college_id,
                         degree_id: degree_id,
@@ -235,7 +235,7 @@
                         @endif
                     }, function(response){
                         if(response.status == 401){
-                            alert('请先登录')
+                          that.callLogin();
                         };
                     })
                 },
