@@ -261,14 +261,14 @@
 
     <div class="middle">
       <div class='app-content'>
-        <sub-company x="665" y="225" tips="北京公司"></sub-company>
-        <sub-company x="641" y="252" tips="太原公司"></sub-company>
-        <sub-company x="845" y="686" tips="悉尼公司"></sub-company>
-        <sub-company x="963" y="702" tips="奥克兰公司"></sub-company>
-        <sub-company x="826" y="714" tips="墨尔本公司"></sub-company>
-        <sub-company x="786" y="694" tips="阿德莱德公司"></sub-company>
-        <sub-company x="845" y="633" tips="布里斯班公司"></sub-company>
-        <sub-company x="834" y="699" tips="堪培拉公司"></sub-company>
+        <sub-company x="665" y="225" tips="2016年3月，在中国成立第一家北京分公司"></sub-company>
+        <sub-company x="641" y="252" tips="2016年9月，成立了中国太原分公司"></sub-company>
+        <sub-company x="845" y="686" tips="2008年8月，在澳大利亚成立的悉尼分公司"></sub-company>
+        <sub-company x="963" y="702" tips="2002年1月，成立了奥克兰公司"></sub-company>
+        <sub-company x="826" y="714" tips="2012年4月，成立了墨尔本分公司"></sub-company>
+        <sub-company x="786" y="694" tips="2012年12月，成立了阿德莱德分公司"></sub-company>
+        <sub-company x="845" y="633" tips="2013年11月，成立了布里斯班分公司"></sub-company>
+        <sub-company x="834" y="699" tips="2014年12月，成立了堪培拉分公司"></sub-company>
 
         <div class='consult'>
           <img src="/images/msg_ic.png" alt="msg_ic" />

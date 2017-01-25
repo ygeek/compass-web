@@ -12,6 +12,7 @@
   <div class="container">
     <div class="app-content">
       @include('shared.reset_password_component')
+      <h1 class="reset-header">忘记密码</h1>
       <reset-password-form>
       </reset-password-form>
     </div>

@@ -542,11 +542,11 @@ ul {
       position: absolute;
       z-index: 9999;
       top: -45px;
-      left: -45px; }
+      left: -138px; }
       .index-page .middle .sub-company .mark label {
         display: inline-block;
         box-shadow: 0 0 5px #888888;
-        width: 110px;
+        width: 300px;
         height: 40px;
         line-height: 40px;
         text-align: center;
@@ -839,10 +839,13 @@ ul {
   background-repeat: no-repeat;
   background-position: center; }
 
+.reset-header {
+  text-align: center;
+  margin-top: 100px; }
+
 .reset-form {
   width: 340px;
-  margin: 0 auto;
-  margin-top: 100px; }
+  margin: 0 auto; }
   .reset-form .button {
     width: 300px;
     height: 40px;
