@@ -366,7 +366,7 @@ textarea {
   /* 2 */ }
 
 .calc-link {
-  color: #354869; }
+  color: #0000FF; }
 
 * {
   margin: 0;
@@ -1827,8 +1827,6 @@ ul {
 
 .colleges-rank-page .tabs {
   float: left;
-  padding-left: 250px;
-  width: 600px;
   font-size: 15px;
   color: #6c6c6c; }
   .colleges-rank-page .tabs a {
@@ -1866,7 +1864,7 @@ ul {
     .colleges-rank-page-content .rank-content .colleges {
       float: left; }
     .colleges-rank-page-content .rank-content .pagination {
-      float: left; }
+      margin-bottom: 20px; }
   .colleges-rank-page-content table {
     width: 100%;
     float: left;
@@ -2027,7 +2025,7 @@ ul {
         font-size: 14px;
         font-weight: bold;
         z-index: 999;
-        color: #354869; }
+        color: #0000FF; }
       .colleges-page .search-result .colleges .college .like-button {
         position: absolute;
         bottom: 6px;

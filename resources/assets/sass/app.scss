@@ -9,7 +9,7 @@
 }
 
 .calc-link{
-  color: #354869;
+  color: #0000FF;
 }
 *{
   margin: 0;
@@ -1815,8 +1815,6 @@ ul{
   }
   .tabs{
     float: left;
-    padding-left: 250px;
-    width: 600px;
     font-size: 15px;
     color: #6c6c6c;
     a{
@@ -1856,7 +1854,7 @@ ul{
         float: left;
       }
       .pagination{
-        float: left;
+        margin-bottom: 20px;
       }
     }
     table{
@@ -2056,7 +2054,7 @@ ul{
           font-size: 14px;
           font-weight: bold;
           z-index: 999;
-          color: #354869;
+          color: #0000FF;
         }
         .like-button{
           position: absolute;

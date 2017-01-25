@@ -46,7 +46,7 @@
                           @endif
                         </td>
                         <td class="english_name">{{ $college['english_name'] }}</td>
-                        @if(isset($college['world_ranking']) && $college['world_ranking'] > 0)
+                        @if(isset($college['world_ranking']) && $college['world_ranking'] > 0 || $college['world_ranking'] == '-')
                         <td class="english_name">世界排名: {{$college['world_ranking']}}</td>
                         @endif
                         <td class="actions">@if($college['key'])

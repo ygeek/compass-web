@@ -118,7 +118,7 @@
 
                     @include('shared.like_college', ['template_name' => 'like-college'])
 
-                <a href="{{ route('colleges.rank') }}"><button class="estimate-button">院校排名 -></button></a>
+                <a href="{{ route('colleges.rank') }}" target="_blank"><button class="estimate-button">院校排名 -></button></a>
                 </div>
             </div>
         </div>
