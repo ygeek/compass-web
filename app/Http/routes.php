@@ -2,6 +2,7 @@
 
 Route::get('/', 'IndexController@index')->name('index');
 Route::get('/get_speciality', 'IndexController@getSpeciality')->name('index.get_speciality');
+Route::get('/caluse', 'IndexController@caluse')->name('index.caluse');
 
 //评估
 Route::get('/estimate/step-1', 'EstimateController@stepFirst')->name('estimate.step_first');

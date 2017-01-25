@@ -11,6 +11,10 @@ use App\SpecialityCategory;
 use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
 {
+    public function caluse() {
+      return $this->view('index.caluse');
+    }
+
     public function index(){
         $countries = AdministrativeArea::countries()->with('children')->get();
         $degrees = Degree::estimatable()->get();

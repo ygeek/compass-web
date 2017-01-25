@@ -61,7 +61,7 @@
           </button>
         </p>
         <p class="tips">
-          注册既同意《指南针用户协议》
+          注册既同意<a href="/caluse" target="_blank">《指南针用户协议》</a>
         </p>
         <button class="button" @click="sendRegisterRequest" v-bind:disabled="!canRegist">注册</button>
       </div>
