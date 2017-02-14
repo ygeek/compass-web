@@ -18,7 +18,7 @@
             <div class="header_c">@{{title}}选择</div>
           </div>
         </div>
-        <div class="content">
+        <div class="content" style="padding-top:0px;">
           <ul class="select-list">
             <li v-for="option in options" @click="selectOption(option)">
               <span class="list-item speciality" style="color: #2d313a">@{{option.name}}</span>
@@ -50,7 +50,7 @@
             <div class="header_r" @click="commitAddSpeciality">确定</div>
           </div>
         </div>
-        <div class="content">
+        <div class="content"  style="padding-top:0px;">
           <ul class="select-list">
             <li
               @click="select({
@@ -152,16 +152,16 @@
                       @{{ intention.speciality_name }}
                     </td>
 
-                    <td>
+                    <td style="width:30px;">
                       @{{ intention.degree.name }}
                     </td>
 
-                    <td @click="displayIntentionDetail(intention)" style="cursor: pointer;">
+                    <td @click="displayIntentionDetail(intention)" style="cursor: pointer; width:65px;">
                       查看详情
                     </td>
 
                     <td
-                      style="padding-right: 10px; cursor: pointer;"
+                      style="padding-right: 10px; cursor: pointer; width:13px;"
                       @click="deleteSpeciality(intention)"
                       v-bind:class="{disabled: commitedIntentionIds.indexOf(intention._id) != -1}"
                     >

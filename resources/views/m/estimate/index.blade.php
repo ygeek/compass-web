@@ -117,7 +117,7 @@
 
                 </div>
 
-                <div class="tanchu_join"><a href="javascript:void();" onclick="addInten({{$college['college_id']}})">加入意向单</a></div>
+                <div class="tanchu_join" style="display:inline-block;text-align:center;width: 100%;color: #ffffff;border: none;background-color: #0e2d60;height: 40px;position: fixed;bottom: 0px; left: 0px; right: 0px; line-height: 40px;"><a href="javascript:void();" onclick="addInten({{$college['college_id']}})" >加入意向单</a></div>
 
                 <div class="clear"></div>
             </div>
@@ -185,6 +185,7 @@
 
 </div>
 @endif
+<a  href="{{ URL::route('estimate.step_first') }}" style="display:inline-block;text-align:center;width: 100%;color: #ffffff;border: none;background-color: #0e2d60;height: 40px;position: fixed;bottom: 0px; left: 0px; right: 0px; line-height: 40px;">重新生成解决方案</a>
 
 <script>
 function redirect_back() {

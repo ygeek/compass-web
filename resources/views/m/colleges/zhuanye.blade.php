@@ -236,7 +236,7 @@ function searSub()
         <ul>
             
             <li id="setting-location">
-                <em class="Counter" vid=''>不限</em>
+                <em class="Counter" vid='' style=" color: #666;">不限</em>
                 <span>学位类型</span>
 
                 <!-- subpanel -->
@@ -251,7 +251,7 @@ function searSub()
                 </div>
             </li>
             <li id="setting-radius">
-                <em class="Counter" vid=''>不限</em>
+                <em class="Counter" vid='' style=" color: #666;">不限</em>
                 <span>专业方向</span>
 
                 <!-- subpanel -->

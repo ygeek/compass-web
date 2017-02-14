@@ -85,7 +85,7 @@
             <li class="home04"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'tu-pian']) }}#college-page-nav" @if($article_key == 'tu-pian')id="current"@endif >图片</a></li>
             <li class="home05"><a href="{{ route('colleges.show', ['key' => $college->key, 'article_type' => 'liu-xue-gong-lue', 'desc' => '1']) }}#college-page-nav" @if($article_key == 'liu-xue-gong-lue')id="current"@endif>留学攻略</a></li>
         </ul>
-        <a href="/estimate/step-1"><div style=" height: 40px; line-height: 40px; color: #fff; background-color: #1ddab0; text-align: center; position: fixed; bottom: 0px; left: 0px; right: 0px; max-width: 800px; margin: 0 auto;">开启免费评估</div></a>
+        <a href="/estimate/step-1?selected_country_id={{$college->country_id}}&college_id={{$college->id}}"><div style=" height: 40px; line-height: 40px; color: #fff; background-color: #1ddab0; text-align: center; position: fixed; bottom: 0px; left: 0px; right: 0px; max-width: 800px; margin: 0 auto;">开启免费评估</div></a>
     </div>
 
 </div>
