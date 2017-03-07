@@ -193,7 +193,7 @@
                                   @{{ intention.degree.name }}
                                 </td>
 
-                                <td @click="displayIntentionDetail(intention)" style="cursor: pointer;">
+                                <td @click="displayIntentionDetail(intention)" style="cursor: pointer; color:blue;">
                                   查看详情
                                 </td>
 

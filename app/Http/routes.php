@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/', 'IndexController@index')->name('index');
+Route::get('/login', 'IndexController@index')->name('index');
 Route::get('/get_speciality', 'IndexController@getSpeciality')->name('index.get_speciality');
 Route::get('/caluse', 'IndexController@caluse')->name('index.caluse');
 

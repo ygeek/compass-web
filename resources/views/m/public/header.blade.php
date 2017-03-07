@@ -34,7 +34,7 @@
                 <li><a href="/index.php">首页</a></li>
                 <li><a href="/estimate/step-1">免费留学评估</a></li>
                 <li><a href="/colleges">院校查询</a></li>
-                <li><a href="/colleges_rank?category_id=602c0037-6649-5ea0-894b-bddc4144fc15">排行榜</a></li>
+                <li><a href="/colleges_rank?category_id=5acbe389-966f-f916-2a24-a96827a9d9fe">排行榜</a></li>
                 @if(Auth::check())
                 <li class="headuser"><a href="{{route('home.index')}}"  >个人中心</a></li>
                 <li class="headuser"><a href="{{route('auth.logout_user')}}"  >退出</a></li>
