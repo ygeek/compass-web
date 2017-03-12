@@ -263,7 +263,7 @@
 
     <script type="text/x-template" id="college-select-pop">
 
-      <div class="college-select-pop" v-show="show">
+      <div class="college-select-pop" v-show="show" @if($cpm) style="width:533px;" @endif>
         <h1>选择院校</h1>
         <div class="close" @click="closeButtonClick">X</div>
 

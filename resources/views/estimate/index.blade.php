@@ -11,7 +11,7 @@
             <estimate-result-list></estimate-result-list>
             <template id="estimate-result-list">
                 <div id="estimate-detail-pop" class="mask" v-if="showRequirementContrasts">
-                    <div class="estimate-detail">
+                    <div class="estimate-detail" style="overflow-y: scroll;">
                         <p class="match-title">匹配结果</p>
                         <h1>@{{ showRequirementContrastsContent.college.chinese_name }}</h1>
                         @if(!(isset($cpm) && $cpm))
@@ -20,7 +20,7 @@
                         <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showRequirementContrastsContent.score }}%</span>，@{{ selected_speciality_name }}专业匹配如下：</p>
                         <table>
                             <tr>
-                                <th style="padding-left: 30px;">
+                                <th style="padding-left: 30px; width: 350px;">
                                     专业
                                 </th>
                                 <th v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  != '备注'">
@@ -39,7 +39,7 @@
                             @if(Auth::check())
                             <tr>
                                 <td style="text-align: left;padding-left: 30px;">
-                                    @{{ selected_speciality_name }}专业要求
+                                    @{{ selected_speciality_name }}
                                 </td>
                                 <td v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast['name']  != '备注'">
                                     @{{ contrast['require'] }}

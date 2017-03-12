@@ -359,7 +359,9 @@ class CollegesController extends Controller
         //如果没有传此参数 可以去取一个排行榜的分类id
 
         $rankings = Setting::get('rankings');
-
+        
+        if(!$selected_category_id){  $selected_category_id = '5acbe389-966f-f916-2a24-a96827a9d9fe'; } //add at 20170310 暂时写死了
+        
         if(!$selected_category_id){
           if(count($rankings['rankings']) > 0){
             $first_ranking = $rankings['rankings'][0];
@@ -392,7 +394,6 @@ class CollegesController extends Controller
             break;
           }
         }
-
         $index = 0;
         for ($index=0; $index < count($activing_ranking['rank']); $index++) {
           $activing_ranking['rank'][$index]['rank'] = $index + 1;
