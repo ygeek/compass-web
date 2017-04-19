@@ -18,7 +18,9 @@
         methods: {
             close: function (e) {
                 this.showEstimatePanel = false;
-                window.location.reload(true);
+                if(window.location.pathname == '/colleges') {
+                    window.location.reload(true);
+                }
             }
         },
         watch: {
