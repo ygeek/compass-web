@@ -18,6 +18,7 @@
         methods: {
             close: function (e) {
                 this.showEstimatePanel = false;
+                window.location.reload(true);
             }
         },
         watch: {
@@ -30,4 +31,3 @@
         }
     })
 </script>
-
