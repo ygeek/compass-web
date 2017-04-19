@@ -93,10 +93,10 @@
                                     style="text-align: left;line-height: 26px;padding-left: 30px;background: #fff;"
                                     v-bind:colspan="showIntentionDetail.requirement_contrast.length"
                                     v-for="contrast in showIntentionDetail.requirement_contrast"
-                                    v-if="contrast['name']  == '备注'"
+                                    v-if="contrast['name'] == '备注'"
                                   >
                                     <div style="height: 115px;overflow: hidden">
-                                        @{{{ changeLine(contrast['require']) }}}
+                                        @{{{ contrast['require'] }}}
                                     </div>
                                   </td>
                               </tr>
@@ -426,7 +426,8 @@
         },
         methods: {
             displayIntentionDetail: function(intentionDetail) {
-              this.showIntentionDetail = intentionDetail;
+                this.showIntentionDetail = intentionDetail;
+                console.log(this.showIntentionDetail.requirement_contrast);
             },
             addSpeciality: function(intentionCollege){
               var intentionsOfColleges = this.intentions[intentionCollege['id']];
