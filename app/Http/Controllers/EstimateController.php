@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Uuid;
 use File;
 
+use Cookie;
 use App\Http\Requests;
 
 class EstimateController extends Controller
@@ -50,12 +51,14 @@ class EstimateController extends Controller
       ]);
     }
 
-    public function stepFirst(Request $request){
+    public function stepFirst(Request $request)
+    {
+
         $cpm = (bool)($request->input('cpm', false));
         $selected_country_id = $request->input('selected_country_id', null);
         $selected_degree_id = $request->input('selected_degree_id', null);
         $selected_year = $request->input('selected_year', null);
-        $selected_category_id = $request->input('selected_category_id');
+        $selected_category_id = $request->input('selected_category_id', null);
         $selected_speciality_name = $request->input('selected_speciality_name');
         $college_id = $request->input('college_id', false);
 
@@ -81,7 +84,8 @@ class EstimateController extends Controller
         return $this->view('estimate.step_first', compact('countries', 'degrees', 'years', 'speciality_categories', 'selected_country_id', 'selected_degree_id', 'selected_year', 'selected_category_id', 'selected_speciality_name', 'cpm', 'college_id'));
     }
 
-    public function getSpeciality(Request $request){
+    public function getSpeciality(Request $request)
+    {
         $college_id = $request->input('college_id', false);
         $degree_id = $request->input('degree_id', false);
         $category_id = $request->input('category_id', false);
@@ -101,16 +105,18 @@ class EstimateController extends Controller
           }
 
           if($country_id){
-            $query = $query->where('specialities.country_id', $country_id);
+            $query = $query->where('specialities.country_id', $country_id)
+                    ->orderByRaw('CONVERT( name USING gbk ) COLLATE gbk_chinese_ci ASC');
           }
 
         }]);
 
-        return $speciality_categories_query->get();
-
+        $result = $speciality_categories_query->get();
+        return $result;
     }
 
-    public function stepSecond(Request $request){
+    public function stepSecond(Request $request)
+    {
         $cpm = (bool)($request->input('cpm', false));
         $disable_pre_button = (bool)($request->input('disable_pre_button', false));
         $college_id = $request->input('college_id', false);
@@ -148,7 +154,8 @@ class EstimateController extends Controller
     /*
      * 生成评估结果
      */
-    public function store(Request $request){
+    public function store(Request $request) {
+        // TODO 获取cookie
         $estimate_id = $request->input('estimate_id');
         $college_id = $request->input('college_id', false);
         $cpm = (bool)($request->input('cpm', false));
@@ -164,7 +171,24 @@ class EstimateController extends Controller
             $data = json_decode($data, true);
         }
 
+        $examinations = $data['examinations'];
+        // 手机端
+        if(isset($examinations['高考']['tag'])) {
+            $student_temp_data['province'] = $examinations['高考']['tag'];
+            $student_temp_data['score_without_tag'] = $examinations['高考']['score_without_tag'];
+            $student_temp_data['high_school_average'] = $examinations['高中平均成绩']['score'];
+            $student_temp_data['ielts'] = $examinations['雅思']['score'];
+            $student_temp_data['ielts_average'] = $examinations['雅思']['sections'];
+        }
 
+        // 电脑端
+        if(isset($examinations['大学平均成绩']['score'])) {
+            $student_temp_data['college_name'] = isset($data['recently_college_name']) ? $data['recently_college_name'] : "-";
+            $student_temp_data['recently_speciality_name'] = isset($data['recently_speciality_name']) ? $data['recently_speciality_name'] : "-";
+            $student_temp_data['college_average'] = $examinations['大学平均成绩']['score'];
+            $student_temp_data['ielts'] = $examinations['雅思']['score'];
+            $student_temp_data['ielts_average'] = $examinations['雅思']['sections'];
+        }
         $selected_country = AdministrativeArea::find($data['selected_country']);
         $selected_degree = Degree::find($data['selected_degree']);
         $selected_speciality_name = $data['selected_speciality_name'];
@@ -221,12 +245,26 @@ class EstimateController extends Controller
                   }
                   $user->save();
               }
-          }
-          else{
+          } else {
               $estimate_id = str_replace('estimate-', '', $estimate_id);
           }
-          $reduce_colleges = [$res];
-          return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data', 'college_id', 'res', 'cpm'));
+
+            $reduce_colleges = [$res];
+            return $this->view('estimate.index',
+                compact(
+                    'reduce_colleges',
+                    'examinations',
+                    'selected_degree',
+                    'selected_speciality_name',
+                    'estimate_id',
+                    'data',
+                    'college_id',
+                    'res',
+                    'cpm',
+                    'student_temp_data',
+                    'res'
+                )
+            );
         }else{
 
           $colleges = $this->estimateColleges($selected_degree, $selected_speciality_name);
@@ -272,8 +310,21 @@ class EstimateController extends Controller
               $estimate_id = str_replace('estimate-', '', $estimate_id);
           }
 
-
-          return $this->view('estimate.index', compact('reduce_colleges', 'examinations', 'selected_degree', 'selected_speciality_name', 'estimate_id', 'data', 'cpm', 'college_id'));
+          // TODO
+          return $this->view('estimate.index',
+              compact(
+                'reduce_colleges',
+                'examinations',
+                'selected_degree',
+                'selected_speciality_name',
+                'estimate_id',
+                'data',
+                'cpm',
+                'college_id',
+                'student_temp_data',
+                'res'
+                )
+          );
         }
 
     }
@@ -290,7 +341,6 @@ class EstimateController extends Controller
 
     public function stepSecondPost()
     {
-
         $data = $_POST;
         $fields = '';
 
@@ -312,9 +362,6 @@ class EstimateController extends Controller
 
     public function stepSecondForm()
     {
-
-
-
         $value = $_POST['value'];
         $groups = $_POST['groups'];
         $key = $_POST['key'];
@@ -382,6 +429,7 @@ class EstimateController extends Controller
 
         return json_encode($str);
     }
+
     function object_to_array($obj)
     {
         $_arr = is_object($obj) ? get_object_vars($obj) : $obj;
