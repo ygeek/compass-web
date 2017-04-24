@@ -360,16 +360,50 @@ function changeZy()
         dataType:'json',
         success:function(e){
             var htm = '';
-            console.log(e);
-            for(var i=0;i<e[num].specialities.length;i++){
 
-                htm += '<option value="'+e[num].specialities[i]['name']+'" >'+e[num].specialities[i]['name']+'</option>';
+            for(var i=0;i<e[num].specialities.length;i++){
+                var result = e[num].specialities[i]['name'];
+                if(i+1 < e[num].specialities.length) {
+                    var nextResult = e[num].specialities[i+1]['name'];
+                    var nextMatched = nextResult.match(/[\u4e00-\u9fa5]+（/g);
+                    if(nextMatched != null) {
+                        nextMatched = nextMatched.toString().replace(/（/g,'');
+                    }
+                }
+
+                var matched = result.match(/[\u4e00-\u9fa5]+（/g);
+                if(matched != null) {
+                    matched = matched.toString().replace(/（/g,"");
+                }
+
+                if(matched == nextMatched) {
+                    console.log(matched != nextMatched);
+                } else {
+                    htm += '<option value="'+ result +'" >'+ result +'</option>';
+                }
             }
 
-            console.log(htm);
+            // console.log(htm);
             $("select[name='speciality_name']").html(htm);
         }
     });
+}
+
+function unique(arr) {
+    var result = [], isRepeated;
+    for (var i = 0, len = arr.length; i < len; i++) {
+        isRepeated = false;
+        for (var j = 0, len = result.length; j < len; j++) {
+            if (arr[i] == result[j]) {
+                isRepeated = true;
+                break;
+            }
+        }
+        if (!isRepeated) {
+            result.push(arr[i]);
+        }
+    }
+    return result;
 }
 
 function choseInput(v,n)
