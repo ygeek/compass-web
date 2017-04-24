@@ -580,11 +580,14 @@ ul{
 }
 
 .reset-password-page {
-  height: 100vh;
-  background-color: #e0e0e0;
-  background-image: url(/images/estimate-bg.png);
-  background-repeat: no-repeat;
-  background-position: center;
+    // height: 100vh;
+    background-color: #e0e0e0;
+    background-image: url(/images/estimate-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
 }
 
 .reset-header {
