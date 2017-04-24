@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="reset-password-page">
+<div class="reset-password-page" style="height:100%;">
   <div class="container">
       <div class="header">
         <div class="app-content">
