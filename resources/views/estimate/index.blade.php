@@ -22,15 +22,6 @@
                         <p class="title">您的录取率为<span style="color: red;font-size: 18px">@{{ showRequirementContrastsContent.score }}%</span>，@{{ selected_speciality_name }}专业匹配如下：</p>
 
                         <table>
-                            <tr style="background: #fff">
-                                <td style="text-align: center;">
-                                    所在大学(<strong>{{$student_temp_data['college_name']}}</strong>)
-                                </td>
-                                <td>所在专业:{{$student_temp_data['recently_speciality_name']}}</td>
-
-                                <td colspan="4">雅思各项</td>
-                                <td colspan="4">其他</td>
-                            </tr>
                             @if(!Auth::check())
                             <tr style="background: #fff">
                                 <td style="text-align: center;">
@@ -47,7 +38,7 @@
                             @if(Auth::check())
                             <tr style="background: #FFF;height: 80px">
                                 <th style="text-align: center;">
-                                    您的成绩
+                                    专业
                                 </th>
                                 <th style="text-align:center;" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast.name !=
                                 '备注'">
@@ -84,16 +75,11 @@
                                 </td>
                             </tr>
                             <tr style="background: #FFF;height: 80px">
-                                <td>备注</td>
-                                <td v-bind:colspan="showRequirementContrastsContent.contrasts.length-1" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast.name ==
-                                '备注'">
+                                <td v-bind:colspan="showRequirementContrastsContent.contrasts.length" v-for="contrast in showRequirementContrastsContent.contrasts" v-if="contrast.name == '备注'">
                                    <div v-if="contrast.name ==
                                    '备注'">
                                        @{{{ changeLine(contrast['require']) }}}
                                    </div>
-                                </td>
-                                <td v-if="showRequirementContrastsContent.contrasts.length == 0 " colspan="5">
-                                    暂无数据
                                 </td>
                             </tr>
                             @else
