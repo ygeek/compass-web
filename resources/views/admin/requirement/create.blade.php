@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('content')
     <?php
-      if($type == 'App\College') {
-        $college = App\College::find($id);
-      } else if($type == 'App\Speciality') {
-        $speciality = App\Speciality::find($id);
-        $college = $speciality->college;
+      if ($type == 'App\College') {
+          $college = App\College::find($id);
+      } elseif ($type == 'App\Speciality') {
+          $speciality = App\Speciality::find($id);
+          $college = $speciality->college;
       }
     ?>
       @if(isset($college))
@@ -52,9 +52,9 @@
                                     </td>
                                 </tr>
                             </table>
-
                             <button @click="addRequireForExamination()">添加 @{{examination.examination_name}} 要求段 </button>
-
+                            @{{reversedExamination}}
+                            <textarea v-model="examination_detail" placeholder="please input..."></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -156,7 +156,29 @@
             props: ['examination'],
             data: function(){
                 return {
-                    showPop: false
+                    showPop: false,
+                    examination_detail: '',
+                    examinationScoreArr: []
+                }
+            },
+            computed: {
+                // 一个 computed getter
+                reversedExamination: {
+                // function() {
+                //     var self = this;
+                //     self.examinationScoreArr = self.examination_detail.split('#');
+                //     console.log(self.examinationScoreArr);
+                // }
+
+                    get:function(){
+                        var self = this;
+                        self.examinationScoreArr = self.examination_detail.split('#');
+                        console.log(self.examinationScoreArr);
+
+                    },
+                    set:function(value){
+                        console.log(value);
+                    }
                 }
             },
             methods: {
