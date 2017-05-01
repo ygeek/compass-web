@@ -106,7 +106,7 @@
             var that = this;
             this.examination.score_sections.forEach(function(item){
               var values = [];
-
+              console.log(item.section);
               values.push(item.section);
               if(!that.examination.multiple_degree) {
                 values.push(item.score);
@@ -116,6 +116,7 @@
               }
               text += values.join("#")
               text += "\n"
+
             });
 
             return text;

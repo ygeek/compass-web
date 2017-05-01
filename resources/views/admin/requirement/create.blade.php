@@ -173,11 +173,11 @@
                     get:function(){
                         var self = this;
                         self.examinationScoreArr = self.examination_detail.split('#');
-                        console.log(self.examinationScoreArr);
-
-                    },
-                    set:function(value){
-                        console.log(value);
+                        self.examination.requirement.forEach(function(item, index) {
+                            // self.examination.requirement.push({tag_value: 1});
+                            self.examination.requirement[index].tag_value = self.examinationScoreArr[index];
+                            return;
+                        });
                     }
                 }
             },
