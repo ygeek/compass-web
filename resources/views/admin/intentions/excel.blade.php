@@ -3,22 +3,39 @@
 
     $ordered_keys = ['雅思','托福IBT','听','说','读','写','高中平均成绩', '大学平均成绩', '高考','ACT','作文','SAT', 'GRE', 'GMAT','阅读','数学','语文','写作','相关专业工作年限','备注'];
 
-    function ordered_score_keys($user_scores, $ordered_keys) {
-      return collect(array_keys($user_scores))->sort(function($a, $b) use ($ordered_keys){
-        if (strpos($a, '高考') !== false ) {
-          $a = '高考';
-        }
+    function ordered_score_keys($user_scores, $ordered_keys)
+    {
+        return collect(array_keys($user_scores))->sort(function ($a, $b) use ($ordered_keys) {
+            if (strpos($a, '高考') !== false) {
+                $a = '高考';
+            }
 
-        if (strpos($b, '高考') !== false){
-          $b = '高考';
-        }
-        return array_search($a, $ordered_keys) - array_search($b, $ordered_keys);
-      })->filter(function($key){
-          return $key != '备注';
-      });
+            if (strpos($b, '高考') !== false) {
+                $b = '高考';
+            }
+            return array_search($a, $ordered_keys) - array_search($b, $ordered_keys);
+        })->filter(function ($key) {
+            return $key != '备注';
+        });
     }
 
     $intentions_group_by_country = $intentions->groupBy('country_id');
+    //var_dump($intentions_group_by_country->toArray());die;
+
+    $ielts = $estimate_input['examinations.雅思'];
+    // foreach ($ielts['sections'] as $value) {
+    //     var_dump($value["score"]);
+    // }
+    // die;
+    $data = [];
+    $data[] = $ielts['score'];
+    $data[] = $ielts['sections'][0]['score'];
+    $data[] = $ielts['sections'][1]['score'];
+    $data[] = $ielts['sections'][2]['score'];
+    $data[] = $ielts['sections'][3]['score'];
+    $data[] = $estimate_input["examinations.高中平均成绩"]["score"];
+    $data[] = $estimate_input["examinations.高考"]["score_without_tag"];
+    // var_dump($data);die;
 ?>
 
 @foreach($intentions_group_by_country as $country_id => $intentions_by_country)
@@ -63,8 +80,8 @@
     <tr>
     <td></td>
     <td>客户成绩</td>
-    @foreach($score_keys as $key)
-        <td>{{ $intentions_by_degree->first()['user_scores'][$key] }}</td>
+    @foreach($data as $item)
+        <td>{{ $item }}</td>
     @endforeach
     </tr>
 
