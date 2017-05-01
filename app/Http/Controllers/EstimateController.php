@@ -172,6 +172,7 @@ class EstimateController extends Controller
         }
 
         $examinations = $data['examinations'];
+// var_dump($data);
         // 手机端
         if (isset($examinations['高考']['tag'])) {
             $student_temp_data['province'] = $examinations['高考']['tag'];
@@ -185,10 +186,12 @@ class EstimateController extends Controller
         if (isset($examinations['大学平均成绩']['score'])) {
             $student_temp_data['college_name'] = isset($data['recently_college_name']) ? $data['recently_college_name'] : "-";
             $student_temp_data['recently_speciality_name'] = isset($data['recently_speciality_name']) ? $data['recently_speciality_name'] : "-";
-            $student_temp_data['college_average'] = $examinations['大学平均成绩']['score'];
+            $student_temp_data['college_average'] = isset($data['examinations']['大学平均成绩']['score']) ? $data['examinations']['大学平均成绩']['score'] : "";
             $student_temp_data['ielts'] = $examinations['雅思']['score'];
             $student_temp_data['ielts_average'] = $examinations['雅思']['sections'];
         }
+        
+        $student_temp_data['related_length_of_working'] = isset($data['related_length_of_working']) ? $data['related_length_of_working'] :"";
         $selected_country = AdministrativeArea::find($data['selected_country']);
         $selected_degree = Degree::find($data['selected_degree']);
         $selected_speciality_name = $data['selected_speciality_name'];

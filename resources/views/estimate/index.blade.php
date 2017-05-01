@@ -25,14 +25,27 @@
                             @if(!Auth::check())
                             <tr style="background: #fff">
                                 <td style="text-align: center;">
+                                    专业
+                                </td>
+                                <td>雅思成绩</td>
+                                <td>听</td>
+                                <td>说</td>
+                                <td>读</td>
+                                <td>写</td>
+                                <td>大学平均成绩(双非)</td>
+                                <td>相关专业工作年限</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
                                     您的成绩
                                 </td>
-                                <td>雅思成绩:{{$student_temp_data['ielts']}}</td>
-                                <td>听: {{ $student_temp_data['ielts_average'][0]['score'] ? $student_temp_data['ielts_average'][0]['score'] : "暂未填写" }}</td>
-                                <td>说: {{$student_temp_data['ielts_average'][1]['score'] ? $student_temp_data['ielts_average'][1]['score'] : "暂未填写" }}</td>
-                                <td>读: {{$student_temp_data['ielts_average'][2]['score'] ? $student_temp_data['ielts_average'][2]['score'] : "暂未填写" }}</td>
-                                <td>写: {{$student_temp_data['ielts_average'][3]['score'] ? $student_temp_data['ielts_average'][3]['score'] : "暂未填写" }}</td>
-                                <td>-</td>
+                                <td>{{$student_temp_data['ielts']}}</td>
+                                <td>{{ $student_temp_data['ielts_average'][0]['score'] ? $student_temp_data['ielts_average'][0]['score'] : "暂未填写" }}</td>
+                                <td>{{$student_temp_data['ielts_average'][1]['score'] ? $student_temp_data['ielts_average'][1]['score'] : "暂未填写" }}</td>
+                                <td>{{$student_temp_data['ielts_average'][2]['score'] ? $student_temp_data['ielts_average'][2]['score'] : "暂未填写" }}</td>
+                                <td>{{$student_temp_data['ielts_average'][2]['score'] ? $student_temp_data['ielts_average'][3]['score'] : "暂未填写" }}</td>
+                                <td>{{$student_temp_data['college_average'] ? $student_temp_data['college_average'] : "暂未填写" }}</td>
+                                <td>{{$student_temp_data['related_length_of_working'] ? $student_temp_data['related_length_of_working'] : "暂未填写" }}</td>
                             </tr>
                             @endif
                             @if(Auth::check())
