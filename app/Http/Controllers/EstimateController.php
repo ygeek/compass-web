@@ -172,26 +172,33 @@ class EstimateController extends Controller
         }
 
         $examinations = $data['examinations'];
-// var_dump($data);
-        // 手机端
-        if (isset($examinations['高考']['tag'])) {
+        if ($data['selected_degree'] == 2) {
             $student_temp_data['province'] = $examinations['高考']['tag'];
             $student_temp_data['score_without_tag'] = $examinations['高考']['score_without_tag'];
             $student_temp_data['high_school_average'] = $examinations['高中平均成绩']['score'];
+            $student_temp_data['type'] = 1; //本科
+        }
+        // var_dump($data);
+        // die;
+        if ($data['selected_degree'] == 3) {
+            $student_temp_data['type'] = 2; //研究生
+            $student_temp_data['related_length_of_working'] = isset($data['related_length_of_working']) ? $data['related_length_of_working'] :"";
+            $student_temp_data['college_name'] = isset($data['recently_college_name']) ? $data['recently_college_name'] : "-";
+            $student_temp_data['recently_speciality_name'] = isset($data['recently_speciality_name']) ? $data['recently_speciality_name'] : "-";
+            $student_temp_data['college_average'] = isset($data['examinations']['大学平均成绩']['score']) ? $data['examinations']['大学平均成绩']['score'] : "";
+        }
+        if(isset($examinations['雅思'])) {
+            $student_temp_data['language_type'] = 1;
             $student_temp_data['ielts'] = $examinations['雅思']['score'];
             $student_temp_data['ielts_average'] = $examinations['雅思']['sections'];
         }
 
-        // 电脑端
-        if (isset($examinations['大学平均成绩']['score'])) {
-            $student_temp_data['college_name'] = isset($data['recently_college_name']) ? $data['recently_college_name'] : "-";
-            $student_temp_data['recently_speciality_name'] = isset($data['recently_speciality_name']) ? $data['recently_speciality_name'] : "-";
-            $student_temp_data['college_average'] = isset($data['examinations']['大学平均成绩']['score']) ? $data['examinations']['大学平均成绩']['score'] : "";
-            $student_temp_data['ielts'] = $examinations['雅思']['score'];
-            $student_temp_data['ielts_average'] = $examinations['雅思']['sections'];
+        if(isset($examinations['托福IBT'])) {
+            $student_temp_data['language_type'] = 2;
+            $student_temp_data['tofel'] = $examinations['托福IBT']['score'];
+            $student_temp_data['tofel_average'] = $examinations['托福IBT']['sections'];
         }
-        
-        $student_temp_data['related_length_of_working'] = isset($data['related_length_of_working']) ? $data['related_length_of_working'] :"";
+
         $selected_country = AdministrativeArea::find($data['selected_country']);
         $selected_degree = Degree::find($data['selected_degree']);
         $selected_speciality_name = $data['selected_speciality_name'];

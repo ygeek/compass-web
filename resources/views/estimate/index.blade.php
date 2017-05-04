@@ -10,6 +10,7 @@
   @else
     <div class="estimate-page estimate-result">
   @endif
+  <?php // var_dump($student_temp_data); ?>
             <estimate-result-list></estimate-result-list>
             <template id="estimate-result-list">
                 <div id="estimate-detail-pop" class="mask" v-if="showRequirementContrasts">
@@ -27,25 +28,51 @@
                                 <td style="text-align: center;">
                                     专业
                                 </td>
-                                <td>雅思成绩</td>
+                                @if($student_temp_data['language_type'] == 1)
+                                    <td>雅思成绩</td>
+                                @endif
+                                @if($student_temp_data['language_type'] == 2)
+                                    <td>托福成绩</td>
+                                @endif
                                 <td>听</td>
                                 <td>说</td>
                                 <td>读</td>
                                 <td>写</td>
-                                <td>大学平均成绩(双非)</td>
-                                <td>相关专业工作年限</td>
+                                @if($student_temp_data['type'] == 1)
+                                    <td>平均成绩</td>
+                                    <td>高考成绩({{$student_temp_data['province'] ? $student_temp_data['province'] : "-" }})</td>
+                                @endif
+                                @if($student_temp_data['type'] == 2)
+                                    <td>平均成绩(双非)</td>
+                                    <td>相关专业工作年限</td>
+                                @endif
                             </tr>
                             <tr>
                                 <td style="text-align: center;">
                                     您的成绩
                                 </td>
-                                <td>{{$student_temp_data['ielts']}}</td>
-                                <td>{{ $student_temp_data['ielts_average'][0]['score'] ? $student_temp_data['ielts_average'][0]['score'] : "暂未填写" }}</td>
-                                <td>{{$student_temp_data['ielts_average'][1]['score'] ? $student_temp_data['ielts_average'][1]['score'] : "暂未填写" }}</td>
-                                <td>{{$student_temp_data['ielts_average'][2]['score'] ? $student_temp_data['ielts_average'][2]['score'] : "暂未填写" }}</td>
-                                <td>{{$student_temp_data['ielts_average'][2]['score'] ? $student_temp_data['ielts_average'][3]['score'] : "暂未填写" }}</td>
-                                <td>{{$student_temp_data['college_average'] ? $student_temp_data['college_average'] : "暂未填写" }}</td>
-                                <td>{{$student_temp_data['related_length_of_working'] ? $student_temp_data['related_length_of_working'] : "暂未填写" }}</td>
+                                @if($student_temp_data['language_type'] == 1)
+                                    <td>{{$student_temp_data['ielts']}}</td>
+                                    <td>{{ $student_temp_data['ielts_average'][0]['score'] ? $student_temp_data['ielts_average'][0]['score'] : "-" }}</td>
+                                    <td>{{$student_temp_data['ielts_average'][1]['score'] ? $student_temp_data['ielts_average'][1]['score'] : "-" }}</td>
+                                    <td>{{$student_temp_data['ielts_average'][2]['score'] ? $student_temp_data['ielts_average'][2]['score'] : "-" }}</td>
+                                    <td>{{$student_temp_data['ielts_average'][3]['score'] ? $student_temp_data['ielts_average'][3]['score'] : "-" }}</td>
+                                @endif
+                                @if($student_temp_data['language_type'] == 2)
+                                    <td>{{$student_temp_data['tofel']}}</td>
+                                    <td>{{ $student_temp_data['tofel_average'][0]['score'] ? $student_temp_data['tofel_average'][0]['score'] : "-" }}</td>
+                                    <td>{{$student_temp_data['tofel_average'][1]['score'] ? $student_temp_data['tofel_average'][1]['score'] : "-" }}</td>
+                                    <td>{{$student_temp_data['tofel_average'][2]['score'] ? $student_temp_data['tofel_average'][2]['score'] : "-" }}</td>
+                                    <td>{{$student_temp_data['tofel_average'][3]['score'] ? $student_temp_data['tofel_average'][3]['score'] : "-" }}</td>
+                                @endif
+                                @if($student_temp_data['type'] == 1)
+                                    <td>{{$student_temp_data['high_school_average'] ? $student_temp_data['high_school_average'] : "-" }}</td>
+                                    <td>{{$student_temp_data['score_without_tag'] ? $student_temp_data['score_without_tag'] : "-" }}</td>
+                                @endif
+                                @if($student_temp_data['type'] == 2)
+                                    <td>{{$student_temp_data['college_average'] ? $student_temp_data['college_average'] : "-" }}</td>
+                                    <td>{{$student_temp_data['related_length_of_working'] ? $student_temp_data['related_length_of_working'] : "-" }}</td>
+                                @endif
                             </tr>
                             @endif
                             @if(Auth::check())
