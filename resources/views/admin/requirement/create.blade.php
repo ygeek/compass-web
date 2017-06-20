@@ -7,6 +7,15 @@
           $speciality = App\Speciality::find($id);
           $college = $speciality->college;
       }
+
+      $examination_detail = '';
+      foreach ($nemt as $value) {
+          if(isset($value["tag_value"])) {
+              $examination_detail .= $value["tag_value"] . "#";
+          }
+      }
+    //   $nemt_scores =
+      $nemt = json_encode($nemt, JSON_UNESCAPED_UNICODE);
     ?>
       @if(isset($college))
       <h5>{{$college->chinese_name}} @if(isset($speciality)) {{$speciality->name}} @endif 申请要求设置</h5>
@@ -157,12 +166,11 @@
             data: function(){
                 return {
                     showPop: false,
-                    examination_detail: '',
+                    examination_detail: '<?php echo $examination_detail != '' ? $examination_detail : ''; ?>',
                     examinationScoreArr: []
                 }
             },
             computed: {
-                // 一个 computed getter
                 reversedExamination: {
                 // function() {
                 //     var self = this;

@@ -10,7 +10,8 @@ use App\Http\Controllers\Controller;
 
 class RequirementController extends BaseController
 {
-    public function index($type, $id){
+    public function index($type, $id)
+    {
 
         $instance = $type::find($id);
         $requirement = $instance->requirement;
@@ -23,7 +24,6 @@ class RequirementController extends BaseController
         }
 
         if($requirement){
-
             for ($i=0; $i<count($requirement); $i++){
                 for ($j=0; $j<count($requirement[$i]['examinations']); $j++){
                     if($requirement[$i]['examinations'][$j]['examination_name'] == '高考'){
@@ -32,11 +32,13 @@ class RequirementController extends BaseController
                                 return iconv('UTF-8', 'GBK//IGNORE', "崇庆");
                             return iconv('UTF-8', 'GBK//IGNORE', $product['tag_name']);
                         })->values()->all();
+
+                        $nemt = $requirement[$i]['examinations'][$j]['requirement'];
                     }
                 }
             }
             //已存在 修改
-            return view('admin.requirement.create', compact('requirement', 'type', 'id'));
+            return view('admin.requirement.create', compact('requirement', 'type', 'id', 'nemt'));
         }else{
             //不存在 新建
             $template = CountryDegreeExaminationMap::getExaminationsGroupByDegree($country, $degrees);
