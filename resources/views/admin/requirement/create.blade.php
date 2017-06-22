@@ -66,7 +66,9 @@
                             </table>
                             <button @click="addRequireForExamination()">添加 @{{examination.examination_name}} 要求段 </button>
                             @{{reversedExamination}}
-                            <textarea v-model="examination_detail" placeholder="please input..."></textarea>
+                            <?php if($type == 'App\College') { ?>
+                                <textarea v-model="examination_detail" placeholder="please input..."></textarea>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -169,7 +171,8 @@
             data: function(){
                 return {
                     showPop: false,
-                    examination_detail: '<?php echo isset($examination_detail) && $examination_detail != '' ? $examination_detail : ''; ?>',
+                    <?php if($type == 'App\College') { ?>examination_detail: '<?php echo isset($examination_detail) && $examination_detail != '' ? $examination_detail : ''; ?>',
+                    <?php } ?>
                     examinationScoreArr: []
                 }
             },
