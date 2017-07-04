@@ -47,85 +47,91 @@ class AuthController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => ['logoutUser', 'createVerifyCodes']]);
     }
 
-    public function createVerifyCodes(Request $request){
+    public function createVerifyCodes(Request $request)
+    {
         $phone_number = $request->input('phone_number');
         $phone_country = $request->input('phone_country', 'china');
         $code = $this->verify_code_service->setVerifyCodeForPhoneNumber($phone_number);
 
-        if(env('APP_DEBUG')){
+        if (env('APP_DEBUG')) {
             return $this->responseJson('ok', ['code' => $code]);
-        }else{
+        } else {
             event(new VerifyCodeSet($code, $phone_number, $phone_country));
             return $this->responseJson('ok');
         }
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $code = $request->get('code');
         $phone_number = $request->get('phone_number');
 
-        if(!$this->validateVerifyCode($phone_number, $code)){
+        if (!$this->validateVerifyCode($phone_number, $code)) {
             return $this->errorResponse('验证码验证失败');
         }
 
         try {
             $data = $request->only(['phone_number', 'password']);
             $data['register_ip'] = $request->ip();
-            $this->registrar->create($data);
+            $user = $this->registrar->create($data);
+            Auth::login($user);
 
             return $this->okResponse();
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->errorResponse('创建用户失败');
         }
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $phone_number = $request->get('phone_number');
         $password = $request->get('password');
 
-        if(Auth::attempt(['phone_number' => $phone_number, 'password' => $password])){
+        if (Auth::attempt(['phone_number' => $phone_number, 'password' => $password])) {
             $user = Auth::User();
             $userInfo = $user->toArray();
             $userInfo['avatarPath'] = $user->getAvatarPath();
 
             return $this->okResponse($userInfo);
-        }else{
+        } else {
             return $this->errorResponse('登录信息错误');
         }
     }
 
-    public function logoutUser(){
-      Auth::logout();
-      return redirect()->route('index');
+    public function logoutUser()
+    {
+        Auth::logout();
+        return redirect()->route('index');
     }
 
-    public function resetPassword(Request $request) {
-      $method = $request->method();
+    public function resetPassword(Request $request)
+    {
+        $method = $request->method();
 
-      if($request->isMethod('post')) {
-        $code = $request->get('code');
-        $phone_number = $request->get('phone_number');
-        $password = $request->get('password');
+        if ($request->isMethod('post')) {
+            $code = $request->get('code');
+            $phone_number = $request->get('phone_number');
+            $password = $request->get('password');
 
-        if(!$this->validateVerifyCode($phone_number, $code)){
-          return $this->errorResponse('验证码验证失败');
-        }else {
-          $user = User::where('phone_number', $phone_number)->first();
-          if(!$user) {
-            return $this->errorResponse('用户不存在');
-          }else {
-            $user->password = bcrypt($password);
-            $user->save();
-            return $this->okResponse();
-          }
+            if (!$this->validateVerifyCode($phone_number, $code)) {
+                return $this->errorResponse('验证码验证失败');
+            } else {
+                $user = User::where('phone_number', $phone_number)->first();
+                if (!$user) {
+                    return $this->errorResponse('用户不存在');
+                } else {
+                    $user->password = bcrypt($password);
+                    $user->save();
+                    return $this->okResponse();
+                }
+            }
+        } else {
+            return $this->view('auth.reset_password');
         }
-      }else {
-        return $this->view('auth.reset_password');
-      }
     }
 
-    private function validateVerifyCode($phone_number, $code){
+    private function validateVerifyCode($phone_number, $code)
+    {
         return $this->verify_code_service->testingVerifyCodeWithPhoneNumber($phone_number, $code);
     }
-
 }

@@ -126,8 +126,6 @@
           if(response.data.data.code){
             console.log('验证码为：' + response.data.data.code);
             this.verify_code = response.data.data.code;
-          }else{
-
           }
 
           var that = this;
@@ -147,10 +145,11 @@
           code: this.verify_code,
           password: this.password
         }).then(function(response){
-          alert('注册成功');
-          window.location.reload();
-        }, function(response) {
-          alert('注册用户失败');
+            console.log(response)
+              alert('注册成功');
+              window.location.reload();
+        }).catch(function (error) {
+            console.log("后台登录出错，报错" + error);
         });
       },
       sendLoginRequest: function(){
