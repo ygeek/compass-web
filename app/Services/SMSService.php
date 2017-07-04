@@ -1,12 +1,13 @@
 <?php namespace App\Services;
 
-class SMSService{
-    public function sendVerifyCode(string $code, string $phone_number, string $phone_country){
-        if($phone_country == 'china') {
-          $smsClient = new \MESSAGEXsend(config('sms_service'));
-        }else {
-          $smsClient = new \INTERNATIONALSMSXsend(config('sms_service'));
-          switch ($phone_country) {
+class SMSService
+{
+    public function sendVerifyCode(string $code, string $phone_number, string $phone_country)
+    {
+        if ($phone_country == 'china') {
+            $smsClient = new \MESSAGEXsend(config('sms_service'));
+        } else {
+            switch ($phone_country) {
             case 'nzl':
               $phone_number = '+64'.$phone_number;
               break;
@@ -15,7 +16,9 @@ class SMSService{
               break;
             default:
               return;
-          }
+            }
+
+            $smsClient = new \INTERNATIONALSMSXsend(config('sms_service_int'));
         }
 
         $smsClient->SetTo($phone_number);
