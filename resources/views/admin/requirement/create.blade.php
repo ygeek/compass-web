@@ -66,9 +66,9 @@
                             </table>
                             <button @click="addRequireForExamination()">添加 @{{examination.examination_name}} 要求段 </button>
                             @{{reversedExamination}}
-                            <?php if($type == 'App\College') { ?>
+                            <?php //if($type == 'App\College') { ?>
                                 <textarea v-model="examination_detail" placeholder="please input..."></textarea>
-                            <?php } ?>
+                            <?php // } ?>
                         </div>
                     </div>
                     <div class="modal-footer">
