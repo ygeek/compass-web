@@ -11,3 +11,4 @@ tags
 *.iml
 debug.log
 npm-debug.log
+public/*
