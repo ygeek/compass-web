@@ -124,11 +124,11 @@
           phone_country: this.phone_country,
         }).then(function(response){
             console.log(response);
-          this.onRequest = false;
-          if(response.data.data.code){
-            console.log('验证码为：' + response.data.data.code);
-            this.verify_code = response.data.data.code;
-          }
+            this.onRequest = false;
+            if(response.data.data.code){
+              console.log('验证码为：' + response.data.data.code);
+              this.verify_code = response.data.data.code;
+            }
 
           var that = this;
           that.countDown = 60;
