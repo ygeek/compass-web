@@ -6,6 +6,7 @@ class SMSService
     {
         if ($phone_country == 'china') {
             $smsClient = new \MESSAGEXsend(config('sms_service'));
+            $smsClient->SetProject(config('sms_service.verify_code_template_id'));
         } else {
             switch ($phone_country) {
             case 'nzl':
@@ -19,11 +20,19 @@ class SMSService
             }
 
             $smsClient = new \INTERNATIONALSMSXsend(config('sms_service_int'));
+
+            $smsClient->SetProject(config('sms_service_int.verify_code_template_id'));
         }
 
         $smsClient->SetTo($phone_number);
-        $smsClient->SetProject(config('sms_service.verify_code_template_id'));
+
         $smsClient->AddVar('code', $code);
-        return $smsClient->xsend();
+        $xsend = $smsClient->xsend();
+
+        echo "<pre>";
+        print_r($xsend);
+        echo "</pre>";
+
+        return $xsend;
     }
 }

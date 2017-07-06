@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'appid' => '60078',
-    'appkey' => 'b8170f7b27b268c805983d8fbb7a192a',
-    'verify_code_template_id' => 'z42gr3'
+    'appid' => '60079',
+    'appkey' => 'ef1154c35b4fcb5f70e36b537e2554b3',
+    'verify_code_template_id' => 'z42gr3',
+    // 'sign_type' => 'normal'
 ];
